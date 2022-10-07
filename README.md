@@ -1,16 +1,16 @@
 # 위젯 버스
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/minjae9610/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/license/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
   <img src="https://img.shields.io/cocoapods/p/ios?style=flat-square" />
-  <img src="https://img.shields.io/github/forks/minjae9610/WidgetBus?style=flat-square" />
-  <img src="https://img.shields.io/github/stars/minjae9610/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/forks/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/stars/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
 <br>
-  <img src="https://img.shields.io/github/contributors/minjae9610/WidgetBus?style=flat-square" />
-  <img src="https://img.shields.io/github/issues/minjae9610/WidgetBus?style=flat-square" />
-  <img src="https://img.shields.io/github/issues-pr/minjae9610/WidgetBus?style=flat-square" />
-  <img src="https://img.shields.io/github/last-commit/minjae9610/WidgetBus?style=flat-square" />
-  <img src="https://img.shields.io/github/commit-activity/w/minjae9610/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/contributors/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/issues/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/issues-pr/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/last-commit/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
+  <img src="https://img.shields.io/github/commit-activity/w/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
 </p>
 
 <p align="center" text-align="center" width="100%">
