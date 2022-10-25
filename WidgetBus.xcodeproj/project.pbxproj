@@ -19,6 +19,7 @@
 		C169207B2907B75D0021D17F /* WidgetBusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C169207A2907B75D0021D17F /* WidgetBusTests.swift */; };
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
+		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
 		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		C16920802907B75D0021D17F /* WidgetBusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WidgetBusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 		C16920542907B75C0021D17F = {
 			isa = PBXGroup;
 			children = (
+				C16920982907C38D0021D17F /* .swiftlint.yml */,
 				C169205F2907B75C0021D17F /* WidgetBus */,
 				C16920792907B75D0021D17F /* WidgetBusTests */,
 				C16920832907B75D0021D17F /* WidgetBusUITests */,
@@ -278,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C16920992907C38D0021D17F /* .swiftlint.yml in Resources */,
 				C16920702907B75D0021D17F /* LaunchScreen.storyboard in Resources */,
 				C169206D2907B75D0021D17F /* Assets.xcassets in Resources */,
 				C16920682907B75C0021D17F /* Main.storyboard in Resources */,
@@ -347,6 +351,7 @@
 		};
 		C16920932907C0EB0021D17F /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
