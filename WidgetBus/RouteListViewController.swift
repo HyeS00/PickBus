@@ -15,6 +15,10 @@ class RouteListViewController: UIViewController {
 
         // 루트 셀 등록
         table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
+
+        // 루트추가 셀 등록
+        table.register(AddRouteTableViewCell.self, forCellReuseIdentifier: AddRouteTableViewCell.identifier)
+
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -47,11 +51,21 @@ extension RouteListViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension RouteListViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as! RouteTableViewCell
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as! RouteTableViewCell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddRouteTableViewCell.identifier, for: indexPath) as! AddRouteTableViewCell
+            return cell
+        }
     }
 }

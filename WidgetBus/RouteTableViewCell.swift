@@ -25,7 +25,7 @@ class RouteTableViewCell: UITableViewCell {
     }()
 
     // 버스남은시간
-    private let busRemainingTime: UILabel = {
+    private let busRemainingTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textColor = .black
@@ -34,7 +34,7 @@ class RouteTableViewCell: UITableViewCell {
     }()
 
     // 다음버스남은시간
-    private let nextBusRemainingTime: UILabel = {
+    private let nextBusRemainingTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
@@ -69,19 +69,20 @@ class RouteTableViewCell: UITableViewCell {
     // 레이어
     private func setupLayout() {
         self.contentView.addSubview(busNumberLabel)
-        self.contentView.addSubview(busRemainingTime)
-        self.contentView.addSubview(nextBusRemainingTime)
+        self.contentView.addSubview(busRemainingTimeLabel)
+        self.contentView.addSubview(nextBusRemainingTimeLabel)
         self.contentView.addSubview(rideButton)
 
         // 샘플
         busNumberLabel.text = "5007"
-        busRemainingTime.text = "전전"
-        nextBusRemainingTime.text = "7분전"
+        busRemainingTimeLabel.text = "전전"
+        nextBusRemainingTimeLabel.text = "7분전"
     }
 
     // 제약
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            self.contentView.heightAnchor.constraint(equalToConstant: 52),
 
             // 버스번호
             busNumberLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
@@ -90,12 +91,12 @@ class RouteTableViewCell: UITableViewCell {
             busNumberLabel.heightAnchor.constraint(equalToConstant: 30),
 
             // 버스남은시간
-            busRemainingTime.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            busRemainingTime.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            busRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            busRemainingTimeLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
 
             // 다음버스남은시간
-            nextBusRemainingTime.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            nextBusRemainingTime.leadingAnchor.constraint(equalTo: self.busRemainingTime.trailingAnchor, constant: 14),
+            nextBusRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            nextBusRemainingTimeLabel.leadingAnchor.constraint(equalTo: self.busRemainingTimeLabel.trailingAnchor, constant: 14),
 
             // 탑승버튼
             rideButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
