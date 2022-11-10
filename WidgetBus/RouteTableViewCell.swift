@@ -58,31 +58,21 @@ class RouteTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupLayout()
-        setupConstraints()
+        self.backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // 레이어
-    private func setupLayout() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         self.contentView.addSubview(busNumberLabel)
         self.contentView.addSubview(busRemainingTimeLabel)
         self.contentView.addSubview(nextBusRemainingTimeLabel)
         self.contentView.addSubview(rideButton)
 
-        // 샘플
-        busNumberLabel.text = "5007"
-        busRemainingTimeLabel.text = "전전"
-        nextBusRemainingTimeLabel.text = "7분전"
-    }
-
-    // 제약
-    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            self.contentView.heightAnchor.constraint(equalToConstant: 52),
+//            self.contentView.heightAnchor.constraint(equalToConstant: 52),
 
             // 버스번호
             busNumberLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
@@ -104,5 +94,10 @@ class RouteTableViewCell: UITableViewCell {
             rideButton.widthAnchor.constraint(equalToConstant: 38),
             rideButton.heightAnchor.constraint(equalToConstant: 30)
         ])
+
+        // 샘플
+        busNumberLabel.text = "5007"
+        busRemainingTimeLabel.text = "전전"
+        nextBusRemainingTimeLabel.text = "7분전"
     }
 }

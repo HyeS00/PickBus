@@ -30,27 +30,25 @@ class AddRouteTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupLayout()
-        setupConstraints()
+        self.layer.cornerRadius = 15
+        self.backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupLayout() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         self.contentView.addSubview(addImageView)
         self.contentView.addSubview(addLabel)
-    }
 
-    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            self.contentView.heightAnchor.constraint(equalToConstant: 78),
+//            self.contentView.heightAnchor.constraint(equalToConstant: 78),
             addImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
             addImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             addLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
             addLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
         ])
     }
-
 }
