@@ -22,7 +22,7 @@ class RouteTableHeader: UITableViewHeaderFooterView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .white
+        self.contentView.backgroundColor = .red
         self.contentView.layer.cornerRadius = 15
         self.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }

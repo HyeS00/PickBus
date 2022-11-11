@@ -15,6 +15,9 @@ class RouteTableViewCell: UITableViewCell {
     private let busNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+//        label.numberOfLines = 0
+        label.minimumScaleFactor = 5
+//        label.minimumScaleFactor = 5
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .black
@@ -86,7 +89,9 @@ class RouteTableViewCell: UITableViewCell {
 
             // 다음버스남은시간
             nextBusRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            nextBusRemainingTimeLabel.leadingAnchor.constraint(equalTo: self.busRemainingTimeLabel.trailingAnchor, constant: 14),
+            nextBusRemainingTimeLabel.leadingAnchor.constraint(
+                equalTo: self.busRemainingTimeLabel.trailingAnchor,
+                constant: 14),
 
             // 탑승버튼
             rideButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
@@ -96,7 +101,7 @@ class RouteTableViewCell: UITableViewCell {
         ])
 
         // 샘플
-        busNumberLabel.text = "5007"
+        busNumberLabel.text = "21000000"
         busRemainingTimeLabel.text = "전전"
         nextBusRemainingTimeLabel.text = "7분전"
     }

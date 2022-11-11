@@ -9,6 +9,12 @@ import UIKit
 
 class RouteListViewController: UIViewController {
 
+    // 셀,헤더,푸터 높이
+    let headerHeight: CGFloat = 36
+    let footerHeight: CGFloat = 15
+    let routeCellHeight: CGFloat = 52
+    let addRouteCellHeight: CGFloat = 78
+
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -72,11 +78,11 @@ extension RouteListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 2 ? 0 : 36
+        return section == 2 ? 0 : headerHeight
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 2 ? 0 : 15
+        return section == 2 ? 0 : footerHeight
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,15 +94,19 @@ extension RouteListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        indexPath.section == 2 ? 78 : 52
+        indexPath.section == 2 ? addRouteCellHeight : routeCellHeight
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: AddRouteTableViewCell.identifier, for: indexPath) as! AddRouteTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: AddRouteTableViewCell.identifier,
+                for: indexPath) as! AddRouteTableViewCell
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: RouteTableViewCell.identifier, for: indexPath) as! RouteTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: RouteTableViewCell.identifier,
+                for: indexPath) as! RouteTableViewCell
             return cell
         }
     }

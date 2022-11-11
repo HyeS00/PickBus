@@ -25,6 +25,7 @@
 		D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */; };
 		D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848085291D433D009F8FDB /* RouteTableHeader.swift */; };
 		D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848087291D46B1009F8FDB /* RouteTableFooter.swift */; };
+		D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784808D291E1B9C009F8FDB /* NSObject+.swift */; };
 		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouteTableViewCell.swift; sourceTree = "<group>"; };
 		D7848085291D433D009F8FDB /* RouteTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableHeader.swift; sourceTree = "<group>"; };
 		D7848087291D46B1009F8FDB /* RouteTableFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableFooter.swift; sourceTree = "<group>"; };
+		D784808D291E1B9C009F8FDB /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,12 +146,10 @@
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
-				D784807D291D156A009F8FDB /* RouteListViewController.swift */,
-				D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */,
-				D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */,
-				D7848085291D433D009F8FDB /* RouteTableHeader.swift */,
-				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
 				C16920662907B75C0021D17F /* Main.storyboard */,
+				D7848089291E162E009F8FDB /* Views */,
+				D784808A291E168A009F8FDB /* Models */,
+				D784808C291E18DC009F8FDB /* Extensions */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
 				C16920712907B75D0021D17F /* Info.plist */,
@@ -173,6 +173,41 @@
 				C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */,
 			);
 			path = WidgetBusUITests;
+			sourceTree = "<group>";
+		};
+		D7848089291E162E009F8FDB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D784808B291E16A2009F8FDB /* RouteListView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D784808A291E168A009F8FDB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D784808B291E16A2009F8FDB /* RouteListView */ = {
+			isa = PBXGroup;
+			children = (
+				D784807D291D156A009F8FDB /* RouteListViewController.swift */,
+				D7848085291D433D009F8FDB /* RouteTableHeader.swift */,
+				D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */,
+				D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */,
+				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
+			);
+			path = RouteListView;
+			sourceTree = "<group>";
+		};
+		D784808C291E18DC009F8FDB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D784808D291E1B9C009F8FDB /* NSObject+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DC93DED6DD175EC91A8BEA4F /* Pods */ = {
@@ -417,6 +452,7 @@
 				D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */,
+				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
 				D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,
