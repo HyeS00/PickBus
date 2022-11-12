@@ -21,6 +21,14 @@ class RouteListViewController: UIViewController {
         table.sectionHeaderTopPadding = 25
         table.backgroundColor = .clear
         table.separatorStyle = .none
+        table.translatesAutoresizingMaskIntoConstraints = false
+
+        // 그림자
+        table.layer.masksToBounds = false
+        table.layer.shadowColor = UIColor.black.cgColor
+        table.layer.shadowOpacity = 0.2
+        table.layer.shadowRadius = 10
+        table.layer.shadowOffset = .init(width: 0, height: 2)
 
         // 루트 셀 등록
         table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
@@ -34,12 +42,12 @@ class RouteListViewController: UIViewController {
         // 푸터 등록
         table.register(RouteTableFooter.self, forHeaderFooterViewReuseIdentifier: RouteTableFooter.identifier)
 
-        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .gray
         setupLayout()
         setupConstraints()
         routeTableView.delegate = self
