@@ -21,8 +21,9 @@
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
 		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
+		E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */; };
+		E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */; };
 		E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1707842291EC1B0001D324C /* RouteDetailView.storyboard */; };
-		E1707849291EC583001D324C /* UIViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1707848291EC583001D324C /* UIViewExtention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +66,9 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailViewController.swift; sourceTree = "<group>"; };
+		E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E1707842291EC1B0001D324C /* RouteDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteDetailView.storyboard; sourceTree = "<group>"; };
-		E1707848291EC583001D324C /* UIViewExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtention.swift; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -198,7 +200,6 @@
 		E1707846291EC277001D324C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E1707848291EC583001D324C /* UIViewExtention.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -207,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				E1707842291EC1B0001D324C /* RouteDetailView.storyboard */,
+				E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */,
+				E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */,
 			);
 			path = RouteDetailView;
 			sourceTree = "<group>";
@@ -437,7 +440,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
-				E1707849291EC583001D324C /* UIViewExtention.swift in Sources */,
+				E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */,
+				E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,
