@@ -195,9 +195,9 @@
 			children = (
 				D784807D291D156A009F8FDB /* RouteListViewController.swift */,
 				D7848085291D433D009F8FDB /* RouteTableHeader.swift */,
+				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
 				D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */,
 				D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */,
-				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
 			);
 			path = RouteListView;
 			sourceTree = "<group>";

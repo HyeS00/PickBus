@@ -8,7 +8,6 @@
 import UIKit
 
 class RouteTableHeader: UITableViewHeaderFooterView {
-    static let identifier = "RouteTableHeader"
 
     // 정류장이름
     private let busStopLabel: UILabel = {
@@ -22,7 +21,7 @@ class RouteTableHeader: UITableViewHeaderFooterView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .red
+        self.contentView.backgroundColor = .white
         self.contentView.layer.cornerRadius = 15
         self.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }

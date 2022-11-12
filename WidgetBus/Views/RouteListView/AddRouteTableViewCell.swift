@@ -8,7 +8,6 @@
 import UIKit
 
 class AddRouteTableViewCell: UITableViewCell {
-    static let identifier = "AddRouteTableViewCell"
 
     // 루트추가 이미지
     private let addImageView: UIImageView = {

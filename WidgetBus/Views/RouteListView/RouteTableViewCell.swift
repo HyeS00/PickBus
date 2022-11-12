@@ -9,22 +9,28 @@ import UIKit
 
 class RouteTableViewCell: UITableViewCell {
 
-    static let identifier = "RouteTableViewCell"
-
     // 버스번호
     private let busNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-//        label.numberOfLines = 0
-        label.minimumScaleFactor = 5
-//        label.minimumScaleFactor = 5
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.1
         label.textColor = .white
         label.textAlignment = .center
-        label.backgroundColor = .black
-        label.layer.cornerRadius = 9
-        label.clipsToBounds = true
+//        label.backgroundColor = .black
+//        label.layer.cornerRadius = 9
+//        label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+
+    private let busNumberBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.layer.cornerRadius = 9
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     // 버스남은시간
@@ -40,7 +46,7 @@ class RouteTableViewCell: UITableViewCell {
     private let nextBusRemainingTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .black
+        label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,6 +75,8 @@ class RouteTableViewCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        self.contentView.addSubview(busNumberBackgroundView)
         self.contentView.addSubview(busNumberLabel)
         self.contentView.addSubview(busRemainingTimeLabel)
         self.contentView.addSubview(nextBusRemainingTimeLabel)
@@ -77,10 +85,17 @@ class RouteTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
 //            self.contentView.heightAnchor.constraint(equalToConstant: 52),
 
+            // 버스번호 배경
+            busNumberBackgroundView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            busNumberBackgroundView.leadingAnchor.constraint(
+                equalTo: self.contentView.leadingAnchor, constant: 16),
+            busNumberBackgroundView.widthAnchor.constraint(equalToConstant: 80),
+            busNumberBackgroundView.heightAnchor.constraint(equalToConstant: 30),
+
             // 버스번호
-            busNumberLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            busNumberLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            busNumberLabel.widthAnchor.constraint(equalToConstant: 80),
+            busNumberLabel.centerYAnchor.constraint(equalTo: self.busNumberBackgroundView.centerYAnchor),
+            busNumberLabel.centerXAnchor.constraint(equalTo: busNumberBackgroundView.centerXAnchor),
+            busNumberLabel.widthAnchor.constraint(equalToConstant: 60),
             busNumberLabel.heightAnchor.constraint(equalToConstant: 30),
 
             // 버스남은시간
@@ -88,7 +103,8 @@ class RouteTableViewCell: UITableViewCell {
             busRemainingTimeLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
 
             // 다음버스남은시간
-            nextBusRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            nextBusRemainingTimeLabel.bottomAnchor.constraint(
+                equalTo: self.busRemainingTimeLabel.bottomAnchor),
             nextBusRemainingTimeLabel.leadingAnchor.constraint(
                 equalTo: self.busRemainingTimeLabel.trailingAnchor,
                 constant: 14),
@@ -101,8 +117,8 @@ class RouteTableViewCell: UITableViewCell {
         ])
 
         // 샘플
-        busNumberLabel.text = "21000000"
-        busRemainingTimeLabel.text = "전전"
-        nextBusRemainingTimeLabel.text = "7분전"
+        busNumberLabel.text = "7000"
+        busRemainingTimeLabel.text = "18분전"
+        nextBusRemainingTimeLabel.text = "21분전"
     }
 }

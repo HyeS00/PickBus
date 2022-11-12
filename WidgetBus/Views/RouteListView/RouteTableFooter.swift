@@ -8,12 +8,11 @@
 import UIKit
 
 class RouteTableFooter: UITableViewHeaderFooterView {
-    static let identifier = "RouteTableFooter"
 
     // 라운드
     let roundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         view.layer.cornerRadius = 15
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
