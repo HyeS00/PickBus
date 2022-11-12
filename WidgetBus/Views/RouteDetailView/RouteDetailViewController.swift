@@ -18,7 +18,15 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var routeDetailTableView: UITableView!
 
     @IBOutlet weak var boardingStateButton: UIButton!
+
+    @IBAction func tapBoardingStateButton(_ sender: UIButton) {
+        
+    }
+
+    let retryButoon = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
+
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         routeView.clipsToBounds = true
         routeView.layer.cornerRadius = 30
@@ -28,6 +36,9 @@ class RouteDetailViewController: UIViewController {
         self.routeDetailTableView.delegate = self
         busNumberLabel.text = "1000"
 
+        retryButoon.backgroundColor = .blue
+        retryButoon.layer.cornerRadius = 0.5 * retryButoon.bounds.width
+        self.view.addSubview(retryButoon)
     }
 }
 
