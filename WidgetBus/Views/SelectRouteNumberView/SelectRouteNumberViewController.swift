@@ -11,6 +11,8 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     //
     private var routeNumberInfos = [ArriveInfoResponseArriveInfo]()
     //
+    var selectedIndex = IndexPath(row: -1, section: 0)
+    //
     @IBOutlet weak var routeNumberTableView: UITableView!
     //
     override func viewDidLoad() {
@@ -46,6 +48,12 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         //
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+        selectedIndex = indexPath
+        tableView.reloadData()
+    }
+    //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("run \(routeNumberInfos)")
         if routeNumberInfos.isEmpty {
