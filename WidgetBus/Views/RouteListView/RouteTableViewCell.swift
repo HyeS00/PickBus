@@ -80,7 +80,6 @@ class RouteTableViewCell: UITableViewCell {
         self.contentView.addSubview(rideButton)
 
         NSLayoutConstraint.activate([
-//            self.contentView.heightAnchor.constraint(equalToConstant: 52),
 
             // 버스번호 배경
             busNumberBackgroundView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
@@ -97,7 +96,7 @@ class RouteTableViewCell: UITableViewCell {
 
             // 버스남은시간
             busRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            busRemainingTimeLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            busRemainingTimeLabel.leadingAnchor.constraint(equalTo: self.contentView.centerXAnchor, constant: -20),
 
             // 다음버스남은시간
             nextBusRemainingTimeLabel.bottomAnchor.constraint(
@@ -119,9 +118,5 @@ class RouteTableViewCell: UITableViewCell {
         self.busNumberLabel.text = busNumber
         self.busRemainingTimeLabel.text = busRemainingTime
         self.nextBusRemainingTimeLabel.text = nextBusRemainingTime
-
-        print(self.busNumberLabel.text!)
-        print(self.busRemainingTimeLabel.text!)
-        print(self.nextBusRemainingTimeLabel.text!)
     }
 }

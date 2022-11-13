@@ -35,7 +35,6 @@ class RouteTableHeader: UITableViewHeaderFooterView {
         self.contentView.addSubview(busStopLabel)
 
         NSLayoutConstraint.activate([
-//            self.contentView.heightAnchor.constraint(equalToConstant: 36),
             self.busStopLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             self.busStopLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16)
         ])

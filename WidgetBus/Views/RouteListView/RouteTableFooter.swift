@@ -34,7 +34,6 @@ class RouteTableFooter: UITableViewHeaderFooterView {
         self.contentView.addSubview(roundView)
 
         NSLayoutConstraint.activate([
-//            self.contentView.heightAnchor.constraint(equalToConstant: 15),
             self.roundView.heightAnchor.constraint(equalToConstant: 30),
             self.roundView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
             self.roundView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)

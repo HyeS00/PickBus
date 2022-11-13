@@ -21,6 +21,7 @@ class RouteListViewController: UIViewController {
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
+        table.showsVerticalScrollIndicator = false
         table.sectionHeaderTopPadding = 25
         table.backgroundColor = .clear
         table.separatorStyle = .none
@@ -63,7 +64,7 @@ class RouteListViewController: UIViewController {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 120),
+            routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             routeTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             routeTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             routeTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
