@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum BoardingStatus {
+    case onBoard
+    case getOff
+}
+
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -19,8 +24,17 @@ class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var boardingStateButton: UIButton!
 
+    var boardingStatus: BoardingStatus = .onBoard
+
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
-        
+        switch self.boardingStatus {
+        case .onBoard:
+            self.boardingStatus = .getOff
+            self.boardingStateButton.isSelected = true
+        case .getOff:
+            self.boardingStatus = .onBoard
+            self.boardingStateButton.isSelected = false
+        }
     }
 
     let retryButoon = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
@@ -39,6 +53,12 @@ class RouteDetailViewController: UIViewController {
         retryButoon.backgroundColor = .blue
         retryButoon.layer.cornerRadius = 0.5 * retryButoon.bounds.width
         self.view.addSubview(retryButoon)
+        self.configureBoardingTapButton()
+    }
+
+    func configureBoardingTapButton() {
+        self.boardingStateButton.setTitle("탑승", for: .normal)
+        self.boardingStateButton.setTitle("탑승취소", for: .selected)
     }
 }
 
@@ -48,9 +68,14 @@ extension RouteDetailViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "routeDetailCell", for: indexPath) as! RouteDetailTableViewCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "routeDetailCell",
+            for: indexPath) as! RouteDetailTableViewCell
         cell.busStationLabel.text = "포스텍"
         cell.routeLineView.backgroundColor = .gray
+        cell.busView.isHidden = false
+        cell.busTimeLabel.layer.masksToBounds = true
+        cell.busTimeLabel.layer.cornerRadius = 6.5
         return cell
     }
 
