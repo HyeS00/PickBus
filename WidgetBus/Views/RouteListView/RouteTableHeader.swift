@@ -10,7 +10,7 @@ import UIKit
 class RouteTableHeader: UITableViewHeaderFooterView {
 
     // 정류장이름
-    private let busStopLabel: UILabel = {
+    let busStopLabel: UILabel = {
         let label = UILabel()
         label.text = "정류장이름"
         label.textColor = .black

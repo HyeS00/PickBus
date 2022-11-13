@@ -9,6 +9,9 @@ import UIKit
 
 class RouteListViewController: UIViewController {
 
+    // 더미 데이터
+    let busStops = BusData.busStops
+
     // 셀,헤더,푸터 높이
     let headerHeight: CGFloat = 36
     let footerHeight: CGFloat = 15
@@ -75,46 +78,63 @@ extension RouteListViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension RouteListViewController: UITableViewDataSource {
 
+    // 헤더
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: RouteTableHeader.identifier)
+        let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: RouteTableHeader.identifier) as! RouteTableHeader
+        header.busStopLabel.text = busStops[section].name
         return header
     }
 
+    // 푸터
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: RouteTableFooter.identifier)
         return footer
     }
 
+    // 헤더 높이 - 마지막 섹션 헤더 높이는 0
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 2 ? 0 : headerHeight
+        return section == busStops.count - 1 ? 0 : headerHeight
     }
 
+    // 푸터 높이 - 마지막 섹션 푸터 높이는 0
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 2 ? 0 : footerHeight
+        return section == busStops.count - 1 ? 0 : footerHeight
     }
 
+    // 섹션 수
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        busStops.count
     }
 
+    // 셀 수 - 마지막 섹션의 셀 수는 1 (루트 추가 셀)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 2 ? 1 : 2
+        section == busStops.count - 1 ? 1 : busStops[section].routes.count
     }
 
+    // 셀 높이 - 마지막 섹션의 셀이면 루트 추가 셀의 높이 적용
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        indexPath.section == 2 ? addRouteCellHeight : routeCellHeight
+        indexPath.section == busStops.count - 1 ? addRouteCellHeight : routeCellHeight
     }
 
+    // 셀 정의 - 마지막 섹션이면 루트 추가 셀 적용 / 기본 섹션이면 루트 셀 적용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 2 {
+        if indexPath.section == busStops.count - 1 {
+            // 마지막 섹션
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddRouteTableViewCell.identifier,
                 for: indexPath) as! AddRouteTableViewCell
             return cell
         } else {
+            // 기본 섹션
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: RouteTableViewCell.identifier,
                 for: indexPath) as! RouteTableViewCell
+            let route = busStops[indexPath.section].routes[indexPath.row]
+            cell.setCell(
+                busNumber: route.busNumber,
+                busRemainingTime: route.busRemainingTime,
+                nextBusRemainingTime: route.nextBusRemainingTimeLabel)
             return cell
         }
     }

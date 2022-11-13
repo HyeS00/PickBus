@@ -26,6 +26,7 @@
 		D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848085291D433D009F8FDB /* RouteTableHeader.swift */; };
 		D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848087291D46B1009F8FDB /* RouteTableFooter.swift */; };
 		D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784808D291E1B9C009F8FDB /* NSObject+.swift */; };
+		D78480B32920BF8D009F8FDB /* BusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78480B22920BF8D009F8FDB /* BusData.swift */; };
 		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		D7848085291D433D009F8FDB /* RouteTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableHeader.swift; sourceTree = "<group>"; };
 		D7848087291D46B1009F8FDB /* RouteTableFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableFooter.swift; sourceTree = "<group>"; };
 		D784808D291E1B9C009F8FDB /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		D78480B22920BF8D009F8FDB /* BusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusData.swift; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -198,6 +200,7 @@
 				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
 				D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */,
 				D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */,
+				D78480B22920BF8D009F8FDB /* BusData.swift */,
 			);
 			path = RouteListView;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
 				D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */,
 				D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,

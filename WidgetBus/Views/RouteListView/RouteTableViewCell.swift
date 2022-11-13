@@ -10,21 +10,18 @@ import UIKit
 class RouteTableViewCell: UITableViewCell {
 
     // 버스번호
-    private let busNumberLabel: UILabel = {
+    private lazy var busNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
         label.textColor = .white
         label.textAlignment = .center
-//        label.backgroundColor = .black
-//        label.layer.cornerRadius = 9
-//        label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let busNumberBackgroundView: UIView = {
+    private lazy var busNumberBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
         view.layer.cornerRadius = 9
@@ -34,7 +31,7 @@ class RouteTableViewCell: UITableViewCell {
     }()
 
     // 버스남은시간
-    private let busRemainingTimeLabel: UILabel = {
+    private lazy var busRemainingTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textColor = .black
@@ -43,7 +40,7 @@ class RouteTableViewCell: UITableViewCell {
     }()
 
     // 다음버스남은시간
-    private let nextBusRemainingTimeLabel: UILabel = {
+    private lazy var nextBusRemainingTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
@@ -116,9 +113,15 @@ class RouteTableViewCell: UITableViewCell {
             rideButton.heightAnchor.constraint(equalToConstant: 30)
         ])
 
-        // 샘플
-        busNumberLabel.text = "7000"
-        busRemainingTimeLabel.text = "18분전"
-        nextBusRemainingTimeLabel.text = "21분전"
+    }
+
+    func setCell(busNumber: String, busRemainingTime: String, nextBusRemainingTime: String) {
+        self.busNumberLabel.text = busNumber
+        self.busRemainingTimeLabel.text = busRemainingTime
+        self.nextBusRemainingTimeLabel.text = nextBusRemainingTime
+
+        print(self.busNumberLabel.text!)
+        print(self.busRemainingTimeLabel.text!)
+        print(self.nextBusRemainingTimeLabel.text!)
     }
 }
