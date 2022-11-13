@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051D006F291E1F090061FCF4 /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
+		0547490D291E22A100DACC91 /* GroupListViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547490C291E22A100DACC91 /* GroupListViewContoller.swift */; };
+		0547490F2920EF1700DACC91 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547490E2920EF1700DACC91 /* SettingViewController.swift */; };
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
-		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; };
+		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		C16920612907B75C0021D17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920602907B75C0021D17F /* AppDelegate.swift */; };
 		C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920622907B75C0021D17F /* SceneDelegate.swift */; };
 		C16920652907B75C0021D17F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920642907B75C0021D17F /* ViewController.swift */; };
-		C16920682907B75C0021D17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16920662907B75C0021D17F /* Main.storyboard */; };
 		C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C16920692907B75C0021D17F /* WidgetBus.xcdatamodeld */; };
 		C169206D2907B75D0021D17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C169206C2907B75D0021D17F /* Assets.xcassets */; };
 		C16920702907B75D0021D17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C169206E2907B75D0021D17F /* LaunchScreen.storyboard */; };
@@ -20,7 +22,6 @@
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
-		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0547490C291E22A100DACC91 /* GroupListViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewContoller.swift; sourceTree = "<group>"; };
+		0547490E2920EF1700DACC91 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		18CC6641603FF94C1AE75616 /* Pods-WidgetBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus.release.xcconfig"; path = "Target Support Files/Pods-WidgetBus/Pods-WidgetBus.release.xcconfig"; sourceTree = "<group>"; };
 		2B93AF352370F71C8635C715 /* Pods-WidgetBusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBusTests.release.xcconfig"; path = "Target Support Files/Pods-WidgetBusTests/Pods-WidgetBusTests.release.xcconfig"; sourceTree = "<group>"; };
 		33D20902E13EA0B45D8B2E6E /* Pods-WidgetBus-WidgetBusUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus-WidgetBusUITests.release.xcconfig"; path = "Target Support Files/Pods-WidgetBus-WidgetBusUITests/Pods-WidgetBus-WidgetBusUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -52,7 +55,6 @@
 		C16920602907B75C0021D17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C16920622907B75C0021D17F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C16920642907B75C0021D17F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C16920672907B75C0021D17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C169206A2907B75C0021D17F /* WidgetBus.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WidgetBus.xcdatamodel; sourceTree = "<group>"; };
 		C169206C2907B75D0021D17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C169206F2907B75D0021D17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */,
+				051D006F291E1F090061FCF4 /* Pods_WidgetBus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +97,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0547490A291E223700DACC91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0547490B291E226D00DACC91 /* GroupListViewContoller */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0547490B291E226D00DACC91 /* GroupListViewContoller */ = {
+			isa = PBXGroup;
+			children = (
+				0547490C291E22A100DACC91 /* GroupListViewContoller.swift */,
+				0547490E2920EF1700DACC91 /* SettingViewController.swift */,
+			);
+			path = GroupListViewContoller;
+			sourceTree = "<group>";
+		};
 		BA6B18571B3FD79D5E2D2D5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +153,7 @@
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
-				C16920662907B75C0021D17F /* Main.storyboard */,
+				0547490A291E223700DACC91 /* View */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
 				C16920712907B75D0021D17F /* Info.plist */,
@@ -284,7 +303,6 @@
 				C16920992907C38D0021D17F /* .swiftlint.yml in Resources */,
 				C16920702907B75D0021D17F /* LaunchScreen.storyboard in Resources */,
 				C169206D2907B75D0021D17F /* Assets.xcassets in Resources */,
-				C16920682907B75C0021D17F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,10 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0547490F2920EF1700DACC91 /* SettingViewController.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,
+				0547490D291E22A100DACC91 /* GroupListViewContoller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,14 +457,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C16920662907B75C0021D17F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C16920672907B75C0021D17F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C169206E2907B75D0021D17F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -576,16 +588,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetBus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -596,7 +606,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Dudu WidgetBus";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -609,16 +618,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetBus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -629,7 +636,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Dudu WidgetBus";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -644,7 +650,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -665,7 +671,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -685,7 +691,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBusUITests;
@@ -704,7 +710,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBusUITests;
