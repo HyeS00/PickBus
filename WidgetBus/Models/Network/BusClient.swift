@@ -9,8 +9,10 @@ import Foundation
 
 class BusClient {
     //
+
     static var apiKey: String {
         get {
+
             guard let url = Bundle.main.url(forResource: "Service Key", withExtension: "plist") else {
                 return ""
             }
@@ -18,19 +20,23 @@ class BusClient {
                 return ""
             }
             //
+
             return dictionary["BusStop"] as? String ?? ""
             //
         }
+
     }
     //
-    //
+
     enum Endpoints {
         static let base = "http://apis.data.go.kr"
         static let apiKeyParam = "?serviceKey=\(BusClient.apiKey)"
         //
+
         case getArriveList(city: String, busStopId: String)
         case getCityCodeList
         //
+
         var stringValue: String {
             switch self {
             case .getArriveList(let city, let busStopId):
@@ -45,13 +51,15 @@ class BusClient {
             }
         }
         //
+
         var url: URL {
             return URL(string: stringValue)!
         }
         //
+
     }
     //
-    //
+
     class func taskForGETRequest<ResponseType: Decodable>(
         url: URL,
         responseType: ResponseType.Type,
@@ -80,9 +88,11 @@ class BusClient {
         }
         task.resume()
         //
+
         return task
     }
     //
+
     class func getArriveList(completion: @escaping ([ArriveInfoResponseArriveInfo], Error?) -> Void) {
         _ = taskForGETRequest(
             url: Endpoints.getArriveList(city: "25", busStopId: "DJB8001793").url,

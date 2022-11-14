@@ -8,7 +8,6 @@
 import UIKit
 
 class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    //
     private var routeNumberInfos = [ArriveInfoResponseArriveInfo]()
     //
     var selectedIndex = IndexPath(row: -1, section: 0)
@@ -24,8 +23,10 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         BusClient.getArriveList(completion: handleRequestArriveInfoResponse(response:error:))
     }
     //
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "RouteNumberCell", for: indexPath)
         //
         var cellContent = cell.defaultContentConfiguration()
@@ -33,6 +34,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             cellContent.text = "불러오는 중입니다."
 //            cell.tintColor = .gray
             //
+
         } else {
             let cellData = routeNumberInfos[indexPath.row]
             cellContent.text = "\(cellData.routeno) 번"
@@ -46,6 +48,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         }
         cell.contentConfiguration = cellContent
         //
+
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -54,6 +57,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         tableView.reloadData()
     }
     //
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("run \(routeNumberInfos)")
         if routeNumberInfos.isEmpty {
@@ -62,6 +66,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             return routeNumberInfos.count
         }
         //
+
     }
 
     func handleRequestArriveInfoResponse(response: [ArriveInfoResponseArriveInfo], error: Error?) {
