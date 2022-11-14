@@ -20,6 +20,7 @@
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
+		D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103DF3292218E900DA7CDD /* UIColor+.swift */; };
 		D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807D291D156A009F8FDB /* RouteListViewController.swift */; };
 		D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */; };
 		D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		D7103DF3292218E900DA7CDD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		D784807D291D156A009F8FDB /* RouteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListViewController.swift; sourceTree = "<group>"; };
 		D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouteTableViewCell.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				D784808D291E1B9C009F8FDB /* NSObject+.swift */,
+				D7103DF3292218E900DA7CDD /* UIColor+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */,
 				D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
+				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
 				D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */,
 				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
