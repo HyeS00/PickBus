@@ -95,6 +95,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		096B55C6292213B700B328A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		096B55C7292213C300B328A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				096B55C8292213D100B328A0 /* SelectArrivalView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		096B55C8292213D100B328A0 /* SelectArrivalView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SelectArrivalView;
+			sourceTree = "<group>";
+		};
 		BA6B18571B3FD79D5E2D2D5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +153,8 @@
 		C169205F2907B75C0021D17F /* WidgetBus */ = {
 			isa = PBXGroup;
 			children = (
+				096B55C7292213C300B328A0 /* Views */,
+				096B55C6292213B700B328A0 /* Models */,
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
