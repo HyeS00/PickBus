@@ -57,8 +57,25 @@ class RouteDetailViewController: UIViewController {
     }
 
     func configureBoardingTapButton() {
-        self.boardingStateButton.setTitle("탑승", for: .normal)
-        self.boardingStateButton.setTitle("탑승취소", for: .selected)
+
+        let boardText = "탑승"
+        let boardAttribute = NSMutableAttributedString(string: boardText)
+        let font = UIFont(name: "Helvetica-Bold", size: 40)
+        boardAttribute.addAttribute(
+            NSAttributedString.Key.font,
+            value: font as Any,
+            range: NSRange(location: 0, length: boardText.count)
+        )
+        self.boardingStateButton.setAttributedTitle(boardAttribute, for: .normal)
+
+        let getOffText = "탑승취소"
+        let getOffAttribute = NSMutableAttributedString(string: getOffText)
+        getOffAttribute.addAttribute(
+            NSAttributedString.Key.font,
+            value: font as Any,
+            range: NSRange(location: 0, length: getOffText.count)
+        )
+        self.boardingStateButton.setAttributedTitle(getOffAttribute, for: .selected)
     }
 }
 
@@ -76,6 +93,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busView.isHidden = false
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
+
         return cell
     }
 
@@ -83,7 +101,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         UIView()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 14
     }
 }
 
