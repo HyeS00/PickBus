@@ -51,7 +51,7 @@ class RouteListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .gray
+        self.view.backgroundColor = .duduDeepBlue
         setupLayout()
         setupConstraints()
         routeTableView.delegate = self

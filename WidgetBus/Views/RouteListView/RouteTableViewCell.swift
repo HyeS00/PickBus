@@ -23,7 +23,7 @@ class RouteTableViewCell: UITableViewCell {
 
     private lazy var busNumberBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .duduDeepBlue
         view.layer.cornerRadius = 9
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class RouteTableViewCell: UITableViewCell {
     private lazy var nextBusRemainingTimeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
+        label.textColor = .duduGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -53,11 +53,11 @@ class RouteTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setTitle("탑승", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
+        button.setTitleColor(.duduDeepBlue, for: .normal)
+        button.backgroundColor = .duduBlue
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = UIColor.duduDeepBlue?.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
