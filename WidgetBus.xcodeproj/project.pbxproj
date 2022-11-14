@@ -11,6 +11,8 @@
 		0547490D291E22A100DACC91 /* GroupListViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547490C291E22A100DACC91 /* GroupListViewContoller.swift */; };
 		0547490F2920EF1700DACC91 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547490E2920EF1700DACC91 /* SettingViewController.swift */; };
 		05474911292124F200DACC91 /* AddGroupListNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05474910292124F200DACC91 /* AddGroupListNameView.swift */; };
+		054749132921612200DACC91 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054749122921612200DACC91 /* GroupTableViewCell.swift */; };
+		05474915292170AD00DACC91 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */; };
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
 		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		C16920612907B75C0021D17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920602907B75C0021D17F /* AppDelegate.swift */; };
@@ -46,6 +48,8 @@
 		0547490C291E22A100DACC91 /* GroupListViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewContoller.swift; sourceTree = "<group>"; };
 		0547490E2920EF1700DACC91 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		05474910292124F200DACC91 /* AddGroupListNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupListNameView.swift; sourceTree = "<group>"; };
+		054749122921612200DACC91 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		18CC6641603FF94C1AE75616 /* Pods-WidgetBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus.release.xcconfig"; path = "Target Support Files/Pods-WidgetBus/Pods-WidgetBus.release.xcconfig"; sourceTree = "<group>"; };
 		2B93AF352370F71C8635C715 /* Pods-WidgetBusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBusTests.release.xcconfig"; path = "Target Support Files/Pods-WidgetBusTests/Pods-WidgetBusTests.release.xcconfig"; sourceTree = "<group>"; };
 		33D20902E13EA0B45D8B2E6E /* Pods-WidgetBus-WidgetBusUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus-WidgetBusUITests.release.xcconfig"; path = "Target Support Files/Pods-WidgetBus-WidgetBusUITests/Pods-WidgetBus-WidgetBusUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				0547490C291E22A100DACC91 /* GroupListViewContoller.swift */,
+				054749122921612200DACC91 /* GroupTableViewCell.swift */,
+				05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */,
 				0547490E2920EF1700DACC91 /* SettingViewController.swift */,
 				05474910292124F200DACC91 /* AddGroupListNameView.swift */,
 			);
@@ -419,8 +425,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0547490F2920EF1700DACC91 /* SettingViewController.swift in Sources */,
+				05474915292170AD00DACC91 /* AddGroupTableViewCell.swift in Sources */,
 				05474911292124F200DACC91 /* AddGroupListNameView.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				054749132921612200DACC91 /* GroupTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,

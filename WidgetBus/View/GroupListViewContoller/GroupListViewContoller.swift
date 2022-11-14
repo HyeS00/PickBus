@@ -8,18 +8,35 @@
 import UIKit
 
 final class GroupListViewContoller: UIViewController {
+    let initMain = true
+    var groupName = ["출근길", "퇴근길", "백화점으로"]
+
+    private let groupListView: UITableView = {
+        let groupList = UITableView(frame: .zero, style: .plain)
+        groupList.translatesAutoresizingMaskIntoConstraints = false
+        groupList.separatorStyle = .none
+        groupList.rowHeight = 100
+        groupList.register(GroupTableViewCell.self, forCellReuseIdentifier: "GroupListCell")
+        groupList.register(AddGroupTableViewCell.self, forCellReuseIdentifier: AddGroupTableViewCell.identifier)
+        return groupList
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigationController()
-        setupMainView()
+        if initMain == true {
+            setupMainView()
+        } else {
+            setupTableView()
+        }
+
     }
 }
 
 private extension GroupListViewContoller {
     func setupNavigationController() {
         let titleLabel = UILabel()
-        titleLabel.textColor = UIColor.black
+        titleLabel.textColor = UIColor.systemGray2
         titleLabel.text = "뜌벅초"
         titleLabel.font = UIFont.systemFont(ofSize: 42, weight: .bold)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
@@ -34,6 +51,7 @@ private extension GroupListViewContoller {
         barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
         barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
         self.navigationItem.rightBarButtonItem = barButtonItem
+
     }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
@@ -78,5 +96,48 @@ private extension GroupListViewContoller {
     @objc func btnAddGroupList(_ sender: UIButton) {
         let addGroupListNameView = AddGroupListNameViewController()
         self.navigationController?.pushViewController(addGroupListNameView, animated: true)
+    }
+}
+private extension GroupListViewContoller {
+    func setupTableView() {
+
+        groupListView.delegate = self
+        groupListView.dataSource = self
+
+        self.view.addSubview(groupListView)
+        groupListView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        groupListView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        groupListView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        groupListView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+
+    }
+}
+
+extension GroupListViewContoller: UITableViewDelegate {
+}
+
+extension GroupListViewContoller: UITableViewDataSource {
+
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return groupName.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = groupListView.dequeueReusableCell(withIdentifier: GroupTableViewCell.identifier, for: indexPath) as! GroupTableViewCell
+        cell.selectionStyle = .none
+        cell.groupListButton.setTitle(groupName[indexPath.row], for: .normal)
+        return cell
+    }
+
+
+
+}
+
+extension GroupListViewContoller: ContentsMainTextDelegate {
+    func catergoryButtonTapped() {
+        let settingView = SettingViewController()
+        self.navigationController?.pushViewController(settingView, animated: true)
     }
 }
