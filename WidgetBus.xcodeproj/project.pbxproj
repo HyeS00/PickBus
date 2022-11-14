@@ -71,14 +71,14 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
-		E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailViewController.swift; sourceTree = "<group>"; };
-		E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailTableViewCell.swift; sourceTree = "<group>"; };
-		E1707842291EC1B0001D324C /* RouteDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteDetailView.storyboard; sourceTree = "<group>"; };
 		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
 		CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteNumberViewController.swift; sourceTree = "<group>"; };
 		CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArriveInfoFromBusStop.swift; sourceTree = "<group>"; };
 		CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteNumberViewStoryboard.storyboard; sourceTree = "<group>"; };
 		CFE0A86A291CD484002779C6 /* BusClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusClient.swift; sourceTree = "<group>"; };
+		E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailViewController.swift; sourceTree = "<group>"; };
+		E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailTableViewCell.swift; sourceTree = "<group>"; };
+		E1707842291EC1B0001D324C /* RouteDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteDetailView.storyboard; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -154,9 +154,6 @@
 				E1707844291EC26A001D324C /* Views */,
 				E1707845291EC271001D324C /* Models */,
 				E1707846291EC277001D324C /* Extensions */,
-				CFD79AFE291E436F0091202C /* Views */,
-				CFD79AFF291E437C0091202C /* Models */,
-				CFD79B00291E43830091202C /* Extensions */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
 				C16920712907B75D0021D17F /* Info.plist */,
@@ -181,29 +178,6 @@
 				C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */,
 			);
 			path = WidgetBusUITests;
-			sourceTree = "<group>";
-		};
-		CFD79AFE291E436F0091202C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CFD79B02291E44020091202C /* SelectRouteNumberView */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CFD79AFF291E437C0091202C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CFE0A865291CCB29002779C6 /* Network */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		CFD79B00291E43830091202C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CFD79B02291E44020091202C /* SelectRouteNumberView */ = {
@@ -240,6 +214,7 @@
 		E1707844291EC26A001D324C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFD79B02291E44020091202C /* SelectRouteNumberView */,
 				E1707847291EC291001D324C /* RouteDetailView */,
 			);
 			path = Views;
@@ -248,6 +223,7 @@
 		E1707845291EC271001D324C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CFE0A865291CCB29002779C6 /* Network */,
 			);
 			path = Models;
 			sourceTree = "<group>";
