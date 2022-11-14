@@ -96,7 +96,8 @@ class RouteTableViewCell: UITableViewCell {
 
             // 버스남은시간
             busRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            busRemainingTimeLabel.leadingAnchor.constraint(equalTo: self.contentView.centerXAnchor, constant: -20),
+            busRemainingTimeLabel.leadingAnchor.constraint(
+                equalTo: self.contentView.centerXAnchor, constant: -20),
 
             // 다음버스남은시간
             nextBusRemainingTimeLabel.bottomAnchor.constraint(
