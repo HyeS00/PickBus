@@ -10,18 +10,18 @@ import Foundation
 struct ArrivalNodeModel {
 //    let code: String?
     let name: String?
-    let attribute: nodeAttribute?
-    var userSelected: nodeSelected?
+    let attribute: NodeAttribute?
+    var userSelected: NodeSelected?
 }
 
-enum nodeAttribute {
+enum NodeAttribute {
     case first
     case nomal
     case turnaround
     case final
 }
 
-enum nodeSelected {
+enum NodeSelected {
     case notSelected
     case departure
     case middle
