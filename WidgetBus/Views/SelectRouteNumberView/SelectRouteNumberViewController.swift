@@ -13,7 +13,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet weak var routeNumberTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        }
+
         self.navigationItem.title = "송강전통시장"
         BusClient.getArriveList(completion: handleRequestArriveInfoResponse(response:error:))
     }
