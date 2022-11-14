@@ -8,22 +8,19 @@
 import UIKit
 
 final class AddGroupListNameViewController: UIViewController {
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
-        return scrollView
-    }()
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private let contentTextView: UIView = {
+    private let bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
+        view.layer.cornerRadius = 15
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        view.backgroundColor = .white
         return view
     }()
 
@@ -49,10 +46,28 @@ final class AddGroupListNameViewController: UIViewController {
 
     let groupListTextfield: UITextField = {
         var groupListTextfield = UITextField()
-        groupListTextfield.frame = CGRect(x: 200, y: 200, width: 300, height: 90)
+        groupListTextfield.frame = CGRect(x: 15, y: 10, width: 361, height: 75)
+        groupListTextfield.font = UIFont(name: "SFUI-Regular", size: 70)
         groupListTextfield.placeholder = "출발지를 입력해주세요"
+        groupListTextfield.layer.shadowColor = UIColor.black.cgColor
+        groupListTextfield.layer.shadowOpacity = 0.3
+        groupListTextfield.layer.shadowOffset = CGSize(width: 0, height: 2)
+        groupListTextfield.layer.shadowRadius = 2
         groupListTextfield.borderStyle = .roundedRect
+        groupListTextfield.clearButtonMode = .whileEditing
+
         return groupListTextfield
+    }()
+
+    private let bottomViewLabel: UILabel = {
+        let viewLabel = UILabel()
+        viewLabel.text = "버스로 자주다니는 곳을 등록해 보세요!"
+        viewLabel.textAlignment = .center
+        viewLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        viewLabel.textColor = .gray
+        viewLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        return viewLabel
     }()
 
     override func viewDidLoad() {
@@ -62,6 +77,14 @@ final class AddGroupListNameViewController: UIViewController {
         setupNavigationController()
         setupLayout()
 
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.groupListTextfield.becomeFirstResponder()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.groupListTextfield.resignFirstResponder()
     }
 }
 
@@ -91,44 +114,48 @@ private extension AddGroupListNameViewController {
 
 private extension AddGroupListNameViewController {
     func setupLayout() {
-        self.view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-
-        scrollView.addSubview(contentView)
-        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-
-        self.view.addSubview(contentTextView)
-        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        self.view.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
         contentView.addSubview(viewLabel)
-        viewLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        viewLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -50).isActive = true
-        viewLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        viewLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100).isActive = true
+        viewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        viewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        viewLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
 
         contentView.addSubview(indicatorImage)
+        indicatorImage.topAnchor.constraint(equalTo: viewLabel.topAnchor, constant: 80).isActive = true
+        indicatorImage.centerXAnchor.constraint(equalTo: viewLabel.centerXAnchor).isActive = true
         indicatorImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         indicatorImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        indicatorImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        indicatorImage.topAnchor.constraint(equalTo: viewLabel.topAnchor, constant: 130).isActive = true
-        indicatorImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
-//        contentTextView.addSubview(groupListTextfield)
-//        indicatorImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        groupListTextfield.topAnchor.constraint(equalTo: indicatorImage.topAnchor, constant: 10).isActive = true
-//        groupListTextfield.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        contentView.addSubview(bottomView)
+        bottomView.topAnchor.constraint(equalTo: indicatorImage.topAnchor, constant: 50).isActive = true
+        bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        bottomView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+
+        bottomView.addSubview(groupListTextfield)
+
+        bottomView.addSubview(bottomViewLabel)
+        bottomViewLabel.topAnchor.constraint(equalTo: groupListTextfield.topAnchor, constant: 100)
+            .isActive = true
+        bottomViewLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor).isActive = true
+        bottomViewLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor).isActive = true
+
     }
-
 }
 extension AddGroupListNameViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.groupListTextfield.resignFirstResponder()
+        self.dismiss(animated: true, completion: nil)
+        return true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
 }
