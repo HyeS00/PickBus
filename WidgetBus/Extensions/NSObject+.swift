@@ -7,7 +7,7 @@
 
 import Foundation
 
-// 뷰에에 identifier 작성 생략 가능
+// 뷰에 identifier 작성 생략 가능
 extension NSObject {
     static var identifier: String {
         String(describing: self)
