@@ -52,7 +52,6 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         } else {
             return routeNumberInfos.count
         }
-
     }
 
     func handleRequestArriveInfoResponse(response: [ArriveInfoResponseArriveInfo], error: Error?) {
@@ -65,5 +64,4 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         print("error")
         print(error?.localizedDescription ?? "")
     }
-//
 }
