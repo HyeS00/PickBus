@@ -10,6 +10,7 @@ import UIKit
 class SelectArrivalViewController: UIViewController {
 
     // MARK: - Properties
+    var nodeList: [ArrivalNodeModel?] = []
 
     private let arrivalTableView: UITableView =  {
         let tableView = UITableView()
@@ -22,6 +23,8 @@ class SelectArrivalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        nodeList = setDummyBusNodeList()
+
         arrivalTableView.delegate = self
         arrivalTableView.dataSource = self
 
@@ -33,6 +36,25 @@ class SelectArrivalViewController: UIViewController {
     func configureUI() {
         view.addSubview(arrivalTableView)
         arrivalTableView.frame = view.bounds
+    }
+
+    // 버스노선 더미 데이터
+    func setDummyBusNodeList() -> [ArrivalNodeModel] {
+        let nodeList: [ArrivalNodeModel] = [
+            ArrivalNodeModel(name: "포스텍", attribute: .nomal, userSelected: .departure),
+            ArrivalNodeModel(name: "생명공학연구소", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "효곡동행정복지센터", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "효자아트홀", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "포항성모병원", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "대잠사거리", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "시외버스터미널", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "교보생명", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "산업은행", attribute: .nomal, userSelected: .notSelected),
+            ArrivalNodeModel(name: "고용복지플러스센터", attribute: .final, userSelected: .notSelected)
+        ]
+
+        return nodeList
+
     }
 }
 extension SelectArrivalViewController: UITableViewDelegate {

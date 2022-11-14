@@ -41,7 +41,7 @@ class ArrivalTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.selectionStyle = .none
-        
+
         configureUI()
     }
 
