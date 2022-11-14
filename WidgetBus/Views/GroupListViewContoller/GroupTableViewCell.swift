@@ -25,9 +25,9 @@ class GroupTableViewCell: UITableViewCell {
     let groupListButton: UIButton = {
         let button = UIButton()
         button.setTitle("출근길", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 30)
+        button.titleLabel?.font = .systemFont(ofSize: 30, weight: .bold)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
         button.layer.cornerRadius = 15
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 1.0

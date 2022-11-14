@@ -15,7 +15,8 @@ class AddGroupTableViewCell: UITableViewCell {
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 30)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
+        button.layer.opacity = 0.3
+        button.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.cgColor

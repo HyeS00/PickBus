@@ -103,12 +103,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0547490A291E223700DACC91 /* View */ = {
+		0547490A291E223700DACC91 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0547490B291E226D00DACC91 /* GroupListViewContoller */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0547490B291E226D00DACC91 /* GroupListViewContoller */ = {
@@ -162,7 +162,7 @@
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
-				0547490A291E223700DACC91 /* View */,
+				0547490A291E223700DACC91 /* Views */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
 				C16920712907B75D0021D17F /* Info.plist */,

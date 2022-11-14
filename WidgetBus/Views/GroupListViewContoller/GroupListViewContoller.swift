@@ -9,7 +9,7 @@ import UIKit
 
 final class GroupListViewContoller: UIViewController {
     let initMain = true
-    var groupName = ["출근길", "퇴근길", "백화점으로"]
+    var groupName = ["출근길", "퇴근길", "백화점으로", ""]
 
     private let groupListView: UITableView = {
         let groupList = UITableView(frame: .zero, style: .plain)
@@ -17,7 +17,7 @@ final class GroupListViewContoller: UIViewController {
         groupList.separatorStyle = .none
         groupList.rowHeight = 100
         groupList.register(GroupTableViewCell.self, forCellReuseIdentifier: "GroupListCell")
-        groupList.register(AddGroupTableViewCell.self, forCellReuseIdentifier: AddGroupTableViewCell.identifier)
+        groupList.register(AddGroupTableViewCell.self, forCellReuseIdentifier: "AddGroupTableViewCell")
         return groupList
     }()
 
@@ -29,7 +29,6 @@ final class GroupListViewContoller: UIViewController {
         } else {
             setupTableView()
         }
-
     }
 }
 
@@ -76,8 +75,8 @@ private extension GroupListViewContoller {
         let addButton = UIButton()
         addButton.setTitle("추가하기", for: .normal)
         addButton.setTitleColor(.white, for: .normal)
-        addButton.backgroundColor = .blue
-        addButton.layer.opacity = 0.3
+        addButton.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        addButton.layer.opacity = 0.4
         addButton.layer.cornerRadius = 15
         addButton.layer.shadowColor = UIColor.black.cgColor
         addButton.layer.shadowOpacity = 1.0
@@ -118,21 +117,28 @@ extension GroupListViewContoller: UITableViewDelegate {
 
 extension GroupListViewContoller: UITableViewDataSource {
 
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupName.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = groupListView.dequeueReusableCell(withIdentifier: GroupTableViewCell.identifier, for: indexPath) as! GroupTableViewCell
-        cell.selectionStyle = .none
-        cell.groupListButton.setTitle(groupName[indexPath.row], for: .normal)
-        return cell
+        if indexPath.row == groupName.count - 1 {
+            // 마지막 섹션
+            let cell = groupListView.dequeueReusableCell(
+                withIdentifier: AddGroupTableViewCell.identifier,
+                for: indexPath) as! AddGroupTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            // 기본 섹션
+            let cell = groupListView.dequeueReusableCell(
+                withIdentifier: GroupTableViewCell.identifier,
+                for: indexPath) as! GroupTableViewCell
+            cell.selectionStyle = .none
+            cell.groupListButton.setTitle(groupName[indexPath.row], for: .normal)
+            return cell
+        }
     }
-
-
-
 }
 
 extension GroupListViewContoller: ContentsMainTextDelegate {
