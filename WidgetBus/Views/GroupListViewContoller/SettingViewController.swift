@@ -12,6 +12,18 @@ final class SettingViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationController()
 
+        let isPushOn = UIApplication.shared.isRegisteredForRemoteNotifications
+
+        if isPushOn {
+            print("push on")
+            // disable
+            UIApplication.shared.unregisterForRemoteNotifications()
+        } else {
+            print("push off")
+            // enable
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+
     }
 }
 private extension SettingViewController {
