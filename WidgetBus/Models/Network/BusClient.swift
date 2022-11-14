@@ -8,10 +8,8 @@
 import Foundation
 
 class BusClient {
-    //
 
     static var apiKey: String {
-        get {
 
             guard let url = Bundle.main.url(forResource: "Service Key", withExtension: "plist") else {
                 return ""
@@ -19,23 +17,17 @@ class BusClient {
             guard let dictionary = NSDictionary(contentsOf: url) else {
                 return ""
             }
-            //
 
             return dictionary["BusStop"] as? String ?? ""
-            //
-        }
 
     }
-    //
 
     enum Endpoints {
         static let base = "http://apis.data.go.kr"
         static let apiKeyParam = "?serviceKey=\(BusClient.apiKey)"
-        //
 
         case getArriveList(city: String, busStopId: String)
         case getCityCodeList
-        //
 
         var stringValue: String {
             switch self {
@@ -50,15 +42,12 @@ class BusClient {
                 Endpoints.apiKeyParam + "&_type=json"
             }
         }
-        //
 
         var url: URL {
             return URL(string: stringValue)!
         }
-        //
 
     }
-    //
 
     class func taskForGETRequest<ResponseType: Decodable>(
         url: URL,
@@ -87,25 +76,19 @@ class BusClient {
             }
         }
         task.resume()
-        //
 
         return task
     }
-    //
 
     class func getArriveList(completion: @escaping ([ArriveInfoResponseArriveInfo], Error?) -> Void) {
         _ = taskForGETRequest(
             url: Endpoints.getArriveList(city: "25", busStopId: "DJB8001793").url,
             responseType: ArriveInfoFromBusStop.self) { response, error in
                 if let response = response {
-//                    print("good")
-//                    print(response)
                     completion(response.response.body.items.item, nil)
                 } else {
-//                    print("response is nil")
                     completion([], error)
                 }
             }
     }
-    //
 }
