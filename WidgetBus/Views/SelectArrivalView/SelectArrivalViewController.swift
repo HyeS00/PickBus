@@ -14,7 +14,7 @@ class SelectArrivalViewController: UIViewController {
 
     private let arrivalTableView: UITableView =  {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ArrivalTableViewCell.self, forCellReuseIdentifier: ArrivalTableViewCell.identifier)
         return tableView
     }()
 
@@ -27,6 +27,7 @@ class SelectArrivalViewController: UIViewController {
 
         arrivalTableView.delegate = self
         arrivalTableView.dataSource = self
+        arrivalTableView.separatorStyle = .none
 
         configureUI()
 
@@ -65,12 +66,44 @@ extension SelectArrivalViewController: UITableViewDelegate {
 
 extension SelectArrivalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return nodeList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = arrivalTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "dd"
+        guard let cell = arrivalTableView.dequeueReusableCell(withIdentifier: ArrivalTableViewCell.identifier, for: indexPath) as? ArrivalTableViewCell else {
+            return UITableViewCell()
+        }
+
+        cell.configure(nodeInfo: nodeList[indexPath.row]!)
+
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        for index in nodeList.indices {
+            /*
+            if indexPath.row == 0 {
+                // 출발 노드 경로 색상을 바꿔줘야한다.
+            } else {
+                //
+            }
+             */
+
+            if index == 0 {
+                continue
+            }
+            // 1번 인덱스 부터 마지막 전 인덱스 까지
+            if index < indexPath.row {
+                nodeList[index]?.userSelected = .middle
+                print(index,"미들")
+            } else if index == indexPath.row {
+                nodeList[index]?.userSelected = .arrival
+                print(index,"도착")
+            } else {
+                nodeList[index]?.userSelected = .notSelected
+                print(index,"선택 X")
+            }
+        }
+        arrivalTableView.reloadData()
     }
 }

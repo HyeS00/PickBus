@@ -75,13 +75,10 @@ class ArrivalTableViewCell: UITableViewCell {
         case .middle:
             routeNodeImageView.tintColor = .blue
             routeLineImageView.tintColor = .blue
-            break
-
         case .arrival:
             nodeHighlightImageView.image = UIImage(named: "EndNodeImg")
             routeNodeImageView.tintColor = .blue
             routeLineImageView.tintColor = .gray
-
         case .none:
             break
         }
@@ -89,10 +86,8 @@ class ArrivalTableViewCell: UITableViewCell {
         switch nodeInfo.attribute {
         case .first, .nomal, .turnaround:
             routeLineImageView.image = UIImage(named: "routeLine")
-            break
         case .final:
             routeLineImageView.image = nil
-            break
         case .none:
             break
         }
@@ -106,7 +101,6 @@ class ArrivalTableViewCell: UITableViewCell {
         nodeHighlightImageView.translatesAutoresizingMaskIntoConstraints = false
         nodeHighlightImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         nodeHighlightImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-
 
         addSubview(routeNodeImageView)
         routeNodeImageView.translatesAutoresizingMaskIntoConstraints = false
