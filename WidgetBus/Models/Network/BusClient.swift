@@ -19,7 +19,6 @@ class BusClient {
             }
 
             return dictionary["BusStop"] as? String ?? ""
-
     }
 
     enum Endpoints {
@@ -46,7 +45,6 @@ class BusClient {
         var url: URL {
             return URL(string: stringValue)!
         }
-
     }
 
     class func taskForGETRequest<ResponseType: Decodable>(
