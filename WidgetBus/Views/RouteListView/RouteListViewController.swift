@@ -9,6 +9,15 @@ import UIKit
 
 class RouteListViewController: UIViewController {
 
+    // 임시 설정 버튼
+    private lazy var editButton: UIButton = {
+            let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+            button.setTitle("Edit", for: .normal)
+            button.backgroundColor = .green
+            button.addTarget(self, action: #selector(pressedEditButton(_ :)), for: .touchUpInside)
+            return button
+        }()
+
     // 더미 데이터
     let busStops = BusData.busStops
 
@@ -54,12 +63,14 @@ class RouteListViewController: UIViewController {
         self.view.backgroundColor = .duduDeepBlue
         setupLayout()
         setupConstraints()
+        routeTableView.reloadData()
         routeTableView.delegate = self
         routeTableView.dataSource = self
     }
 
     private func setupLayout() {
         self.view.addSubview(routeTableView)
+        self.view.addSubview(editButton)
     }
 
     private func setupConstraints() {
@@ -70,6 +81,21 @@ class RouteListViewController: UIViewController {
             routeTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
         ])
     }
+
+    // 임시 설정 버튼 함수
+        @objc private func pressedEditButton(_ sender: UIButton!) {
+            print("pressed editButton")
+            if self.routeTableView.isEditing {
+                print("수정모드yes")
+                self.editButton.setTitle("Edit", for: .normal)
+                self.routeTableView.setEditing(false, animated: true)
+
+            } else {
+                print("수정모드no")
+                self.editButton.setTitle("Done", for: .normal)
+                self.routeTableView.setEditing(true, animated: true)
+            }
+        }
 }
 
 // MARK: - UITableViewDelegate
@@ -132,6 +158,7 @@ extension RouteListViewController: UITableViewDataSource {
                 withIdentifier: RouteTableViewCell.identifier,
                 for: indexPath) as! RouteTableViewCell
             let route = busStops[indexPath.section].routes[indexPath.row]
+            cell.selectionStyle = .none
             cell.setCell(
                 busNumber: route.busNumber,
                 busRemainingTime: route.busRemainingTime,
