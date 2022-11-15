@@ -77,29 +77,14 @@ class ArrivalTableViewCell: UITableViewCell {
 
         switch nodeInfo.userSelected {
         case .notSelected:
-            //            routeNodeImageView.tintColor = .gray
-            //            routeLineImageView.tintColor = .gray
             break
-
-        case .depart(.onlyDep):
-            print("도착 선택 안함")
-            highlightView.backgroundColor = .systemPink
-            highlightLabel.text = "출발"
-            routeNodeImageView.tintColor = .blue
-            routeLineView.backgroundColor = .gray
-//            fallthrough
         case .depart(.notOnlyDep):
+            routeLineView.backgroundColor = .blue
+            fallthrough
+        case .depart(.onlyDep):
             highlightView.backgroundColor = .systemPink
             highlightLabel.text = "출발"
             routeNodeImageView.tintColor = .blue
-            routeLineView.backgroundColor = .blue
-            print("도착까지 선택")
-//            fallthrough
-//        case .depart(.onlyDep), .depart(.notOnlyDep):
-//            highlightView.backgroundColor = .systemPink
-//            highlightLabel.text = "출발"
-//            routeNodeImageView.tintColor = .blue
-//            print("둘다")
         case .middle:
             routeNodeImageView.tintColor = .blue
             routeLineView.backgroundColor = .blue
@@ -134,18 +119,21 @@ class ArrivalTableViewCell: UITableViewCell {
         addSubview(highlightLabel)
         highlightLabel.translatesAutoresizingMaskIntoConstraints = false
         highlightLabel.centerYAnchor.constraint(equalTo: highlightView.centerYAnchor).isActive = true
-        highlightLabel.trailingAnchor.constraint(equalTo: highlightView.trailingAnchor, constant: -7).isActive = true
+        highlightLabel.trailingAnchor.constraint(equalTo: highlightView.trailingAnchor, constant: -7)
+            .isActive = true
 
         addSubview(routeNodeImageView)
         routeNodeImageView.translatesAutoresizingMaskIntoConstraints = false
         routeNodeImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         routeNodeImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         routeNodeImageView.centerYAnchor.constraint(equalTo: highlightView.centerYAnchor).isActive = true
-        routeNodeImageView.leadingAnchor.constraint(equalTo: highlightView.leadingAnchor, constant: 18).isActive = true
+        routeNodeImageView.leadingAnchor.constraint(equalTo: highlightView.leadingAnchor, constant: 18)
+            .isActive = true
 
         addSubview(routeNodeLabel)
         routeNodeLabel.translatesAutoresizingMaskIntoConstraints = false
-        routeNodeLabel.leadingAnchor.constraint(equalTo: routeNodeImageView.trailingAnchor, constant: 14).isActive = true
+        routeNodeLabel.leadingAnchor.constraint(equalTo: routeNodeImageView.trailingAnchor, constant: 14)
+            .isActive = true
         routeNodeLabel.centerYAnchor.constraint(equalTo: routeNodeImageView.centerYAnchor).isActive = true
 
         addSubview(routeLineView)
@@ -153,6 +141,7 @@ class ArrivalTableViewCell: UITableViewCell {
         routeLineView.widthAnchor.constraint(equalToConstant: routeLineView.frame.width).isActive = true
         routeLineView.heightAnchor.constraint(equalToConstant: routeLineView.frame.height).isActive = true
         routeLineView.centerXAnchor.constraint(equalTo: routeNodeImageView.centerXAnchor).isActive = true
-        routeLineView.topAnchor.constraint(equalTo: routeNodeImageView.bottomAnchor, constant: 4).isActive = true
+        routeLineView.topAnchor.constraint(equalTo: routeNodeImageView.bottomAnchor, constant: 4)
+            .isActive = true
     }
 }

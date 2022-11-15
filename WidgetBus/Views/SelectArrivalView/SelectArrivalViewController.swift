@@ -70,7 +70,11 @@ extension SelectArrivalViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = arrivalTableView.dequeueReusableCell(withIdentifier: ArrivalTableViewCell.identifier, for: indexPath) as? ArrivalTableViewCell else {
+        guard let cell =
+                arrivalTableView.dequeueReusableCell(
+                    withIdentifier: ArrivalTableViewCell.identifier,
+                    for: indexPath
+                ) as? ArrivalTableViewCell else {
             return UITableViewCell()
         }
 
