@@ -118,5 +118,19 @@ class BusClient {
                 }
         }
 
+    class func getNodeList (
+        city: String = "25",
+        routeId: String = "DJB30300004",
+        pageNo: String = "1",
+        completion: @escaping ([RouteNodesInfo], Error?) -> Void) {
+            _ = taskForGETRequest(
+                url: Endpoints.getNodesList(city: city, routeId: routeId, pageNumber: pageNo).url,
+                responseType: RouteNodes.self) { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion([], error)
+                    }
+                }
         }
 }
