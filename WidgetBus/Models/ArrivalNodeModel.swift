@@ -23,7 +23,13 @@ enum NodeAttribute {
 
 enum NodeSelected {
     case notSelected
-    case departure
+    enum Departure {
+        enum Togle {
+            case onlyDep
+            case notOnlyDep
+        }
+    }
+    case depart(Departure.Togle)
     case middle
     case arrival
 }
