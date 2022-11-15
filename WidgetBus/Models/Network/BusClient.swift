@@ -72,7 +72,7 @@ class BusClient {
             }
             let decoder = JSONDecoder()
             do {
-                print(String(decoding: data, as: UTF8.self))
+//                print(String(decoding: data, as: UTF8.self))
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
@@ -92,29 +92,31 @@ class BusClient {
         city: String = "25",
         busstopId: String = "DJB8001793",
         completion: @escaping ([ArriveInfoResponseArriveInfo], Error?) -> Void) {
-        _ = taskForGETRequest(
-            url: Endpoints.getArriveList(city: "25", busStopId: "DJB8001793").url,
-            responseType: ArriveInfoFromBusStop.self) { response, error in
-                if let response = response {
-                    completion(response.response.body.items.item, nil)
-                } else {
-                    completion([], error)
+            _ = taskForGETRequest(
+                url: Endpoints.getArriveList(city: "25", busStopId: "DJB8001793").url,
+                responseType: ArriveInfoFromBusStop.self) { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion([], error)
+                    }
                 }
-            }
-    }
+        }
 
-    class func getNodesList(
+    class func getNodesListBody(
         city: String = "25",
         routeId: String = "DJB30300004",
         completion: @escaping (RouteNodesResponseBody?, Error?) -> Void) {
-        _ = taskForGETRequest(
-            url: Endpoints.getNodesList(city: city, routeId: routeId).url,
-            responseType: RouteNodes.self) { response, error in
-            if let response = response {
-                completion(response.response.body, nil)
-            } else {
-                completion(nil, error)
-            }
+            _ = taskForGETRequest(
+                url: Endpoints.getNodesList(city: city, routeId: routeId).url,
+                responseType: RouteNodes.self) { response, error in
+                    if let response = response {
+                        completion(response.response.body, nil)
+                    } else {
+                        completion(nil, error)
+                    }
+                }
         }
-    }
+
+        }
 }
