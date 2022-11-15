@@ -81,11 +81,25 @@ class ArrivalTableViewCell: UITableViewCell {
             //            routeLineImageView.tintColor = .gray
             break
 
-        case .departure:
-            nodeHighlightImageView.image = UIImage(named: "StartNodeImg")
+        case .depart(.onlyDep):
+            print("도착 선택 안함")
+            highlightView.backgroundColor = .systemPink
+            highlightLabel.text = "출발"
             routeNodeImageView.tintColor = .blue
-            routeLineImageView.tintColor = .gray
-
+            routeLineView.backgroundColor = .gray
+//            fallthrough
+        case .depart(.notOnlyDep):
+            highlightView.backgroundColor = .systemPink
+            highlightLabel.text = "출발"
+            routeNodeImageView.tintColor = .blue
+            routeLineView.backgroundColor = .blue
+            print("도착까지 선택")
+//            fallthrough
+//        case .depart(.onlyDep), .depart(.notOnlyDep):
+//            highlightView.backgroundColor = .systemPink
+//            highlightLabel.text = "출발"
+//            routeNodeImageView.tintColor = .blue
+//            print("둘다")
         case .middle:
             routeNodeImageView.tintColor = .blue
             routeLineView.backgroundColor = .blue

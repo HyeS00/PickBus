@@ -42,7 +42,7 @@ class SelectArrivalViewController: UIViewController {
     // 버스노선 더미 데이터
     func setDummyBusNodeList() -> [ArrivalNodeModel] {
         let nodeList: [ArrivalNodeModel] = [
-            ArrivalNodeModel(name: "포스텍", attribute: .nomal, userSelected: .departure),
+            ArrivalNodeModel(name: "포스텍", attribute: .nomal, userSelected: .depart(.onlyDep)),
             ArrivalNodeModel(name: "생명공학연구소", attribute: .nomal, userSelected: .notSelected),
             ArrivalNodeModel(name: "효곡동행정복지센터", attribute: .nomal, userSelected: .notSelected),
             ArrivalNodeModel(name: "효자아트홀", attribute: .nomal, userSelected: .notSelected),
@@ -60,7 +60,7 @@ class SelectArrivalViewController: UIViewController {
 }
 extension SelectArrivalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 75
     }
 }
 
@@ -81,15 +81,13 @@ extension SelectArrivalViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         for index in nodeList.indices {
-            /*
-            if indexPath.row == 0 {
-                // 출발 노드 경로 색상을 바꿔줘야한다.
-            } else {
-                //
-            }
-             */
-
             if index == 0 {
+                if indexPath.row == 0 {
+                    nodeList[0]?.userSelected = .depart(.onlyDep)
+                } else {
+                    nodeList[0]?.userSelected = .depart(.notOnlyDep)
+                }
+
                 continue
             }
             // 1번 인덱스 부터 마지막 전 인덱스 까지
