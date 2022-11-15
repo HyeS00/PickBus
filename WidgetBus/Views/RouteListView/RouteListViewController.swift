@@ -11,15 +11,15 @@ class RouteListViewController: UIViewController {
 
     // 임시 설정 버튼
     private lazy var editButton: UIButton = {
-            let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
-            button.setTitle("Edit", for: .normal)
-            button.backgroundColor = .green
-            button.addTarget(self, action: #selector(pressedEditButton(_ :)), for: .touchUpInside)
-            return button
-        }()
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
+        button.setTitle("Edit", for: .normal)
+        button.backgroundColor = .green
+        button.addTarget(self, action: #selector(pressedEditButton(_ :)), for: .touchUpInside)
+        return button
+    }()
 
     // 더미 데이터
-    let busStops = BusData.busStops
+    var busStops = BusData.busStops
 
     // 셀,헤더,푸터 높이
     let headerHeight: CGFloat = 36
@@ -29,7 +29,7 @@ class RouteListViewController: UIViewController {
 
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .insetGrouped)
         table.showsVerticalScrollIndicator = false
         table.sectionHeaderTopPadding = 25
         table.backgroundColor = .clear
@@ -48,12 +48,6 @@ class RouteListViewController: UIViewController {
 
         // 루트추가 셀 등록
         table.register(AddRouteTableViewCell.self, forCellReuseIdentifier: AddRouteTableViewCell.identifier)
-
-        // 헤더 등록
-        table.register(RouteTableHeader.self, forHeaderFooterViewReuseIdentifier: RouteTableHeader.identifier)
-
-        // 푸터 등록
-        table.register(RouteTableFooter.self, forHeaderFooterViewReuseIdentifier: RouteTableFooter.identifier)
 
         return table
     }()
@@ -77,57 +71,40 @@ class RouteListViewController: UIViewController {
         NSLayoutConstraint.activate([
             routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             routeTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            routeTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            routeTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
+            routeTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            routeTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
     }
 
     // 임시 설정 버튼 함수
-        @objc private func pressedEditButton(_ sender: UIButton!) {
-            print("pressed editButton")
-            if self.routeTableView.isEditing {
-                print("수정모드yes")
-                self.editButton.setTitle("Edit", for: .normal)
-                self.routeTableView.setEditing(false, animated: true)
+    @objc private func pressedEditButton(_ sender: UIButton!) {
+        print("pressed editButton")
+        if self.routeTableView.isEditing {
+            print("수정모드yes")
+            self.editButton.setTitle("Edit", for: .normal)
+            self.routeTableView.setEditing(false, animated: true)
 
-            } else {
-                print("수정모드no")
-                self.editButton.setTitle("Done", for: .normal)
-                self.routeTableView.setEditing(true, animated: true)
-            }
+        } else {
+            print("수정모드no")
+            self.editButton.setTitle("Done", for: .normal)
+            self.routeTableView.setEditing(true, animated: true)
         }
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension RouteListViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        busStops[indexPath.section].routes.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension RouteListViewController: UITableViewDataSource {
-
-    // 헤더
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: RouteTableHeader.identifier) as! RouteTableHeader
-        header.busStopLabel.text = busStops[section].name
-        return header
-    }
-
-    // 푸터
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: RouteTableFooter.identifier)
-        return footer
-    }
-
-    // 헤더 높이 - 마지막 섹션 헤더 높이는 0
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == busStops.count - 1 ? 0 : headerHeight
-    }
-
-    // 푸터 높이 - 마지막 섹션 푸터 높이는 0
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == busStops.count - 1 ? 0 : footerHeight
-    }
 
     // 섹션 수
     func numberOfSections(in tableView: UITableView) -> Int {
