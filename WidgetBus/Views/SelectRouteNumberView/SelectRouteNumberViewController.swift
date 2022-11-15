@@ -31,10 +31,11 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             cellContent.secondaryText = cellData.routetp
         }
         if selectedIndex == indexPath {
-            cell.backgroundColor = UIColor.blue
+            cell.backgroundColor = UIColor(named: "duduBlue")
         } else {
             cell.backgroundColor = UIColor.clear
         }
+        cell.selectionStyle = .none
         cell.contentConfiguration = cellContent
 
         return cell
