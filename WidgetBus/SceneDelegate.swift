@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window!.rootViewController = UIStoryboard(name: "RouteDetailView", bundle: nil).instantiateInitialViewController()!
 
         guard let _ = (scene as? UIWindowScene) else { return }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
