@@ -26,6 +26,7 @@
 		CFE0A869291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */; };
 		CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A86A291CD484002779C6 /* BusClient.swift */; };
 		D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103DF3292218E900DA7CDD /* UIColor+.swift */; };
+		D7103E2129239E9F00DA7CDD /* RouteTableHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103E2029239E9F00DA7CDD /* RouteTableHeaderCell.swift */; };
 		D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807D291D156A009F8FDB /* RouteListViewController.swift */; };
 		D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */; };
 		D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */; };
@@ -85,6 +86,7 @@
 		CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteNumberViewStoryboard.storyboard; sourceTree = "<group>"; };
 		CFE0A86A291CD484002779C6 /* BusClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusClient.swift; sourceTree = "<group>"; };
 		D7103DF3292218E900DA7CDD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		D7103E2029239E9F00DA7CDD /* RouteTableHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableHeaderCell.swift; sourceTree = "<group>"; };
 		D784807D291D156A009F8FDB /* RouteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListViewController.swift; sourceTree = "<group>"; };
 		D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouteTableViewCell.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				D784807D291D156A009F8FDB /* RouteListViewController.swift */,
+				D7103E2029239E9F00DA7CDD /* RouteTableHeaderCell.swift */,
 				D7848085291D433D009F8FDB /* RouteTableHeader.swift */,
 				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
 				D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */,
@@ -515,6 +518,7 @@
 				E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
+				D7103E2129239E9F00DA7CDD /* RouteTableHeaderCell.swift in Sources */,
 				D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */,
 				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
