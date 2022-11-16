@@ -97,11 +97,17 @@ class RouteListViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension RouteListViewController: UITableViewDelegate {
 
+    // 셀 삭제 기능
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         busStops[indexPath.section].routes.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+
+    // 첫번째 셀은 삭제 불가능 - 정류장 이름 셀, 루트 차가하기 셀
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        indexPath.row == 0 ? false : true
     }
 }
 

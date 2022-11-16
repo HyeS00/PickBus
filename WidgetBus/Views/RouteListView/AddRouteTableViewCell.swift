@@ -43,8 +43,11 @@ class AddRouteTableViewCell: UITableViewCell {
         self.contentView.addSubview(addLabel)
 
         NSLayoutConstraint.activate([
+            // 플러스 이미지
             addImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
             addImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+
+            // 플러스 라벨
             addLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
             addLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
         ])

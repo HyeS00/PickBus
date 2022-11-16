@@ -33,6 +33,8 @@ class RouteTableHeaderCell: UITableViewCell {
         self.contentView.addSubview(busStopLabel)
 
         NSLayoutConstraint.activate([
+
+            // 버스정류장 라벨
             self.busStopLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.busStopLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
 
