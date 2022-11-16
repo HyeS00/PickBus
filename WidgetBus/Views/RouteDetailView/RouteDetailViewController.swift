@@ -62,6 +62,7 @@ class RouteDetailViewController: UIViewController {
         routeView.layer.cornerRadius = 30
         routeView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
 
+        self.view.backgroundColor = .duduDeepBlue
         self.routeDetailTableView.dataSource = self
         self.routeDetailTableView.delegate = self
         busNumberLabel.text = "1000"
