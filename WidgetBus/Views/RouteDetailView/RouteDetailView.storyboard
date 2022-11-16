@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vo-zH-5Sc">
                                 <rect key="frame" x="0.0" y="199" width="393" height="573"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="14w-zT-xrL">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="14w-zT-xrL">
                                         <rect key="frame" x="0.0" y="-9" width="393" height="582"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
@@ -31,8 +31,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="80"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e84-a0-P7M">
-                                                            <rect key="frame" x="62" y="0.0" width="30" height="30"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="e84-a0-P7M">
+                                                            <rect key="frame" x="62" y="0.99999999999999822" width="30" height="28.666666666666664"/>
+                                                            <color key="tintColor" name="duduGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="SzF-2B-suP"/>
                                                                 <constraint firstAttribute="height" constant="30" id="UK9-gN-T4F"/>
@@ -48,12 +49,12 @@
                                                             <rect key="frame" x="76" y="37" width="2" height="36"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         </view>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pn2-zV-WcU">
-                                                            <rect key="frame" x="16" y="23" width="79" height="29"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pn2-zV-WcU">
+                                                            <rect key="frame" x="15.666666666666664" y="0.0" width="79" height="29"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10분" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXU-3h-BtU">
                                                                     <rect key="frame" x="0.0" y="4.6666666666666679" width="38" height="20"/>
-                                                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                                    <color key="backgroundColor" name="duduDeepBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="LkQ-R9-Wcf"/>
                                                                         <constraint firstAttribute="width" constant="38" id="fcb-EA-ZvQ"/>
@@ -62,8 +63,9 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jf7-8v-JAB">
-                                                                    <rect key="frame" x="44" y="0.0" width="35" height="29"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Jf7-8v-JAB">
+                                                                    <rect key="frame" x="44" y="-0.66666666666666785" width="35" height="30.333333333333336"/>
+                                                                    <color key="tintColor" name="duduDeepBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="35" id="RH8-4h-7wX"/>
                                                                         <constraint firstAttribute="height" constant="29" id="geU-Q5-WSy"/>
@@ -71,8 +73,33 @@
                                                                 </imageView>
                                                             </subviews>
                                                         </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Gkf-bI-5yq">
+                                                            <rect key="frame" x="15.666666666666664" y="40" width="79" height="29"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10분" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrZ-K8-3Os">
+                                                                    <rect key="frame" x="0.0" y="4.6666666666666643" width="38" height="20"/>
+                                                                    <color key="backgroundColor" name="duduDeepBlue"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="38" id="Un8-lZ-HHT"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="wdA-fC-YLD"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HxK-uL-I1j">
+                                                                    <rect key="frame" x="44" y="-0.66666666666666785" width="35" height="30.333333333333336"/>
+                                                                    <color key="tintColor" name="duduDeepBlue"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="29" id="Ekl-nH-PMB"/>
+                                                                        <constraint firstAttribute="width" constant="35" id="HCL-1S-K4a"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="Gkf-bI-5yq" firstAttribute="top" secondItem="e84-a0-P7M" secondAttribute="bottom" constant="10" id="0eg-bE-UEU"/>
                                                         <constraint firstItem="muD-5j-a98" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="topMargin" constant="26" id="5yC-Vf-5dz"/>
                                                         <constraint firstItem="muD-5j-a98" firstAttribute="centerX" secondItem="e84-a0-P7M" secondAttribute="centerX" id="60U-wb-aYm"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="muD-5j-a98" secondAttribute="bottom" constant="-4" id="6Z2-rY-CZI"/>
@@ -82,13 +109,18 @@
                                                         <constraint firstItem="n5M-gO-6h2" firstAttribute="centerY" secondItem="e84-a0-P7M" secondAttribute="centerY" id="LEk-Vg-b3e"/>
                                                         <constraint firstItem="muD-5j-a98" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leadingMargin" constant="56" id="a2L-Qt-u4p"/>
                                                         <constraint firstItem="Jf7-8v-JAB" firstAttribute="centerX" secondItem="muD-5j-a98" secondAttribute="centerX" id="dkI-f9-3O6"/>
+                                                        <constraint firstItem="Pn2-zV-WcU" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="top" id="jI0-eN-jl3"/>
+                                                        <constraint firstItem="HxK-uL-I1j" firstAttribute="centerX" secondItem="Jf7-8v-JAB" secondAttribute="centerX" id="xoC-fP-YCD"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="busImageView" destination="Jf7-8v-JAB" id="2ea-iw-ZIN"/>
+                                                    <outlet property="busImageView2" destination="HxK-uL-I1j" id="bIn-Fd-CFl"/>
                                                     <outlet property="busStationLabel" destination="n5M-gO-6h2" id="UkD-HM-nlf"/>
                                                     <outlet property="busTimeLabel" destination="fXU-3h-BtU" id="Jyr-jL-Seb"/>
+                                                    <outlet property="busTimeLabel2" destination="hrZ-K8-3Os" id="FwP-We-uO3"/>
                                                     <outlet property="busView" destination="Pn2-zV-WcU" id="ElC-yw-ah2"/>
+                                                    <outlet property="busView2" destination="Gkf-bI-5yq" id="00U-XY-lc4"/>
                                                     <outlet property="routeLineView" destination="muD-5j-a98" id="WXs-sv-6dX"/>
                                                     <outlet property="routePointImageView" destination="e84-a0-P7M" id="m8E-A5-nrM"/>
                                                 </connections>
@@ -98,10 +130,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="14w-zT-xrL" secondAttribute="bottom" id="0Es-ab-L3U"/>
-                                    <constraint firstItem="14w-zT-xrL" firstAttribute="top" secondItem="7Vo-zH-5Sc" secondAttribute="top" id="6aw-iu-Bpy"/>
-                                    <constraint firstItem="14w-zT-xrL" firstAttribute="leading" secondItem="7Vo-zH-5Sc" secondAttribute="leading" id="oHK-4c-CER"/>
-                                    <constraint firstAttribute="trailing" secondItem="14w-zT-xrL" secondAttribute="trailing" id="xlF-zw-QDR"/>
+                                    <constraint firstItem="14w-zT-xrL" firstAttribute="centerX" secondItem="7Vo-zH-5Sc" secondAttribute="centerX" id="dvk-my-Sbg"/>
+                                    <constraint firstItem="14w-zT-xrL" firstAttribute="leading" secondItem="7Vo-zH-5Sc" secondAttribute="leading" id="ecP-h9-fdO"/>
+                                    <constraint firstAttribute="bottom" secondItem="14w-zT-xrL" secondAttribute="bottom" id="hbU-9D-UIb"/>
+                                    <constraint firstItem="14w-zT-xrL" firstAttribute="top" secondItem="7Vo-zH-5Sc" secondAttribute="top" constant="-9" id="xFE-Lf-Cev"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -211,6 +243,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bus" catalog="system" width="128" height="122"/>
+        <image name="chevron.down.circle" catalog="system" width="128" height="123"/>
+        <namedColor name="duduDeepBlue">
+            <color red="0.17254901960784313" green="0.20392156862745098" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="duduGray">
+            <color red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="duduYellow">
             <color red="0.98431372549019602" green="1" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

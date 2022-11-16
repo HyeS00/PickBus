@@ -127,7 +127,7 @@ class RouteDetailViewController: UIViewController {
 
 extension RouteDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return 10
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,10 +135,21 @@ extension RouteDetailViewController: UITableViewDataSource {
             withIdentifier: "routeDetailCell",
             for: indexPath) as! RouteDetailTableViewCell
         cell.busStationLabel.text = "포스텍"
-        cell.routeLineView.backgroundColor = .gray
+        cell.routeLineView.backgroundColor = .duduGray
         cell.busView.isHidden = false
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
+        cell.busView.isHidden = true
+        cell.busTimeLabel2.layer.masksToBounds = true
+        cell.busTimeLabel2.layer.cornerRadius = 6.5
+
+//        cell.busImageView2.image = UIImage(named: "bus")
+
+        let idx = indexPath.row
+        if idx == 9 {
+            cell.routeLineView.isHidden = true
+            cell.busView2.isHidden = true
+        }
 
         return cell
     }
@@ -147,7 +158,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         UIView()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 14
+        return 12
     }
 }
 
