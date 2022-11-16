@@ -32,24 +32,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asu-Z3-tWK">
-                                <rect key="frame" x="159" y="252" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asu-Z3-tWK">
+                                <rect key="frame" x="168.66666666666666" y="252" width="56" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Jedi"/>
                                 <connections>
                                     <segue destination="em8-0h-ovx" kind="show" id="ETv-Me-IHI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Irc-vl-NC8">
+                                <rect key="frame" x="167" y="612" width="59" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Dale"/>
+                                <connections>
+                                    <segue destination="PAY-MO-Xp7" kind="show" id="byJ-fA-GmE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Irc-vl-NC8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="98w-Ro-MOD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Irc-vl-NC8" secondAttribute="bottom" constant="171" id="LnT-H9-wZe"/>
+                            <constraint firstItem="Irc-vl-NC8" firstAttribute="centerX" secondItem="Asu-Z3-tWK" secondAttribute="centerX" id="b5z-r8-osV"/>
+                            <constraint firstItem="Asu-Z3-tWK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="149" id="iDc-qA-kod"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zY3-15-RZ0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="-27"/>
+            <point key="canvasLocation" x="32.824427480916029" y="-27.464788732394368"/>
         </scene>
         <!--SelectRouteNumberViewController-->
         <scene sceneID="Mlw-ct-bPs">
@@ -60,6 +73,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSq-U7-rrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="715" y="-137"/>
+        </scene>
+        <!--RouteDetailView-->
+        <scene sceneID="EpQ-0e-eku">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RouteDetailView" storyboardName="RouteDetailView" id="PAY-MO-Xp7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ITV-Ld-iI1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J0D-Sk-IFK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="84"/>
         </scene>
     </scenes>
     <resources>

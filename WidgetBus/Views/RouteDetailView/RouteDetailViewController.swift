@@ -26,6 +26,17 @@ class RouteDetailViewController: UIViewController {
 
     var boardingStatus: BoardingStatus = .onBoard
 
+    // Jedi
+    // 코어데이터에서 가져오는 정보들 (예정)
+    // 노선 ID
+    var routeId: String = "DJB30300004"
+    // 정류장 ID
+    var nodeId: String = "DJB8001793"
+    // 도시 코드
+    var cityCode: Int = 25
+    // 버스 정류장들
+    var nodeList = [RouteNodesInfo]()
+
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
         case .onBoard:
@@ -41,6 +52,11 @@ class RouteDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 네트워크 전송.
+        BusClient.getNodesListBody(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestNodesTotalNumberResponse(response:error:))
 
         routeView.clipsToBounds = true
         routeView.layer.cornerRadius = 30
@@ -76,6 +92,35 @@ class RouteDetailViewController: UIViewController {
             range: NSRange(location: 0, length: getOffText.count)
         )
         self.boardingStateButton.setAttributedTitle(getOffAttribute, for: .selected)
+    }
+
+    // 전체 갯수 확인하는 네트워크 받으면 실행되는 콜백.
+    func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
+        if let response = response {
+            let iterater: Int = (response.totalCount / response.numOfRows) + 1
+            for index in 1...iterater {
+                BusClient.getNodeList(
+                    city: String(cityCode),
+                    routeId: routeId,
+                    pageNo: String(index),
+                    completion: handleRequestNodesListResponse(response:error:))
+            }
+        }
+
+//        print("error")
+//        print(error?.localizedDescription ?? "")
+    }
+
+    // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
+    func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
+        if !response.isEmpty {
+            nodeList += response
+        }
+
+        print("Node List: \(nodeList.count)")
+
+//        print("error")
+//        print(error?.localizedDescription ?? "")
     }
 }
 
