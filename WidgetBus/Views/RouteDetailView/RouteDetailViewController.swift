@@ -42,6 +42,10 @@ class RouteDetailViewController: UIViewController {
         case .onBoard:
             self.boardingStatus = .getOff
             self.boardingStateButton.isSelected = true
+
+            let moveIndex = IndexPath(row: 9, section: 0)
+            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .middle, animated: true)
+
         case .getOff:
             self.boardingStatus = .onBoard
             self.boardingStateButton.isSelected = false
@@ -127,7 +131,7 @@ class RouteDetailViewController: UIViewController {
 
 extension RouteDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 50
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
