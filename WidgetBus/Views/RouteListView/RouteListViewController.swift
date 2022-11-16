@@ -8,16 +8,6 @@
 import UIKit
 
 class RouteListViewController: UIViewController {
-
-    // 임시 설정 버튼
-    private lazy var editButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 50))
-        button.setTitle("Edit", for: .normal)
-        button.backgroundColor = .green
-        button.addTarget(self, action: #selector(pressedEditButton(_ :)), for: .touchUpInside)
-        return button
-    }()
-
     // 더미 데이터
     var busStops = BusData.busStops
 
@@ -57,6 +47,20 @@ class RouteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "􀯶",
+            style: .plain,
+            target: self,
+            action: #selector(pressedBackButton(_ :))
+        )
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "편집",
+            style: .plain,
+            target: self,
+            action: #selector(pressedEditButton(_ :))
+        )
         setupLayout()
         setupConstraints()
         routeTableView.reloadData()
@@ -66,7 +70,6 @@ class RouteListViewController: UIViewController {
 
     private func setupLayout() {
         self.view.addSubview(routeTableView)
-        self.view.addSubview(editButton)
     }
 
     private func setupConstraints() {
@@ -78,17 +81,22 @@ class RouteListViewController: UIViewController {
         ])
     }
 
-    // 임시 설정 버튼 함수
+    // 뒤로가기
+    @objc private func pressedBackButton(_ sender: UIButton!) {
+        // 뒤로가기 기능
+    }
+
+    // 편집하기
     @objc private func pressedEditButton(_ sender: UIButton!) {
         print("pressed editButton")
         if self.routeTableView.isEditing {
             print("수정모드yes")
-            self.editButton.setTitle("Edit", for: .normal)
+            navigationItem.rightBarButtonItem?.title = "편집"
             self.routeTableView.setEditing(false, animated: true)
 
         } else {
             print("수정모드no")
-            self.editButton.setTitle("Done", for: .normal)
+            navigationItem.rightBarButtonItem?.title = "완료"
             self.routeTableView.setEditing(true, animated: true)
         }
     }
