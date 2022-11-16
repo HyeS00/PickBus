@@ -14,4 +14,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func routeList(_ sender: UIButton) {
+        let routeListvc = RouteListViewController()
+        navigationController?.pushViewController(routeListvc, animated: true)
+    }
 }
