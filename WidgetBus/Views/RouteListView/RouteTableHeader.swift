@@ -12,18 +12,15 @@ class RouteTableHeader: UITableViewHeaderFooterView {
     // 정류장이름
     let busStopLabel: UILabel = {
         let label = UILabel()
-        label.text = "정류장이름"
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.text = "출근"
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 26, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .white
-        self.contentView.layer.cornerRadius = 15
-        self.contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
 
     required init?(coder: NSCoder) {
@@ -35,8 +32,8 @@ class RouteTableHeader: UITableViewHeaderFooterView {
         self.contentView.addSubview(busStopLabel)
 
         NSLayoutConstraint.activate([
-            self.busStopLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            self.busStopLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16)
+            self.busStopLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.busStopLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
         ])
     }
 }

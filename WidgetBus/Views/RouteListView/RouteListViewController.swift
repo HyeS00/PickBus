@@ -16,16 +16,6 @@ class RouteListViewController: UIViewController {
     let routeCellHeight: CGFloat = 50
     let addRouteCellHeight: CGFloat = 78
 
-    // 타이틀 라벨
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "출근"
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -41,6 +31,9 @@ class RouteListViewController: UIViewController {
         table.layer.shadowOpacity = 0.2
         table.layer.shadowRadius = 10
         table.layer.shadowOffset = .init(width: 0, height: 2)
+
+        // 헤더 등록
+        table.register(RouteTableHeader.self, forHeaderFooterViewReuseIdentifier: RouteTableHeader.identifier)
 
         // 루트 헤더 셀 등록
         table.register(RouteTableHeaderCell.self, forCellReuseIdentifier: RouteTableHeaderCell.identifier)
@@ -86,18 +79,14 @@ class RouteListViewController: UIViewController {
     }
 
     private func setupLayout() {
-        self.view.addSubview(titleLabel)
         self.view.addSubview(routeTableView)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // 타이틀라벨
-            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
 
             // 루트테이블뷰
-            routeTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             routeTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             routeTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             routeTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
@@ -144,6 +133,19 @@ extension RouteListViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension RouteListViewController: UITableViewDataSource {
+
+    // 헤더
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: RouteTableHeader.identifier) as! RouteTableHeader
+        header.busStopLabel.text = busStops[section].name
+        return header
+    }
+
+    // 헤더 높이
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 50 : 0
+    }
 
     // 섹션 수
     func numberOfSections(in tableView: UITableView) -> Int {
