@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vo-zH-5Sc">
-                                <rect key="frame" x="0.0" y="199" width="393" height="573"/>
+                                <rect key="frame" x="0.0" y="201" width="393" height="571"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="14w-zT-xrL">
-                                        <rect key="frame" x="0.0" y="-9" width="393" height="582"/>
+                                        <rect key="frame" x="0.0" y="-9" width="393" height="580"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="routeDetailCell" rowHeight="80" id="eSh-10-w4V" customClass="RouteDetailTableViewCell" customModule="WidgetBus" customModuleProvider="target">
@@ -198,7 +198,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:20 ~ 22:50 배차간격 12분 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-Om-sW3">
-                                <rect key="frame" x="93" y="134" width="207" height="19.333333333333343"/>
+                                <rect key="frame" x="93" y="136" width="207" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -215,8 +215,8 @@
                             <constraint firstItem="5Wo-t4-cmr" firstAttribute="centerX" secondItem="qfo-E8-el5" secondAttribute="centerX" id="7G6-fe-Qya"/>
                             <constraint firstAttribute="bottomMargin" secondItem="c3v-9d-oaG" secondAttribute="bottom" constant="-34" id="7QV-qC-brL"/>
                             <constraint firstItem="7Vo-zH-5Sc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="AkG-Zg-DhV"/>
+                            <constraint firstItem="1QU-Om-sW3" firstAttribute="top" secondItem="nWJ-Vq-Byg" secondAttribute="bottom" constant="6" id="TsN-iH-2OI"/>
                             <constraint firstItem="7Vo-zH-5Sc" firstAttribute="centerX" secondItem="1QU-Om-sW3" secondAttribute="centerX" id="Wcr-vw-e7T"/>
-                            <constraint firstItem="1QU-Om-sW3" firstAttribute="top" secondItem="nWJ-Vq-Byg" secondAttribute="bottom" constant="4" id="cpb-qd-yUe"/>
                             <constraint firstItem="7Vo-zH-5Sc" firstAttribute="top" secondItem="1QU-Om-sW3" secondAttribute="bottom" constant="45.666666666666657" id="fSI-D2-afx"/>
                             <constraint firstItem="7Vo-zH-5Sc" firstAttribute="trailing" secondItem="c3v-9d-oaG" secondAttribute="trailing" id="fvm-zs-it7"/>
                             <constraint firstItem="c3v-9d-oaG" firstAttribute="top" secondItem="7Vo-zH-5Sc" secondAttribute="bottom" id="laQ-CH-OpU"/>

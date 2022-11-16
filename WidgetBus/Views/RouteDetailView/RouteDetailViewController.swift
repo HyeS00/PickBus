@@ -48,7 +48,7 @@ class RouteDetailViewController: UIViewController {
         }
     }
 
-    let retryButoon = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
+    let retryButton = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,9 +67,9 @@ class RouteDetailViewController: UIViewController {
         self.routeDetailTableView.delegate = self
         busNumberLabel.text = "1000"
 
-        retryButoon.backgroundColor = .blue
-        retryButoon.layer.cornerRadius = 0.5 * retryButoon.bounds.width
-        self.view.addSubview(retryButoon)
+        retryButton.backgroundColor = .blue
+        retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
+        self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
     }
 
