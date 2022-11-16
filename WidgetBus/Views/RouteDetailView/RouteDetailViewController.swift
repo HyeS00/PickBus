@@ -35,7 +35,7 @@ class RouteDetailViewController: UIViewController {
     // 도시 코드
     var cityCode: Int = 25
     // 버스 정류장들
-    var nodeList = [RouteNodesInfo]()
+    private var nodeList = [RouteNodesInfo]()
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
@@ -138,7 +138,13 @@ extension RouteDetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "routeDetailCell",
             for: indexPath) as! RouteDetailTableViewCell
-        cell.busStationLabel.text = "포스텍"
+        if nodeList.isEmpty {
+            cell.busStationLabel.text = "불러오는 중입니다."
+        } else {
+            let cellData = nodeList[indexPath.row]
+            cell.busStationLabel.text = "\(cellData.nodenm)"
+        }
+        //cell.busStationLabel.text = "포스텍"
         cell.routeLineView.backgroundColor = .duduGray
         cell.busView.isHidden = false
         cell.busTimeLabel.layer.masksToBounds = true
