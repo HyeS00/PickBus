@@ -52,7 +52,7 @@ class RouteTableViewCell: UITableViewCell {
     private let rideButton: UIButton = {
         let button = UIButton()
         button.setTitle("탑승", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 13)
+        button.titleLabel?.font = .systemFont(ofSize: 13, weight: .bold)
         button.setTitleColor(.duduDeepBlue, for: .normal)
         button.backgroundColor = .duduBlue
         button.layer.cornerRadius = 15

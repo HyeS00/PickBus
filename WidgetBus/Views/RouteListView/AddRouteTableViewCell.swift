@@ -12,7 +12,7 @@ class AddRouteTableViewCell: UITableViewCell {
     // 루트추가 이미지
     private let addImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "plus")
+        image.image = UIImage(named: "duduPlus")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -22,7 +22,7 @@ class AddRouteTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "새 경로를 추가해주세요"
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
