@@ -12,6 +12,18 @@ class SelectArrivalViewController: UIViewController {
     // MARK: - Properties
     var nodeList: [ArrivalNodeModel?] = []
 
+    // 변수 이름은 원하는 대로 변경하시면 됩니다.
+    var nodeListJedi = [RouteNodesInfo]()
+
+    // Jedi
+    // 이전 뷰에서 넘어올 정보들
+    // 노선 ID
+    var routeId: String = "DJB30300004"
+    // 정류장 ID
+    var nodeId: String = "DJB8001793"
+    // 도시 코드
+    var cityCode: Int = 25
+
     private let arrivalTableView: UITableView =  {
         let tableView = UITableView()
         tableView.register(ArrivalTableViewCell.self, forCellReuseIdentifier: ArrivalTableViewCell.identifier)
@@ -25,6 +37,9 @@ class SelectArrivalViewController: UIViewController {
 
         nodeList = setDummyBusNodeList()
 
+        // 버스 노드 추가 함수.
+        setBusNodeList()
+
         arrivalTableView.delegate = self
         arrivalTableView.dataSource = self
         arrivalTableView.separatorStyle = .none
@@ -37,6 +52,13 @@ class SelectArrivalViewController: UIViewController {
     func configureUI() {
         view.addSubview(arrivalTableView)
         arrivalTableView.frame = view.bounds
+    }
+
+    func setBusNodeList() {
+        BusClient.getNodesListBody(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestNodesTotalNumberResponse(response:error:))
     }
 
     // 버스노선 더미 데이터
@@ -57,6 +79,36 @@ class SelectArrivalViewController: UIViewController {
         return nodeList
 
     }
+
+    // 전체 갯수 확인하는 네트워크 받으면 실행되는 콜백.
+    func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
+        if let response = response {
+            let iterater: Int = (response.totalCount / response.numOfRows) + 1
+            for index in 1...iterater {
+                BusClient.getNodeList(
+                    city: String(cityCode),
+                    routeId: routeId,
+                    pageNo: String(index),
+                    completion: handleRequestNodesListResponse(response:error:))
+            }
+        }
+
+//        print("error")
+//        print(error?.localizedDescription ?? "")
+    }
+
+    // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
+    func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
+        if !response.isEmpty {
+            nodeListJedi += response
+        }
+
+        print("Jerry Node List: \(nodeListJedi.count)")
+
+//        print("error")
+//        print(error?.localizedDescription ?? "")
+    }
+
 }
 extension SelectArrivalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
