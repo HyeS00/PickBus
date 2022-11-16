@@ -133,22 +133,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		096B55C6292213B700B328A0 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		096B55C7292213C300B328A0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				096B55C8292213D100B328A0 /* SelectArrivalView */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		096B55C8292213D100B328A0 /* SelectArrivalView */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,8 +181,6 @@
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
-				096B55C7292213C300B328A0 /* Views */,
-				096B55C6292213B700B328A0 /* Models */,
 				C16920662907B75C0021D17F /* Main.storyboard */,
 				E1707844291EC26A001D324C /* Views */,
 				E1707845291EC271001D324C /* Models */,
@@ -285,6 +267,7 @@
 		E1707844291EC26A001D324C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				096B55C8292213D100B328A0 /* SelectArrivalView */,
 				D784808B291E16A2009F8FDB /* RouteListView */,
 				CFD79B02291E44020091202C /* SelectRouteNumberView */,
 				E1707847291EC291001D324C /* RouteDetailView */,
@@ -295,6 +278,7 @@
 		E1707845291EC271001D324C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */,
 				CFE0A865291CCB29002779C6 /* Network */,
 			);
 			path = Models;
