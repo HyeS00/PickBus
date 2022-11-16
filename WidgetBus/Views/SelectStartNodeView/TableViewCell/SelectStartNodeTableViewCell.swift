@@ -7,15 +7,6 @@
 
 import UIKit
 
-class ExpandingTableViewCellContent {
-
-    var expanded: Bool
-
-    init() {
-        self.expanded = false
-    }
-}
-
 class SelectStartNodeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nodeName: UILabel!
@@ -41,8 +32,8 @@ class SelectStartNodeTableViewCell: UITableViewCell {
     }
 
     // MARK: 셀 확장 설정
-    func settingData(isClicked: ExpandingTableViewCellContent) {
-        if isClicked.expanded == true {
+    func settingData(isClicked: Bool) {
+        if isClicked == true {
             self.mapView.isHidden = false
             self.mapViewHeightConstraint.constant = 290
         } else {

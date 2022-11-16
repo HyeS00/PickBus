@@ -9,7 +9,8 @@ import UIKit
 
 class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var answerFilterDatasource =  ExpandingTableViewCellContent()
+    var answerFilterDatasource: Bool = false
+    var selectedTableViewCell: IndexPath?
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -63,10 +64,18 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let content = answerFilterDatasource
 
-        content.expanded = !content.expanded
+        if let prevSelectedTableViewCell = self.selectedTableViewCell {
+            if prevSelectedTableViewCell != indexPath {
+                self.answerFilterDatasource = false
+                self.tableView.reloadRows(at: [prevSelectedTableViewCell], with: .automatic)
+            }
+        }
+
+        self.answerFilterDatasource.toggle()
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        self.selectedTableViewCell = indexPath
+
 //        self.performSegue(withIdentifier: "showHomeDetailView", sender: self)
 //
 //        navigationController?.setNavigationBarHidden(false, animated: true)
