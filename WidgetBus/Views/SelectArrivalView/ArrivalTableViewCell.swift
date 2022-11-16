@@ -9,7 +9,7 @@ import UIKit
 
 class ArrivalTableViewCell: UITableViewCell {
     // MARK: - Properties
-    static let identifier = "arrivalTableViewCell"
+//    static let identifier = "arrivalTableViewCell"
 
     private let highlightView: UIView = {
         let view = UIView()
