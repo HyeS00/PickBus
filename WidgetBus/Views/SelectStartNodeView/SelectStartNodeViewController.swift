@@ -9,19 +9,23 @@ import UIKit
 
 class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var answerFilterDatasource: Bool = false
     var selectedTableViewCell: IndexPath?
 
     @IBOutlet weak var tableView: UITableView!
 
     var nodeName: [String] = [
-        "정류장1", "정류장2", "정류장3", "정류장4", "정류장5", "정류장6", "정류장7", "정류장8", "정류장9", "정류장10"
+        "정류장1", "정류장2", "정류장3", "정류장4", "정류장5", "정류장6", "정류장7", "정류장8", "정류장9", "정류장10",
+        "정류장11", "정류장12", "정류장13", "정류장14", "정류장15", "정류장16", "정류장17", "정류장18", "정류장19", "정류장20"
     ]
     var nodeDirection: [String] = [
-        "정류장2방면", "정류장3방면", "정류장4방면", "정류장5방면", "정류장6방면", "정류장7방면", "정류장8방면", "정류장9방면", "정류장10방면", "정류장1방면"
+        "정류장2방면", "정류장3방면", "정류장4방면", "정류장5방면", "정류장6방면",
+        "정류장7방면", "정류장8방면", "정류장9방면", "정류장10방면", "정류장11방면",
+        "정류장12방면", "정류장13방면", "정류장14방면", "정류장15방면", "정류장16방면",
+        "정류장17방면", "정류장18방면", "정류장19방면", "정류장20방면", "정류장1방면"
     ]
     var nodeDistance: [String] = [
-        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
     ]
 
     override func viewDidLoad() {
@@ -58,23 +62,23 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         cell.nodeName.text = nodeName[indexPath.row]
         cell.nodeDirection.text = nodeDirection[indexPath.row]
         cell.nodeDistance.text = nodeDistance[indexPath.row]
-        cell.settingData(isClicked: answerFilterDatasource)
+        cell.settingData(isClicked: self.selectedTableViewCell == indexPath)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        if let prevSelectedTableViewCell = self.selectedTableViewCell {
-            if prevSelectedTableViewCell != indexPath {
-                self.answerFilterDatasource = false
+        if self.selectedTableViewCell == indexPath {
+            self.selectedTableViewCell = nil
+        } else {
+            if let prevSelectedTableViewCell = self.selectedTableViewCell {
+                self.selectedTableViewCell = indexPath
                 self.tableView.reloadRows(at: [prevSelectedTableViewCell], with: .automatic)
+            } else {
+                self.selectedTableViewCell = indexPath
             }
         }
-
-        self.answerFilterDatasource.toggle()
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
-        self.selectedTableViewCell = indexPath
 
 //        self.performSegue(withIdentifier: "showHomeDetailView", sender: self)
 //
