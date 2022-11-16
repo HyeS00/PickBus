@@ -16,6 +16,16 @@ class RouteListViewController: UIViewController {
     let routeCellHeight: CGFloat = 50
     let addRouteCellHeight: CGFloat = 78
 
+    // 타이틀 라벨
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "출근"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -48,19 +58,7 @@ class RouteListViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "􀯶",
-            style: .plain,
-            target: self,
-            action: #selector(pressedBackButton(_ :))
-        )
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "편집",
-            style: .plain,
-            target: self,
-            action: #selector(pressedEditButton(_ :))
-        )
+        setupNavigationBar()
         setupLayout()
         setupConstraints()
         routeTableView.reloadData()
@@ -68,13 +66,38 @@ class RouteListViewController: UIViewController {
         routeTableView.dataSource = self
     }
 
+    private func setupNavigationBar() {
+        // 뒤로가기 네비게이션 버튼
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(pressedBackButton(_ :))
+        )
+        // 편집하기 네이게이션 버튼
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "편집",
+            style: .plain,
+            target: self,
+            action: #selector(pressedEditButton(_ :))
+        )
+        // 네비게이션바 틴트 컬러
+        navigationController?.navigationBar.tintColor = .white
+    }
+
     private func setupLayout() {
+        self.view.addSubview(titleLabel)
         self.view.addSubview(routeTableView)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            // 타이틀라벨
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+
+            // 루트테이블뷰
+            routeTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             routeTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             routeTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             routeTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
@@ -83,7 +106,7 @@ class RouteListViewController: UIViewController {
 
     // 뒤로가기
     @objc private func pressedBackButton(_ sender: UIButton!) {
-        // 뒤로가기 기능
+        navigationController?.popViewController(animated: true)
     }
 
     // 편집하기
