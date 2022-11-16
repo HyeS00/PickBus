@@ -32,24 +32,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asu-Z3-tWK">
-                                <rect key="frame" x="159" y="252" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <segue destination="em8-0h-ovx" kind="show" id="ETv-Me-IHI"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0Uh-33-MCI">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5yf-pt-QcU">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="680.66666666666663"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="출발 정류장 선택 뷰 이동"/>
+                                        <connections>
+                                            <segue destination="j7y-vn-diP" kind="show" id="aX3-RO-8hs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asu-Z3-tWK">
+                                        <rect key="frame" x="0.0" y="680.66666666666663" width="393" height="34.333333333333371"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="버스 선택 뷰 이동"/>
+                                        <connections>
+                                            <segue destination="em8-0h-ovx" kind="show" id="ETv-Me-IHI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0Uh-33-MCI" secondAttribute="bottom" id="RD0-N7-8V0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Uh-33-MCI" secondAttribute="trailing" id="UrT-pV-GSb"/>
+                            <constraint firstItem="0Uh-33-MCI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cDS-fX-Lg9"/>
+                            <constraint firstItem="0Uh-33-MCI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d2h-Cu-lNH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zY3-15-RZ0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="33" y="-27"/>
+        </scene>
+        <!--SelectStartNodeViewController-->
+        <scene sceneID="pMi-dr-Vhr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SelectStartNodeView" referencedIdentifier="SelectStartNodeViewController" id="j7y-vn-diP" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="TU5-RY-cnb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdD-OP-hOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="736" y="-46"/>
         </scene>
         <!--SelectRouteNumberViewController-->
         <scene sceneID="Mlw-ct-bPs">
@@ -59,7 +87,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSq-U7-rrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="715" y="-137"/>
+            <point key="canvasLocation" x="753" y="-10"/>
         </scene>
     </scenes>
     <resources>
