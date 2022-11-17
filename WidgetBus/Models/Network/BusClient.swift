@@ -29,6 +29,7 @@ class BusClient {
         case getCityCodeList
         case getNodesList(city: String, routeId: String, pageNumber: String = "1")
         case getRouteInformation(city: String, routeId: String)
+        case getBusLocationsOnRoute(city: String, routeId: String)
 
         var stringValue: String {
             switch self {
@@ -56,6 +57,12 @@ class BusClient {
                 "/1613000/BusRouteInfoInqireService/getRouteInfoIem" +
                 Endpoints.apiKeyParam +
                 "&_type=json&cityCode=\(city)&routeId=\(routeId)"
+
+            case .getBusLocationsOnRoute(let city, let routeId):
+                return Endpoints.base +
+                "/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList" +
+                Endpoints.apiKeyParam +
+                "&_type=json&cityCode=\(city)&routeId=\(routeId)"
             }
         }
 
@@ -79,7 +86,7 @@ class BusClient {
             }
             let decoder = JSONDecoder()
             do {
-//                print(String(decoding: data, as: UTF8.self))
+                //                print(String(decoding: data, as: UTF8.self))
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
@@ -155,4 +162,20 @@ class BusClient {
                     }
                 })
         }
+
+    class func getLocationsOnRoute(
+        city: String = "25",
+        routeId: String = "DJB30300004",
+        completion: @escaping ([BusLocationsInfo], Error?) -> Void) {
+            _ = taskForGETRequest(
+                url: Endpoints.getBusLocationsOnRoute(city: city, routeId: routeId).url,
+                responseType: BusLocationsOnRoute.self, completion: { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion([], error)
+                    }
+                })
+        }
+
 }
