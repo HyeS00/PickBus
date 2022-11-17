@@ -81,7 +81,16 @@ class RouteDetailViewController: UIViewController {
             routeId: routeId,
             completion: handleRequestRouteInformation(response:error:))
 
-        BusClient.getLocationsOnRoute(completion: handleRequestLocationsOnRouteResponse(response:error:))
+        BusClient.getLocationsOnRoute(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestLocationsOnRouteResponse(response:error:))
+
+        BusClient.getSpecificArrive(
+            city: String(cityCode),
+            routeId: routeId,
+            nodeId: nodeId,
+            completion: handleRequestSpecificArriveInfoResponse(response:error:))
     }
 
     func configureBoardingTapButton() {
@@ -142,8 +151,8 @@ class RouteDetailViewController: UIViewController {
             print("RouteInformation: \(response)")
         }
 
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
     }
 
     // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
@@ -155,6 +164,17 @@ class RouteDetailViewController: UIViewController {
 
         //        print("error")
         //        print(error?.localizedDescription ?? "")
+    }
+
+    // 정류장에 오는 특정 노선에 대한 도착 정보만 받는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
+        // 여기 특정 노선에 대한 도착 정보 표현 됨.
+        if let response = response {
+            print("Response: \(response)")
+        }
+
+//        print(error)
+//        print(error?.localizedDescription)
     }
 }
 

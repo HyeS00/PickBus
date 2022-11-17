@@ -30,6 +30,7 @@ class BusClient {
         case getNodesList(city: String, routeId: String, pageNumber: String = "1")
         case getRouteInformation(city: String, routeId: String)
         case getBusLocationsOnRoute(city: String, routeId: String)
+        case getSpecificArrive(city: String, routeId: String, nodeId: String)
 
         var stringValue: String {
             switch self {
@@ -63,6 +64,12 @@ class BusClient {
                 "/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList" +
                 Endpoints.apiKeyParam +
                 "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=99"
+
+            case .getSpecificArrive(let city, let routeId, let nodeId):
+                return Endpoints.base +
+                "/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList" +
+                Endpoints.apiKeyParam +
+                "&_type=json&cityCode=\(city)&nodeId=\(nodeId)&routeId=\(routeId)&numOfRows=99"
             }
         }
 
@@ -104,7 +111,7 @@ class BusClient {
 
     class func getArriveList(
         city: String = "25",
-        busstopId: String = "DJB8001793",
+        nodeId: String = "DJB8001793",
         completion: @escaping ([ArriveInfoResponseArriveInfo], Error?) -> Void) {
             _ = taskForGETRequest(
                 url: Endpoints.getArriveList(city: "25", busStopId: "DJB8001793").url,
@@ -174,6 +181,23 @@ class BusClient {
                         completion(response.response.body.items.item, nil)
                     } else {
                         completion([], error)
+                    }
+                })
+        }
+
+    class func getSpecificArrive(
+        city: String = "25",
+        routeId: String = "DJB30300004",
+        nodeId: String = "DJB8001793",
+        completion: @escaping (SpecificArriveInfo?, Error?) -> Void) {
+            _ = taskForGETRequest(
+                url: Endpoints.getSpecificArrive(
+                    city: city, routeId: routeId, nodeId: nodeId).url, responseType: SpecificArrive.self,
+                completion: { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion(nil, error)
                     }
                 })
         }
