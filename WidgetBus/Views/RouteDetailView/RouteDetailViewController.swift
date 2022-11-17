@@ -12,6 +12,11 @@ enum BoardingStatus {
     case getOff
 }
 
+struct RouteModel {
+    let startNodeId: String
+    let endNodeId: String
+}
+
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -25,6 +30,8 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var boardingStateButton: UIButton!
 
     var boardingStatus: BoardingStatus = .onBoard
+
+    let route: RouteModel = RouteModel(startNodeId: "DJB8001780", endNodeId: "DJB8003057")
 
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
@@ -75,6 +82,7 @@ class RouteDetailViewController: UIViewController {
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
+
     }
 
     func configureBoardingTapButton() {
@@ -122,7 +130,10 @@ class RouteDetailViewController: UIViewController {
             nodeList += response
         }
 
+        nodeList.sort { $0.nodeord < $1.nodeord }
+
         print("Node List: \(nodeList.count)")
+        routeDetailTableView.reloadData()
 
 //        print("error")
 //        print(error?.localizedDescription ?? "")
@@ -143,6 +154,20 @@ extension RouteDetailViewController: UITableViewDataSource {
         } else {
             let cellData = nodeList[indexPath.row]
             cell.busStationLabel.text = "\(cellData.nodenm)"
+
+
+            if (route.startNodeId == cellData.nodeid) {
+                cell.busTimeLabel2.text = "출발"
+            } else {
+                cell.busTimeLabel2.text = "10분"
+            }
+
+            if (route.endNodeId == cellData.nodeid) {
+                cell.busTimeLabel2.text = "도착"
+            } else {
+                cell.busTimeLabel2.text = "10분"
+            }
+
         }
         //cell.busStationLabel.text = "포스텍"
         cell.routeLineView.backgroundColor = .duduGray
@@ -155,11 +180,11 @@ extension RouteDetailViewController: UITableViewDataSource {
 
 //        cell.busImageView2.image = UIImage(named: "bus")
 
-        let idx = indexPath.row
-        if idx == 9 {
-            cell.routeLineView.isHidden = true
-            cell.busView2.isHidden = true
-        }
+//        let idx = indexPath.row
+//        if idx == 9 {
+//            cell.routeLineView.isHidden = true
+//            cell.busView2.isHidden = true
+//        }
 
         return cell
     }

@@ -33,7 +33,7 @@ struct RouteNodesResponseItem: Codable {
 }
 
 struct RouteNodesInfo: Codable {
-    let gpslati: Double
+    let gpslati: Double 
     let gpslong: Double
     let nodeid: String
     let nodenm: String
