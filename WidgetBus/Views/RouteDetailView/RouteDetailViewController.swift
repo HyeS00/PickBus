@@ -148,7 +148,7 @@ class RouteDetailViewController: UIViewController {
 
     // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
-        // 여기 버스 위치들
+        // 여기 버스 위치들 나타남
         if !response.isEmpty {
             print("Locations: \(response)")
         }

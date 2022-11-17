@@ -37,7 +37,7 @@ class BusClient {
                 return Endpoints.base +
                 "/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList" +
                 Endpoints.apiKeyParam +
-                "&_type=json&cityCode=\(city)&nodeId=\(busStopId)"
+                "&_type=json&cityCode=\(city)&nodeId=\(busStopId)&numOfRows=99"
 
             case .getCityCodeList:
                 return Endpoints.base +
@@ -62,7 +62,7 @@ class BusClient {
                 return Endpoints.base +
                 "/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList" +
                 Endpoints.apiKeyParam +
-                "&_type=json&cityCode=\(city)&routeId=\(routeId)"
+                "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=99"
             }
         }
 
