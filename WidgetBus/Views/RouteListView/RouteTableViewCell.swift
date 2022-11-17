@@ -9,6 +9,8 @@ import UIKit
 
 class RouteTableViewCell: UITableViewCell {
 
+    var busNumver: String = ""
+
     // 버스번호
     private lazy var busNumberLabel: UILabel = {
         let label = UILabel()
@@ -21,6 +23,7 @@ class RouteTableViewCell: UITableViewCell {
         return label
     }()
 
+    // 버스번호 배경
     private lazy var busNumberBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .duduDeepBlue
@@ -49,7 +52,7 @@ class RouteTableViewCell: UITableViewCell {
     }()
 
     // 탑승버튼
-    private let rideButton: UIButton = {
+    private lazy var rideButton: UIButton = {
         let button = UIButton()
         button.setTitle("탑승", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13, weight: .bold)
@@ -58,6 +61,7 @@ class RouteTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.duduDeepBlue?.cgColor
+        button.addTarget(self, action: #selector(pressedRideButton(_ :)), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -113,7 +117,12 @@ class RouteTableViewCell: UITableViewCell {
         ])
     }
 
+    @objc func pressedRideButton(_ sender: UIButton) {
+        print(busNumver)
+    }
+
     func setCell(busNumber: String, busRemainingTime: String, nextBusRemainingTime: String) {
+        self.busNumver = busNumber
         self.busNumberLabel.text = busNumber
         self.busRemainingTimeLabel.text = busRemainingTime
         self.nextBusRemainingTimeLabel.text = nextBusRemainingTime
