@@ -150,7 +150,7 @@ class RouteDetailViewController: UIViewController {
     func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
         // 여기 버스 위치들 나타남
         if !response.isEmpty {
-            print("Locations: \(response)")
+            print("Locations: \(response.count)")
         }
 
         //        print("error")
