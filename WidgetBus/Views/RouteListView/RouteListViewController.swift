@@ -50,6 +50,8 @@ class RouteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
+        title = "포스텍"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
 
         setupNavigationBar()
         setupLayout()
@@ -128,6 +130,16 @@ extension RouteListViewController: UITableViewDelegate {
     // 첫번째 셀은 삭제 불가능 - 정류장 이름 셀, 루트 차가하기 셀
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         indexPath.row == 0 ? false : true
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if routeTableView.contentOffset.y > -20 {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+            self.title = "포스텍"
+        } else {
+            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
+            self.title = .none
+        }
     }
 }
 
