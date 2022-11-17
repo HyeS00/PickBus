@@ -9,7 +9,7 @@ import UIKit
 
 final class GroupListViewContoller: UIViewController {
     let initMain = true
-    var groupName = ["출근길", "퇴근길", "백화점으로", ""]
+    var groupName = ["출근길", "퇴근길", "백화점으로", "어디로", "시장으로", "제주도로", "어디로가죠", "저도 모르는 곳으로 가요"]
 
     private let groupListView: UITableView = {
         let groupList = UITableView(frame: .zero, style: .plain)
@@ -21,6 +21,31 @@ final class GroupListViewContoller: UIViewController {
         return groupList
     }()
 
+    let mainLabel: UILabel = {
+        let mainLabel = UILabel()
+        mainLabel.text = "그룹을 \n추가해주세요."
+        mainLabel.numberOfLines = 2
+        mainLabel.textAlignment = .center
+        mainLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
+
+        return mainLabel
+    }()
+
+    let addButton: UIButton = {
+        let addButton = UIButton()
+        addButton.setTitle("추가하기", for: .normal)
+        addButton.setTitleColor(.white, for: .normal)
+        addButton.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        addButton.layer.opacity = 0.4
+        addButton.layer.cornerRadius = 15
+        addButton.layer.shadowColor = UIColor.black.cgColor
+        addButton.layer.shadowOpacity = 1.0
+        addButton.layer.shadowOffset = CGSize.zero
+        addButton.layer.shadowRadius = 2
+
+        return addButton
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
@@ -28,6 +53,7 @@ final class GroupListViewContoller: UIViewController {
             setupMainView()
         } else {
             setupTableView()
+
         }
     }
 }
@@ -41,14 +67,14 @@ private extension GroupListViewContoller {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
 
         let button = UIButton(type: .system)
-        let buttonImage = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold)
+        let buttonImage = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
         button.setImage(UIImage(systemName: "gearshape", withConfiguration: buttonImage), for: .normal)
         button.addTarget(self, action: #selector(pressButton(_:)), for: .touchUpInside)
         button.tintColor = .black
         let barButtonItem = UIBarButtonItem(customView: button)
         barButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
-        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 30).isActive = true
         self.navigationItem.rightBarButtonItem = barButtonItem
 
     }
@@ -61,27 +87,12 @@ private extension GroupListViewContoller {
 
 private extension GroupListViewContoller {
     func setupMainView() {
-        let mainLabel = UILabel()
-        mainLabel.text = "그룹을 \n추가해주세요."
-        mainLabel.numberOfLines = 2
-        mainLabel.textAlignment = .center
-        mainLabel.font = UIFont.systemFont(ofSize: 20, weight: .light)
         self.view.addSubview(mainLabel)
 
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         mainLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mainLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
-        let addButton = UIButton()
-        addButton.setTitle("추가하기", for: .normal)
-        addButton.setTitleColor(.white, for: .normal)
-        addButton.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
-        addButton.layer.opacity = 0.4
-        addButton.layer.cornerRadius = 15
-        addButton.layer.shadowColor = UIColor.black.cgColor
-        addButton.layer.shadowOpacity = 1.0
-        addButton.layer.shadowOffset = CGSize.zero
-        addButton.layer.shadowRadius = 2
         self.view.addSubview(addButton)
 
         addButton.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +146,7 @@ extension GroupListViewContoller: UITableViewDataSource {
                 withIdentifier: GroupTableViewCell.identifier,
                 for: indexPath) as! GroupTableViewCell
             cell.selectionStyle = .none
-            cell.groupListButton.setTitle(groupName[indexPath.row], for: .normal)
+            cell.groupListButton.setTitle(groupName[indexPath.row + 1], for: .normal)
             return cell
         }
     }

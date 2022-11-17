@@ -161,4 +161,12 @@ extension AddGroupListNameViewController: UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
         return true
     }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String
+    ) -> Bool {
+        guard groupListTextfield.text!.count < 17 else { return false }
+        return true
+        }
 }
