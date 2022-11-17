@@ -12,6 +12,11 @@ enum BoardingStatus {
     case getOff
 }
 
+struct RouteModel {
+    let startNodeId: String
+    let endNodeId: String
+}
+
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -26,6 +31,8 @@ class RouteDetailViewController: UIViewController {
 
     var boardingStatus: BoardingStatus = .onBoard
 
+    let route: RouteModel = RouteModel(startNodeId: "DJB8001780", endNodeId: "DJB8003057")
+
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
     // 노선 ID
@@ -35,20 +42,24 @@ class RouteDetailViewController: UIViewController {
     // 도시 코드
     var cityCode: Int = 25
     // 버스 정류장들
-    var nodeList = [RouteNodesInfo]()
+    private var nodeList = [RouteNodesInfo]()
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
         case .onBoard:
             self.boardingStatus = .getOff
             self.boardingStateButton.isSelected = true
+
+            let moveIndex = IndexPath(row: 9, section: 0)
+            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .middle, animated: true)
+
         case .getOff:
             self.boardingStatus = .onBoard
             self.boardingStateButton.isSelected = false
         }
     }
 
-    let retryButoon = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
+    let retryButton = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +70,14 @@ class RouteDetailViewController: UIViewController {
         routeView.layer.cornerRadius = 30
         routeView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
 
+        self.view.backgroundColor = .duduDeepBlue
         self.routeDetailTableView.dataSource = self
         self.routeDetailTableView.delegate = self
         busNumberLabel.text = "1000"
 
-        retryButoon.backgroundColor = .blue
-        retryButoon.layer.cornerRadius = 0.5 * retryButoon.bounds.width
-        self.view.addSubview(retryButoon)
+        retryButton.backgroundColor = .blue
+        retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
+        self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
     }
 
@@ -138,7 +150,10 @@ class RouteDetailViewController: UIViewController {
             nodeList += response
         }
 
+        nodeList.sort { $0.nodeord < $1.nodeord }
+
         print("Node List: \(nodeList.count)")
+        routeDetailTableView.reloadData()
 
         //        print("error")
         //        print(error?.localizedDescription ?? "")
@@ -180,18 +195,50 @@ class RouteDetailViewController: UIViewController {
 
 extension RouteDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return nodeList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "routeDetailCell",
             for: indexPath) as! RouteDetailTableViewCell
-        cell.busStationLabel.text = "포스텍"
-        cell.routeLineView.backgroundColor = .gray
+        if nodeList.isEmpty {
+            cell.busStationLabel.text = "불러오는 중입니다."
+        } else {
+            let cellData = nodeList[indexPath.row]
+            cell.busStationLabel.text = "\(cellData.nodenm)"
+
+            if (route.startNodeId == cellData.nodeid) {
+                cell.busTimeLabel2.text = "출발"
+            } else {
+                cell.busTimeLabel2.text = "10분"
+            }
+
+            if (route.endNodeId == cellData.nodeid) {
+                cell.busTimeLabel2.text = "도착"
+            } else {
+                cell.busTimeLabel2.text = "10분"
+            }
+        }
+        cell.routeLineView.backgroundColor = .duduGray
         cell.busView.isHidden = false
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
+        cell.busView.isHidden = true
+        cell.busTimeLabel2.layer.masksToBounds = true
+        cell.busTimeLabel2.layer.cornerRadius = 6.5
+
+//        cell.busImageView2.image = UIImage(named: "bus")
+
+        let endNode = nodeList.count - 1
+        let index = indexPath.row
+        if index == endNode {
+            cell.routeLineView.isHidden = true
+            cell.busView2.isHidden = true
+        } else {
+            cell.routeLineView.isHidden = false
+            cell.busView2.isHidden = false
+        }
 
         return cell
     }
@@ -200,7 +247,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         UIView()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 14
+        return 12
     }
 }
 
