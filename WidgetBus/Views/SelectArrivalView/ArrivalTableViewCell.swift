@@ -9,14 +9,10 @@ import UIKit
 
 class ArrivalTableViewCell: UITableViewCell {
     // MARK: - Properties
-//    static let identifier = "arrivalTableViewCell"
-
     private let highlightView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 303, height: 46)
-//        view.layer.backgroundColor = UIColor.cyan.cgColor
         view.layer.cornerRadius = 15
-
         return view
     }()
 
@@ -29,14 +25,19 @@ class ArrivalTableViewCell: UITableViewCell {
     private let routeNodeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "chevron.down.circle")
-        imageView.tintColor = UIColor.gray
+        imageView.tintColor = UIColor.duduGray
         return imageView
     }()
 
     private let routeNodeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 19)
+        return label
+    }()
 
+    private let testLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 19)
         return label
     }()
 
@@ -44,16 +45,13 @@ class ArrivalTableViewCell: UITableViewCell {
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 3, height: 36)
         view.layer.backgroundColor = UIColor.gray.cgColor
-
         return view
     }()
 
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
         self.selectionStyle = .none
-
         configureUI()
     }
 
@@ -64,8 +62,8 @@ class ArrivalTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        routeNodeImageView.tintColor = .gray
-        routeLineView.backgroundColor = .gray
+        routeNodeImageView.tintColor = UIColor.duduGray
+        routeLineView.backgroundColor = UIColor.duduGray
 
         highlightView.backgroundColor = .none
         highlightLabel.text = .none
@@ -79,28 +77,33 @@ class ArrivalTableViewCell: UITableViewCell {
         case .notSelected:
             break
         case .depart(.notOnlyDep):
-            routeLineView.backgroundColor = .blue
+            routeLineView.backgroundColor = UIColor.duduDeepBlue
             fallthrough
         case .depart(.onlyDep):
-            highlightView.backgroundColor = .systemPink
+            highlightView.backgroundColor = UIColor.duduRed
             highlightLabel.text = "출발"
-            routeNodeImageView.tintColor = .blue
+            routeNodeImageView.tintColor = UIColor.duduDeepBlue
         case .middle:
-            routeNodeImageView.tintColor = .blue
-            routeLineView.backgroundColor = .blue
+            routeNodeImageView.tintColor = UIColor.duduDeepBlue
+            routeLineView.backgroundColor = UIColor.duduDeepBlue
         case .arrival:
-            highlightView.backgroundColor = .cyan
+            highlightView.backgroundColor = UIColor.duduBlue
             highlightLabel.text = "도착"
-            routeNodeImageView.tintColor = .blue
+            routeNodeImageView.tintColor = UIColor.duduDeepBlue
         default:
             break
         }
 
         switch nodeInfo.attribute {
-        case .first, .nomal, .turnaround:
-            break
+        case .first:
+            testLabel.text = "기점"
+        case .nomal:
+            testLabel.text = "일반"
+        case .turnaround:
+            testLabel.text = "회차지"
         case .final:
             routeLineView.backgroundColor = .none
+            testLabel.text = "종점"
         default:
             break
         }
@@ -143,5 +146,10 @@ class ArrivalTableViewCell: UITableViewCell {
         routeLineView.centerXAnchor.constraint(equalTo: routeNodeImageView.centerXAnchor).isActive = true
         routeLineView.topAnchor.constraint(equalTo: routeNodeImageView.bottomAnchor, constant: 4)
             .isActive = true
+
+        addSubview(testLabel)
+        testLabel.translatesAutoresizingMaskIntoConstraints = false
+        testLabel.trailingAnchor.constraint(equalTo: routeNodeImageView.leadingAnchor, constant: -10).isActive = true
+        testLabel.centerYAnchor.constraint(equalTo: routeNodeImageView.centerYAnchor).isActive = true
     }
 }
