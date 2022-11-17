@@ -81,6 +81,7 @@ class RouteDetailViewController: UIViewController {
             routeId: routeId,
             completion: handleRequestRouteInformation(response:error:))
 
+        BusClient.getLocationsOnRoute(completion: handleRequestLocationsOnRouteResponse(response:error:))
     }
 
     func configureBoardingTapButton() {
@@ -143,6 +144,17 @@ class RouteDetailViewController: UIViewController {
 
 //        print("error")
 //        print(error?.localizedDescription ?? "")
+    }
+
+    // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
+        // 여기 버스 위치들
+        if !response.isEmpty {
+            print("Locations: \(response)")
+        }
+
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
     }
 }
 
