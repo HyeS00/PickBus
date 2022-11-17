@@ -9,7 +9,7 @@ import UIKit
 
 class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var selectedTableViewCell: IndexPath?
+    private var selectedTableViewCellIndexPath: IndexPath?
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -43,10 +43,6 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
-//        self.tableView.separatorStyle = .none
-//        self.tableView.separatorInset = .zero
-
-        self.tableView.rowHeight = UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,34 +58,23 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         cell.nodeName.text = nodeName[indexPath.row]
         cell.nodeDirection.text = nodeDirection[indexPath.row]
         cell.nodeDistance.text = nodeDistance[indexPath.row]
-        cell.settingData(isClicked: self.selectedTableViewCell == indexPath)
+        cell.settingData(isClicked: selectedTableViewCellIndexPath == indexPath)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.selectedTableViewCell == indexPath {
-            self.selectedTableViewCell = nil
+        if selectedTableViewCellIndexPath == indexPath {
+            selectedTableViewCellIndexPath = nil
         } else {
-            if let prevSelectedTableViewCell = self.selectedTableViewCell {
-                self.selectedTableViewCell = indexPath
-                self.tableView.reloadRows(at: [prevSelectedTableViewCell], with: .automatic)
+            if let prevSelectedTableViewCell = selectedTableViewCellIndexPath {
+                selectedTableViewCellIndexPath = indexPath
+                tableView.reloadRows(at: [prevSelectedTableViewCell], with: .automatic)
             } else {
-                self.selectedTableViewCell = indexPath
+                selectedTableViewCellIndexPath = indexPath
             }
         }
-        self.tableView.reloadRows(at: [indexPath], with: .automatic)
-
-//        self.performSegue(withIdentifier: "showHomeDetailView", sender: self)
-//
-//        navigationController?.setNavigationBarHidden(false, animated: true)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? HomeDetailViewController {
-//            destination.dogDataModel = dogDataModels[(table.indexPathForSelectedRow?.row)!]
-//            table.deselectRow(at: table.indexPathForSelectedRow!, animated: true)
-//        }
-//    }
 
 }

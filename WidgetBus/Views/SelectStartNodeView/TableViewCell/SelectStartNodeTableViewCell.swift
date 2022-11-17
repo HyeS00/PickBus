@@ -14,7 +14,6 @@ class SelectStartNodeTableViewCell: UITableViewCell {
     @IBOutlet weak var nodeDistance: UILabel!
 
     @IBOutlet weak var mapView: UIView!
-    @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
 
     static func nib() -> UINib {
         return UINib(nibName: "SelectStartNodeTableViewCell", bundle: nil)
@@ -33,13 +32,7 @@ class SelectStartNodeTableViewCell: UITableViewCell {
 
     // MARK: 셀 확장 설정
     func settingData(isClicked: Bool) {
-        if isClicked == true {
-            self.mapView.isHidden = false
-            self.mapViewHeightConstraint.constant = 290
-        } else {
-            self.mapViewHeightConstraint.constant = 0
-            self.mapView.isHidden = true
-        }
+        mapView.isHidden = !isClicked
     }
 
 }
