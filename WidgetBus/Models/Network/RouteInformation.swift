@@ -22,10 +22,14 @@ struct RouteInformationResponseHeader: Codable {
 }
 
 struct RouteInformationResponseBody: Codable {
-    let items: [RouteInformationResponseItem]
+    let items: RouteInformationResponseItem
 }
 
 struct RouteInformationResponseItem: Codable {
+    let item: RouteInformationInfo
+}
+
+struct RouteInformationInfo: Codable {
     // 종점
     let endnodenm: String
     // 막차 시간
