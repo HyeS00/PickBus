@@ -161,24 +161,24 @@ extension RouteListViewController: UITableViewDataSource {
 
     // 섹션 수
     func numberOfSections(in tableView: UITableView) -> Int {
-        busStops.count
+        busStops.count + 1
     }
 
     // 셀 수 - 마지막 섹션의 셀 수는 1 (루트 추가 셀)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == busStops.count - 1 ? 1 : busStops[section].routes.count
+        section == busStops.count ? 1 : busStops[section].routes.count
     }
 
     // 셀 높이 - 마지막 섹션의 셀이면 루트 추가 셀의 높이 적용
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        indexPath.section == busStops.count - 1 ?
+        indexPath.section == busStops.count ?
         addRouteCellHeight : indexPath.row == 0 ?
         routeHeaderCellHeight : routeCellHeight
     }
 
     // 셀 정의 - 마지막 섹션이면 루트 추가 셀 적용 / 기본 섹션이면 루트 셀 적용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == busStops.count - 1 {
+        if indexPath.section == busStops.count {
             // 마지막 섹션
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddRouteTableViewCell.identifier,
