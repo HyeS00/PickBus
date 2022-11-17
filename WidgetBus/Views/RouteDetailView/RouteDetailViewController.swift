@@ -82,7 +82,6 @@ class RouteDetailViewController: UIViewController {
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
-
     }
 
     func configureBoardingTapButton() {
@@ -142,7 +141,7 @@ class RouteDetailViewController: UIViewController {
 
 extension RouteDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return nodeList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,7 +154,6 @@ extension RouteDetailViewController: UITableViewDataSource {
             let cellData = nodeList[indexPath.row]
             cell.busStationLabel.text = "\(cellData.nodenm)"
 
-
             if (route.startNodeId == cellData.nodeid) {
                 cell.busTimeLabel2.text = "출발"
             } else {
@@ -167,9 +165,7 @@ extension RouteDetailViewController: UITableViewDataSource {
             } else {
                 cell.busTimeLabel2.text = "10분"
             }
-
         }
-        //cell.busStationLabel.text = "포스텍"
         cell.routeLineView.backgroundColor = .duduGray
         cell.busView.isHidden = false
         cell.busTimeLabel.layer.masksToBounds = true
@@ -180,11 +176,15 @@ extension RouteDetailViewController: UITableViewDataSource {
 
 //        cell.busImageView2.image = UIImage(named: "bus")
 
-//        let idx = indexPath.row
-//        if idx == 9 {
-//            cell.routeLineView.isHidden = true
-//            cell.busView2.isHidden = true
-//        }
+        let endNode = nodeList.count - 1
+        let index = indexPath.row
+        if index == endNode {
+            cell.routeLineView.isHidden = true
+            cell.busView2.isHidden = true
+        } else {
+            cell.routeLineView.isHidden = false
+            cell.busView2.isHidden = false
+        }
 
         return cell
     }

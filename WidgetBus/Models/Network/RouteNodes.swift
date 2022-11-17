@@ -33,6 +33,7 @@ struct RouteNodesResponseItem: Codable {
 }
 
 struct RouteNodesInfo: Codable {
+    //WGS84위도 좌표
     let gpslati: Double
     //WGS84 경도 좌표
     let gpslong: Double
