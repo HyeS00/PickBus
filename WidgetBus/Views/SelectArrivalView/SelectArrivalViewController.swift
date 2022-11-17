@@ -24,6 +24,15 @@ class SelectArrivalViewController: UIViewController {
     // 도시 코드
     var cityCode: Int = 25
 
+    var pageCount: Int = -1
+
+    // 정방향 or 역방향 / 회차지 구분용
+    // api: updowncd 0 or 1
+    // 예) 0 > 0(회차지) > 1 > 1
+    var upOrDown: Int?
+    // 출발 정류장 인덱스
+    var departNodeIdx: Int = 0
+
     private let arrivalTableView: UITableView =  {
         let tableView = UITableView()
         tableView.register(ArrivalTableViewCell.self, forCellReuseIdentifier: ArrivalTableViewCell.identifier)
@@ -34,10 +43,9 @@ class SelectArrivalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        nodeList = setDummyBusNodeList()
-
         // 버스 노드 추가 함수.
+//        nodeList = setDummyBusNodeList()
+
         setBusNodeList()
 
         arrivalTableView.delegate = self
@@ -45,6 +53,7 @@ class SelectArrivalViewController: UIViewController {
         arrivalTableView.separatorStyle = .none
 
         configureUI()
+
 
     }
 
@@ -84,6 +93,7 @@ class SelectArrivalViewController: UIViewController {
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
+            pageCount = iterater
             for index in 1...iterater {
                 BusClient.getNodeList(
                     city: String(cityCode),
@@ -92,7 +102,6 @@ class SelectArrivalViewController: UIViewController {
                     completion: handleRequestNodesListResponse(response:error:))
             }
         }
-
 //        print("error")
 //        print(error?.localizedDescription ?? "")
     }
@@ -101,21 +110,70 @@ class SelectArrivalViewController: UIViewController {
     func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
         if !response.isEmpty {
             nodeListJedi += response
+            pageCount -= 1
+
         }
 
-        print("Jerry Node List: \(nodeListJedi.count)")
-
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        if pageCount == 0 {
+            nodeListJedi.sort {
+                $0.nodeord < $1.nodeord
+            }
+            nodeInfoConversion(beforeNodes: nodeListJedi)
+            let slice = nodeList[departNodeIdx...]
+            nodeList = Array(slice)
+            arrivalTableView.reloadData()
+        }
     }
 
+    // API 노선정보 변환 파싱, 출발정류장부터,
+    func nodeInfoConversion(beforeNodes: [RouteNodesInfo]) {
+        for (index, beforeNode) in beforeNodes.enumerated() {
+            var nodeAttribute: NodeAttribute?
+            var nodeSelected: NodeSelected?
+
+            // 기점
+            if beforeNode.nodeord == 1 {
+                nodeAttribute = .first
+            } else {
+                nodeAttribute = .final
+            }
+
+            if upOrDown == nil {
+                upOrDown = beforeNode.updowncd
+            } else {
+                if upOrDown != beforeNode.updowncd {
+                    upOrDown = beforeNode.updowncd
+                    nodeList[nodeList.endIndex - 1]?.attribute = .turnaround
+                }
+            }
+
+            if !nodeList.isEmpty && nodeList.last!?.attribute == .final {
+                nodeList[nodeList.endIndex - 1]?.attribute = .nomal
+            }
+
+            // 출발 정류장
+            if beforeNode.nodeid == nodeId {
+                nodeSelected = .depart(.onlyDep)
+                departNodeIdx = index
+            }
+
+            nodeList.append(
+                ArrivalNodeModel(
+                    name: beforeNode.nodenm,
+                    attribute: nodeAttribute,
+                    userSelected: nodeSelected)
+            )
+        }
+    }
 }
+// MARK: - UITableViewDelegate
 extension SelectArrivalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
 }
 
+// MARK: - UITableViewDataSource
 extension SelectArrivalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nodeList.count
@@ -149,13 +207,13 @@ extension SelectArrivalViewController: UITableViewDataSource {
             // 1번 인덱스 부터 마지막 전 인덱스 까지
             if index < indexPath.row {
                 nodeList[index]?.userSelected = .middle
-                print(index,"미들")
+//                print(index,"미들")
             } else if index == indexPath.row {
                 nodeList[index]?.userSelected = .arrival
-                print(index,"도착")
+//                print(index,"도착")
             } else {
                 nodeList[index]?.userSelected = .notSelected
-                print(index,"선택 X")
+//                print(index,"선택 X")
             }
         }
         arrivalTableView.reloadData()
