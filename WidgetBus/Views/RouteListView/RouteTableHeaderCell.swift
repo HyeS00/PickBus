@@ -9,6 +9,8 @@ import UIKit
 
 class RouteTableHeaderCell: UITableViewCell {
 
+    var isNoti: Bool = false
+
     // 정류장이름
     let busStopLabel: UILabel = {
         let label = UILabel()
@@ -17,6 +19,15 @@ class RouteTableHeaderCell: UITableViewCell {
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+
+    // 알림 버튼
+    private lazy var notiButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(pressedNotiButton(_ :)), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "bell"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,13 +42,23 @@ class RouteTableHeaderCell: UITableViewCell {
 
     override func layoutSubviews() {
         self.contentView.addSubview(busStopLabel)
+        self.contentView.addSubview(notiButton)
 
         NSLayoutConstraint.activate([
-
             // 버스정류장 라벨
-            self.busStopLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.busStopLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+            busStopLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            busStopLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
+            // 알림 버튼
+            notiButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            notiButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+
+    @objc private func pressedNotiButton(_ sender: UIButton) {
+        isNoti = !isNoti
+        notiButton.setImage(
+            UIImage(systemName: isNoti ? "bell.fill" : "bell"), for: .normal
+        )
     }
 }

@@ -44,8 +44,6 @@ class RouteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
-        title = "포스텍"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
 
         setupNavigationBar()
         setupLayout()
@@ -56,21 +54,24 @@ class RouteListViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        // 뒤로가기 네비게이션 버튼
+        // 타이틀 설정
+        title = "포스텍"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
+
+        // back 버튼
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.backward"),
             style: .plain,
             target: self,
             action: #selector(pressedBackButton(_ :))
         )
-        // 편집하기 네이게이션 버튼
+        // 편집 버튼
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "편집",
             style: .plain,
             target: self,
             action: #selector(pressedEditButton(_ :))
         )
-        // 네비게이션바 틴트 컬러
         navigationController?.navigationBar.tintColor = .white
     }
 
@@ -133,7 +134,7 @@ extension RouteListViewController: UITableViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if routeTableView.contentOffset.y > -20 {
+        if routeTableView.contentOffset.y > -40 {
             self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
             self.title = "포스텍"
         } else {
