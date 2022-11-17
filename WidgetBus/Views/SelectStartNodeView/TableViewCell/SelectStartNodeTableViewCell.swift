@@ -33,6 +33,7 @@ class SelectStartNodeTableViewCell: UITableViewCell {
     // MARK: 셀 확장 설정
     func settingData(isClicked: Bool) {
         mapView.isHidden = !isClicked
+        self.backgroundColor = isClicked ? .duduBlue : .clear
     }
 
 }
