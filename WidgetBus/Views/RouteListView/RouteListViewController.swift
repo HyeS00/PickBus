@@ -8,6 +8,7 @@
 import UIKit
 
 class RouteListViewController: UIViewController {
+
     // 더미 데이터
     var busStops = BusData.busStops
 
@@ -24,7 +25,6 @@ class RouteListViewController: UIViewController {
         table.backgroundColor = .clear
         table.separatorStyle = .none
         table.translatesAutoresizingMaskIntoConstraints = false
-
         // 그림자
         table.layer.masksToBounds = false
         table.layer.shadowColor = UIColor.black.cgColor
@@ -32,16 +32,10 @@ class RouteListViewController: UIViewController {
         table.layer.shadowRadius = 10
         table.layer.shadowOffset = .init(width: 0, height: 2)
 
-        // 헤더 등록
+        // 테이블 뷰 요소 등록 - 타이틀, 정류장, 루트, 루트추가
         table.register(RouteTableHeader.self, forHeaderFooterViewReuseIdentifier: RouteTableHeader.identifier)
-
-        // 루트 헤더 셀 등록
         table.register(RouteTableHeaderCell.self, forCellReuseIdentifier: RouteTableHeaderCell.identifier)
-
-        // 루트 셀 등록
         table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
-
-        // 루트추가 셀 등록
         table.register(AddRouteTableViewCell.self, forCellReuseIdentifier: AddRouteTableViewCell.identifier)
 
         return table
@@ -102,14 +96,11 @@ class RouteListViewController: UIViewController {
 
     // 편집하기
     @objc private func pressedEditButton(_ sender: UIButton!) {
-        print("pressed editButton")
         if self.routeTableView.isEditing {
-            print("수정모드yes")
             navigationItem.rightBarButtonItem?.title = "편집"
             self.routeTableView.setEditing(false, animated: true)
-
+            self.routeTableView.reloadData()
         } else {
-            print("수정모드no")
             navigationItem.rightBarButtonItem?.title = "완료"
             self.routeTableView.setEditing(true, animated: true)
         }
@@ -119,12 +110,21 @@ class RouteListViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension RouteListViewController: UITableViewDelegate {
 
-    // 셀 삭제 기능
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        busStops[indexPath.section].routes.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+    // 섹션, 루트 삭제 기능
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
+        if busStops[indexPath.section].routes.count == 1 {
+            // 섹션 제거
+            busStops.remove(at: indexPath.section)
+            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+        } else {
+            // 루트 제거
+            busStops[indexPath.section].routes.remove(at: indexPath.row - 1)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 
     // 첫번째 셀은 삭제 불가능 - 정류장 이름 셀, 루트 차가하기 셀
@@ -166,7 +166,7 @@ extension RouteListViewController: UITableViewDataSource {
 
     // 셀 수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == busStops.count ? 1 : busStops[section].routes.count
+        section == busStops.count ? 1 : busStops[section].routes.count + 1
     }
 
     // 셀 높이
@@ -199,7 +199,7 @@ extension RouteListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: RouteTableViewCell.identifier,
                     for: indexPath) as! RouteTableViewCell
-                let route = busStops[indexPath.section].routes[indexPath.row]
+                let route = busStops[indexPath.section].routes[indexPath.row - 1]
                 cell.selectionStyle = .none
                 cell.setCell(
                     busNumber: route.busNumber,
