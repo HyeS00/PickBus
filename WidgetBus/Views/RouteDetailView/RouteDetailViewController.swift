@@ -53,10 +53,7 @@ class RouteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 네트워크 전송.
-        BusClient.getNodesListBody(
-            city: String(cityCode),
-            routeId: routeId,
-            completion: handleRequestNodesTotalNumberResponse(response:error:))
+        callNetworkFunction()
 
         routeView.clipsToBounds = true
         routeView.layer.cornerRadius = 30
@@ -70,6 +67,20 @@ class RouteDetailViewController: UIViewController {
         retryButoon.layer.cornerRadius = 0.5 * retryButoon.bounds.width
         self.view.addSubview(retryButoon)
         self.configureBoardingTapButton()
+    }
+
+    // 네트워크 연결 부르는 함수
+    func callNetworkFunction() {
+        BusClient.getNodesListBody(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestNodesTotalNumberResponse(response:error:))
+
+        BusClient.getRouteInformation(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestRouteInformation(response:error:))
+
     }
 
     func configureBoardingTapButton() {
@@ -94,7 +105,7 @@ class RouteDetailViewController: UIViewController {
         self.boardingStateButton.setAttributedTitle(getOffAttribute, for: .selected)
     }
 
-    // 전체 갯수 확인하는 네트워크 받으면 실행되는 콜백.
+    // 전체 갯수 확인하는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
@@ -107,17 +118,28 @@ class RouteDetailViewController: UIViewController {
             }
         }
 
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
     }
 
-    // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
+    // 버스 정류장 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
         if !response.isEmpty {
             nodeList += response
         }
 
         print("Node List: \(nodeList.count)")
+
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
+    }
+
+    // 노선 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestRouteInformation(response: RouteInformationInfo?, error: Error?) {
+        // 여기 버스 노선 정보 첫차, 막차 등.
+        if let response = response {
+            print("RouteInformation: \(response)")
+        }
 
 //        print("error")
 //        print(error?.localizedDescription ?? "")
