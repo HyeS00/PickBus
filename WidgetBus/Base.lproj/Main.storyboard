@@ -41,15 +41,6 @@
                                     <segue destination="em8-0h-ovx" kind="show" id="ETv-Me-IHI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uND-Tq-W18">
-                                <rect key="frame" x="148" y="771" width="98" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="루트리스트"/>
-                                <connections>
-                                    <action selector="routeList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T4O-HE-ZQD"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
