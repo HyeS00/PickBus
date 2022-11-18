@@ -20,11 +20,13 @@
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
+		CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */; };
 		CFD79B04291E45050091202C /* Service Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD79B03291E45050091202C /* Service Key.plist */; };
 		CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */; };
 		CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */; };
 		CFE0A869291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */; };
 		CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A86A291CD484002779C6 /* BusClient.swift */; };
+		CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF488229235B860037BBBA /* RouteNodes.swift */; };
 		D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103DF3292218E900DA7CDD /* UIColor+.swift */; };
 		D7103E2129239E9F00DA7CDD /* BusStopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103E2029239E9F00DA7CDD /* BusStopCell.swift */; };
 		D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807D291D156A009F8FDB /* RouteListViewController.swift */; };
@@ -79,11 +81,13 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationFromBusStop.swift; sourceTree = "<group>"; };
 		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
 		CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteNumberViewController.swift; sourceTree = "<group>"; };
 		CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArriveInfoFromBusStop.swift; sourceTree = "<group>"; };
 		CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteNumberViewStoryboard.storyboard; sourceTree = "<group>"; };
 		CFE0A86A291CD484002779C6 /* BusClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusClient.swift; sourceTree = "<group>"; };
+		CFEF488229235B860037BBBA /* RouteNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNodes.swift; sourceTree = "<group>"; };
 		D7103DF3292218E900DA7CDD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		D7103E2029239E9F00DA7CDD /* BusStopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopCell.swift; sourceTree = "<group>"; };
 		D784807D291D156A009F8FDB /* RouteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 			children = (
 				CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */,
 				CFE0A86A291CD484002779C6 /* BusClient.swift */,
+				CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */,
+				CFEF488229235B860037BBBA /* RouteNodes.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -507,7 +513,9 @@
 				CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */,
 				CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */,
 				CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */,
+				CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
 				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
 				D7848086291D433D009F8FDB /* TitleHeader.swift in Sources */,
 				D7848080291D1C65009F8FDB /* RouteCell.swift in Sources */,
