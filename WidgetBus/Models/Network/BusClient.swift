@@ -49,7 +49,7 @@ class BusClient {
                 return Endpoints.base +
                 "/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList" +
                 Endpoints.apiKeyParam +
-                "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=25"
+                "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=99"
                 +
                 "&pageNo=\(pageNumber)"
 
