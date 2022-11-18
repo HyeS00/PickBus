@@ -7,32 +7,32 @@
 
 import Foundation
 
-struct BusLocationsOnRoute: Codable {
+struct BusLocationsOnRoute: Decodable {
     let response: BusLocationsResponse
 }
 
-struct BusLocationsResponse: Codable {
+struct BusLocationsResponse: Decodable {
     let header: BusLocationsResponseHeader
     let body: BusLocationsResponseBody
 }
 
-struct BusLocationsResponseHeader: Codable {
+struct BusLocationsResponseHeader: Decodable {
     let resultCode: String
     let resultMsg: String
 }
 
-struct BusLocationsResponseBody: Codable {
+struct BusLocationsResponseBody: Decodable {
     let items: BusLocationsResponseItems
     let numOfRows: Int
     let pageNo: Int
     let totalCount: Int
 }
 
-struct BusLocationsResponseItems: Codable {
+struct BusLocationsResponseItems: Decodable {
     let item: [BusLocationsInfo]
 }
 
-struct BusLocationsInfo: Codable {
+struct BusLocationsInfo: Decodable {
     /// WGS84 위도 좌표
     let gpslati: Double
     /// WGS84 경도 좌표

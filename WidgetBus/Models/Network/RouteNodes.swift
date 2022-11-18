@@ -7,32 +7,32 @@
 
 import Foundation
 
-struct RouteNodes: Codable {
+struct RouteNodes: Decodable {
     let response: RouteNodesResponseAPI
 }
 
-struct RouteNodesResponseAPI: Codable {
+struct RouteNodesResponseAPI: Decodable {
     let header: RouteNodesResponseHeader
     let body: RouteNodesResponseBody
 }
 
-struct RouteNodesResponseHeader: Codable {
+struct RouteNodesResponseHeader: Decodable {
     let resultCode: String
     let resultMsg: String
 }
 
-struct RouteNodesResponseBody: Codable {
+struct RouteNodesResponseBody: Decodable {
     let items: RouteNodesResponseItem
     let numOfRows: Int
     let pageNo: Int
     let totalCount: Int
 }
 
-struct RouteNodesResponseItem: Codable {
+struct RouteNodesResponseItem: Decodable {
     let item: [RouteNodesInfo]
 }
 
-struct RouteNodesInfo: Codable {
+struct RouteNodesInfo: Decodable {
     /// WGS84 위도 좌표
     let gpslati: Double
     /// WGS84 경도 좌표

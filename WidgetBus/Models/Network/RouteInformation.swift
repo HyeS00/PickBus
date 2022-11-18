@@ -7,29 +7,29 @@
 
 import Foundation
 
-struct RouteInformation: Codable {
+struct RouteInformation: Decodable {
     let response: RouteInformationResponse
 }
 
-struct RouteInformationResponse: Codable {
+struct RouteInformationResponse: Decodable {
     let header: RouteInformationResponseHeader
     let body: RouteInformationResponseBody
 }
 
-struct RouteInformationResponseHeader: Codable {
+struct RouteInformationResponseHeader: Decodable {
     let resultCode: String
     let resultMsg: String
 }
 
-struct RouteInformationResponseBody: Codable {
+struct RouteInformationResponseBody: Decodable {
     let items: RouteInformationResponseItem
 }
 
-struct RouteInformationResponseItem: Codable {
+struct RouteInformationResponseItem: Decodable {
     let item: RouteInformationInfo
 }
 
-struct RouteInformationInfo: Codable {
+struct RouteInformationInfo: Decodable {
     /// 종점
     let endnodenm: String
     /// 막차 시간

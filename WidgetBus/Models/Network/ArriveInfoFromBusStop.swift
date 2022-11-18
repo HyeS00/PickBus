@@ -7,32 +7,32 @@
 
 import Foundation
 
-struct ArriveInfoFromBusStop: Codable {
+struct ArriveInfoFromBusStop: Decodable {
     let response: ArriveInfoResponseAPI
 }
 
-struct ArriveInfoResponseAPI: Codable {
+struct ArriveInfoResponseAPI: Decodable {
     let header: ArriveInfoResponseHeader
     let body: ArriveInfoResponseBody
 }
 
-struct ArriveInfoResponseHeader: Codable {
+struct ArriveInfoResponseHeader: Decodable {
     let resultCode: String
     let resultMsg: String
 }
 
-struct ArriveInfoResponseBody: Codable {
+struct ArriveInfoResponseBody: Decodable {
     let items: ArriveInfoResponseArriveItem
     let numOfRows: Int
     let pageNo: Int
     let totalCount: Int
 }
 
-struct ArriveInfoResponseArriveItem: Codable {
+struct ArriveInfoResponseArriveItem: Decodable {
     let item: [ArriveInfoResponseArriveInfo]
 }
 
-struct ArriveInfoResponseArriveInfo: Codable {
+struct ArriveInfoResponseArriveInfo: Decodable {
     /// 도착예정버스 남은 정류장 수
     let arrprevstationcnt: Int
     /// 도착예정버스 도착예정 시간[초]
