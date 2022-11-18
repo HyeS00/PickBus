@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RouteTableHeaderCell: UITableViewCell {
+class BusStopCell: UITableViewCell {
 
     var isNoti: Bool = false
 

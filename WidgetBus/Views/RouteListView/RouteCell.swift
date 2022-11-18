@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RouteTableViewCell: UITableViewCell {
+class RouteCell: UITableViewCell {
 
     var busNumver: String = ""
 

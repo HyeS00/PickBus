@@ -33,10 +33,10 @@ class RouteListViewController: UIViewController {
         table.layer.shadowOffset = .init(width: 0, height: 2)
 
         // 테이블 뷰 요소 등록 - 타이틀, 정류장, 루트, 루트추가
-        table.register(RouteTableHeader.self, forHeaderFooterViewReuseIdentifier: RouteTableHeader.identifier)
-        table.register(RouteTableHeaderCell.self, forCellReuseIdentifier: RouteTableHeaderCell.identifier)
-        table.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
-        table.register(AddRouteTableViewCell.self, forCellReuseIdentifier: AddRouteTableViewCell.identifier)
+        table.register(TitleHeader.self, forHeaderFooterViewReuseIdentifier: TitleHeader.identifier)
+        table.register(BusStopCell.self, forCellReuseIdentifier: BusStopCell.identifier)
+        table.register(RouteCell.self, forCellReuseIdentifier: RouteCell.identifier)
+        table.register(AddRouteCell.self, forCellReuseIdentifier: AddRouteCell.identifier)
 
         return table
     }()
@@ -150,7 +150,7 @@ extension RouteListViewController: UITableViewDataSource {
     // 헤더
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: RouteTableHeader.identifier) as! RouteTableHeader
+            withIdentifier: TitleHeader.identifier) as! TitleHeader
         header.busStopLabel.text = busStops[section].name
         return header
     }
@@ -182,24 +182,24 @@ extension RouteListViewController: UITableViewDataSource {
         if indexPath.section == busStops.count {
             // 마지막 섹션
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: AddRouteTableViewCell.identifier,
-                for: indexPath) as! AddRouteTableViewCell
+                withIdentifier: AddRouteCell.identifier,
+                for: indexPath) as! AddRouteCell
             return cell
         } else {
             // 기본 섹션
             if indexPath.row == 0 {
                 // 헤더 셀
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: RouteTableHeaderCell.identifier,
-                    for: indexPath) as! RouteTableHeaderCell
+                    withIdentifier: BusStopCell.identifier,
+                    for: indexPath) as! BusStopCell
                 cell.busStopLabel.text = busStops[indexPath.section].name
                 cell.selectionStyle = .none
                 return cell
             } else {
                 // 기본 셀
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: RouteTableViewCell.identifier,
-                    for: indexPath) as! RouteTableViewCell
+                    withIdentifier: RouteCell.identifier,
+                    for: indexPath) as! RouteCell
                 let route = busStops[indexPath.section].routes[indexPath.row - 1]
                 cell.selectionStyle = .none
                 cell.setCell(
