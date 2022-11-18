@@ -30,24 +30,24 @@ struct RouteInformationResponseItem: Codable {
 }
 
 struct RouteInformationInfo: Codable {
-    // 종점
+    /// 종점
     let endnodenm: String
-    // 막차 시간
+    /// 막차 시간
     let endvehicletime: Int
-    // 배차 간격(토요일)
+    /// 배차 간격(토요일)
     let intervalsattime: Int
-    // 배차 간격(일요일)
+    /// 배차 간격(일요일)
     let intervalsuntime: Int
-    // 배차 간격(평일)
+    /// 배차 간격(평일)
     let intervaltime: Int
-    // 노선 ID
+    /// 노선 ID
     let routeid: String
-    // 노선 번호
+    /// 노선 번호
     let routeno: Int
-    // 노선 유형(마을 버스 등)
+    /// 노선 유형(마을 버스 등)
     let routetp: String
-    // 기점
+    /// 기점
     let startnodenm: String
-    // 첫차 시간
+    /// 첫차 시간
     let startvehicletime: String
 }

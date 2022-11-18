@@ -33,20 +33,20 @@ struct BusLocationsResponseItems: Codable {
 }
 
 struct BusLocationsInfo: Codable {
-    // WGS84 위도 좌표
+    /// WGS84 위도 좌표
     let gpslati: Double
-    // WGS84 경도 좌표
+    /// WGS84 경도 좌표
     let gpslong: Double
-    // 정류장 ID
+    /// 정류장 ID
     let nodeid: String
-    // 정류장 이름
+    /// 정류장 이름
     let nodenm: String
-    // 정류장 순서
+    /// 정류장 순서
     let nodeord: Int
-    // 노선 번호
+    /// 노선 번호
     let routenm: Int
-    // 노선 유형(간선 버스 등)
+    /// 노선 유형(간선 버스 등)
     let routetp: String
-    // 차량 번호(대전99가9999 등)
+    /// 차량 번호(대전99가9999 등)
     let vehicleno: String
 }

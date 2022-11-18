@@ -33,20 +33,20 @@ struct ArriveInfoResponseArriveItem: Codable {
 }
 
 struct ArriveInfoResponseArriveInfo: Codable {
-    // 도착예정버스 남은 정류장 수
+    /// 도착예정버스 남은 정류장 수
     let arrprevstationcnt: Int
-    // 도착예정버스 도착예정 시간[초]
+    /// 도착예정버스 도착예정 시간[초]
     let arrtime: Int
-    // 정류소 ID
+    /// 정류소 ID
     let nodeid: String
-    // 정류소 명
+    /// 정류소 명
     let nodenm: String
-    // 노선 ID
+    /// 노선 ID
     let routeid: String
-    // 노선 번호
+    /// 노선 번호
     let routeno: Int
-    // 노선 유형(마을 버스 등)
+    /// 노선 유형(마을 버스 등)
     let routetp: String
-    // 도착예정버스 차량유형(저상 버스 등)
+    /// 도착예정버스 차량유형(저상 버스 등)
     let vehicletp: String
 }

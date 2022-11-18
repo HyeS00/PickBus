@@ -33,20 +33,20 @@ struct RouteNodesResponseItem: Codable {
 }
 
 struct RouteNodesInfo: Codable {
-    // WGS84 위도 좌표
+    /// WGS84 위도 좌표
     let gpslati: Double
-    // WGS84 경도 좌표
+    /// WGS84 경도 좌표
     let gpslong: Double
-    // 정류소 ID
+    /// 정류소 ID
     let nodeid: String
-    // 정류소 명
+    /// 정류소 명
     let nodenm: String
-    // 정류소 번호
+    /// 정류소 번호
     let nodeno: Int
-    // 정류소 순번
+    /// 정류소 순번
     let nodeord: Int
-    // 노선 ID
+    /// 노선 ID
     let routeid: String
-    // 상하행 구분 코드
+    /// 상하행 구분 코드
     let updowncd: Int
 }
