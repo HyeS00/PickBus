@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SelectStartNodeTableViewCell: UITableViewCell {
 
@@ -13,7 +14,7 @@ class SelectStartNodeTableViewCell: UITableViewCell {
     @IBOutlet weak var nodeDirection: UILabel!
     @IBOutlet weak var nodeDistance: UILabel!
 
-    @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
 
     static func nib() -> UINib {
         return UINib(nibName: "SelectStartNodeTableViewCell", bundle: nil)
@@ -22,11 +23,11 @@ class SelectStartNodeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        mapView.mapType = MKMapType.standard
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
