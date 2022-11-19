@@ -44,13 +44,13 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
 
     // MARK: 테이블
     func defaultTableViewSetting() {
-        self.tableView.register(
+        tableView.register(
             SelectStartNodeTableViewCell.nib(),
             forCellReuseIdentifier: SelectStartNodeTableViewCell.identifier
         )
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
