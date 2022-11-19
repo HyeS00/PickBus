@@ -16,31 +16,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dLC-aU-oT4">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yYG-0a-brm">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="rX5-Ob-a0v"/>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="uGG-7G-gGd"/>
-                                </connections>
-                            </tableView>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dLC-aU-oT4">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="722"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="rX5-Ob-a0v"/>
+                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="uGG-7G-gGd"/>
+                                        </connections>
+                                    </tableView>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="검색할 정류장을 입력해 주세요." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4MV-ap-3EY">
+                                        <rect key="frame" x="0.0" y="722" width="393" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="didEndOnExit:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="8kA-fv-XVO"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="dLC-aU-oT4" secondAttribute="bottom" id="IbJ-PO-G5h"/>
-                            <constraint firstAttribute="trailing" secondItem="dLC-aU-oT4" secondAttribute="trailing" id="KgH-C1-lH9"/>
-                            <constraint firstItem="dLC-aU-oT4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="deY-Ln-AWx"/>
-                            <constraint firstItem="dLC-aU-oT4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="uCC-O2-pVE"/>
+                            <constraint firstItem="yYG-0a-brm" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="6eO-Ed-q5Y"/>
+                            <constraint firstItem="yYG-0a-brm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GGN-Fr-x6O"/>
+                            <constraint firstItem="yYG-0a-brm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Qdg-2p-lbP"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="yYG-0a-brm" secondAttribute="bottom" id="wf3-mE-7sT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="busNodeSearchTextField" destination="4MV-ap-3EY" id="l5I-F3-g7q"/>
                         <outlet property="tableView" destination="dLC-aU-oT4" id="y2O-Lz-zXC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36" y="25"/>
+            <point key="canvasLocation" x="35.877862595419849" y="24.647887323943664"/>
         </scene>
     </scenes>
     <resources>

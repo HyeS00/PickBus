@@ -12,6 +12,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     private var selectedTableViewCellIndexPath: IndexPath?
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var busNodeSearchTextField: UITextField!
 
     var nodeName: [String] = [
         "정류장1", "정류장2", "정류장3", "정류장4", "정류장5", "정류장6", "정류장7", "정류장8", "정류장9", "정류장10",
@@ -32,6 +33,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
 
         defaultTableViewSetting()
+        defaultKeyboardObserverSetting()
     }
 
     // MARK: 테이블
@@ -77,4 +79,39 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 
+    // MARK: 키보드
+    func defaultKeyboardObserverSetting() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+
+    @IBAction func didEndOnExit(_ sender: Any) {
+        // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
+        print(busNodeSearchTextField.text ?? "텍스트 필드 입력값 없음")
+    }
+
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardFrame: NSValue =
+            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            UIView.animate(withDuration: 1) {
+                self.view.frame.origin.y -= keyboardHeight
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0
+    }
 }
