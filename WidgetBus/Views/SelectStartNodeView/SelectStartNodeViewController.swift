@@ -36,6 +36,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         busNodeSearchTextField.layer.cornerRadius = 15
         busNodeSearchTextField.layer.borderWidth = 2
         busNodeSearchTextField.layer.borderColor = UIColor.duduDeepBlue?.cgColor
+        busNodeSearchTextField.addLeftPadding()
 
         defaultTableViewSetting()
         defaultKeyboardObserverSetting()

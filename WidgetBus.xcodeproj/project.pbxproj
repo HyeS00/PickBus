@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
 		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; };
+		C13E0E412929941500818085 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E0E402929941500818085 /* UITextField+.swift */; };
 		C146115429237E11003E03E3 /* SelectStartNodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C146115229237E11003E03E3 /* SelectStartNodeTableViewCell.swift */; };
 		C146115529237E11003E03E3 /* SelectStartNodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C146115329237E11003E03E3 /* SelectStartNodeTableViewCell.xib */; };
 		C16920612907B75C0021D17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920602907B75C0021D17F /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		7EC20A1B8AEA1509993C81A6 /* Pods-WidgetBusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBusTests.debug.xcconfig"; path = "Target Support Files/Pods-WidgetBusTests/Pods-WidgetBusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		95C0C9BA31DBED1269202E64 /* Pods-WidgetBus-WidgetBusUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus-WidgetBusUITests.debug.xcconfig"; path = "Target Support Files/Pods-WidgetBus-WidgetBusUITests/Pods-WidgetBus-WidgetBusUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus_WidgetBusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C13E0E402929941500818085 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C146115229237E11003E03E3 /* SelectStartNodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStartNodeTableViewCell.swift; sourceTree = "<group>"; };
 		C146115329237E11003E03E3 /* SelectStartNodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectStartNodeTableViewCell.xib; sourceTree = "<group>"; };
 		C169205D2907B75C0021D17F /* WidgetBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WidgetBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,6 +267,7 @@
 			children = (
 				D784808D291E1B9C009F8FDB /* NSObject+.swift */,
 				D7103DF3292218E900DA7CDD /* UIColor+.swift */,
+				C13E0E402929941500818085 /* UITextField+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */,
 				CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */,
 				CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */,
+				C13E0E412929941500818085 /* UITextField+.swift in Sources */,
 				CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
