@@ -67,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="-27"/>
+            <point key="canvasLocation" x="32.824427480916029" y="-27.464788732394368"/>
         </scene>
         <!--SelectStartNodeViewController-->
         <scene sceneID="pMi-dr-Vhr">
@@ -88,6 +88,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSq-U7-rrD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="753" y="-10"/>
+        </scene>
+        <!--RouteDetailView-->
+        <scene sceneID="EpQ-0e-eku">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RouteDetailView" storyboardName="RouteDetailView" id="PAY-MO-Xp7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ITV-Ld-iI1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J0D-Sk-IFK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="84"/>
         </scene>
     </scenes>
     <resources>
