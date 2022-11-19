@@ -64,10 +64,7 @@ class RouteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 네트워크 전송.
-        BusClient.getNodesListBody(
-            city: String(cityCode),
-            routeId: routeId,
-            completion: handleRequestNodesTotalNumberResponse(response:error:))
+        callNetworkFunction()
 
         routeView.clipsToBounds = true
         routeView.layer.cornerRadius = 30
@@ -82,6 +79,30 @@ class RouteDetailViewController: UIViewController {
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
+    }
+
+    // 네트워크 연결 부르는 함수
+    func callNetworkFunction() {
+        BusClient.getNodesListBody(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestNodesTotalNumberResponse(response:error:))
+
+        BusClient.getRouteInformation(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestRouteInformation(response:error:))
+
+        BusClient.getLocationsOnRoute(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestLocationsOnRouteResponse(response:error:))
+
+        BusClient.getSpecificArrive(
+            city: String(cityCode),
+            routeId: routeId,
+            nodeId: nodeId,
+            completion: handleRequestSpecificArriveInfoResponse(response:error:))
     }
 
     func configureBoardingTapButton() {
@@ -106,7 +127,7 @@ class RouteDetailViewController: UIViewController {
         self.boardingStateButton.setAttributedTitle(getOffAttribute, for: .selected)
     }
 
-    // 전체 갯수 확인하는 네트워크 받으면 실행되는 콜백.
+    // 전체 갯수 확인하는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
@@ -119,23 +140,58 @@ class RouteDetailViewController: UIViewController {
             }
         }
 
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
     }
 
-    // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
+    // 버스 정류장 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
-        if !response.isEmpty {
-            nodeList += response
+        guard !response.isEmpty else {
+            //        print("error")
+            //        print(error?.localizedDescription ?? "")
+            return
         }
+
+        nodeList += response
 
         nodeList.sort { $0.nodeord < $1.nodeord }
 
         print("Node List: \(nodeList.count)")
         routeDetailTableView.reloadData()
 
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+    }
+
+    // 노선 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestRouteInformation(response: RouteInformationInfo?, error: Error?) {
+        // 여기 버스 노선 정보 첫차, 막차 등.
+        guard let response = response else {
+            //        print("error")
+            //        print(error?.localizedDescription ?? "")
+            return
+        }
+        print("RouteInformation: \(response)")
+    }
+
+    // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
+        // 여기 버스 위치들 나타남
+        guard !response.isEmpty else {
+            //        print("error")
+            //        print(error?.localizedDescription ?? "")
+            return
+        }
+        print("Locations: \(response.count)")
+    }
+
+    // 정류장에 오는 특정 노선에 대한 도착 정보만 받는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
+        // 여기 특정 노선에 대한 도착 정보 표현 됨.
+        guard let response = response else {
+            //        print(error)
+            //        print(error?.localizedDescription)
+            return
+        }
+        print("Response: \(response)")
     }
 }
 
@@ -174,7 +230,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busTimeLabel2.layer.masksToBounds = true
         cell.busTimeLabel2.layer.cornerRadius = 6.5
 
-//        cell.busImageView2.image = UIImage(named: "bus")
+        //        cell.busImageView2.image = UIImage(named: "bus")
 
         let endNode = nodeList.count - 1
         let index = indexPath.row
