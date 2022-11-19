@@ -32,6 +32,11 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 텍스트 필드 레이아웃 설정
+        busNodeSearchTextField.layer.cornerRadius = 15
+        busNodeSearchTextField.layer.borderWidth = 2
+        busNodeSearchTextField.layer.borderColor = UIColor.duduDeepBlue?.cgColor
+
         defaultTableViewSetting()
         defaultKeyboardObserverSetting()
     }
