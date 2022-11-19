@@ -26,12 +26,61 @@ class SelectArrivalViewController: UIViewController {
 
     var pageCount: Int = -1
 
-    // 정방향 or 역방향 / 회차지 구분용
-    // api: updowncd 0 or 1
+    // var busNum: String?
+    // 테스트용 
+    var busNum: String = "207"
+
+    // 0 정방향 or 1 역방향 / 회차지 구분용
     // 예) 0 > 0(회차지) > 1 > 1
     var upOrDown: Int?
     // 출발 정류장 인덱스
     var departNodeIdx: Int = 0
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "도착정류장을 선택해 주세요."
+        label.font = UIFont.systemFont(ofSize: 25)
+        return label
+    }()
+
+    private let indicatorImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "progressIndicator4")
+        return imageView
+    }()
+
+    private let busBadgeView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 91, height: 31)
+        view.layer.cornerRadius = 8
+        view.backgroundColor = UIColor.duduDeepBlue
+        return view
+    }()
+
+    private lazy var busBadgeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = busNum
+        return label
+    }()
+
+    private let busBadgeIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "bus.fill")
+        imageView.tintColor = UIColor.white
+        return imageView
+    }()
+
+    private let bottomView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 15
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        view.backgroundColor = .white
+
+        return view
+    }()
 
     private let arrivalTableView: UITableView =  {
         let tableView = UITableView()
@@ -43,10 +92,10 @@ class SelectArrivalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 버스 노드 추가 함수.
-//        nodeList = setDummyBusNodeList()
 
         setBusNodeList()
+
+        view.backgroundColor = UIColor.duduDeepBlue
 
         arrivalTableView.delegate = self
         arrivalTableView.dataSource = self
@@ -54,13 +103,59 @@ class SelectArrivalViewController: UIViewController {
 
         configureUI()
 
-
     }
 
     // MARK: - Helpers
     func configureUI() {
-        view.addSubview(arrivalTableView)
-        arrivalTableView.frame = view.bounds
+        view.addSubview(bottomView)
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        bottomView.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.75).isActive = true
+        bottomView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+        bottomView.addSubview(busBadgeView)
+        busBadgeView.translatesAutoresizingMaskIntoConstraints = false
+        busBadgeView.widthAnchor.constraint(equalToConstant: busBadgeView.frame.width).isActive = true
+        busBadgeView.heightAnchor.constraint(equalToConstant: busBadgeView.frame.height).isActive = true
+        busBadgeView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 9).isActive = true
+        busBadgeView.trailingAnchor
+            .constraint(equalTo: bottomView.trailingAnchor, constant: -17).isActive = true
+
+        busBadgeView.addSubview(busBadgeIcon)
+        busBadgeIcon.translatesAutoresizingMaskIntoConstraints = false
+        busBadgeIcon.widthAnchor
+            .constraint(equalToConstant: 22).isActive = true
+        busBadgeIcon.heightAnchor.constraint(equalToConstant: 19).isActive = true
+        busBadgeIcon.centerYAnchor.constraint(equalTo: busBadgeView.centerYAnchor).isActive = true
+        busBadgeIcon.leadingAnchor
+            .constraint(equalTo: busBadgeView.leadingAnchor, constant: 7)
+            .isActive = true
+
+        busBadgeView.addSubview(busBadgeLabel)
+        busBadgeLabel.translatesAutoresizingMaskIntoConstraints = false
+        busBadgeLabel.centerYAnchor.constraint(equalTo: busBadgeView.centerYAnchor).isActive = true
+        busBadgeLabel.leadingAnchor
+            .constraint(equalTo: busBadgeIcon.trailingAnchor, constant: 5).isActive = true
+
+        bottomView.addSubview(arrivalTableView)
+        arrivalTableView.translatesAutoresizingMaskIntoConstraints = false
+        arrivalTableView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        arrivalTableView.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor).isActive = true
+        arrivalTableView.topAnchor
+            .constraint(equalTo: busBadgeView.bottomAnchor, constant: 10).isActive = true
+        arrivalTableView.bottomAnchor.constraint(equalTo:bottomView.bottomAnchor).isActive = true
+
+        view.addSubview(indicatorImage)
+        indicatorImage.translatesAutoresizingMaskIntoConstraints = false
+        indicatorImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        indicatorImage.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -10).isActive = true
+
+        view.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        titleLabel.topAnchor
+            .constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.1).isActive = true
     }
 
     func setBusNodeList() {
@@ -102,8 +197,8 @@ class SelectArrivalViewController: UIViewController {
                     completion: handleRequestNodesListResponse(response:error:))
             }
         }
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
     }
 
     // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
@@ -207,13 +302,13 @@ extension SelectArrivalViewController: UITableViewDataSource {
             // 1번 인덱스 부터 마지막 전 인덱스 까지
             if index < indexPath.row {
                 nodeList[index]?.userSelected = .middle
-//                print(index,"미들")
+                //                print(index,"미들")
             } else if index == indexPath.row {
                 nodeList[index]?.userSelected = .arrival
-//                print(index,"도착")
+                //                print(index,"도착")
             } else {
                 nodeList[index]?.userSelected = .notSelected
-//                print(index,"선택 X")
+                //                print(index,"선택 X")
             }
         }
         arrivalTableView.reloadData()
