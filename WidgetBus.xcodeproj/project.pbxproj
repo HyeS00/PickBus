@@ -26,6 +26,7 @@
 		CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */; };
 		CFE0A869291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */; };
 		CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A86A291CD484002779C6 /* BusClient.swift */; };
+		CFEC63D32928B67E00B75795 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEC63D22928B67E00B75795 /* DataController.swift */; };
 		CFEC63F52928BF3F00B75795 /* BusCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFEC63F32928BF3F00B75795 /* BusCoreDataModel.xcdatamodeld */; };
 		CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF488229235B860037BBBA /* RouteNodes.swift */; };
 		D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103DF3292218E900DA7CDD /* UIColor+.swift */; };
@@ -88,6 +89,7 @@
 		CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArriveInfoFromBusStop.swift; sourceTree = "<group>"; };
 		CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteNumberViewStoryboard.storyboard; sourceTree = "<group>"; };
 		CFE0A86A291CD484002779C6 /* BusClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusClient.swift; sourceTree = "<group>"; };
+		CFEC63D22928B67E00B75795 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CFEC63F42928BF3F00B75795 /* BusCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BusCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		CFEF488229235B860037BBBA /* RouteNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNodes.swift; sourceTree = "<group>"; };
 		D7103DF3292218E900DA7CDD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		CFEC63D12928B66500B75795 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				CFEC63D22928B67E00B75795 /* DataController.swift */,
 				CFEC63F32928BF3F00B75795 /* BusCoreDataModel.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -526,6 +529,7 @@
 				CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */,
 				CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				CFEC63D32928B67E00B75795 /* DataController.swift in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
 				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
 				D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */,
