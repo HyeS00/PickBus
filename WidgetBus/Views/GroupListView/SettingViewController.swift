@@ -41,6 +41,11 @@ final class SettingViewController: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
+    }
+
     @objc func onClickSwitch(sender: UISwitch) {
            var text: String!
            var color: UIColor!

@@ -130,6 +130,7 @@ private extension GroupListViewContoller {
 }
 
 extension GroupListViewContoller: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == groupName.count {
             let settingView = AddGroupListNameViewController()
