@@ -30,6 +30,8 @@ struct CityCodeResponseItem: Decodable {
 }
 
 struct CityCodeInfo: Decodable {
+    /// 도시 코드 (숫자)
     let citycode: Int
+    /// 도시 이름 (글자)
     let cityname: String
 }
