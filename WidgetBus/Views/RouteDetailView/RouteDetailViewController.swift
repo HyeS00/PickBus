@@ -252,6 +252,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busTimeLabel2.layer.masksToBounds = true
         cell.busTimeLabel2.layer.cornerRadius = 6.5
 
+        cell.busView.isHidden = false
         //        cell.busImageView2.image = UIImage(named: "bus")
 
         let endNode = nodeList.count - 1

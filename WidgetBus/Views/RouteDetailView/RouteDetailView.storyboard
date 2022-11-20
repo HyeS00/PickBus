@@ -72,17 +72,21 @@
                                                             </constraints>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pn2-zV-WcU">
-                                                            <rect key="frame" x="19.333333333333336" y="4" width="70.666666666666657" height="30"/>
+                                                            <rect key="frame" x="19.333333333333336" y="4" width="74" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10분" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXU-3h-BtU">
-                                                                    <rect key="frame" x="0.0" y="4.3333333333333339" width="34.666666666666664" height="21.666666666666664"/>
+                                                                    <rect key="frame" x="0.0" y="5" width="38" height="20"/>
                                                                     <color key="backgroundColor" name="duduDeepBlue"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="38" id="EX1-zB-gNq"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="PDa-22-HDY"/>
+                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bus" translatesAutoresizingMaskIntoConstraints="NO" id="Jf7-8v-JAB">
-                                                                    <rect key="frame" x="40.666666666666671" y="0.0" width="30" height="30"/>
+                                                                    <rect key="frame" x="44" y="0.0" width="30" height="30"/>
                                                                     <color key="tintColor" name="duduDeepBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="x5m-vO-mKy"/>
@@ -92,17 +96,21 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Gkf-bI-5yq">
-                                                            <rect key="frame" x="19.333333333333336" y="36.666666666666664" width="70.666666666666657" height="41.999999999999993"/>
+                                                            <rect key="frame" x="16" y="36.666666666666664" width="74" height="41.999999999999993"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10분" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrZ-K8-3Os">
-                                                                    <rect key="frame" x="0.0" y="10.000000000000002" width="34.666666666666664" height="21.666666666666671"/>
+                                                                    <rect key="frame" x="0.0" y="11" width="38" height="20"/>
                                                                     <color key="backgroundColor" name="duduDeepBlue"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="1b9-uS-rJl"/>
+                                                                        <constraint firstAttribute="width" constant="38" id="MdG-sb-qZx"/>
+                                                                    </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bus2" translatesAutoresizingMaskIntoConstraints="NO" id="HxK-uL-I1j">
-                                                                    <rect key="frame" x="40.666666666666671" y="6" width="30" height="30"/>
+                                                                    <rect key="frame" x="44" y="6" width="30" height="30"/>
                                                                     <color key="tintColor" name="duduDeepBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="JDw-g3-ShT"/>
@@ -121,10 +129,12 @@
                                                         <constraint firstItem="Gkf-bI-5yq" firstAttribute="centerY" secondItem="muD-5j-a98" secondAttribute="centerY" id="IFd-oX-x2S"/>
                                                         <constraint firstItem="n5M-gO-6h2" firstAttribute="centerY" secondItem="e84-a0-P7M" secondAttribute="centerY" id="MVu-f7-HyP"/>
                                                         <constraint firstItem="e84-a0-P7M" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="top" constant="6" id="NZk-QH-MW2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="vut-Jn-ywC" secondAttribute="trailing" constant="45" id="Rcs-uC-3vl"/>
                                                         <constraint firstAttribute="bottom" secondItem="muD-5j-a98" secondAttribute="bottom" id="UEd-5W-hE2"/>
                                                         <constraint firstItem="vut-Jn-ywC" firstAttribute="centerX" secondItem="7Mk-uT-sw5" secondAttribute="centerX" id="V5y-fT-LbR"/>
                                                         <constraint firstItem="HxK-uL-I1j" firstAttribute="centerX" secondItem="Jf7-8v-JAB" secondAttribute="centerX" id="Z81-UX-bOb"/>
                                                         <constraint firstItem="Jf7-8v-JAB" firstAttribute="centerY" secondItem="e84-a0-P7M" secondAttribute="centerY" id="byD-2h-Uwt"/>
+                                                        <constraint firstItem="vut-Jn-ywC" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leading" constant="45" id="cvA-y0-HIQ"/>
                                                         <constraint firstItem="vut-Jn-ywC" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="top" id="nFA-Mv-q58"/>
                                                         <constraint firstItem="n5M-gO-6h2" firstAttribute="leading" secondItem="e84-a0-P7M" secondAttribute="trailing" constant="10" id="nal-KY-HeL"/>
                                                         <constraint firstItem="e84-a0-P7M" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leading" constant="62" id="q6G-c5-jt2"/>
