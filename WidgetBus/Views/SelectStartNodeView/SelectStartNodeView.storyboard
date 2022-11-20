@@ -44,6 +44,7 @@
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="didEndOnExit:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="8kA-fv-XVO"/>
+                                                    <action selector="editing:" destination="Y6W-OH-hqX" eventType="editingChanged" id="TYd-kv-Xuo"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
