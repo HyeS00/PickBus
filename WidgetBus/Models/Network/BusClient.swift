@@ -149,8 +149,8 @@ class BusClient {
         nodeNm: String? = "전통시장",
         nodeNo: String? = "44810",
         completion: @escaping (Int?, [SearchNodeInfo], Error?) -> Void
-    ) {
-        _ = taskForGetRequestWithCityCode(
+    ) -> URLSessionDataTask {
+        let myTask = taskForGetRequestWithCityCode(
             url: Endpoints.searchNode(
                 city: city,
                 nodeNm: nodeNm,
@@ -163,6 +163,8 @@ class BusClient {
                     completion(nil, [], error)
                 }
             }
+
+        return myTask
     }
 
     class func getArriveList(
