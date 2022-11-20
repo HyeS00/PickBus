@@ -77,6 +77,8 @@ class RouteDetailViewController: UIViewController {
 
         retryButton.backgroundColor = .blue
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
+        retryButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
+        retryButton.backgroundColor = .duduDeepBlue
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
 
@@ -216,15 +218,12 @@ extension RouteDetailViewController: UITableViewDataSource {
 
             cell.highlightView.translatesAutoresizingMaskIntoConstraints = false
 
-            cell.highlightView.widthAnchor.constraint(equalToConstant: cell.highlightView.frame.width).isActive = true
-            cell.highlightView.heightAnchor.constraint(equalToConstant: cell.highlightView.frame.height).isActive = true
-
-            //cell.highlightView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-
-//
-//            cell.highlightView.translatesAutoresizingMaskIntoConstraints = false
-            cell.highlightView.centerYAnchor.constraint(
-                equalTo: cell.routePointImageView.centerYAnchor).isActive = true
+            cell.highlightView.widthAnchor.constraint(equalToConstant: cell.highlightView.frame.width)
+                .isActive = true
+            cell.highlightView.heightAnchor.constraint(equalToConstant: cell.highlightView.frame.height)
+                .isActive = true
+//            cell.highlightView.centerYAnchor.constraint(
+//                equalTo: cell.routePointImageView.centerYAnchor).isActive = true
 
             if(route.startNodeId == cellData.nodeid) {
                 cell.busTimeLabel2.text = "출발"
