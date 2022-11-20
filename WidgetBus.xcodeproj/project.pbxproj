@@ -106,12 +106,12 @@
 		0547490A291E223700DACC91 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0547490B291E226D00DACC91 /* GroupListViewContoller */,
+				0547490B291E226D00DACC91 /* GroupListView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0547490B291E226D00DACC91 /* GroupListViewContoller */ = {
+		0547490B291E226D00DACC91 /* GroupListView */ = {
 			isa = PBXGroup;
 			children = (
 				0547490C291E22A100DACC91 /* GroupListViewContoller.swift */,
@@ -120,7 +120,7 @@
 				0547490E2920EF1700DACC91 /* SettingViewController.swift */,
 				05474910292124F200DACC91 /* AddGroupListNameView.swift */,
 			);
-			path = GroupListViewContoller;
+			path = GroupListView;
 			sourceTree = "<group>";
 		};
 		BA6B18571B3FD79D5E2D2D5F /* Frameworks */ = {

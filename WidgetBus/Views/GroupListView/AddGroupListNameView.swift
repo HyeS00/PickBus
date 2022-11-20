@@ -54,12 +54,12 @@ final class AddGroupListNameViewController: UIViewController {
     // 출발지 입력 텍스트필드
     lazy var groupListTextfield: UITextField = {
         var groupListTextfield = UITextField()
-        groupListTextfield.frame = CGRect(x: 15, y: 15, width: 361, height: 75)
         groupListTextfield.font = UIFont(name: "SFUI-Regular", size: 30)
         groupListTextfield.placeholder = "출발지를 입력해주세요"
         groupListTextfield.tintColor = .black
         groupListTextfield.layer.shadowColor = UIColor.black.cgColor
         groupListTextfield.layer.shadowOpacity = 0.3
+        groupListTextfield.translatesAutoresizingMaskIntoConstraints = false
         groupListTextfield.layer.shadowOffset = CGSize(width: 0, height: 2)
         groupListTextfield.layer.shadowRadius = 2
         groupListTextfield.borderStyle = .roundedRect
@@ -123,7 +123,7 @@ private extension AddGroupListNameViewController {
         backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
         backgroundView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 100).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 70).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
@@ -141,6 +141,12 @@ private extension AddGroupListNameViewController {
         bottomView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
         bottomView.addSubview(groupListTextfield)
+        groupListTextfield.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 20)
+            .isActive = true
+        groupListTextfield.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15).isActive = true
+        groupListTextfield.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15)
+            .isActive = true
+        groupListTextfield.heightAnchor.constraint(equalToConstant: 80).isActive = true
 
         bottomView.addSubview(bottomLabel)
         bottomLabel.topAnchor.constraint(equalTo: groupListTextfield.topAnchor, constant: 100)

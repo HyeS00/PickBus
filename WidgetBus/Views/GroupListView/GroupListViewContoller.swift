@@ -6,7 +6,9 @@
 //
 
 import UIKit
-
+struct GroupListArray: Decodable {
+    let groupName: String
+}
 final class GroupListViewContoller: UIViewController {
     let initMain = true
     var groupName = ["출근길", "퇴근길", "백화점으로", "어디로", "시장으로", "제주도로", "어디로가죠", "저도 모르는 곳으로 가요"]
@@ -16,6 +18,7 @@ final class GroupListViewContoller: UIViewController {
         groupList.translatesAutoresizingMaskIntoConstraints = false
         groupList.separatorStyle = .none
         groupList.rowHeight = 100
+        groupList.showsVerticalScrollIndicator = false
         groupList.register(GroupTableViewCell.self, forCellReuseIdentifier: "GroupListCell")
         groupList.register(AddGroupTableViewCell.self, forCellReuseIdentifier: "AddGroupTableViewCell")
         return groupList
@@ -48,12 +51,15 @@ final class GroupListViewContoller: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        groupListView.delegate = self
+        groupListView.dataSource = self
+
         setupNavigationController()
         if initMain == true {
             setupMainView()
         } else {
             setupTableView()
-
+print("gd")
         }
     }
 }
@@ -111,9 +117,6 @@ private extension GroupListViewContoller {
 private extension GroupListViewContoller {
     func setupTableView() {
 
-        groupListView.delegate = self
-        groupListView.dataSource = self
-
         self.view.addSubview(groupListView)
         groupListView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         groupListView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -129,11 +132,12 @@ extension GroupListViewContoller: UITableViewDelegate {
 extension GroupListViewContoller: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupName.count
+        return groupName.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == groupName.count - 1 {
+
+        if indexPath.row == groupName.count {
             // 마지막 섹션
             let cell = groupListView.dequeueReusableCell(
                 withIdentifier: AddGroupTableViewCell.identifier,
@@ -146,7 +150,8 @@ extension GroupListViewContoller: UITableViewDataSource {
                 withIdentifier: GroupTableViewCell.identifier,
                 for: indexPath) as! GroupTableViewCell
             cell.selectionStyle = .none
-            cell.groupListButton.setTitle(groupName[indexPath.row + 1], for: .normal)
+            cell.groupListButton.setTitle(groupName[indexPath.row], for: .normal)
+
             return cell
         }
     }

@@ -8,8 +8,24 @@
 import UIKit
 
 final class SettingViewController: UIViewController {
+
+    let notiLabel: UILabel = {
+        let noti = UILabel()
+        noti.text = "설정"
+        return noti
+    }()
+
+    lazy var notiSetting: UISwitch = {
+        let noti = UISwitch()
+        noti.tintColor = UIColor.orange
+        noti.isOn = true
+        noti.addTarget(self, action: #selector(onClickSwitch(sender:)), for: UIControl.Event.valueChanged)
+        return noti
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLayout()
         setupNavigationController()
 
         let isPushOn = UIApplication.shared.isRegisteredForRemoteNotifications
@@ -23,8 +39,23 @@ final class SettingViewController: UIViewController {
             // enable
             UIApplication.shared.registerForRemoteNotifications()
         }
-
     }
+
+    @objc func onClickSwitch(sender: UISwitch) {
+           var text: String!
+           var color: UIColor!
+
+           if sender.isOn {
+               text = "On"
+               color = UIColor.gray
+           } else {
+               text = "Off"
+               color = UIColor.orange
+           }
+
+           self.notiLabel.text = text
+           self.notiLabel.backgroundColor = color
+       }
 }
 private extension SettingViewController {
     func setupNavigationController() {
@@ -37,5 +68,16 @@ private extension SettingViewController {
         self.navigationItem.rightBarButtonItem = barButtonItem
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.topItem?.title = ""
+    }
+}
+
+private extension SettingViewController {
+    func setupLayout() {
+        view.addSubview(notiSetting)
+        notiSetting.translatesAutoresizingMaskIntoConstraints = false
+        notiSetting.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        notiSetting.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(notiLabel)
+
     }
 }
