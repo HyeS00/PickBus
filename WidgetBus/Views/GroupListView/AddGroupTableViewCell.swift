@@ -10,18 +10,31 @@ import UIKit
 class AddGroupTableViewCell: UITableViewCell {
     static let identifier = "AddGroupTableViewCell"
 
-    let groupAddButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 30)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.opacity = 0.3
-        button.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.black.cgColor
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var groupListAddLabel: UILabel = {
+        let label = UILabel()
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "plus")
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let contentString = NSMutableAttributedString(string: "")
+        contentString.append(attachmentString)
+        label.attributedText = contentString
+
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 10, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        label.layer.masksToBounds = true
+        label.layer.opacity = 0.3
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 15
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 0.8
+        label.layer.shadowOffset = CGSize(width: 2, height: 20)
+        label.layer.shadowRadius = 2.0
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,10 +46,12 @@ class AddGroupTableViewCell: UITableViewCell {
     }
 
     private func setupLayout() {
-        self.contentView.addSubview(groupAddButton)
-        groupAddButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        groupAddButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        groupAddButton.widthAnchor.constraint(equalToConstant: 361).isActive = true
-        groupAddButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        self.contentView.addSubview(groupListAddLabel)
+        groupListAddLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        groupListAddLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        groupListAddLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15).isActive = true
+        groupListAddLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
+            .isActive = true
+        groupListAddLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
     }
 }

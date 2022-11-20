@@ -13,7 +13,8 @@ final class GroupListViewContoller: UIViewController {
     let initMain = true
     var groupName = ["출근길", "퇴근길", "백화점으로", "어디로", "시장으로", "제주도로", "어디로가죠", "저도 모르는 곳으로 가요"]
 
-    private let groupListView: UITableView = {
+    // 그룹 리스트 테이블
+    private lazy var groupListView: UITableView = {
         let groupList = UITableView(frame: .zero, style: .plain)
         groupList.translatesAutoresizingMaskIntoConstraints = false
         groupList.separatorStyle = .none
@@ -24,7 +25,8 @@ final class GroupListViewContoller: UIViewController {
         return groupList
     }()
 
-    let mainLabel: UILabel = {
+    // 초기 문구
+    private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
         mainLabel.text = "그룹을 \n추가해주세요."
         mainLabel.numberOfLines = 2
@@ -34,7 +36,8 @@ final class GroupListViewContoller: UIViewController {
         return mainLabel
     }()
 
-    let addButton: UIButton = {
+    // 메인 그룹 추가 버튼
+    private lazy var addButton: UIButton = {
         let addButton = UIButton()
         addButton.setTitle("추가하기", for: .normal)
         addButton.setTitleColor(.white, for: .normal)
@@ -55,11 +58,11 @@ final class GroupListViewContoller: UIViewController {
         groupListView.dataSource = self
 
         setupNavigationController()
+
         if initMain == true {
             setupMainView()
         } else {
             setupTableView()
-print("gd")
         }
     }
 }
@@ -127,6 +130,15 @@ private extension GroupListViewContoller {
 }
 
 extension GroupListViewContoller: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == groupName.count {
+            let settingView = AddGroupListNameViewController()
+            self.navigationController?.pushViewController(settingView, animated: true)
+        } else {
+            let settingView = SettingViewController()
+            self.navigationController?.pushViewController(settingView, animated: true)
+        }
+    }
 }
 
 extension GroupListViewContoller: UITableViewDataSource {
@@ -150,16 +162,9 @@ extension GroupListViewContoller: UITableViewDataSource {
                 withIdentifier: GroupTableViewCell.identifier,
                 for: indexPath) as! GroupTableViewCell
             cell.selectionStyle = .none
-            cell.groupListButton.setTitle(groupName[indexPath.row], for: .normal)
+            cell.groupListLabel.text = groupName[indexPath.row]
 
             return cell
         }
-    }
-}
-
-extension GroupListViewContoller: ContentsMainTextDelegate {
-    func catergoryButtonTapped() {
-        let settingView = SettingViewController()
-        self.navigationController?.pushViewController(settingView, animated: true)
     }
 }

@@ -7,34 +7,31 @@
 
 import UIKit
 
-protocol ContentsMainTextDelegate: AnyObject {
-    func catergoryButtonTapped()
-}
 class GroupTableViewCell: UITableViewCell {
 
     static let identifier = "GroupListCell"
 
-    var cellDelegate: ContentsMainTextDelegate?
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.groupListButton.addTarget(self, action: #selector(groupClicked), for: .touchUpInside)
         setupLayout()
     }
 
-    let groupListButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("출근길", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 30, weight: .bold)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
-        button.layer.cornerRadius = 15
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 1.0
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        button.layer.shadowRadius = 2
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    let groupListLabel: UILabel = {
+        let label = UILabel()
+        label.text = "출근길"
+        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        label.layer.masksToBounds = true
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 15
+        label.layer.shadowColor = UIColor.black.cgColor
+        label.layer.shadowOpacity = 0.8
+        label.layer.shadowOffset = CGSize(width: 2, height: 20)
+        label.layer.shadowRadius = 2.0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     required init?(coder: NSCoder) {
@@ -42,14 +39,12 @@ class GroupTableViewCell: UITableViewCell {
     }
 
     private func setupLayout() {
-        self.contentView.addSubview(groupListButton)
-        groupListButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        groupListButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        groupListButton.widthAnchor.constraint(equalToConstant: 361).isActive = true
-        groupListButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
-    }
-
-    @objc func groupClicked() {
-        cellDelegate?.catergoryButtonTapped()
+        self.contentView.addSubview(groupListLabel)
+        groupListLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        groupListLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        groupListLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15).isActive = true
+        groupListLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
+            .isActive = true
+        groupListLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
     }
 }
