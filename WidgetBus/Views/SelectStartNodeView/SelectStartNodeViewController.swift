@@ -14,6 +14,9 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var busNodeSearchTextField: UITextField!
 
+    // 도시코드 딕션어리
+    private var cityCodeDictionary = [Int: String]()
+
     var nodeName: [String] = [
         "정류장1", "정류장2", "정류장3", "정류장4", "정류장5", "정류장6", "정류장7", "정류장8", "정류장9", "정류장10",
         "정류장11", "정류장12", "정류장13", "정류장14", "정류장15", "정류장16", "정류장17", "정류장18", "정류장19", "정류장20"
@@ -38,8 +41,19 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         busNodeSearchTextField.layer.borderColor = UIColor.duduDeepBlue?.cgColor
         busNodeSearchTextField.addLeftPadding()
 
+        // 도시 코드 가져오기
+        getCityCode()
+
         defaultTableViewSetting()
         defaultKeyboardObserverSetting()
+    }
+
+    func getCityCode(isInit: Bool = true) {
+        if isInit {
+            BusClient.getCityCodeList(completion: handleRequestCityCodeResponse(response:error:))
+        } else {
+            BusClient.getCityCodeList(completion: handleRequestCityCodeResponseSearch(response:error:))
+        }
     }
 
     // MARK: 테이블
@@ -104,6 +118,38 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func didEndOnExit(_ sender: Any) {
         // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
         print(busNodeSearchTextField.text ?? "텍스트 필드 입력값 없음")
+        if cityCodeDictionary.isEmpty {
+            getCityCode(isInit: false)
+        } else {
+
+            let nodeNm: String?
+            let nodeNo: String?
+            // 번호 검색인지 이름 검색인지 확인.
+            if Int(self.busNodeSearchTextField.text ?? "") == nil {
+                nodeNo = nil
+                nodeNm = self.busNodeSearchTextField.text ?? ""
+            } else {
+                nodeNo = self.busNodeSearchTextField.text ?? ""
+                nodeNm = nil
+            }
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                var count = 1
+
+                for mCityCode in self.cityCodeDictionary.keys {
+//                    print(mCityCode)
+                    count += 1
+                    BusClient.searchNodeList(
+                        city: String(mCityCode),
+                        nodeNm: nodeNm,
+                        nodeNo: nodeNo,
+                        completion: self.handleRequestSearchNodeResponse(cityCode:response:error:))
+                    if count % 29 == 0 {
+                        sleep(1)
+                    }
+                }
+            }
+        }
     }
 
     @objc func keyboardWillShow(notification: Notification) {
@@ -119,5 +165,58 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
 
     @objc func keyboardWillHide(_ sender: Notification) {
         self.view.frame.origin.y = 0
+    }
+
+    // 도시 코드 가져오는 네트워크 완료된 다음 실행되는 콜백(초반)
+    func handleRequestCityCodeResponse(response: [CityCodeInfo], error: Error?) {
+        guard error == nil else {
+            //            print(error?.localizedDescription)
+            return
+        }
+        if !response.isEmpty {
+            cityCodeDictionary = makeCityCodeDictionary(cityCodeArray: response)
+            //            print(cityCodeDictionary)
+        }
+    }
+
+    // 도시 코드 가져오는 네트워크 완료된 다음 실행되는 콜백(검색)
+    func handleRequestCityCodeResponseSearch(response: [CityCodeInfo], error: Error?) {
+        guard error == nil else {
+            //            print(error?.localizedDescription)
+            return
+        }
+        if !response.isEmpty {
+            cityCodeDictionary = makeCityCodeDictionary(cityCodeArray: response)
+            BusClient.searchNodeList(completion: handleRequestSearchNodeResponse(cityCode:response:error:))
+            //            print(cityCodeDictionary)
+        }
+    }
+
+    // 검색 후, 실행되는 콜백
+    func handleRequestSearchNodeResponse(cityCode: Int?, response: [SearchNodeInfo], error: Error?) {
+        guard error == nil else {
+//            print(error?.localizedDescription)
+            return
+        }
+
+        // 로빈 여기서 필요한 항목들 뽑아서 사용하면 될 듯 합니다.
+        if !response.isEmpty {
+            print(cityCode!)
+            print(cityCodeDictionary[cityCode!] ?? "Nil_")
+            print(response)
+        }
+    }
+
+    // 배열을 딕션어리로 변경하는 함수
+    func makeCityCodeDictionary(cityCodeArray: [CityCodeInfo]) -> [Int: String] {
+        var tmpCityCodeDictionary = [Int: String]()
+        for cityCode in cityCodeArray {
+            if tmpCityCodeDictionary.keys.contains(cityCode.citycode) {
+                continue
+            } else {
+                tmpCityCodeDictionary[cityCode.citycode] = cityCode.cityname
+            }
+        }
+        return tmpCityCodeDictionary
     }
 }
