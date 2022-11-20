@@ -31,6 +31,23 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="80"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vut-Jn-ywC">
+                                                            <rect key="frame" x="46" y="-9" width="303" height="46"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDh-Wm-5L9">
+                                                                    <rect key="frame" x="247" y="11.666666666666664" width="46" height="23"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="303" id="OdI-p3-P2I"/>
+                                                                <constraint firstAttribute="trailing" secondItem="hDh-Wm-5L9" secondAttribute="trailing" constant="10" id="Zte-Ez-ebv"/>
+                                                                <constraint firstItem="hDh-Wm-5L9" firstAttribute="centerY" secondItem="vut-Jn-ywC" secondAttribute="centerY" id="mI8-Q5-3Di"/>
+                                                                <constraint firstAttribute="height" constant="46" id="xUq-zo-Dg0"/>
+                                                            </constraints>
+                                                        </view>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="e84-a0-P7M">
                                                             <rect key="frame" x="62" y="0.99999999999999822" width="29" height="28.666666666666664"/>
                                                             <color key="tintColor" name="duduGray"/>
@@ -104,6 +121,7 @@
                                                         <constraint firstItem="e84-a0-P7M" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leadingMargin" constant="42" id="8nL-ze-qLk"/>
                                                         <constraint firstItem="Pn2-zV-WcU" firstAttribute="leading" secondItem="Gkf-bI-5yq" secondAttribute="leading" id="8ua-eg-tP5"/>
                                                         <constraint firstItem="muD-5j-a98" firstAttribute="centerX" secondItem="e84-a0-P7M" secondAttribute="centerX" id="AHo-BM-x4p"/>
+                                                        <constraint firstItem="vut-Jn-ywC" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="top" constant="-9" id="FSF-o1-7Ml"/>
                                                         <constraint firstItem="Pn2-zV-WcU" firstAttribute="centerY" secondItem="e84-a0-P7M" secondAttribute="centerY" id="HwH-cR-VsY"/>
                                                         <constraint firstItem="Pn2-zV-WcU" firstAttribute="top" secondItem="e84-a0-P7M" secondAttribute="top" id="Pr7-Or-eXD"/>
                                                         <constraint firstItem="muD-5j-a98" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leadingMargin" constant="56" id="Swl-2R-D2f"/>
@@ -113,6 +131,7 @@
                                                         <constraint firstItem="Pn2-zV-WcU" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leadingMargin" constant="-4.3333333333333357" id="eRA-a8-yaC"/>
                                                         <constraint firstItem="n5M-gO-6h2" firstAttribute="leading" secondItem="e84-a0-P7M" secondAttribute="trailing" constant="14" id="fMJ-8o-Fh2"/>
                                                         <constraint firstItem="Pn2-zV-WcU" firstAttribute="centerX" secondItem="Gkf-bI-5yq" secondAttribute="centerX" id="kCx-Aj-7c7"/>
+                                                        <constraint firstItem="vut-Jn-ywC" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leading" constant="46" id="lUM-xx-521"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="muD-5j-a98" secondAttribute="bottom" constant="-4" id="uRE-6i-Ufs"/>
                                                         <constraint firstItem="muD-5j-a98" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="topMargin" constant="26" id="wRK-Ge-VWI"/>
                                                     </constraints>
@@ -125,6 +144,8 @@
                                                     <outlet property="busTimeLabel2" destination="hrZ-K8-3Os" id="FwP-We-uO3"/>
                                                     <outlet property="busView" destination="Pn2-zV-WcU" id="ElC-yw-ah2"/>
                                                     <outlet property="busView2" destination="Gkf-bI-5yq" id="00U-XY-lc4"/>
+                                                    <outlet property="highlightLabel" destination="hDh-Wm-5L9" id="5e6-ut-FGa"/>
+                                                    <outlet property="highlightView" destination="vut-Jn-ywC" id="XQe-Ga-eYM"/>
                                                     <outlet property="routeLineView" destination="muD-5j-a98" id="WXs-sv-6dX"/>
                                                     <outlet property="routePointImageView" destination="e84-a0-P7M" id="m8E-A5-nrM"/>
                                                 </connections>

@@ -20,4 +20,7 @@ class RouteDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var busView2: UIStackView!
     @IBOutlet weak var busTimeLabel2: UILabel!
     @IBOutlet weak var busImageView2: UIImageView!
+
+    @IBOutlet weak var highlightView: UIView!
+    @IBOutlet weak var highlightLabel: UILabel!
 }

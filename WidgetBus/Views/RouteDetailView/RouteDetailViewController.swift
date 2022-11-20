@@ -82,6 +82,7 @@ class RouteDetailViewController: UIViewController {
         retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
+
     }
 
     func configureBoardingTapButton() {
@@ -154,17 +155,40 @@ extension RouteDetailViewController: UITableViewDataSource {
             let cellData = nodeList[indexPath.row]
             cell.busStationLabel.text = "\(cellData.nodenm)"
 
-            if (route.startNodeId == cellData.nodeid) {
+            cell.highlightView.frame = CGRect(x: 0, y: 0, width: 303, height: 46)
+            cell.highlightView.layer.cornerRadius = 15
+
+            cell.highlightView.translatesAutoresizingMaskIntoConstraints = false
+
+            cell.highlightView.widthAnchor.constraint(equalToConstant: cell.highlightView.frame.width).isActive = true
+            cell.highlightView.heightAnchor.constraint(equalToConstant: cell.highlightView.frame.height).isActive = true
+
+            //cell.highlightView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+
+//
+//            cell.highlightView.translatesAutoresizingMaskIntoConstraints = false
+            cell.highlightView.centerYAnchor.constraint(
+                equalTo: cell.routePointImageView.centerYAnchor).isActive = true
+
+            if(route.startNodeId == cellData.nodeid) {
                 cell.busTimeLabel2.text = "출발"
+                cell.highlightView.isHidden = false
+                cell.highlightView.backgroundColor = .duduRed
+                cell.highlightLabel.text = "출발"
+
+            } else if(route.endNodeId == cellData.nodeid) {
+                cell.busTimeLabel2.text = "도착"
+                self.view.sendSubviewToBack(self.view)
+                cell.highlightView.isHidden = false
+                cell.highlightView.backgroundColor = .duduBlue
+                cell.highlightLabel.text = "도착"
             } else {
                 cell.busTimeLabel2.text = "10분"
+                cell.highlightView.isHidden = true
             }
 
-            if (route.endNodeId == cellData.nodeid) {
-                cell.busTimeLabel2.text = "도착"
-            } else {
-                cell.busTimeLabel2.text = "10분"
-            }
+            tableView.sendSubviewToBack(cell.highlightView)
+
         }
         cell.routeLineView.backgroundColor = .duduGray
         cell.busView.isHidden = false
@@ -193,7 +217,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         UIView()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 12
+        return 15
     }
 }
 
