@@ -36,6 +36,8 @@ class SelectArrivalViewController: UIViewController {
     // 출발 정류장 인덱스
     var departNodeIdx: Int = 0
 
+    var isArrivalOn: Bool = false
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
@@ -88,6 +90,14 @@ class SelectArrivalViewController: UIViewController {
         return tableView
     }()
 
+    private lazy var doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("완료", for: .normal)
+        button.setTitleColor(UIColor.duduGray, for: .normal)
+        button.addTarget(self, action: #selector(doneButtonSelect), for: .touchUpInside)
+        return button
+    }()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -96,16 +106,34 @@ class SelectArrivalViewController: UIViewController {
         setBusNodeList()
 
         view.backgroundColor = UIColor.duduDeepBlue
-
-        arrivalTableView.delegate = self
-        arrivalTableView.dataSource = self
-        arrivalTableView.separatorStyle = .none
-
+        configureTableView()
+        configureNavigationBar()
         configureUI()
 
     }
 
+    // MARK: - Actions
+
+    @objc func doneButtonSelect() {
+        if isArrivalOn {
+            navigationController?.popViewController(animated: false)
+        }
+    }
+
     // MARK: - Helpers
+    func configureTableView() {
+        arrivalTableView.delegate = self
+        arrivalTableView.dataSource = self
+        arrivalTableView.separatorStyle = .none
+    }
+
+    func configureNavigationBar() {
+        let barDoneButton = UIBarButtonItem(customView: doneButton)
+        navigationItem.rightBarButtonItem = barDoneButton
+        navigationController?.navigationBar.tintColor = .white
+
+    }
+
     func configureUI() {
         view.addSubview(bottomView)
         bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -290,6 +318,15 @@ extension SelectArrivalViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if indexPath.row == 0 {
+            doneButton.setTitleColor(UIColor.duduGray, for: .normal)
+            isArrivalOn = false
+        } else {
+            doneButton.setTitleColor(.white, for: .normal)
+            isArrivalOn = true
+        }
+
         for index in nodeList.indices {
             if index == 0 {
                 if indexPath.row == 0 {
