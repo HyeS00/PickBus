@@ -14,6 +14,13 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var busNodeSearchTextField: UITextField!
 
+    // load task
+    private var loadTasks = [URLSessionDataTask]()
+    // work item
+    private var workItem: DispatchWorkItem?
+    private var stop: Bool = false
+    private var repeatCount: Int = 1
+
     // 도시코드 딕션어리
     private var cityCodeDictionary = [Int: String]()
 
@@ -117,38 +124,58 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
 
     @IBAction func didEndOnExit(_ sender: Any) {
         // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
+        workItem?.cancel()
         print(busNodeSearchTextField.text ?? "텍스트 필드 입력값 없음")
         if cityCodeDictionary.isEmpty {
             getCityCode(isInit: false)
         } else {
+            startSearch()
+        }
+    }
 
-            let nodeNm: String?
-            let nodeNo: String?
-            // 번호 검색인지 이름 검색인지 확인.
-            if Int(self.busNodeSearchTextField.text ?? "") == nil {
-                nodeNo = nil
-                nodeNm = self.busNodeSearchTextField.text ?? ""
-            } else {
-                nodeNo = self.busNodeSearchTextField.text ?? ""
-                nodeNm = nil
-            }
+    // 검색 시작
+    func startSearch() {
+        let nodeNm: String?
+        let nodeNo: String?
+        // 번호 검색인지 이름 검색인지 확인.
+        if Int(self.busNodeSearchTextField.text ?? "") == nil {
+            nodeNo = nil
+            nodeNm = self.busNodeSearchTextField.text ?? ""
+        } else {
+            nodeNo = self.busNodeSearchTextField.text ?? ""
+            nodeNm = nil
+        }
 
-            DispatchQueue.global(qos: .userInitiated).async {
-                var count = 1
+        workItem = DispatchWorkItem {
+            self.repeatCount = 0
+            self.loadTasks = [URLSessionDataTask]()
 
-                for mCityCode in self.cityCodeDictionary.keys {
-//                    print(mCityCode)
-                    count += 1
-                    BusClient.searchNodeList(
-                        city: String(mCityCode),
-                        nodeNm: nodeNm,
-                        nodeNo: nodeNo,
-                        completion: self.handleRequestSearchNodeResponse(cityCode:response:error:))
-                    if count % 29 == 0 {
-                        sleep(1)
-                    }
+            for mCityCode in self.cityCodeDictionary.keys {
+
+                if self.stop {
+                    self.clearNetworkSessionTask()
+                    break
                 }
+                self.repeatCount += 1
+                let task = BusClient.searchNodeList(
+                    city: String(mCityCode),
+                    nodeNm: nodeNm,
+                    nodeNo: nodeNo,
+                    completion: self.handleRequestSearchNodeResponse(cityCode:response:error:))
+
+                self.loadTasks.append(task)
+
+                if self.repeatCount % 25 == 0 && self.repeatCount > 0 {
+                    sleep(1)
+                }
+//                print("realCount: \(self.repeatCount) \(self.cityCodeDictionary.keys.count)")
+//                print("count: \(self.loadTasks.count)")
             }
+        }
+        if let workItem = workItem {
+            stop = false
+            DispatchQueue.global(qos: .userInitiated).async(execute: workItem)
+
         }
     }
 
@@ -187,7 +214,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         }
         if !response.isEmpty {
             cityCodeDictionary = makeCityCodeDictionary(cityCodeArray: response)
-            BusClient.searchNodeList(completion: handleRequestSearchNodeResponse(cityCode:response:error:))
+            startSearch()
             //            print(cityCodeDictionary)
         }
     }
@@ -195,7 +222,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     // 검색 후, 실행되는 콜백
     func handleRequestSearchNodeResponse(cityCode: Int?, response: [SearchNodeInfo], error: Error?) {
         guard error == nil else {
-//            print(error?.localizedDescription)
+            //            print(error?.localizedDescription)
             return
         }
 
@@ -205,6 +232,25 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
             print(cityCodeDictionary[cityCode!] ?? "Nil_")
             print(response)
         }
+    }
+
+    @IBAction func editing(_ sender: Any) {
+        stop = true
+        if repeatCount == cityCodeDictionary.keys.count {
+            clearNetworkSessionTask()
+        }
+    }
+
+    // 네트워크 작동 취소
+    func clearNetworkSessionTask() {
+        for loadTask in self.loadTasks {
+            if loadTask.state == .running || loadTask.state == .suspended {
+                loadTask.cancel()
+            }
+
+        }
+        self.loadTasks = [URLSessionDataTask]()
+        repeatCount = 0
     }
 
     // 배열을 딕션어리로 변경하는 함수

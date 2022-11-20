@@ -88,7 +88,7 @@ class BusClient {
     ) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-                print("data is nil")
+//                print("data is nil")
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -120,7 +120,7 @@ class BusClient {
     ) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-                print("data is nil")
+//                print("data is nil")
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
