@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum BoardingStatus {
     case onBoard
@@ -43,6 +44,22 @@ class RouteDetailViewController: UIViewController {
     var cityCode: Int = 25
     // 버스 정류장들
     private var nodeList = [RouteNodesInfo]()
+    // 버스 정보
+     private var busInfo: RouteInformationInfo?
+    // 버스 위치
+    private var busLocationList = [BusLocationsInfo]()
+
+    // 새로고침
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+
+        return refreshControl
+    }()
+
+    @objc func fetchData() {
+
+    }
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
@@ -172,6 +189,7 @@ class RouteDetailViewController: UIViewController {
             //        print(error?.localizedDescription ?? "")
             return
         }
+        busInfo = response
         print("RouteInformation: \(response)")
     }
 
@@ -183,7 +201,11 @@ class RouteDetailViewController: UIViewController {
             //        print(error?.localizedDescription ?? "")
             return
         }
+        print("===========================================")
+        busLocationList += response
+        busLocationList.sort { $0.nodeord < $1.nodeord }
         print("Locations: \(response.count)")
+        routeDetailTableView.reloadData()
     }
 
     // 정류장에 오는 특정 노선에 대한 도착 정보만 받는 네트워크 결과 받으면 실행되는 콜백.
@@ -213,26 +235,14 @@ extension RouteDetailViewController: UITableViewDataSource {
             let cellData = nodeList[indexPath.row]
             cell.busStationLabel.text = "\(cellData.nodenm)"
 
-            cell.highlightView.frame = CGRect(x: 0, y: 0, width: 303, height: 46)
             cell.highlightView.layer.cornerRadius = 15
 
-            cell.highlightView.translatesAutoresizingMaskIntoConstraints = false
-
-            cell.highlightView.widthAnchor.constraint(equalToConstant: cell.highlightView.frame.width)
-                .isActive = true
-            cell.highlightView.heightAnchor.constraint(equalToConstant: cell.highlightView.frame.height)
-                .isActive = true
-//            cell.highlightView.centerYAnchor.constraint(
-//                equalTo: cell.routePointImageView.centerYAnchor).isActive = true
-
+            // 출발지 도착지 표시
             if(route.startNodeId == cellData.nodeid) {
-                cell.busTimeLabel2.text = "출발"
                 cell.highlightView.isHidden = false
                 cell.highlightView.backgroundColor = .duduRed
                 cell.highlightLabel.text = "출발"
-
             } else if(route.endNodeId == cellData.nodeid) {
-                cell.busTimeLabel2.text = "도착"
                 self.view.sendSubviewToBack(self.view)
                 cell.highlightView.isHidden = false
                 cell.highlightView.backgroundColor = .duduBlue
@@ -242,7 +252,18 @@ extension RouteDetailViewController: UITableViewDataSource {
                 cell.highlightView.isHidden = true
             }
 
-            tableView.sendSubviewToBack(cell.highlightView)
+//            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
+//                cell.routeLineView.backgroundColor = .duduDeepBlue
+//            } else {
+//                cell.routeLineView.backgroundColor = .duduGray
+//            }
+
+            if(indexPath.row + 1 < nodeList.count
+               && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
+                cell.routePointImageView.image = UIImage(systemName: "eraser")
+            } else {
+                cell.routePointImageView.image = UIImage(systemName: "chevron.down.circle")
+            }
 
         }
         cell.routeLineView.backgroundColor = .duduGray
@@ -252,7 +273,6 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busTimeLabel2.layer.masksToBounds = true
         cell.busTimeLabel2.layer.cornerRadius = 6.5
 
-        cell.busView.isHidden = false
         //        cell.busImageView2.image = UIImage(named: "bus")
 
         let endNode = nodeList.count - 1
@@ -272,7 +292,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         UIView()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        return 10
     }
 }
 
