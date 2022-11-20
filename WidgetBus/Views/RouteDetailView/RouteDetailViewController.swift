@@ -246,7 +246,6 @@ extension RouteDetailViewController: UITableViewDataSource {
 
         }
         cell.routeLineView.backgroundColor = .duduGray
-        cell.busView.isHidden = false
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
         cell.busView.isHidden = true
