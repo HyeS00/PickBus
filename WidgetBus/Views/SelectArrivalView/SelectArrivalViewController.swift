@@ -116,7 +116,8 @@ class SelectArrivalViewController: UIViewController {
 
         bottomView.addSubview(busBadgeView)
         busBadgeView.translatesAutoresizingMaskIntoConstraints = false
-        busBadgeView.widthAnchor.constraint(equalToConstant: busBadgeView.frame.width).isActive = true
+        busBadgeView.widthAnchor
+            .constraint(equalToConstant: busBadgeLabel.intrinsicContentSize.width + 42).isActive = true
         busBadgeView.heightAnchor.constraint(equalToConstant: busBadgeView.frame.height).isActive = true
         busBadgeView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 9).isActive = true
         busBadgeView.trailingAnchor
