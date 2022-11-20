@@ -28,6 +28,7 @@
 		CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */; };
 		CF3D0A362929B4C500639E5C /* CityCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D0A352929B4C500639E5C /* CityCode.swift */; };
 		CF3D0A382929CC1B00639E5C /* SearchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D0A372929CC1B00639E5C /* SearchNode.swift */; };
+		CF3D0A3A292A2B9700639E5C /* MySearchNodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D0A39292A2B9700639E5C /* MySearchNodeInfo.swift */; };
 		CFD79B04291E45050091202C /* Service Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD79B03291E45050091202C /* Service Key.plist */; };
 		CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */; };
 		CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */; };
@@ -96,6 +97,7 @@
 		CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationFromBusStop.swift; sourceTree = "<group>"; };
 		CF3D0A352929B4C500639E5C /* CityCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCode.swift; sourceTree = "<group>"; };
 		CF3D0A372929CC1B00639E5C /* SearchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNode.swift; sourceTree = "<group>"; };
+		CF3D0A39292A2B9700639E5C /* MySearchNodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySearchNodeInfo.swift; sourceTree = "<group>"; };
 		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
 		CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteNumberViewController.swift; sourceTree = "<group>"; };
 		CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArriveInfoFromBusStop.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				CFEF488229235B860037BBBA /* RouteNodes.swift */,
 				CF3D0A352929B4C500639E5C /* CityCode.swift */,
 				CF3D0A372929CC1B00639E5C /* SearchNode.swift */,
+				CF3D0A39292A2B9700639E5C /* MySearchNodeInfo.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				C13E0E412929941500818085 /* UITextField+.swift in Sources */,
 				CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				CF3D0A3A292A2B9700639E5C /* MySearchNodeInfo.swift in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
 				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
 				D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */,

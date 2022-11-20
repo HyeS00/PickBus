@@ -29,7 +29,8 @@ struct SearchNodeResponseBody: Decodable {
 }
 
 struct SearchNodeResponseItem: Decodable {
-    let item: [SearchNodeInfo]
+    let item: MySearchNodeInfo
+
 }
 
 struct SearchNodeInfo: Decodable {
