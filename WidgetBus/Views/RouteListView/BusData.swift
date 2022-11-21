@@ -21,9 +21,9 @@ struct BusData {
         var nodeId: String
         var nodeNm: String
 //        var nodeNo: String
-        var buses: [Bus]
+        var buses: [Route]
     }
-    struct Bus {
+    struct Route {
         var routeID: String
         var routeNo: String
     }
@@ -34,11 +34,11 @@ extension BusData {
     static let groups: [Group] = [
         Group(id: 0, name: "출근", nodes: [
             Node(cityCode: "25", nodeId: "DJB8001793", nodeNm: "송강전통시장", buses: [
-                Bus(routeID: "DJB30300054", routeNo: "301"),
-                Bus(routeID: "DJB30300004", routeNo: "5")
+                Route(routeID: "DJB30300054", routeNo: "301"),
+                Route(routeID: "DJB30300004", routeNo: "5")
             ]),
             Node(cityCode: "25", nodeId: "DJB8005972", nodeNm: "테크노밸리7단지", buses: [
-                Bus(routeID: "DJB30300054", routeNo: "301")
+                Route(routeID: "DJB30300054", routeNo: "301")
             ])
         ])
     ]
