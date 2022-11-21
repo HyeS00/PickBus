@@ -190,7 +190,7 @@ class RouteDetailViewController: UIViewController {
             //        print(error?.localizedDescription ?? "")
             return
         }
-        busInfo = response
+        busNumberLabel.text = String(response.intervaltime)
         print("RouteInformation: \(response)")
     }
 
