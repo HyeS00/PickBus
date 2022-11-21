@@ -41,7 +41,7 @@
                                                     <constraint firstAttribute="height" constant="36" id="k34-eG-byW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="didEndOnExit:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="8kA-fv-XVO"/>
                                                     <action selector="editing:" destination="Y6W-OH-hqX" eventType="editingChanged" id="TYd-kv-Xuo"/>

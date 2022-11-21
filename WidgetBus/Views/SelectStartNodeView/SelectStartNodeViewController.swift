@@ -125,13 +125,14 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func didEndOnExit(_ sender: Any) {
         // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
         workItem?.cancel()
-        print(busNodeSearchTextField.text ?? "텍스트 필드 입력값 없음")
         if cityCodeDictionary.isEmpty {
             getCityCode(isInit: false)
         } else {
             startSearch()
         }
     }
+
+    // MARK: 검색
 
     // 검색 시작
     func startSearch() {
@@ -226,7 +227,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
             return
         }
 
-        // 로빈 여기서 필요한 항목들 뽑아서 사용하면 될 듯 합니다.
+        // API 응답 결과
         if !response.isEmpty {
             print(cityCode!)
             print(cityCodeDictionary[cityCode!] ?? "Nil_")
