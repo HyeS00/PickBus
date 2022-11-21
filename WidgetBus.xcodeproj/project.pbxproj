@@ -13,6 +13,9 @@
 		05474911292124F200DACC91 /* AddGroupListNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05474910292124F200DACC91 /* AddGroupListNameView.swift */; };
 		054749132921612200DACC91 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054749122921612200DACC91 /* GroupTableViewCell.swift */; };
 		05474915292170AD00DACC91 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */; };
+		099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */; };
+		099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */; };
+		099287E82924B23800CB7DBE /* SelectArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */; };
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
 		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		C16920612907B75C0021D17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920602907B75C0021D17F /* AppDelegate.swift */; };
@@ -69,6 +72,9 @@
 		05474910292124F200DACC91 /* AddGroupListNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupListNameView.swift; sourceTree = "<group>"; };
 		054749122921612200DACC91 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
+		099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalNodeModel.swift; sourceTree = "<group>"; };
+		099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTableViewCell.swift; sourceTree = "<group>"; };
+		099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectArrivalViewController.swift; sourceTree = "<group>"; };
 		18CC6641603FF94C1AE75616 /* Pods-WidgetBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus.release.xcconfig"; path = "Target Support Files/Pods-WidgetBus/Pods-WidgetBus.release.xcconfig"; sourceTree = "<group>"; };
 		2B93AF352370F71C8635C715 /* Pods-WidgetBusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBusTests.release.xcconfig"; path = "Target Support Files/Pods-WidgetBusTests/Pods-WidgetBusTests.release.xcconfig"; sourceTree = "<group>"; };
 		33D20902E13EA0B45D8B2E6E /* Pods-WidgetBus-WidgetBusUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus-WidgetBusUITests.release.xcconfig"; path = "Target Support Files/Pods-WidgetBus-WidgetBusUITests/Pods-WidgetBus-WidgetBusUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +157,13 @@
 				05474910292124F200DACC91 /* AddGroupListNameView.swift */,
 			);
 			path = GroupListView;
+		096B55C8292213D100B328A0 /* SelectArrivalView */ = {
+			isa = PBXGroup;
+			children = (
+				099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */,
+				099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */,
+			);
+			path = SelectArrivalView;
 			sourceTree = "<group>";
 		};
 		BA6B18571B3FD79D5E2D2D5F /* Frameworks */ = {
@@ -281,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				0547490B291E226D00DACC91 /* GroupListView */,
+				096B55C8292213D100B328A0 /* SelectArrivalView */,
 				D784808B291E16A2009F8FDB /* RouteListView */,
 				CFD79B02291E44020091202C /* SelectRouteNumberView */,
 				E1707847291EC291001D324C /* RouteDetailView */,
@@ -291,6 +305,7 @@
 		E1707845291EC271001D324C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */,
 				CFE0A865291CCB29002779C6 /* Network */,
 			);
 			path = Models;
@@ -543,6 +558,9 @@
 				CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */,
 				CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				099287E82924B23800CB7DBE /* SelectArrivalViewController.swift in Sources */,
+				099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */,
+				099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
 				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
 				D7848086291D433D009F8FDB /* TitleHeader.swift in Sources */,
