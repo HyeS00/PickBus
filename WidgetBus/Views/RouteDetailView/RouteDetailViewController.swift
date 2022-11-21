@@ -45,10 +45,11 @@ class RouteDetailViewController: UIViewController {
     // 버스 정류장들
     private var nodeList = [RouteNodesInfo]()
     // 버스 정보
-     private var busInfo: RouteInformationInfo?
+    private var busInfo: RouteInformationInfo?
     // 버스 위치
     private var busLocationList = [BusLocationsInfo]()
     private var busLocationListIndex = 0
+    private var busLocationIndexPath: [Int] = []
 
     // 새로고침
     private lazy var refreshControl: UIRefreshControl = {
@@ -258,15 +259,24 @@ extension RouteDetailViewController: UITableViewDataSource {
                && busLocationListIndex + 1 < busLocationList.count) {
                 cell.busView2.isHidden = false
                 busLocationListIndex += 1
+                busLocationIndexPath.append(indexPath.row)
+                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!indexPath.row : \(indexPath.row)")
             } else {
                 cell.busView2.isHidden = true
             }
 
-//            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
-//                cell.routeLineView.backgroundColor = .duduDeepBlue
-//            } else {
-//                cell.routeLineView.backgroundColor = .duduGray
-//            }
+            if(busLocationIndexPath.contains(indexPath.row)) {
+                cell.busView2.isHidden = false
+                print("!===================================indexPath.row : \(indexPath.row)")
+            } else {
+                cell.busView2.isHidden = true
+            }
+
+            //            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
+            //                cell.routeLineView.backgroundColor = .duduDeepBlue
+            //            } else {
+            //                cell.routeLineView.backgroundColor = .duduGray
+            //            }
 
             if(indexPath.row + 1 < nodeList.count
                && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
@@ -285,15 +295,15 @@ extension RouteDetailViewController: UITableViewDataSource {
 
         //        cell.busImageView2.image = UIImage(named: "bus")
 
-//        let endNode = nodeList.count - 1
-//        let index = indexPath.row
-//        if index == endNode {
-//            cell.routeLineView.isHidden = true
-//            cell.busView2.isHidden = true
-//        } else {
-//            cell.routeLineView.isHidden = false
-//            cell.busView2.isHidden = false
-//        }
+        //        let endNode = nodeList.count - 1
+        //        let index = indexPath.row
+        //        if index == endNode {
+        //            cell.routeLineView.isHidden = true
+        //            cell.busView2.isHidden = true
+        //        } else {
+        //            cell.routeLineView.isHidden = false
+        //            cell.busView2.isHidden = false
+        //        }
 
         return cell
     }
