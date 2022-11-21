@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import UserNotifications
 
-final class SettingViewController: UIViewController {
+final class SettingViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     let notiLabel: UILabel = {
         let noti = UILabel()
-        noti.text = "설정"
+        noti.text = "알림 설정 Off"
+        noti.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return noti
     }()
 
     lazy var notiSetting: UISwitch = {
         let noti = UISwitch()
         noti.tintColor = UIColor.orange
-        noti.isOn = true
+        noti.isOn = false
         noti.addTarget(self, action: #selector(onClickSwitch(sender:)), for: UIControl.Event.valueChanged)
         return noti
     }()
@@ -27,6 +29,7 @@ final class SettingViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         setupNavigationController()
+        let notiText: UILabel = notiLabel
 
         let isPushOn = UIApplication.shared.isRegisteredForRemoteNotifications
 
@@ -34,10 +37,12 @@ final class SettingViewController: UIViewController {
             print("push on")
             // disable
             UIApplication.shared.unregisterForRemoteNotifications()
+            notiText.text = "알림 설정 On"
         } else {
             print("push off")
             // enable
             UIApplication.shared.registerForRemoteNotifications()
+            notiText.text = "알림 설정 Off"
         }
     }
 
@@ -47,19 +52,20 @@ final class SettingViewController: UIViewController {
     }
 
     @objc func onClickSwitch(sender: UISwitch) {
-           var text: String!
-           var color: UIColor!
+        let notiText: UILabel = notiLabel
 
            if sender.isOn {
-               text = "On"
-               color = UIColor.gray
+               if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
+                   UIApplication.shared.open(appSettings as URL)
+               }
+               notiText.text = "알림 설정 On"
+               UNUserNotificationCenter.current().delegate = self
            } else {
-               text = "Off"
-               color = UIColor.orange
+               if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
+                   UIApplication.shared.open(appSettings as URL)
+               }
+               notiText.text = "알림 설정 Off"
            }
-
-           self.notiLabel.text = text
-           self.notiLabel.backgroundColor = color
        }
 }
 private extension SettingViewController {
@@ -80,9 +86,12 @@ private extension SettingViewController {
     func setupLayout() {
         view.addSubview(notiSetting)
         notiSetting.translatesAutoresizingMaskIntoConstraints = false
-        notiSetting.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        notiSetting.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        view.addSubview(notiLabel)
+        notiSetting.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        notiSetting.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
 
+        view.addSubview(notiLabel)
+        notiLabel.translatesAutoresizingMaskIntoConstraints = false
+        notiLabel.topAnchor.constraint(equalTo: notiSetting.topAnchor).isActive = true
+        notiLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
     }
 }
