@@ -10,10 +10,10 @@ import UIKit
 class SelectArrivalViewController: UIViewController {
 
     // MARK: - Properties
-    var nodeList: [ArrivalNodeModel?] = []
+    private var nodeList: [ArrivalNodeModel?] = []
 
     // 변수 이름은 원하는 대로 변경하시면 됩니다.
-    var nodeListJedi = [RouteNodesInfo]()
+    private var nodeListJedi = [RouteNodesInfo]()
 
     // Jedi
     // 이전 뷰에서 넘어올 정보들
@@ -24,18 +24,18 @@ class SelectArrivalViewController: UIViewController {
     // 도시 코드
     var cityCode: Int = 25
 
-    var pageCount: Int = -1
+    private var pageCount: Int = -1
 
     // var busNum: String?
-    var busNum: String = "207"
+    var busNum: String = "207 (임시)"
 
     // 0 정방향 or 1 역방향 / 회차지 구분용
     // 예) 0 > 0(회차지) > 1 > 1
-    var upOrDown: Int?
+    private var upOrDown: Int?
     // 출발 정류장 인덱스
-    var departNodeIdx: Int = 0
+    private var departNodeIdx: Int = 0
     // 도착정류장 선택 유뮤 
-    var isArrivalOn: Bool = false
+    private var isArrivalOn: Bool = false
 
     private let titleLabel: UILabel = {
         let label = UILabel()
