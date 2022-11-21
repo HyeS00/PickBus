@@ -20,8 +20,10 @@ final class GroupListViewContoller: UIViewController {
         groupList.separatorStyle = .none
         groupList.rowHeight = 100
         groupList.showsVerticalScrollIndicator = false
-        groupList.register(GroupTableViewCell.self, forCellReuseIdentifier: "GroupListCell")
-        groupList.register(AddGroupTableViewCell.self, forCellReuseIdentifier: "AddGroupTableViewCell")
+        groupList.register(GroupTableViewCell.self, forCellReuseIdentifier: GroupTableViewCell.identifier)
+        groupList.register(
+            AddGroupTableViewCell.self,
+                           forCellReuseIdentifier: AddGroupTableViewCell.identifier)
         return groupList
     }()
 
