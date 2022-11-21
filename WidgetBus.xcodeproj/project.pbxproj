@@ -40,7 +40,6 @@
 		D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848087291D46B1009F8FDB /* RouteTableFooter.swift */; };
 		D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784808D291E1B9C009F8FDB /* NSObject+.swift */; };
 		D78480B32920BF8D009F8FDB /* BusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78480B22920BF8D009F8FDB /* BusData.swift */; };
-		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
 		E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */; };
 		E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */; };
 		E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1707842291EC1B0001D324C /* RouteDetailView.storyboard */; };
@@ -140,14 +139,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0547490A291E223700DACC91 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0547490B291E226D00DACC91 /* GroupListView */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		0547490B291E226D00DACC91 /* GroupListView */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,7 +190,6 @@
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
-				0547490A291E223700DACC91 /* Views */,
 				C16920662907B75C0021D17F /* Main.storyboard */,
 				E1707844291EC26A001D324C /* Views */,
 				E1707845291EC271001D324C /* Models */,
@@ -288,6 +278,7 @@
 		E1707844291EC26A001D324C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0547490B291E226D00DACC91 /* GroupListView */,
 				D784808B291E16A2009F8FDB /* RouteListView */,
 				CFD79B02291E44020091202C /* SelectRouteNumberView */,
 				E1707847291EC291001D324C /* RouteDetailView */,
