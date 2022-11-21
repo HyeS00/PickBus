@@ -48,6 +48,7 @@ class RouteDetailViewController: UIViewController {
      private var busInfo: RouteInformationInfo?
     // 버스 위치
     private var busLocationList = [BusLocationsInfo]()
+    private var busLocationListIndex = 0
 
     // 새로고침
     private lazy var refreshControl: UIRefreshControl = {
@@ -204,7 +205,7 @@ class RouteDetailViewController: UIViewController {
         print("===========================================")
         busLocationList += response
         busLocationList.sort { $0.nodeord < $1.nodeord }
-        print("Locations: \(response.count)")
+        print("Locations: \(response)")
         routeDetailTableView.reloadData()
     }
 
@@ -221,6 +222,7 @@ class RouteDetailViewController: UIViewController {
 }
 
 extension RouteDetailViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nodeList.count
     }
@@ -252,6 +254,14 @@ extension RouteDetailViewController: UITableViewDataSource {
                 cell.highlightView.isHidden = true
             }
 
+            if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
+               && busLocationListIndex + 1 < busLocationList.count) {
+                cell.busView2.isHidden = false
+                busLocationListIndex += 1
+            } else {
+                cell.busView2.isHidden = true
+            }
+
 //            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
 //                cell.routeLineView.backgroundColor = .duduDeepBlue
 //            } else {
@@ -275,15 +285,15 @@ extension RouteDetailViewController: UITableViewDataSource {
 
         //        cell.busImageView2.image = UIImage(named: "bus")
 
-        let endNode = nodeList.count - 1
-        let index = indexPath.row
-        if index == endNode {
-            cell.routeLineView.isHidden = true
-            cell.busView2.isHidden = true
-        } else {
-            cell.routeLineView.isHidden = false
-            cell.busView2.isHidden = false
-        }
+//        let endNode = nodeList.count - 1
+//        let index = indexPath.row
+//        if index == endNode {
+//            cell.routeLineView.isHidden = true
+//            cell.busView2.isHidden = true
+//        } else {
+//            cell.routeLineView.isHidden = false
+//            cell.busView2.isHidden = false
+//        }
 
         return cell
     }
