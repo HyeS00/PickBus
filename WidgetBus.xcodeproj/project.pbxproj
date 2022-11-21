@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051D006F291E1F090061FCF4 /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
+		0547490D291E22A100DACC91 /* GroupListViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547490C291E22A100DACC91 /* GroupListViewContoller.swift */; };
+		0547490F2920EF1700DACC91 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0547490E2920EF1700DACC91 /* SettingViewController.swift */; };
+		05474911292124F200DACC91 /* AddGroupListNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05474910292124F200DACC91 /* AddGroupListNameView.swift */; };
+		054749132921612200DACC91 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054749122921612200DACC91 /* GroupTableViewCell.swift */; };
+		05474915292170AD00DACC91 /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */; };
 		099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */; };
 		099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */; };
 		099287E82924B23800CB7DBE /* SelectArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */; };
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
-		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; };
+		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		C16920612907B75C0021D17F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920602907B75C0021D17F /* AppDelegate.swift */; };
 		C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920622907B75C0021D17F /* SceneDelegate.swift */; };
 		C16920652907B75C0021D17F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920642907B75C0021D17F /* ViewController.swift */; };
-		C16920682907B75C0021D17F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C16920662907B75C0021D17F /* Main.storyboard */; };
 		C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C16920692907B75C0021D17F /* WidgetBus.xcdatamodeld */; };
 		C169206D2907B75D0021D17F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C169206C2907B75D0021D17F /* Assets.xcassets */; };
 		C16920702907B75D0021D17F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C169206E2907B75D0021D17F /* LaunchScreen.storyboard */; };
@@ -23,6 +28,7 @@
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
+		CF2166D6292B59B000091E1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2166D4292B59B000091E1E /* Main.storyboard */; };
 		CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */; };
 		CFD79B04291E45050091202C /* Service Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD79B03291E45050091202C /* Service Key.plist */; };
 		CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */; };
@@ -38,7 +44,6 @@
 		D7848086291D433D009F8FDB /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848085291D433D009F8FDB /* TitleHeader.swift */; };
 		D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784808D291E1B9C009F8FDB /* NSObject+.swift */; };
 		D78480B32920BF8D009F8FDB /* BusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78480B22920BF8D009F8FDB /* BusData.swift */; };
-		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
 		E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */; };
 		E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */; };
 		E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1707842291EC1B0001D324C /* RouteDetailView.storyboard */; };
@@ -62,6 +67,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0547490C291E22A100DACC91 /* GroupListViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListViewContoller.swift; sourceTree = "<group>"; };
+		0547490E2920EF1700DACC91 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		05474910292124F200DACC91 /* AddGroupListNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupListNameView.swift; sourceTree = "<group>"; };
+		054749122921612200DACC91 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalNodeModel.swift; sourceTree = "<group>"; };
 		099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTableViewCell.swift; sourceTree = "<group>"; };
 		099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectArrivalViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +86,6 @@
 		C16920602907B75C0021D17F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C16920622907B75C0021D17F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C16920642907B75C0021D17F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C16920672907B75C0021D17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C169206A2907B75C0021D17F /* WidgetBus.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WidgetBus.xcdatamodel; sourceTree = "<group>"; };
 		C169206C2907B75D0021D17F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C169206F2907B75D0021D17F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,6 +96,7 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		CF2166D5292B59B000091E1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationFromBusStop.swift; sourceTree = "<group>"; };
 		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
 		CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteNumberViewController.swift; sourceTree = "<group>"; };
@@ -114,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */,
+				051D006F291E1F090061FCF4 /* Pods_WidgetBus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +147,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0547490B291E226D00DACC91 /* GroupListView */ = {
+			isa = PBXGroup;
+			children = (
+				0547490C291E22A100DACC91 /* GroupListViewContoller.swift */,
+				054749122921612200DACC91 /* GroupTableViewCell.swift */,
+				05474914292170AD00DACC91 /* AddGroupTableViewCell.swift */,
+				0547490E2920EF1700DACC91 /* SettingViewController.swift */,
+				05474910292124F200DACC91 /* AddGroupListNameView.swift */,
+			);
+			path = GroupListView;
 		096B55C8292213D100B328A0 /* SelectArrivalView */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +205,7 @@
 				C16920602907B75C0021D17F /* AppDelegate.swift */,
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
-				C16920662907B75C0021D17F /* Main.storyboard */,
+				CF2166D4292B59B000091E1E /* Main.storyboard */,
 				E1707844291EC26A001D324C /* Views */,
 				E1707845291EC271001D324C /* Models */,
 				D784808C291E18DC009F8FDB /* Extensions */,
@@ -273,6 +293,7 @@
 		E1707844291EC26A001D324C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0547490B291E226D00DACC91 /* GroupListView */,
 				096B55C8292213D100B328A0 /* SelectArrivalView */,
 				D784808B291E16A2009F8FDB /* RouteListView */,
 				CFD79B02291E44020091202C /* SelectRouteNumberView */,
@@ -408,13 +429,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2166D6292B59B000091E1E /* Main.storyboard in Resources */,
 				E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */,
 				CFD79B04291E45050091202C /* Service Key.plist in Resources */,
 				C16920992907C38D0021D17F /* .swiftlint.yml in Resources */,
 				CFE0A869291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard in Resources */,
 				C16920702907B75D0021D17F /* LaunchScreen.storyboard in Resources */,
 				C169206D2907B75D0021D17F /* Assets.xcassets in Resources */,
-				C16920682907B75C0021D17F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +548,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0547490F2920EF1700DACC91 /* SettingViewController.swift in Sources */,
+				05474915292170AD00DACC91 /* AddGroupTableViewCell.swift in Sources */,
+				05474911292124F200DACC91 /* AddGroupListNameView.swift in Sources */,
+				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				054749132921612200DACC91 /* GroupTableViewCell.swift in Sources */,
 				CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */,
 				CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */,
 				CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */,
@@ -548,6 +574,8 @@
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
 				D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,
+				0547490D291E22A100DACC91 /* GroupListViewContoller.swift in Sources */,
+				D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */,
 				D7848084291D2AC6009F8FDB /* AddRouteCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -585,20 +613,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C16920662907B75C0021D17F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C16920672907B75C0021D17F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C169206E2907B75D0021D17F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C169206F2907B75D0021D17F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CF2166D4292B59B000091E1E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2166D5292B59B000091E1E /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -724,11 +752,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetBus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -744,7 +771,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Dudu WidgetBus";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -757,11 +783,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetBus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -777,7 +802,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Dudu WidgetBus";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -792,7 +816,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -813,7 +837,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
@@ -833,7 +857,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBusUITests;
@@ -852,7 +876,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 68LU7Q7XD4;
+				DEVELOPMENT_TEAM = TZPPZDYCQY;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.robin.WidgetBusUITests;
