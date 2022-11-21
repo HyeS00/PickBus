@@ -23,6 +23,11 @@
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
+		C175CD0B292B719900140CDC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF4292B719900140CDC /* SettingViewController.swift */; };
+		C175CD0C292B719900140CDC /* AddGroupListNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF5292B719900140CDC /* AddGroupListNameView.swift */; };
+		C175CD0D292B719900140CDC /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF6292B719900140CDC /* GroupTableViewCell.swift */; };
+		C175CD0E292B719900140CDC /* GroupListViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF7292B719900140CDC /* GroupListViewContoller.swift */; };
+		C175CD0F292B719900140CDC /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */; };
 		CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */; };
 		CF3C88E9292669B20069E8CE /* SpecificArrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3C88E8292669B20069E8CE /* SpecificArrive.swift */; };
 		CFD79B04291E45050091202C /* Service Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD79B03291E45050091202C /* Service Key.plist */; };
@@ -92,6 +97,11 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		C175CCF4292B719900140CDC /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C175CCF5292B719900140CDC /* AddGroupListNameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupListNameView.swift; sourceTree = "<group>"; };
+		C175CCF6292B719900140CDC /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		C175CCF7292B719900140CDC /* GroupListViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListViewContoller.swift; sourceTree = "<group>"; };
+		C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationFromBusStop.swift; sourceTree = "<group>"; };
 		CF3C88E8292669B20069E8CE /* SpecificArrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificArrive.swift; sourceTree = "<group>"; };
 		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
@@ -225,6 +235,18 @@
 			path = WidgetBusUITests;
 			sourceTree = "<group>";
 		};
+		C175CCF3292B719900140CDC /* GroupListView */ = {
+			isa = PBXGroup;
+			children = (
+				C175CCF4292B719900140CDC /* SettingViewController.swift */,
+				C175CCF5292B719900140CDC /* AddGroupListNameView.swift */,
+				C175CCF6292B719900140CDC /* GroupTableViewCell.swift */,
+				C175CCF7292B719900140CDC /* GroupListViewContoller.swift */,
+				C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */,
+			);
+			path = GroupListView;
+			sourceTree = "<group>";
+		};
 		CFD79B02291E44020091202C /* SelectRouteNumberView */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,9 +317,10 @@
 		E1707844291EC26A001D324C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				096B55C8292213D100B328A0 /* SelectArrivalView */,
+				C175CCF3292B719900140CDC /* GroupListView */,
 				D784808B291E16A2009F8FDB /* RouteListView */,
 				CFD79B02291E44020091202C /* SelectRouteNumberView */,
+				096B55C8292213D100B328A0 /* SelectArrivalView */,
 				E1707847291EC291001D324C /* RouteDetailView */,
 			);
 			path = Views;
@@ -563,6 +586,7 @@
 				099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */,
 				099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
+				C175CD0E292B719900140CDC /* GroupListViewContoller.swift in Sources */,
 				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
 				D7848086291D433D009F8FDB /* TitleHeader.swift in Sources */,
 				D7848080291D1C65009F8FDB /* RouteCell.swift in Sources */,
@@ -572,12 +596,16 @@
 				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
 				D7103E2129239E9F00DA7CDD /* BusStopCell.swift in Sources */,
 				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
+				C175CD0F292B719900140CDC /* AddGroupTableViewCell.swift in Sources */,
+				C175CD0B292B719900140CDC /* SettingViewController.swift in Sources */,
+				C175CD0C292B719900140CDC /* AddGroupListNameView.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
 				D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,
 				D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */,
 				CFEC63F52928BF3F00B75795 /* BusCoreDataModel.xcdatamodeld in Sources */,
 				D7848084291D2AC6009F8FDB /* AddRouteCell.swift in Sources */,
+				C175CD0D292B719900140CDC /* GroupTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
