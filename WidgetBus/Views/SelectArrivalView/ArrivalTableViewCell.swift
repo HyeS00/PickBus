@@ -74,8 +74,6 @@ class ArrivalTableViewCell: UITableViewCell {
     public func configure(nodeInfo: ArrivalNodeModel) {
 
         switch nodeInfo.userSelected {
-        case .notSelected:
-            break
         case .depart(.notOnlyDep):
             routeLineView.backgroundColor = UIColor.duduDeepBlue
             fallthrough
@@ -146,10 +144,5 @@ class ArrivalTableViewCell: UITableViewCell {
         routeLineView.centerXAnchor.constraint(equalTo: routeNodeImageView.centerXAnchor).isActive = true
         routeLineView.topAnchor.constraint(equalTo: routeNodeImageView.bottomAnchor, constant: 4)
             .isActive = true
-
-        addSubview(testLabel)
-        testLabel.translatesAutoresizingMaskIntoConstraints = false
-        testLabel.trailingAnchor.constraint(equalTo: routeNodeImageView.leadingAnchor, constant: -10).isActive = true
-        testLabel.centerYAnchor.constraint(equalTo: routeNodeImageView.centerYAnchor).isActive = true
     }
 }

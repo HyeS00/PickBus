@@ -27,7 +27,6 @@ class SelectArrivalViewController: UIViewController {
     var pageCount: Int = -1
 
     // var busNum: String?
-    // 테스트용 
     var busNum: String = "207"
 
     // 0 정방향 or 1 역방향 / 회차지 구분용
@@ -35,7 +34,7 @@ class SelectArrivalViewController: UIViewController {
     var upOrDown: Int?
     // 출발 정류장 인덱스
     var departNodeIdx: Int = 0
-
+    // 도착정류장 선택 유뮤 
     var isArrivalOn: Bool = false
 
     private let titleLabel: UILabel = {
@@ -113,7 +112,7 @@ class SelectArrivalViewController: UIViewController {
     }
 
     // MARK: - Actions
-
+    // 완료 버튼 Actions
     @objc func doneButtonSelect() {
         if isArrivalOn {
             navigationController?.popViewController(animated: false)
@@ -194,25 +193,6 @@ class SelectArrivalViewController: UIViewController {
             completion: handleRequestNodesTotalNumberResponse(response:error:))
     }
 
-    // 버스노선 더미 데이터
-    func setDummyBusNodeList() -> [ArrivalNodeModel] {
-        let nodeList: [ArrivalNodeModel] = [
-            ArrivalNodeModel(name: "포스텍", attribute: .nomal, userSelected: .depart(.onlyDep)),
-            ArrivalNodeModel(name: "생명공학연구소", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "효곡동행정복지센터", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "효자아트홀", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "포항성모병원", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "대잠사거리", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "시외버스터미널", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "교보생명", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "산업은행", attribute: .nomal, userSelected: .notSelected),
-            ArrivalNodeModel(name: "고용복지플러스센터", attribute: .final, userSelected: .notSelected)
-        ]
-
-        return nodeList
-
-    }
-
     // 전체 갯수 확인하는 네트워크 받으면 실행되는 콜백.
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
@@ -226,8 +206,6 @@ class SelectArrivalViewController: UIViewController {
                     completion: handleRequestNodesListResponse(response:error:))
             }
         }
-        //        print("error")
-        //        print(error?.localizedDescription ?? "")
     }
 
     // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
@@ -243,19 +221,19 @@ class SelectArrivalViewController: UIViewController {
                 $0.nodeord < $1.nodeord
             }
             nodeInfoConversion(beforeNodes: nodeListJedi)
+            // 출발정류장 인덱스부터 슬라이싱
             let slice = nodeList[departNodeIdx...]
             nodeList = Array(slice)
             arrivalTableView.reloadData()
         }
     }
 
-    // API 노선정보 변환 파싱, 출발정류장부터,
+    // API 리스트 -> ArrivalNodeModel 파싱
     func nodeInfoConversion(beforeNodes: [RouteNodesInfo]) {
         for (index, beforeNode) in beforeNodes.enumerated() {
             var nodeAttribute: NodeAttribute?
             var nodeSelected: NodeSelected?
 
-            // 기점
             if beforeNode.nodeord == 1 {
                 nodeAttribute = .first
             } else {
@@ -275,7 +253,6 @@ class SelectArrivalViewController: UIViewController {
                 nodeList[nodeList.endIndex - 1]?.attribute = .nomal
             }
 
-            // 출발 정류장
             if beforeNode.nodeid == nodeId {
                 nodeSelected = .depart(.onlyDep)
                 departNodeIdx = index
@@ -319,7 +296,7 @@ extension SelectArrivalViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        // 완료 버튼 활성화 유뮤
         if indexPath.row == 0 {
             doneButton.setTitleColor(UIColor.duduGray, for: .normal)
             isArrivalOn = false
@@ -328,6 +305,7 @@ extension SelectArrivalViewController: UITableViewDataSource {
             isArrivalOn = true
         }
 
+        // 선택한 셀의 인덱스를 바탕으로 전체 리스트의 .userSelected 속성 변경
         for index in nodeList.indices {
             if index == 0 {
                 if indexPath.row == 0 {
@@ -338,16 +316,13 @@ extension SelectArrivalViewController: UITableViewDataSource {
 
                 continue
             }
-            // 1번 인덱스 부터 마지막 전 인덱스 까지
+
             if index < indexPath.row {
                 nodeList[index]?.userSelected = .middle
-                //                print(index,"미들")
             } else if index == indexPath.row {
                 nodeList[index]?.userSelected = .arrival
-                //                print(index,"도착")
             } else {
                 nodeList[index]?.userSelected = .notSelected
-                //                print(index,"선택 X")
             }
         }
         arrivalTableView.reloadData()
