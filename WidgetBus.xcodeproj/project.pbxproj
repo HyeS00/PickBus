@@ -25,6 +25,25 @@
 		C16920852907B75D0021D17F /* WidgetBusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920842907B75D0021D17F /* WidgetBusUITests.swift */; };
 		C16920872907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */; };
 		C16920992907C38D0021D17F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C16920982907C38D0021D17F /* .swiftlint.yml */; };
+		CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */; };
+		CFD79B04291E45050091202C /* Service Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD79B03291E45050091202C /* Service Key.plist */; };
+		CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */; };
+		CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */; };
+		CFE0A869291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */; };
+		CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A86A291CD484002779C6 /* BusClient.swift */; };
+		CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF488229235B860037BBBA /* RouteNodes.swift */; };
+		D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7103DF3292218E900DA7CDD /* UIColor+.swift */; };
+		D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807D291D156A009F8FDB /* RouteListViewController.swift */; };
+		D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */; };
+		D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */; };
+		D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848085291D433D009F8FDB /* RouteTableHeader.swift */; };
+		D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7848087291D46B1009F8FDB /* RouteTableFooter.swift */; };
+		D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D784808D291E1B9C009F8FDB /* NSObject+.swift */; };
+		D78480B32920BF8D009F8FDB /* BusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78480B22920BF8D009F8FDB /* BusData.swift */; };
+		E022CC0CA515420DBA82C00D /* Pods_WidgetBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */; };
+		E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */; };
+		E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */; };
+		E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1707842291EC1B0001D324C /* RouteDetailView.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +90,24 @@
 		C16920842907B75D0021D17F /* WidgetBusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITests.swift; sourceTree = "<group>"; };
 		C16920862907B75D0021D17F /* WidgetBusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C16920982907C38D0021D17F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationFromBusStop.swift; sourceTree = "<group>"; };
+		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
+		CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteNumberViewController.swift; sourceTree = "<group>"; };
+		CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArriveInfoFromBusStop.swift; sourceTree = "<group>"; };
+		CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteNumberViewStoryboard.storyboard; sourceTree = "<group>"; };
+		CFE0A86A291CD484002779C6 /* BusClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusClient.swift; sourceTree = "<group>"; };
+		CFEF488229235B860037BBBA /* RouteNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNodes.swift; sourceTree = "<group>"; };
+		D7103DF3292218E900DA7CDD /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		D784807D291D156A009F8FDB /* RouteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListViewController.swift; sourceTree = "<group>"; };
+		D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
+		D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouteTableViewCell.swift; sourceTree = "<group>"; };
+		D7848085291D433D009F8FDB /* RouteTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableHeader.swift; sourceTree = "<group>"; };
+		D7848087291D46B1009F8FDB /* RouteTableFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableFooter.swift; sourceTree = "<group>"; };
+		D784808D291E1B9C009F8FDB /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		D78480B22920BF8D009F8FDB /* BusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusData.swift; sourceTree = "<group>"; };
+		E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailViewController.swift; sourceTree = "<group>"; };
+		E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailTableViewCell.swift; sourceTree = "<group>"; };
+		E1707842291EC1B0001D324C /* RouteDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteDetailView.storyboard; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -163,10 +200,15 @@
 				C16920622907B75C0021D17F /* SceneDelegate.swift */,
 				C16920642907B75C0021D17F /* ViewController.swift */,
 				0547490A291E223700DACC91 /* Views */,
+				C16920662907B75C0021D17F /* Main.storyboard */,
+				E1707844291EC26A001D324C /* Views */,
+				E1707845291EC271001D324C /* Models */,
+				D784808C291E18DC009F8FDB /* Extensions */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
 				C16920712907B75D0021D17F /* Info.plist */,
 				C16920692907B75C0021D17F /* WidgetBus.xcdatamodeld */,
+				CFD79B03291E45050091202C /* Service Key.plist */,
 			);
 			path = WidgetBus;
 			sourceTree = "<group>";
@@ -188,6 +230,48 @@
 			path = WidgetBusUITests;
 			sourceTree = "<group>";
 		};
+		CFD79B02291E44020091202C /* SelectRouteNumberView */ = {
+			isa = PBXGroup;
+			children = (
+				CFE0A868291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard */,
+				CFE0A863291CCB11002779C6 /* SelectRouteNumberViewController.swift */,
+			);
+			path = SelectRouteNumberView;
+			sourceTree = "<group>";
+		};
+		CFE0A865291CCB29002779C6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CFE0A866291CCD15002779C6 /* ArriveInfoFromBusStop.swift */,
+				CFE0A86A291CD484002779C6 /* BusClient.swift */,
+				CF251EB829227BE300785682 /* BusLocationFromBusStop.swift */,
+				CFEF488229235B860037BBBA /* RouteNodes.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		D784808B291E16A2009F8FDB /* RouteListView */ = {
+			isa = PBXGroup;
+			children = (
+				D784807D291D156A009F8FDB /* RouteListViewController.swift */,
+				D7848085291D433D009F8FDB /* RouteTableHeader.swift */,
+				D7848087291D46B1009F8FDB /* RouteTableFooter.swift */,
+				D784807F291D1C65009F8FDB /* RouteTableViewCell.swift */,
+				D7848083291D2AC6009F8FDB /* AddRouteTableViewCell.swift */,
+				D78480B22920BF8D009F8FDB /* BusData.swift */,
+			);
+			path = RouteListView;
+			sourceTree = "<group>";
+		};
+		D784808C291E18DC009F8FDB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D784808D291E1B9C009F8FDB /* NSObject+.swift */,
+				D7103DF3292218E900DA7CDD /* UIColor+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DC93DED6DD175EC91A8BEA4F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +283,34 @@
 				2B93AF352370F71C8635C715 /* Pods-WidgetBusTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E1707844291EC26A001D324C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D784808B291E16A2009F8FDB /* RouteListView */,
+				CFD79B02291E44020091202C /* SelectRouteNumberView */,
+				E1707847291EC291001D324C /* RouteDetailView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E1707845291EC271001D324C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFE0A865291CCB29002779C6 /* Network */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E1707847291EC291001D324C /* RouteDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				E1707842291EC1B0001D324C /* RouteDetailView.storyboard */,
+				E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */,
+				E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */,
+			);
+			path = RouteDetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,7 +421,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */,
+				CFD79B04291E45050091202C /* Service Key.plist in Resources */,
 				C16920992907C38D0021D17F /* .swiftlint.yml in Resources */,
+				CFE0A869291CCEB2002779C6 /* RouteNumberViewStoryboard.storyboard in Resources */,
 				C16920702907B75D0021D17F /* LaunchScreen.storyboard in Resources */,
 				C169206D2907B75D0021D17F /* Assets.xcassets in Resources */,
 			);
@@ -429,10 +544,26 @@
 				05474911292124F200DACC91 /* AddGroupListNameView.swift in Sources */,
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
 				054749132921612200DACC91 /* GroupTableViewCell.swift in Sources */,
+				CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */,
+				CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */,
+				CFE0A86B291CD484002779C6 /* BusClient.swift in Sources */,
+				CFEF488329235B860037BBBA /* RouteNodes.swift in Sources */,
+				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
+				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
+				D78480B32920BF8D009F8FDB /* BusData.swift in Sources */,
+				D7848086291D433D009F8FDB /* RouteTableHeader.swift in Sources */,
+				D7848080291D1C65009F8FDB /* RouteTableViewCell.swift in Sources */,
+				E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */,
+				E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
+				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
+				D7848088291D46B1009F8FDB /* RouteTableFooter.swift in Sources */,
+				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
 				C16920612907B75C0021D17F /* AppDelegate.swift in Sources */,
+				D784807E291D156A009F8FDB /* RouteListViewController.swift in Sources */,
 				C16920632907B75C0021D17F /* SceneDelegate.swift in Sources */,
 				0547490D291E22A100DACC91 /* GroupListViewContoller.swift in Sources */,
+				D7848084291D2AC6009F8FDB /* AddRouteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
