@@ -8,7 +8,7 @@
 import Foundation
 
 struct ArrivalNodeModel {
-//    let code: String?
+    let code: String?
     let name: String?
     var attribute: NodeAttribute?
     var userSelected: NodeSelected?

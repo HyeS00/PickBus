@@ -283,6 +283,7 @@ class SelectArrivalViewController: UIViewController {
 
             nodeList.append(
                 ArrivalNodeModel(
+                    code: beforeNode.nodeid,
                     name: beforeNode.nodenm,
                     attribute: nodeAttribute,
                     userSelected: nodeSelected)
