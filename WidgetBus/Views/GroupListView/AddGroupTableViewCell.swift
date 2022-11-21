@@ -8,7 +8,7 @@
 import UIKit
 
 class AddGroupTableViewCell: UITableViewCell {
-    static let identifier = "AddGroupTableViewCell"
+//    static let identifier = "AddGroupTableViewCell"
 
     private lazy var groupListAddLabel: UILabel = {
         let label = UILabel()

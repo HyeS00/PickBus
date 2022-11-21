@@ -9,7 +9,7 @@ import UIKit
 
 class GroupTableViewCell: UITableViewCell {
 
-    static let identifier = "GroupListCell"
+//    static let identifier = "GroupListCell"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
