@@ -16,10 +16,17 @@ class ViewController: UIViewController {
         return button
     }()
 
+    @IBOutlet weak var jerryButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(moveRouteListViewButton)
         // Do any additional setup after loading the view.
+    }
+
+    @IBAction func uploadJerryView(_ sender: Any) {
+        let selectVC = SelectArrivalViewController()
+        self.navigationController?.pushViewController(selectVC, animated: false)
     }
 
     @objc func pressedMoveRouteListViewButton(_ sender: UIButton) {

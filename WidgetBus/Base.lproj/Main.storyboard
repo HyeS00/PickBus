@@ -48,6 +48,15 @@
                                     <segue destination="PAY-MO-Xp7" kind="show" id="byJ-fA-GmE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bz6-5H-3AT">
+                                <rect key="frame" x="310" y="547" width="59" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="jerry"/>
+                                <connections>
+                                    <action selector="uploadJerryView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ecr-e1-Kpf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -59,6 +68,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zY3-15-RZ0"/>
+                    <connections>
+                        <outlet property="jerryButton" destination="bz6-5H-3AT" id="hrJ-Y7-36N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
