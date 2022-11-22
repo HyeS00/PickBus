@@ -255,23 +255,22 @@ extension RouteDetailViewController: UITableViewDataSource {
                 cell.highlightView.isHidden = true
             }
 
-            if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
-               && busLocationListIndex + 1 < busLocationList.count) {
-                cell.busView2.isHidden = false
-                busLocationListIndex += 1
-                busLocationIndexPath.append(indexPath.row)
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!indexPath.row : \(indexPath.row)")
+            cell.busView2.isHidden = true
+            if(busLocationList.isEmpty) {
+                print("busLocationList 불러오는 중")
             } else {
-                cell.busView2.isHidden = true
-            }
+                if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
+                   && busLocationListIndex + 1 < busLocationList.count) {
+                    busLocationListIndex += 1
+                    busLocationIndexPath.append(indexPath.row)
+                }
 
-            if(busLocationIndexPath.contains(indexPath.row)) {
-                cell.busView2.isHidden = false
-                print("!===================================indexPath.row : \(indexPath.row)")
-            } else {
-                cell.busView2.isHidden = true
+                if(busLocationIndexPath.contains(indexPath.row)) {
+                    cell.busView2.isHidden = false
+                } else {
+                    cell.busView2.isHidden = true
+                }
             }
-
             //            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
             //                cell.routeLineView.backgroundColor = .duduDeepBlue
             //            } else {
