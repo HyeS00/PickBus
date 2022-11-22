@@ -9,7 +9,25 @@ import UIKit
 
 class RouteCell: UITableViewCell {
 
-    var busNumver: String = ""
+    // 남은 정류장 수
+    var arrprevstationcnt: Int = 3
+    // 남은 시간
+    var arrtime: Int = 0 {
+        didSet {
+            switch arrprevstationcnt {
+            case 0:
+                busRemainingTimeLabel.text = "곧도착"
+            case 1:
+                busRemainingTimeLabel.text = "전"
+            case 2:
+                busRemainingTimeLabel.text = "전전"
+            default:
+                arrtime = (arrtime / 60) + (arrtime % 60 > 30 ? 1 : 0)
+                busRemainingTimeLabel.text = String(arrtime) + "분"
+
+            }
+        }
+    }
 
     // 버스번호
     private lazy var busNumberLabel: UILabel = {
@@ -118,11 +136,10 @@ class RouteCell: UITableViewCell {
     }
 
     @objc func pressedRideButton(_ sender: UIButton) {
-        print(busNumver)
+        // 버스번호 넘기면서 디테일뷰로 이동
     }
 
     func setCell(busNumber: String, busRemainingTime: String, nextBusRemainingTime: String) {
-        self.busNumver = busNumber
         self.busNumberLabel.text = busNumber
         self.busRemainingTimeLabel.text = busRemainingTime
         self.nextBusRemainingTimeLabel.text = nextBusRemainingTime

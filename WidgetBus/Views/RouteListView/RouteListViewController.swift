@@ -235,12 +235,14 @@ extension RouteListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: RouteCell.identifier,
                     for: indexPath) as! RouteCell
-                let route = group.nodes[indexPath.section].buses[indexPath.row - 1]
+//                let route = group.nodes[indexPath.section].buses[indexPath.row - 1]
+                cell.arrprevstationcnt = 2
+                cell.arrtime = 188
                 cell.selectionStyle = .none
-                cell.setCell(
-                    busNumber: group.nodes[indexPath.section].buses[indexPath.row - 1].routeNo,
-                    busRemainingTime: "곧도착",
-                    nextBusRemainingTime: "전전")
+//                cell.setCell(
+//                    busNumber: group.nodes[indexPath.section].buses[indexPath.row - 1].routeNo,
+//                    busRemainingTime: "곧도착",
+//                    nextBusRemainingTime: "전전")
                 return cell
             }
         }
