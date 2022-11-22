@@ -76,10 +76,12 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: SelectStartNodeTableViewCell.identifier,
             for: indexPath
-        ) as! SelectStartNodeTableViewCell
+        ) as? SelectStartNodeTableViewCell else {
+            return UITableViewCell()
+        }
 
         cell.nodeName.text = nodeName[indexPath.row]
         cell.nodeDirection.text = nodeDirection[indexPath.row]
