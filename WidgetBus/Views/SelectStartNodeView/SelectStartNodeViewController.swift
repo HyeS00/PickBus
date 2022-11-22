@@ -187,13 +187,14 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     }
 
     @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardFrame: NSValue =
-            notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            UIView.animate(withDuration: 1) {
-                self.view.frame.origin.y -= keyboardHeight
-            }
+        guard let keyboardFrame: NSValue =
+                notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        UIView.animate(withDuration: 1) {
+            self.view.frame.origin.y -= keyboardHeight
         }
     }
 
