@@ -14,6 +14,23 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var busNodeSearchTextField: UITextField!
 
+    @IBAction private func didKeyboardEndOnExit(_ sender: Any) {
+        // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
+        workItem?.cancel()
+        if cityCodeDictionary.isEmpty {
+            getCityCode(isInit: false)
+        } else {
+            startSearch()
+        }
+    }
+
+    @IBAction private func editingTextFieldChanged(_ sender: Any) {
+        stop = true
+        if repeatCount == cityCodeDictionary.keys.count {
+            clearNetworkSessionTask()
+        }
+    }
+
     // load task
     private var loadTasks = [URLSessionDataTask]()
     // work item
@@ -119,23 +136,6 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-    }
-
-    @IBAction private func didEndOnExit(_ sender: Any) {
-        // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
-        workItem?.cancel()
-        if cityCodeDictionary.isEmpty {
-            getCityCode(isInit: false)
-        } else {
-            startSearch()
-        }
-    }
-
-    @IBAction private func editing(_ sender: Any) {
-        stop = true
-        if repeatCount == cityCodeDictionary.keys.count {
-            clearNetworkSessionTask()
-        }
     }
 
     // MARK: 검색
