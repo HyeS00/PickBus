@@ -9,8 +9,6 @@ import UIKit
 
 final class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var selectedTableViewCellIndexPath: IndexPath?
-
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var busNodeSearchTextField: UITextField!
 
@@ -30,6 +28,8 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
             clearNetworkSessionTask()
         }
     }
+
+    private var selectedTableViewCellIndexPath: IndexPath?
 
     // load task
     private var loadTasks = [URLSessionDataTask]()
@@ -69,7 +69,11 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
         getCityCode()
 
         settingDefaultTableView()
-        settingDefaultKeyboardObserver()
+        addDefaultKeyboardObserver()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        removeDefaultKeyboardObserver()
     }
 
     func getCityCode(isInit: Bool = true) {
@@ -112,6 +116,7 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
         if selectedTableViewCellIndexPath == indexPath {
             selectedTableViewCellIndexPath = nil
         } else {
+            // selectedTableViewCellIndexPath가 prevSelectedTableViewCell로 이동된 후 실행되어야 함
             if let prevSelectedTableViewCell = selectedTableViewCellIndexPath {
                 selectedTableViewCellIndexPath = indexPath
                 tableView.reloadRows(at: [prevSelectedTableViewCell], with: .automatic)
@@ -123,7 +128,7 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     }
 
     // MARK: 키보드
-    func settingDefaultKeyboardObserver() {
+    private func addDefaultKeyboardObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide(_:)),
@@ -136,6 +141,35 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+    }
+
+    private func removeDefaultKeyboardObserver() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyboardFrame: NSValue =
+                notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        UIView.animate(withDuration: 1) {
+            self.view.frame.origin.y -= keyboardHeight
+        }
+    }
+
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0
     }
 
     // MARK: 검색
@@ -184,22 +218,6 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
             DispatchQueue.global(qos: .userInitiated).async(execute: workItem)
 
         }
-    }
-
-    @objc func keyboardWillShow(notification: Notification) {
-        guard let keyboardFrame: NSValue =
-                notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
-            return
-        }
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-        UIView.animate(withDuration: 1) {
-            self.view.frame.origin.y -= keyboardHeight
-        }
-    }
-
-    @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y = 0
     }
 
     // 도시 코드 가져오는 네트워크 완료된 다음 실행되는 콜백(초반)
