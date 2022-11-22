@@ -44,8 +44,6 @@ class RouteDetailViewController: UIViewController {
     var cityCode: Int = 25
     // 버스 정류장들
     private var nodeList = [RouteNodesInfo]()
-    // 버스 정보
-    private var busInfo: RouteInformationInfo?
     // 버스 위치
     private var busLocationList = [BusLocationsInfo]()
     private var busLocationListIndex = 0
@@ -100,7 +98,6 @@ class RouteDetailViewController: UIViewController {
         retryButton.backgroundColor = .duduDeepBlue
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
-
     }
 
     // 네트워크 연결 부르는 함수
@@ -191,8 +188,27 @@ class RouteDetailViewController: UIViewController {
             //        print(error?.localizedDescription ?? "")
             return
         }
-        busNumberLabel.text = String(response.intervaltime)
-        print("RouteInformation: \(response)")
+
+        var startTime: String = response.startvehicletime
+        var endTime: String = String(response.endvehicletime)
+        var intervalTime: Int
+        let today = Date()
+        let weekday = Calendar.current.component(.weekday, from: today)
+
+        switch weekday {
+        case 1:
+            intervalTime = response.intervalsuntime
+        case 7:
+            intervalTime = response.intervalsattime
+        default:
+            intervalTime = response.intervaltime
+        }
+
+        startTime.insert(":", at: startTime.index(startTime.startIndex, offsetBy: 2))
+        endTime.insert(":", at: endTime.index(endTime.startIndex, offsetBy: 2))
+
+        busTimeInfoLabel.text = "\(startTime) ~ \(endTime) 배차간격 \(intervalTime)분"
+//        print("RouteInformation: \(response)")
     }
 
     // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
@@ -203,7 +219,6 @@ class RouteDetailViewController: UIViewController {
             //        print(error?.localizedDescription ?? "")
             return
         }
-        print("===========================================")
         busLocationList += response
         busLocationList.sort { $0.nodeord < $1.nodeord }
         print("Locations: \(response)")
