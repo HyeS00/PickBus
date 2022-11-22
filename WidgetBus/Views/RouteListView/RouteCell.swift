@@ -9,29 +9,35 @@ import UIKit
 
 class RouteCell: UITableViewCell {
 
-    // 남은 정류장 수
-    var arrprevstationcnt: Int = 3
+    // 버스 번호
+    var routeNumber: String = ""
+
+    // 남은 정류장
+    var arrprevstationcnt: Int = 1000
+
     // 남은 시간
-    var arrtime: Int = 0 {
+    var arrTime: String = "" {
         didSet {
             switch arrprevstationcnt {
-            case 0:
-                busRemainingTimeLabel.text = "곧도착"
             case 1:
-                busRemainingTimeLabel.text = "전"
+                busRemainingTimeLabel.text = "곧도착"
             case 2:
+                busRemainingTimeLabel.text = "전"
+            case 3:
                 busRemainingTimeLabel.text = "전전"
             default:
-                arrtime = (arrtime / 60) + (arrtime % 60 > 30 ? 1 : 0)
-                busRemainingTimeLabel.text = String(arrtime) + "분"
-
+                busRemainingTimeLabel.text = arrTime
             }
         }
     }
 
+    // 다음 남은 시간
+    var nextArrTime: String = ""
+
     // 버스번호
     private lazy var busNumberLabel: UILabel = {
         let label = UILabel()
+        label.text = routeNumber
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
@@ -54,6 +60,7 @@ class RouteCell: UITableViewCell {
     // 버스남은시간
     private lazy var busRemainingTimeLabel: UILabel = {
         let label = UILabel()
+        label.text = arrTime
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +70,7 @@ class RouteCell: UITableViewCell {
     // 다음버스남은시간
     private lazy var nextBusRemainingTimeLabel: UILabel = {
         let label = UILabel()
+        label.text = nextArrTime
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .duduGray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -137,11 +145,5 @@ class RouteCell: UITableViewCell {
 
     @objc func pressedRideButton(_ sender: UIButton) {
         // 버스번호 넘기면서 디테일뷰로 이동
-    }
-
-    func setCell(busNumber: String, busRemainingTime: String, nextBusRemainingTime: String) {
-        self.busNumberLabel.text = busNumber
-        self.busRemainingTimeLabel.text = busRemainingTime
-        self.nextBusRemainingTimeLabel.text = nextBusRemainingTime
     }
 }
