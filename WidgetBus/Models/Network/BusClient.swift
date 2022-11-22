@@ -29,6 +29,9 @@ class BusClient {
         case getCityCodeList
         case getNodesList(city: String, routeId: String, pageNumber: String = "1")
         case searchNode(city: String, nodeNm: String?, nodeNo: String?)
+        case getRouteInformation(city: String, routeId: String)
+        case getBusLocationsOnRoute(city: String, routeId: String)
+        case getSpecificArrive(city: String, routeId: String, nodeId: String)
 
         var stringValue: String {
             switch self {
@@ -36,7 +39,7 @@ class BusClient {
                 return Endpoints.base +
                 "/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList" +
                 Endpoints.apiKeyParam +
-                "&_type=json&cityCode=\(city)&nodeId=\(busStopId)"
+                "&_type=json&cityCode=\(city)&nodeId=\(busStopId)&numOfRows=99"
 
             case .getCityCodeList:
                 return Endpoints.base +
@@ -73,6 +76,23 @@ class BusClient {
                 }
 //                print("url: \(url)")
                 return url
+            case .getRouteInformation(let city, let routeId):
+                return Endpoints.base +
+                "/1613000/BusRouteInfoInqireService/getRouteInfoIem" +
+                Endpoints.apiKeyParam +
+                "&_type=json&cityCode=\(city)&routeId=\(routeId)"
+
+            case .getBusLocationsOnRoute(let city, let routeId):
+                return Endpoints.base +
+                "/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList" +
+                Endpoints.apiKeyParam +
+                "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=99"
+
+            case .getSpecificArrive(let city, let routeId, let nodeId):
+                return Endpoints.base +
+                "/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList" +
+                Endpoints.apiKeyParam +
+                "&_type=json&cityCode=\(city)&nodeId=\(nodeId)&routeId=\(routeId)&numOfRows=99"
             }
         }
 
@@ -169,7 +189,7 @@ class BusClient {
 
     class func getArriveList(
         city: String = "25",
-        busstopId: String = "DJB8001793",
+        nodeId: String = "DJB8001793",
         completion: @escaping ([ArriveInfoResponseArriveInfo], Error?) -> Void) {
             _ = taskForGETRequest(
                 url: Endpoints.getArriveList(city: "25", busStopId: "DJB8001793").url,
@@ -218,11 +238,58 @@ class BusClient {
             _ = taskForGETRequest(
                 url: Endpoints.getCityCodeList.url,
                 responseType: CityCode.self) { response, error in
-                    if let response = response {
+                if let response = response {
                         completion(response.response.body.items.item, nil)
                     } else {
                         completion([], error)
                     }
                 }
         }
+    class func getRouteInformation (
+        city: String = "25",
+        routeId: String = "DJB30300004",
+        completion: @escaping (RouteInformationInfo?, Error?) -> Void) {
+            _ = taskForGETRequest(
+                url: Endpoints.getRouteInformation(city: city, routeId: routeId).url,
+                responseType: RouteInformation.self, completion: { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion(nil, error)
+                    }
+                })
+        }
+
+    class func getLocationsOnRoute(
+        city: String = "25",
+        routeId: String = "DJB30300004",
+        completion: @escaping ([BusLocationsInfo], Error?) -> Void) {
+            _ = taskForGETRequest(
+                url: Endpoints.getBusLocationsOnRoute(city: city, routeId: routeId).url,
+                responseType: BusLocationsOnRoute.self, completion: { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion([], error)
+                    }
+                })
+        }
+
+    class func getSpecificArrive(
+        city: String = "25",
+        routeId: String = "DJB30300004",
+        nodeId: String = "DJB8001793",
+        completion: @escaping (SpecificArriveInfo?, Error?) -> Void) {
+            _ = taskForGETRequest(
+                url: Endpoints.getSpecificArrive(
+                    city: city, routeId: routeId, nodeId: nodeId).url, responseType: SpecificArrive.self,
+                completion: { response, error in
+                    if let response = response {
+                        completion(response.response.body.items.item, nil)
+                    } else {
+                        completion(nil, error)
+                    }
+                })
+        }
+
 }

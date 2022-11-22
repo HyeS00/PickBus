@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum BoardingStatus {
     case onBoard
     case getOff
+}
+
+struct RouteModel {
+    let startNodeId: String
+    let endNodeId: String
 }
 
 class RouteDetailViewController: UIViewController {
@@ -26,6 +32,8 @@ class RouteDetailViewController: UIViewController {
 
     var boardingStatus: BoardingStatus = .onBoard
 
+    let route: RouteModel = RouteModel(startNodeId: "DJB8001780", endNodeId: "DJB8003057")
+
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
     // 노선 ID
@@ -35,41 +43,88 @@ class RouteDetailViewController: UIViewController {
     // 도시 코드
     var cityCode: Int = 25
     // 버스 정류장들
-    var nodeList = [RouteNodesInfo]()
+    private var nodeList = [RouteNodesInfo]()
+    // 버스 정보
+    private var busInfo: RouteInformationInfo?
+    // 버스 위치
+    private var busLocationList = [BusLocationsInfo]()
+    private var busLocationListIndex = 0
+    private var busLocationIndexPath: [Int] = []
+
+    // 새로고침
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+
+        return refreshControl
+    }()
+
+    @objc func fetchData() {
+
+    }
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
         case .onBoard:
             self.boardingStatus = .getOff
             self.boardingStateButton.isSelected = true
+
+            let moveIndex = IndexPath(row: 9, section: 0)
+            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .middle, animated: true)
+
         case .getOff:
             self.boardingStatus = .onBoard
             self.boardingStateButton.isSelected = false
         }
     }
 
-    let retryButoon = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
+    let retryButton = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // 네트워크 전송.
-        BusClient.getNodesListBody(
-            city: String(cityCode),
-            routeId: routeId,
-            completion: handleRequestNodesTotalNumberResponse(response:error:))
+        callNetworkFunction()
 
         routeView.clipsToBounds = true
         routeView.layer.cornerRadius = 30
         routeView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
 
+        self.view.backgroundColor = .duduDeepBlue
         self.routeDetailTableView.dataSource = self
         self.routeDetailTableView.delegate = self
         busNumberLabel.text = "1000"
 
-        retryButoon.backgroundColor = .blue
-        retryButoon.layer.cornerRadius = 0.5 * retryButoon.bounds.width
-        self.view.addSubview(retryButoon)
+        retryButton.backgroundColor = .blue
+        retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
+        retryButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
+        retryButton.backgroundColor = .duduDeepBlue
+        self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
+
+    }
+
+    // 네트워크 연결 부르는 함수
+    func callNetworkFunction() {
+        BusClient.getNodesListBody(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestNodesTotalNumberResponse(response:error:))
+
+        BusClient.getRouteInformation(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestRouteInformation(response:error:))
+
+        BusClient.getLocationsOnRoute(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestLocationsOnRouteResponse(response:error:))
+
+        BusClient.getSpecificArrive(
+            city: String(cityCode),
+            routeId: routeId,
+            nodeId: nodeId,
+            completion: handleRequestSpecificArriveInfoResponse(response:error:))
     }
 
     func configureBoardingTapButton() {
@@ -94,7 +149,7 @@ class RouteDetailViewController: UIViewController {
         self.boardingStateButton.setAttributedTitle(getOffAttribute, for: .selected)
     }
 
-    // 전체 갯수 확인하는 네트워크 받으면 실행되는 콜백.
+    // 전체 갯수 확인하는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
@@ -107,37 +162,148 @@ class RouteDetailViewController: UIViewController {
             }
         }
 
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        //        print("error")
+        //        print(error?.localizedDescription ?? "")
     }
 
-    // 버스 정류장 정보 받아오는 네트워크 받으면 실행되는 콜백.
+    // 버스 정류장 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
-        if !response.isEmpty {
-            nodeList += response
+        guard !response.isEmpty else {
+            //        print("error")
+            //        print(error?.localizedDescription ?? "")
+            return
         }
 
-        print("Node List: \(nodeList.count)")
+        nodeList += response
 
-//        print("error")
-//        print(error?.localizedDescription ?? "")
+        nodeList.sort { $0.nodeord < $1.nodeord }
+
+        print("Node List: \(nodeList.count)")
+        routeDetailTableView.reloadData()
+
+    }
+
+    // 노선 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestRouteInformation(response: RouteInformationInfo?, error: Error?) {
+        // 여기 버스 노선 정보 첫차, 막차 등.
+        guard let response = response else {
+            //        print("error")
+            //        print(error?.localizedDescription ?? "")
+            return
+        }
+        busNumberLabel.text = String(response.intervaltime)
+        print("RouteInformation: \(response)")
+    }
+
+    // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
+        // 여기 버스 위치들 나타남
+        guard !response.isEmpty else {
+            //        print("error")
+            //        print(error?.localizedDescription ?? "")
+            return
+        }
+        print("===========================================")
+        busLocationList += response
+        busLocationList.sort { $0.nodeord < $1.nodeord }
+        print("Locations: \(response)")
+        routeDetailTableView.reloadData()
+    }
+
+    // 정류장에 오는 특정 노선에 대한 도착 정보만 받는 네트워크 결과 받으면 실행되는 콜백.
+    func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
+        // 여기 특정 노선에 대한 도착 정보 표현 됨.
+        guard let response = response else {
+            //        print(error)
+            //        print(error?.localizedDescription)
+            return
+        }
+        print("Response: \(response)")
     }
 }
 
 extension RouteDetailViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return nodeList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "routeDetailCell",
             for: indexPath) as! RouteDetailTableViewCell
-        cell.busStationLabel.text = "포스텍"
-        cell.routeLineView.backgroundColor = .gray
-        cell.busView.isHidden = false
+        if nodeList.isEmpty {
+            cell.busStationLabel.text = "불러오는 중입니다."
+        } else {
+            let cellData = nodeList[indexPath.row]
+            cell.busStationLabel.text = "\(cellData.nodenm)"
+
+            cell.highlightView.layer.cornerRadius = 15
+
+            // 출발지 도착지 표시
+            if(route.startNodeId == cellData.nodeid) {
+                cell.highlightView.isHidden = false
+                cell.highlightView.backgroundColor = .duduRed
+                cell.highlightLabel.text = "출발"
+            } else if(route.endNodeId == cellData.nodeid) {
+                self.view.sendSubviewToBack(self.view)
+                cell.highlightView.isHidden = false
+                cell.highlightView.backgroundColor = .duduBlue
+                cell.highlightLabel.text = "도착"
+            } else {
+                cell.busTimeLabel2.text = "10분"
+                cell.highlightView.isHidden = true
+            }
+
+            if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
+               && busLocationListIndex + 1 < busLocationList.count) {
+                cell.busView2.isHidden = false
+                busLocationListIndex += 1
+                busLocationIndexPath.append(indexPath.row)
+                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!indexPath.row : \(indexPath.row)")
+            } else {
+                cell.busView2.isHidden = true
+            }
+
+            if(busLocationIndexPath.contains(indexPath.row)) {
+                cell.busView2.isHidden = false
+                print("!===================================indexPath.row : \(indexPath.row)")
+            } else {
+                cell.busView2.isHidden = true
+            }
+
+            //            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
+            //                cell.routeLineView.backgroundColor = .duduDeepBlue
+            //            } else {
+            //                cell.routeLineView.backgroundColor = .duduGray
+            //            }
+
+            if(indexPath.row + 1 < nodeList.count
+               && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
+                cell.routePointImageView.image = UIImage(systemName: "eraser")
+            } else {
+                cell.routePointImageView.image = UIImage(systemName: "chevron.down.circle")
+            }
+
+        }
+        cell.routeLineView.backgroundColor = .duduGray
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
+        cell.busView.isHidden = true
+        cell.busTimeLabel2.layer.masksToBounds = true
+        cell.busTimeLabel2.layer.cornerRadius = 6.5
+
+        //        cell.busImageView2.image = UIImage(named: "bus")
+
+        //        let endNode = nodeList.count - 1
+        //        let index = indexPath.row
+        //        if index == endNode {
+        //            cell.routeLineView.isHidden = true
+        //            cell.busView2.isHidden = true
+        //        } else {
+        //            cell.routeLineView.isHidden = false
+        //            cell.busView2.isHidden = false
+        //        }
 
         return cell
     }
@@ -146,12 +312,12 @@ extension RouteDetailViewController: UITableViewDataSource {
         UIView()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 14
+        return 10
     }
 }
 
 extension RouteDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 77
     }
 }
