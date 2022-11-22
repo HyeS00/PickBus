@@ -38,13 +38,7 @@ final class SelectStartNodeTableViewCell: UITableViewCell {
 
     // MARK: 셀 확장 설정
     func settingData(isClicked: Bool) {
-        if isClicked {
-            mapView.isHidden = false
-            self.backgroundColor = .duduBlue
-        } else {
-            mapView.isHidden = true
-            self.backgroundColor = .clear
-        }
+        mapView.isHidden = !isClicked
+        self.backgroundColor = isClicked ? .duduBlue : .clear
     }
-
 }
