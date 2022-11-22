@@ -31,6 +31,13 @@ class SelectStartNodeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        mapView.isHidden = true
+        self.backgroundColor = .clear
+    }
+
     // MARK: 셀 확장 설정
     func settingData(isClicked: Bool) {
         if isClicked {
