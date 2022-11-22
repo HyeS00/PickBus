@@ -7,12 +7,12 @@
 
 import UIKit
 
-class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     private var selectedTableViewCellIndexPath: IndexPath?
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var busNodeSearchTextField: UITextField!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var busNodeSearchTextField: UITextField!
 
     // load task
     private var loadTasks = [URLSessionDataTask]()
@@ -51,8 +51,8 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         // 도시 코드 가져오기
         getCityCode()
 
-        defaultTableViewSetting()
-        defaultKeyboardObserverSetting()
+        settingDefaultTableView()
+        settingDefaultKeyboardObserver()
     }
 
     func getCityCode(isInit: Bool = true) {
@@ -64,14 +64,11 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     // MARK: 테이블
-    func defaultTableViewSetting() {
+    func settingDefaultTableView() {
         tableView.register(
             SelectStartNodeTableViewCell.nib(),
             forCellReuseIdentifier: SelectStartNodeTableViewCell.identifier
         )
-
-        tableView.delegate = self
-        tableView.dataSource = self
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,7 +104,7 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     // MARK: 키보드
-    func defaultKeyboardObserverSetting() {
+    func settingDefaultKeyboardObserver() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide(_:)),
@@ -122,13 +119,20 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
         )
     }
 
-    @IBAction func didEndOnExit(_ sender: Any) {
+    @IBAction private func didEndOnExit(_ sender: Any) {
         // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
         workItem?.cancel()
         if cityCodeDictionary.isEmpty {
             getCityCode(isInit: false)
         } else {
             startSearch()
+        }
+    }
+
+    @IBAction private func editing(_ sender: Any) {
+        stop = true
+        if repeatCount == cityCodeDictionary.keys.count {
+            clearNetworkSessionTask()
         }
     }
 
@@ -232,13 +236,6 @@ class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITa
             print(cityCode!)
             print(cityCodeDictionary[cityCode!] ?? "Nil_")
             print(response)
-        }
-    }
-
-    @IBAction func editing(_ sender: Any) {
-        stop = true
-        if repeatCount == cityCodeDictionary.keys.count {
-            clearNetworkSessionTask()
         }
     }
 

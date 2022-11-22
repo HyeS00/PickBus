@@ -16,12 +16,11 @@ class ViewController: UIViewController {
         return button
     }()
 
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var jerryButton: UIButton!
+    @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var jerryButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         stackView.addArrangedSubview(moveRouteListViewButton)
     }
 
