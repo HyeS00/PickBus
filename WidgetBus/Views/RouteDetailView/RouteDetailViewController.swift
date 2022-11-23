@@ -255,6 +255,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         var startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }
         var endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }
 
+        cell.busView2.isHidden = true
         if nodeList.isEmpty {
             cell.busStationLabel.text = "불러오는 중입니다."
         } else {
