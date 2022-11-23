@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectArrivalViewController: UIViewController {
+final class SelectArrivalViewController: UIViewController {
 
     // MARK: - Properties
     private var nodeList: [ArrivalNodeModel?] = []
