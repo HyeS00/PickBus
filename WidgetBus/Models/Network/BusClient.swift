@@ -28,7 +28,7 @@ class BusClient {
         case getArriveList(city: String, busStopId: String)
         case getCityCodeList
         case getNodesList(city: String, routeId: String, pageNumber: String = "1")
-        case searchNode(city: String, nodeNm: String?, nodeNo: String?)
+        case searchNode(city: String, nodeName: String?, nodeNumber: String?)
         case getRouteInformation(city: String, routeId: String)
         case getBusLocationsOnRoute(city: String, routeId: String)
         case getSpecificArrive(city: String, routeId: String, nodeId: String)
@@ -54,28 +54,33 @@ class BusClient {
                 +
                 "&pageNo=\(pageNumber)"
 
-            case .searchNode(let city, let nodeNm, let nodeNo):
-                var url: String = ""
-                if let nodeNm = nodeNm {
-                    let escapedNodeNm = nodeNm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+            case .searchNode(let city, let nodeName, let nodeNumber):
+                var url = ""
+
+                var isNodeName = false
+                var isNodeNumber = false
+                nodeName == nil ? (isNodeName = false) : (isNodeName = true)
+                nodeNumber == nil ? (isNodeNumber = false) : (isNodeNumber = true)
+
+                if isNodeName {
+                    let escapedNodeNm =
+                    nodeName!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
                     url = Endpoints.base +
                     "/1613000/BusSttnInfoInqireService/getSttnNoList" +
                     Endpoints.apiKeyParam +
                     "&_type=json&cityCode=\(city)&nodeNm=\(escapedNodeNm ?? "")" +
                     "&numOfRows=99"
+                } else if isNodeNumber {
+                    url = Endpoints.base +
+                    "/1613000/BusSttnInfoInqireService/getSttnNoList" +
+                    Endpoints.apiKeyParam +
+                    "&_type=json&cityCode=\(city)&nodeNo=\(nodeNumber!)" +
+                    "&numOfRows=99"
                 } else {
-                    if let nodeNo = nodeNo {
-                        url = Endpoints.base +
-                        "/1613000/BusSttnInfoInqireService/getSttnNoList" +
-                        Endpoints.apiKeyParam +
-                        "&_type=json&cityCode=\(city)&nodeNo=\(nodeNo)" +
-                        "&numOfRows=99"
-                    } else {
-                        url = ""
-                    }
+                    return url
                 }
-//                print("url: \(url)")
                 return url
+
             case .getRouteInformation(let city, let routeId):
                 return Endpoints.base +
                 "/1613000/BusRouteInfoInqireService/getRouteInfoIem" +
@@ -108,7 +113,6 @@ class BusClient {
     ) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-//                print("data is nil")
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -116,7 +120,6 @@ class BusClient {
             }
             let decoder = JSONDecoder()
             do {
-                //                print(String(decoding: data, as: UTF8.self))
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
@@ -140,7 +143,7 @@ class BusClient {
     ) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-//                print("data is nil")
+
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
@@ -148,7 +151,6 @@ class BusClient {
             }
             let decoder = JSONDecoder()
             do {
-                //                print(String(decoding: data, as: UTF8.self))
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(cityCode, responseObject, nil)
@@ -166,15 +168,15 @@ class BusClient {
 
     class func searchNodeList(
         city: String = "25",
-        nodeNm: String? = "전통시장",
-        nodeNo: String? = "44810",
+        nodeName: String? = "전통시장",
+        nodeNumber: String? = "44810",
         completion: @escaping (Int?, [SearchNodeInfo], Error?) -> Void
     ) -> URLSessionDataTask {
         let myTask = taskForGetRequestWithCityCode(
             url: Endpoints.searchNode(
                 city: city,
-                nodeNm: nodeNm,
-                nodeNo: nodeNo).url,
+                nodeName: nodeName,
+                nodeNumber: nodeNumber).url,
             cityCode: Int(city) ?? 0,
             responseType: SearchNode.self) { city, response, error in
                 if let response = response {
@@ -238,7 +240,7 @@ class BusClient {
             _ = taskForGETRequest(
                 url: Endpoints.getCityCodeList.url,
                 responseType: CityCode.self) { response, error in
-                if let response = response {
+                    if let response = response {
                         completion(response.response.body.items.item, nil)
                     } else {
                         completion([], error)
