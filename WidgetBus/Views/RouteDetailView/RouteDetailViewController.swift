@@ -32,7 +32,7 @@ class RouteDetailViewController: UIViewController {
 
     var boardingStatus: BoardingStatus = .onBoard
 
-    let route: RouteModel = RouteModel(startNodeId: "DJB8001780", endNodeId: "DJB8003057")
+    let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
 
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
@@ -48,6 +48,8 @@ class RouteDetailViewController: UIViewController {
     private var busLocationList = [BusLocationsInfo]()
     private var busLocationListIndex = 0
     private var busLocationIndexPath: [Int] = []
+    // 특정 정류장에 도착예정 버스
+    private var specificArriveInfo: SpecificArriveInfo?
 
     // 새로고침
     private lazy var refreshControl: UIRefreshControl = {
@@ -196,11 +198,11 @@ class RouteDetailViewController: UIViewController {
         let weekday = Calendar.current.component(.weekday, from: today)
 
         switch weekday {
-        case 1:
+        case 1:// 일요일
             intervalTime = response.intervalsuntime
-        case 7:
+        case 7:// 토요일
             intervalTime = response.intervalsattime
-        default:
+        default:// 평일
             intervalTime = response.intervaltime
         }
 
@@ -234,6 +236,8 @@ class RouteDetailViewController: UIViewController {
             return
         }
         print("Response: \(response)")
+        specificArriveInfo = response
+        routeDetailTableView.reloadData()
     }
 }
 
@@ -247,6 +251,10 @@ extension RouteDetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "routeDetailCell",
             for: indexPath) as! RouteDetailTableViewCell
+
+        var startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }
+        var endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }
+
         if nodeList.isEmpty {
             cell.busStationLabel.text = "불러오는 중입니다."
         } else {
@@ -266,11 +274,9 @@ extension RouteDetailViewController: UITableViewDataSource {
                 cell.highlightView.backgroundColor = .duduBlue
                 cell.highlightLabel.text = "도착"
             } else {
-                cell.busTimeLabel2.text = "10분"
                 cell.highlightView.isHidden = true
             }
 
-            cell.busView2.isHidden = true
             if(busLocationList.isEmpty) {
                 print("busLocationList 불러오는 중")
             } else {
@@ -285,6 +291,25 @@ extension RouteDetailViewController: UITableViewDataSource {
                 } else {
                     cell.busView2.isHidden = true
                 }
+
+                // 특정 버스 시간
+                if let specificBusInfo = specificArriveInfo {
+
+                    if let startNodeIdIndex = startNodeIdIndex {
+                        let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
+                        if(specificBusLocation > 0) {
+                            if(indexPath.row == specificBusLocation) {
+                                cell.busTimeLabel2.isHidden = false
+                                cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
+                            } else {
+                                cell.busTimeLabel2.isHidden = true
+                            }
+                        }
+                    } else { }
+                } else {
+                    print("현재 다가오는 버스가 없어요.")
+                }
+
             }
             //            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
             //                cell.routeLineView.backgroundColor = .duduDeepBlue
@@ -307,8 +332,8 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busTimeLabel2.layer.masksToBounds = true
         cell.busTimeLabel2.layer.cornerRadius = 6.5
 
-        //        cell.busImageView2.image = UIImage(named: "bus")
 
+        // 종점 표시
         //        let endNode = nodeList.count - 1
         //        let index = indexPath.row
         //        if index == endNode {
