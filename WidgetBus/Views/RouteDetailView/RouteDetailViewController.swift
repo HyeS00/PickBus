@@ -251,15 +251,28 @@ extension RouteDetailViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "routeDetailCell",
             for: indexPath) as! RouteDetailTableViewCell
+        let cellData = nodeList[indexPath.row]
 
-        var startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }
-        var endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }
+        let startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }
+        let endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }
+
+        // 출발지~목적지 색상 변경
+        if (indexPath.row >= startNodeIdIndex! && indexPath.row <= endNodeIdIndex!) {
+            cell.routePointImageView.tintColor = .duduDeepBlue
+        } else {
+            cell.routePointImageView.tintColor = .duduGray
+        }
+        if (indexPath.row >= startNodeIdIndex! && indexPath.row <= endNodeIdIndex! - 1) {
+            cell.routeLineView.backgroundColor = .duduDeepBlue
+        } else {
+            cell.routeLineView.backgroundColor = .duduGray
+        }
 
         cell.busView2.isHidden = true
         if nodeList.isEmpty {
             cell.busStationLabel.text = "불러오는 중입니다."
         } else {
-            let cellData = nodeList[indexPath.row]
+
             cell.busStationLabel.text = "\(cellData.nodenm)"
 
             cell.highlightView.layer.cornerRadius = 15
@@ -312,12 +325,6 @@ extension RouteDetailViewController: UITableViewDataSource {
                 }
 
             }
-            //            if(cellData.nodeord > route.startNodeId && cellData.nodeord < route.endNodeId) {
-            //                cell.routeLineView.backgroundColor = .duduDeepBlue
-            //            } else {
-            //                cell.routeLineView.backgroundColor = .duduGray
-            //            }
-
             if(indexPath.row + 1 < nodeList.count
                && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
                 cell.routePointImageView.image = UIImage(systemName: "eraser")
@@ -326,14 +333,11 @@ extension RouteDetailViewController: UITableViewDataSource {
             }
 
         }
-        cell.routeLineView.backgroundColor = .duduGray
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
         cell.busView.isHidden = true
         cell.busTimeLabel2.layer.masksToBounds = true
         cell.busTimeLabel2.layer.cornerRadius = 6.5
-
-
         // 종점 표시
         //        let endNode = nodeList.count - 1
         //        let index = indexPath.row
