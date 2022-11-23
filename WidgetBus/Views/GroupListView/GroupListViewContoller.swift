@@ -13,6 +13,8 @@ final class GroupListViewContoller: UIViewController {
     let initMain = false
     var groupName = ["출근길", "퇴근길", "백화점으로", "어디로", "시장으로", "제주도로", "어디로가죠", "저도 모르는 곳으로 가요"]
 
+    var dataController: DataController!
+
     // 그룹 리스트 테이블
     private lazy var groupListView: UITableView = {
         let groupList = UITableView(frame: .zero, style: .plain)
