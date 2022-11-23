@@ -16,7 +16,7 @@ struct Node {
 }
 
 struct Route {
-    var routeNo: String
+    var routeNo: Int
     var routeArr: Int?
     var routeNaextArr: Int?
     var routearrprevstationcnt: Int?

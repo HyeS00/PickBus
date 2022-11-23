@@ -22,8 +22,6 @@ class RouteCell: UITableViewCell {
             case 1:
                 busRemainingTimeLabel.text = "곧도착"
             case 2:
-                busRemainingTimeLabel.text = "전"
-            case 3:
                 busRemainingTimeLabel.text = "전전"
             default:
                 busRemainingTimeLabel.text = arrTime

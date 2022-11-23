@@ -9,19 +9,22 @@ import UIKit
 
 class RouteListViewController: UIViewController {
 
+    // API 횟수
+    var nodeCount = 0
+
     // 그룹 이름
     var groupTitle: String = "출근"
 
     // 정류장
     var nodes: [Node] = [
         Node(cityCode: "25", nodeId: "DJB8001793", nodeNm: "송강전통시장"),
-        Node(cityCode: "25", nodeId: "DJB8005972", nodeNm: "테크노밸리7단지")
+        Node(cityCode: "25", nodeId: "DJB8001193", nodeNm: "궁동")
     ]
 
     // 버스
     var routes: [[Route]] = [
-        [Route(routeNo: "301"), Route(routeNo: "802"), Route(routeNo: "5")],
-        [Route(routeNo: "5")]
+        [Route(routeNo: 301), Route(routeNo: 802), Route(routeNo: 5)],
+        [Route(routeNo: 104), Route(routeNo: 105), Route(routeNo: 5)]
     ]
 
     // Timer 객체 생성
@@ -61,17 +64,13 @@ class RouteListViewController: UIViewController {
         self.view.backgroundColor = .duduDeepBlue
 
         // 타이머 실행전 1회 api 호출
-        BusClient.getArriveList(
-            city: "25",
-            busstopId: "DJB8001793",
-            completion: getRouteInfo(response:error:)
-        )
+        requestArriveInfo()
 
         // 타이머 설정 - 30초마다 api 호출
         apiTimer = Timer.scheduledTimer(
-            timeInterval: 30,
+            timeInterval: 1000,
             target: self,
-            selector: #selector(updateRouteInfo(sender:)),
+            selector: #selector(updatedTimer(sender:)),
             userInfo: nil, repeats: true
         )
 
@@ -138,27 +137,57 @@ class RouteListViewController: UIViewController {
     }
 
     // 버스정보 API 호출
-    @objc func updateRouteInfo(sender: Timer) {
-        // API를 호출
+    @objc func updatedTimer(sender: Timer) {
+        // API를 호출함수 호출
         print("30초가 경과하여 updateRouteInfo 함수가 실행되었습니다.")
-        BusClient.getArriveList(
-            city: "25",
-            busstopId: "DJB8001793",
-            completion: getRouteInfo(response:error:)
-        )
+        requestArriveInfo()
+    }
+
+    // API 호출
+    func requestArriveInfo() {
+        for node in nodes {
+            BusClient.getArriveList(
+                city: node.cityCode,
+                busstopId: node.nodeId,
+                completion: getRouteInfo(response:error:)
+            )
+        }
+
     }
 
     func getRouteInfo(response: [ArriveInfoResponseArriveInfo], error: Error?) {
-        print("exFunction 함수가 실행되었다.")
-        //        print(response)
-        print(response.filter { $0.routeno == 5 })
+        if error == nil {
+            // 성공
+            print("response", response)
+
+            for routeN in routes[nodeCount].indices {
+                let newRouteInfo = response.filter {
+                    $0.routeno == routes[nodeCount][routeN].routeNo}.first
+                routes[nodeCount][routeN].routeArr = newRouteInfo?.arrtime
+                routes[nodeCount][routeN].routearrprevstationcnt = newRouteInfo?.arrprevstationcnt
+            }
+            nodeCount += 1
+        } else {
+            // 실패
+            nodeCount += 1
+        }
+
+        if nodeCount == nodes.count {
+            print("완료")
+            print(routes)
+            routeTableView.reloadData()
+            nodeCount = 0
+        } else {
+            print("미완료")
+            print(nodeCount)
+        }
     }
 
     func secToMin(sec: Int?) -> String {
         if sec == nil {
-            return ""
+            return "정보없음"
         } else {
-            return String(sec! / 60)
+            return String(sec! / 60) + "분"
         }
     }
 }
@@ -247,6 +276,7 @@ extension RouteListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: BusStopCell.identifier,
                     for: indexPath) as! BusStopCell
+                print("헤더셀")
                 cell.busStopLabel.text = nodes[indexPath.section].nodeNm
                 cell.selectionStyle = .none
                 return cell
@@ -255,10 +285,11 @@ extension RouteListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: RouteCell.identifier,
                     for: indexPath) as! RouteCell
+
                 let route = routes[indexPath.section][indexPath.row - 1]
                 print(route.routeNo)
 
-                cell.routeNumber = route.routeNo
+                cell.routeNumber = String(route.routeNo)
                 cell.arrprevstationcnt = route.routearrprevstationcnt ?? 1000
                 cell.arrTime = secToMin(sec: route.routeArr)
                 cell.nextArrTime = secToMin(sec: route.routeNaextArr)
