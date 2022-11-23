@@ -210,7 +210,7 @@ class RouteDetailViewController: UIViewController {
         endTime.insert(":", at: endTime.index(endTime.startIndex, offsetBy: 2))
 
         busTimeInfoLabel.text = "\(startTime) ~ \(endTime) 배차간격 \(intervalTime)분"
-//        print("RouteInformation: \(response)")
+        //        print("RouteInformation: \(response)")
     }
 
     // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
@@ -338,16 +338,14 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busView.isHidden = true
         cell.busTimeLabel2.layer.masksToBounds = true
         cell.busTimeLabel2.layer.cornerRadius = 6.5
+
         // 종점 표시
-        //        let endNode = nodeList.count - 1
-        //        let index = indexPath.row
-        //        if index == endNode {
-        //            cell.routeLineView.isHidden = true
-        //            cell.busView2.isHidden = true
-        //        } else {
-        //            cell.routeLineView.isHidden = false
-        //            cell.busView2.isHidden = false
-        //        }
+        let endNode = nodeList.count - 1
+        if indexPath.row == endNode {
+            cell.routeLineView.isHidden = true
+        } else {
+            cell.routeLineView.isHidden = false
+        }
 
         return cell
     }
