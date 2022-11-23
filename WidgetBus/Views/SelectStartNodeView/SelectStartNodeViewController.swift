@@ -142,15 +142,15 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
 
     // 검색 시작
     func startSearch() {
-        let nodeNm: String?
-        let nodeNo: String?
+        let nodeName: String?
+        let nodeNumber: String?
         // 번호 검색인지 이름 검색인지 확인.
         if Int(self.busNodeSearchTextField.text ?? "") == nil {
-            nodeNo = nil
-            nodeNm = self.busNodeSearchTextField.text ?? ""
+            nodeNumber = nil
+            nodeName = self.busNodeSearchTextField.text ?? ""
         } else {
-            nodeNo = self.busNodeSearchTextField.text ?? ""
-            nodeNm = nil
+            nodeNumber = self.busNodeSearchTextField.text ?? ""
+            nodeName = nil
         }
 
         workItem = DispatchWorkItem {
@@ -166,8 +166,8 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
                 self.repeatCount += 1
                 let task = BusClient.searchNodeList(
                     city: String(mCityCode),
-                    nodeNm: nodeNm,
-                    nodeNo: nodeNo,
+                    nodeName: nodeName,
+                    nodeNumber: nodeNumber,
                     completion: self.handleRequestSearchNodeResponse(cityCode:response:error:))
 
                 self.loadTasks.append(task)
@@ -175,8 +175,6 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
                 if self.repeatCount % 25 == 0 && self.repeatCount > 0 {
                     sleep(1)
                 }
-//                print("realCount: \(self.repeatCount) \(self.cityCodeDictionary.keys.count)")
-//                print("count: \(self.loadTasks.count)")
             }
         }
         if let workItem = workItem {
@@ -205,32 +203,27 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     // 도시 코드 가져오는 네트워크 완료된 다음 실행되는 콜백(초반)
     func handleRequestCityCodeResponse(response: [CityCodeInfo], error: Error?) {
         guard error == nil else {
-            //            print(error?.localizedDescription)
             return
         }
         if !response.isEmpty {
             cityCodeDictionary = makeCityCodeDictionary(cityCodeArray: response)
-            //            print(cityCodeDictionary)
         }
     }
 
     // 도시 코드 가져오는 네트워크 완료된 다음 실행되는 콜백(검색)
     func handleRequestCityCodeResponseSearch(response: [CityCodeInfo], error: Error?) {
         guard error == nil else {
-            //            print(error?.localizedDescription)
             return
         }
         if !response.isEmpty {
             cityCodeDictionary = makeCityCodeDictionary(cityCodeArray: response)
             startSearch()
-            //            print(cityCodeDictionary)
         }
     }
 
     // 검색 후, 실행되는 콜백
     func handleRequestSearchNodeResponse(cityCode: Int?, response: [SearchNodeInfo], error: Error?) {
         guard error == nil else {
-            //            print(error?.localizedDescription)
             return
         }
 
