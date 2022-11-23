@@ -24,50 +24,16 @@
             </objects>
             <point key="canvasLocation" x="-981" y="-27"/>
         </scene>
-        <!--View Controller-->
+        <!--Group List View Contoller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WidgetBus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GroupListViewContoller" customModule="WidgetBus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0ik-YK-i6y">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yZ-Ql-blN">
-                                        <rect key="frame" x="97.666666666666686" y="0.0" width="198" height="34.333333333333336"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="select Start Node View"/>
-                                        <connections>
-                                            <segue destination="j7y-vn-diP" kind="show" id="Pyw-4g-3GS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asu-Z3-tWK">
-                                        <rect key="frame" x="168.66666666666666" y="227" width="56" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Jedi"/>
-                                        <connections>
-                                            <segue destination="em8-0h-ovx" kind="show" id="ETv-Me-IHI"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bz6-5H-3AT">
-                                        <rect key="frame" x="167.33333333333334" y="453.66666666666663" width="58.333333333333343" height="34.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="jerry"/>
-                                        <connections>
-                                            <action selector="uploadJerryView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ecr-e1-Kpf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Irc-vl-NC8">
-                                        <rect key="frame" x="167.33333333333334" y="680.66666666666663" width="58.333333333333343" height="34.333333333333371"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Dale"/>
-                                        <connections>
-                                            <segue destination="PAY-MO-Xp7" kind="show" id="byJ-fA-GmE"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -80,10 +46,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zY3-15-RZ0"/>
-                    <connections>
-                        <outlet property="jerryButton" destination="bz6-5H-3AT" id="hrJ-Y7-36N"/>
-                        <outlet property="stackView" destination="0ik-YK-i6y" id="teF-Rr-llV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
