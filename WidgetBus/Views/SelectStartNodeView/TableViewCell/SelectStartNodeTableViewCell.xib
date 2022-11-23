@@ -19,33 +19,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zbu-Ql-1cG" userLabel="Cell Stack View">
-                        <rect key="frame" x="16" y="11" width="288" height="297.66666666666669"/>
+                        <rect key="frame" x="16" y="11" width="288" height="301.33333333333331"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQq-Sl-YJ3" userLabel="BusNodeInfoView">
-                                <rect key="frame" x="0.0" y="0.0" width="288" height="28.666666666666668"/>
+                                <rect key="frame" x="0.0" y="0.0" width="288" height="32.333333333333336"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P8a-71-kre" userLabel="Node Info Stack View">
-                                        <rect key="frame" x="8" y="0.0" width="69.333333333333329" height="28.666666666666668"/>
+                                        <rect key="frame" x="8" y="0.0" width="69.333333333333329" height="32.333333333333336"/>
                                         <subviews>
                                             <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="정류장 이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aPW-LQ-Mmw">
                                                 <rect key="frame" x="0.0" y="0.0" width="69.333333333333329" height="14.333333333333334"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="버스 진행 방향" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lmh-vn-M6B">
-                                                <rect key="frame" x="0.0" y="14.333333333333336" width="69.333333333333329" height="14.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="14.333333333333336" width="86" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
                                                 <color key="highlightedColor" systemColor="labelColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="정류장 거리" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUn-Ku-e9Q">
-                                        <rect key="frame" x="224.66666666666666" y="7.333333333333333" width="55.333333333333343" height="14.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                        <rect key="frame" x="206.33333333333334" y="6.6666666666666696" width="73.666666666666657" height="19.333333333333329"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -59,7 +59,7 @@
                                 </constraints>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TU-A3-Kdf">
-                                <rect key="frame" x="0.0" y="36.666666666666657" width="288" height="261"/>
+                                <rect key="frame" x="0.0" y="40.333333333333343" width="288" height="261"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1TU-A3-Kdf" secondAttribute="height" multiplier="32:29" id="0Oh-5I-8td"/>
                                 </constraints>
