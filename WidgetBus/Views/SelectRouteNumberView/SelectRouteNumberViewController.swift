@@ -10,12 +10,20 @@ import UIKit
 class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var routeNumberInfos = [ArriveInfoResponseArriveInfo]()
     var selectedIndex = IndexPath(row: -1, section: 0)
+
+    var dataController: DataController!
+    var newNode: Node!
+    var newGroup: Group!
+
     @IBOutlet weak var routeNumberTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "송강전통시장"
-        BusClient.getArriveList(completion: handleRequestArriveInfoResponse(response:error:))
+        self.navigationItem.title = "\(newNode.nodeNm!)"
+        BusClient.getArriveList(
+            city: newNode.cityCode!,
+            nodeId: newNode.nodeId!,
+            completion: handleRequestArriveInfoResponse(response:error:))
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
