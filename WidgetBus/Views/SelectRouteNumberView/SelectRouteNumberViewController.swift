@@ -19,6 +19,17 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let rightButton = UIBarButtonItem(
+            title: "다음",
+            style: .plain,
+            target: self,
+            action: #selector(pressButton(_:))
+        )
+        navigationItem.rightBarButtonItem = rightButton
+        navigationItem.rightBarButtonItem?.isEnabled = true
+//        navigationItem.rightBarButtonItem?.tintColor = .white
+
+        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
         self.navigationItem.title = "\(newNode.nodeNm!)"
         BusClient.getArriveList(
             city: newNode.cityCode!,
