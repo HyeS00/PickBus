@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		091BF3CA292E0F12004B8275 /* BusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF3C9292E0F12004B8275 /* BusBadgeView.swift */; };
-		091BF3CC292E5F38004B8275 /* BackgroundSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF3CB292E5F38004B8275 /* BackgroundSuperViewController.swift */; };
 		091BF3CE292E6104004B8275 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF3CD292E6104004B8275 /* TestViewController.swift */; };
 		099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */; };
 		099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */; };
@@ -84,7 +83,6 @@
 
 /* Begin PBXFileReference section */
 		091BF3C9292E0F12004B8275 /* BusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBadgeView.swift; sourceTree = "<group>"; };
-		091BF3CB292E5F38004B8275 /* BackgroundSuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSuperViewController.swift; sourceTree = "<group>"; };
 		091BF3CD292E6104004B8275 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalNodeModel.swift; sourceTree = "<group>"; };
 		099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTableViewCell.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */,
 				099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */,
 				091BF3C9292E0F12004B8275 /* BusBadgeView.swift */,
-				091BF3CB292E5F38004B8275 /* BackgroundSuperViewController.swift */,
 			);
 			path = SelectArrivalView;
 			sourceTree = "<group>";
@@ -636,7 +633,6 @@
 				C175CD27292CA0EF00140CDC /* RouteCell.swift in Sources */,
 				C175CD28292CA0EF00140CDC /* TitleHeader.swift in Sources */,
 				C175CD26292CA0EF00140CDC /* BusData.swift in Sources */,
-				091BF3CC292E5F38004B8275 /* BackgroundSuperViewController.swift in Sources */,
 				CF3D0A3A292A2B9700639E5C /* MySearchNodeInfo.swift in Sources */,
 				CFEC63D32928B67E00B75795 /* DataController.swift in Sources */,
 				091BF3CE292E6104004B8275 /* TestViewController.swift in Sources */,
