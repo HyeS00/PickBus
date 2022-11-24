@@ -52,15 +52,31 @@ class RouteDetailViewController: UIViewController {
     private var specificArriveInfo: SpecificArriveInfo?
 
     // 새로고침
-    private lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+    private func cofigureRefreshControl() {
+        routeDetailTableView.refreshControl = UIRefreshControl()
+        routeDetailTableView.refreshControl?
+            .addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
 
-        return refreshControl
-    }()
+    @objc func handleRefreshControl() {
+//        busLocationIndexPath = []
 
-    @objc func fetchData() {
+//        routeDetailTableView.refreshControl?.endRefreshing()
+//        routeDetailTableView.reloadData()
 
+//        DispatchQueue.main.async {
+//            self.busLocationIndexPath = []
+//            self.callNetworkRefreshFunction()
+//            self.routeDetailTableView.reloadData()
+//            self.routeDetailTableView.refreshControl?.endRefreshing()
+//        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            // self.busLocationIndexPath = []
+            self.callNetworkRefreshFunction()
+            self.routeDetailTableView.reloadData()
+            self.routeDetailTableView.refreshControl?.endRefreshing()
+        }
     }
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
@@ -100,6 +116,8 @@ class RouteDetailViewController: UIViewController {
         retryButton.backgroundColor = .duduDeepBlue
         self.view.addSubview(retryButton)
         self.configureBoardingTapButton()
+
+        self.cofigureRefreshControl()
     }
 
     // 네트워크 연결 부르는 함수
@@ -114,6 +132,20 @@ class RouteDetailViewController: UIViewController {
             routeId: routeId,
             completion: handleRequestRouteInformation(response:error:))
 
+        BusClient.getLocationsOnRoute(
+            city: String(cityCode),
+            routeId: routeId,
+            completion: handleRequestLocationsOnRouteResponse(response:error:))
+
+        BusClient.getSpecificArrive(
+            city: String(cityCode),
+            routeId: routeId,
+            nodeId: nodeId,
+            completion: handleRequestSpecificArriveInfoResponse(response:error:))
+    }
+
+    // 새로고침용 네트워크 연결 함수
+    func callNetworkRefreshFunction() {
         BusClient.getLocationsOnRoute(
             city: String(cityCode),
             routeId: routeId,
@@ -291,14 +323,34 @@ extension RouteDetailViewController: UITableViewDataSource {
                 cell.highlightView.isHidden = true
             }
 
+            // 버스 위치
             if(busLocationList.isEmpty) {
                 print("busLocationList 불러오는 중")
             } else {
-                if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
-                   && busLocationListIndex + 1 < busLocationList.count) {
-                    busLocationListIndex += 1
-                    busLocationIndexPath.append(indexPath.row)
+
+                // busLocationListIndex == busLocationList.count까지
+                if(busLocationListIndex < busLocationList.count) {
+                    if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord) {
+                        print("=================================")
+                        print("busLocationListIndex : \(busLocationListIndex)")
+                        print("busLocationList.count : \(busLocationList.count)")
+
+                        busLocationListIndex += 1
+                        busLocationIndexPath.append(indexPath.row)
+                    }
                 }
+//                if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
+//                   && busLocationListIndex < busLocationList.count + 1) {
+//
+//                    print("=================================")
+//                    print("busLocationListIndex : \(busLocationListIndex)")
+//                    print("busLocationList.count : \(busLocationList.count)")
+//
+//                    busLocationListIndex += 1
+//                    busLocationIndexPath.append(indexPath.row)
+//                } else {
+//                    print("여긴 버스가 없다.")
+//                }
 
                 if(busLocationIndexPath.contains(indexPath.row)) {
                     cell.busView2.isHidden = false
@@ -308,23 +360,24 @@ extension RouteDetailViewController: UITableViewDataSource {
 
                 // 특정 버스 시간
                 if let specificBusInfo = specificArriveInfo {
-
-                    if let startNodeIdIndex = startNodeIdIndex {
-                        let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
-                        if(specificBusLocation > 0) {
-                            if(indexPath.row == specificBusLocation) {
-                                cell.busTimeLabel2.isHidden = false
-                                cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
-                            } else {
-                                cell.busTimeLabel2.isHidden = true
-                            }
+                    let specificBusLocation = startNodeIdIndex! - specificBusInfo.arrprevstationcnt
+                    if(specificBusLocation > 0) {
+                        if(indexPath.row == specificBusLocation) {
+                            cell.busTimeLabel2.isHidden = false
+                            cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
+                        } else {
+                            cell.busTimeLabel2.isHidden = true
                         }
-                    } else { }
+                    }
                 } else {
+                    cell.busTimeLabel2.isHidden = true
                     print("현재 다가오는 버스가 없어요.")
                 }
-
+                // end 특정 버스 시간
             }
+            // end 버스 위치
+
+            // 회차지 표시
             if(indexPath.row + 1 < nodeList.count
                && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
                 cell.routePointImageView.image = UIImage(systemName: "eraser")
@@ -346,7 +399,6 @@ extension RouteDetailViewController: UITableViewDataSource {
         } else {
             cell.routeLineView.isHidden = false
         }
-
         return cell
     }
 
