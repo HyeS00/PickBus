@@ -21,11 +21,11 @@ class TestViewController: BackgroundViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.setTitleAndIndicator(titleText: "제목1231231", indicatorStep: .stepTwo)
+//        super.setTitleAndIndicator(titleText: "제목123\n제목123", indicatorStep: .stepTwo)
 
 //        busNum = "207번 (지곡행)"
 
-        configureUI()
+//        configureUI()
     }
     // MARK: - Actions
 

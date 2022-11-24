@@ -9,11 +9,12 @@ import UIKit
 
 class BackgroundViewController: UIViewController {
     // MARK: - Properties
-    // todo 문자열이 긴경우
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
-        label.text = "제목을 입력해주세요."
+        label.text = "제목을\n입력해주세요"
+        label.textAlignment = .center
+        label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,7 +49,7 @@ class BackgroundViewController: UIViewController {
     /**
      타이틀 명과 인디케이터 이미지를 설정합니다.
      */
-    func setTitleAndIndicator(titleText: String, indicatorStep: IndicatorStep) {
+    final func setTitleAndIndicator(titleText: String, indicatorStep: IndicatorStep) {
         titleLabel.text = titleText
         indicatorImage.image = UIImage(named: indicatorStep.rawValue)
     }
@@ -66,10 +67,10 @@ class BackgroundViewController: UIViewController {
         indicatorImage.widthAnchor.constraint(equalToConstant: 176).isActive = true
         indicatorImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
         indicatorImage.centerXAnchor.constraint(equalTo: guide.centerXAnchor).isActive = true
-        indicatorImage.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50).isActive = true
+        indicatorImage.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 78).isActive = true
 
         view.addSubview(bottomView)
-        bottomView.topAnchor.constraint(equalTo: indicatorImage.bottomAnchor, constant: 5).isActive = true
+        bottomView.topAnchor.constraint(equalTo: indicatorImage.bottomAnchor, constant: 8).isActive = true
         bottomView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         bottomView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
         bottomView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
