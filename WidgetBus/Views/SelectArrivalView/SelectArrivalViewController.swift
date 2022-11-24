@@ -26,8 +26,8 @@ final class SelectArrivalViewController: UIViewController {
 
     private var pageCount: Int = -1
 
-    // var busNum: String?
-    var busNum: String = "207 (임시)"
+     var busNum: String?
+//    var busNum: String = "207 (임시)"
 
     // 0 정방향 or 1 역방향 / 회차지 구분용
     // 예) 0 > 0(회차지) > 1 > 1
@@ -37,6 +37,7 @@ final class SelectArrivalViewController: UIViewController {
     // 도착정류장 선택 유뮤 
     private var isArrivalOn: Bool = false
 
+    //
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
@@ -74,6 +75,7 @@ final class SelectArrivalViewController: UIViewController {
         return imageView
     }()
 
+    //
     private let bottomView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 15

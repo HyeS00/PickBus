@@ -26,6 +26,7 @@ class ViewController: UIViewController {
 
     @IBAction func uploadJerryView(_ sender: Any) {
         let selectVC = SelectArrivalViewController()
+        selectVC.busNum = "208"
         self.navigationController?.pushViewController(selectVC, animated: false)
     }
 
