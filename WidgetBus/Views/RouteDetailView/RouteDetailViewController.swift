@@ -66,7 +66,7 @@ class RouteDetailViewController: UIViewController {
         specificArriveInfo = nil
 
         DispatchQueue.main.async {
-            // self.busLocationIndexPath = []
+
             self.callNetworkRefreshFunction()
             self.routeDetailTableView.reloadData()
             self.routeDetailTableView.refreshControl?.endRefreshing()
@@ -107,11 +107,11 @@ class RouteDetailViewController: UIViewController {
         refreshButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         refreshButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
         refreshButton.backgroundColor = .duduDeepBlue
+        refreshButton.addTarget(self, action: #selector(handleRefreshControl), for: .touchUpInside)
         self.configureBoardingTapButton()
 
         self.cofigureRefreshControl()
     }
-
     // 네트워크 연결 부르는 함수
     func callNetworkFunction() {
         BusClient.getNodesListBody(
