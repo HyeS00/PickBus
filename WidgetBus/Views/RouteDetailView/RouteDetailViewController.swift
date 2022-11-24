@@ -323,7 +323,8 @@ extension RouteDetailViewController: UITableViewDataSource {
 
                 // busLocationListIndex == busLocationList.count까지
                 if(busLocationListIndex < busLocationList.count
-                   && busLocationList[busLocationListIndex].nodeord == cellData.nodeord) {
+                   && busLocationList[busLocationListIndex].nodeord == cellData.nodeord
+                   && nodeList.endIndex != busLocationList[busLocationListIndex].nodeord) {
                         busLocationListIndex += 1
                         busLocationIndexPath.append(indexPath.row)
                 }
