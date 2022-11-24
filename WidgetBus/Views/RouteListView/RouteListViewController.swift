@@ -10,7 +10,7 @@ import UIKit
 class RouteListViewController: UIViewController {
 
     // API 횟수
-    var nodeCount = 0
+    var nodeCount: Int = 0
 
     // 그룹 이름
     var groupTitle: String = "출근"
@@ -24,7 +24,12 @@ class RouteListViewController: UIViewController {
     // 버스
     var routes: [[Route]] = [
         [Route(routeNo: 301), Route(routeNo: 802), Route(routeNo: 5)],
-        [Route(routeNo: 104), Route(routeNo: 105), Route(routeNo: 5)]
+        [Route(routeNo: 104), Route(routeNo: 105)]
+    ]
+
+    var index: [String: Int] = [
+        "DJB8001793": 0,
+        "DJB8001193": 1
     ]
 
     // Timer 객체 생성
@@ -159,12 +164,12 @@ class RouteListViewController: UIViewController {
         if error == nil {
             // 성공
             print("response", response)
-
-            for routeN in routes[nodeCount].indices {
+            guard let nodeIndex = index[response[0].nodeid] else { fatalError() }
+            for routeN in routes[nodeIndex].indices {
                 let newRouteInfo = response.filter {
-                    $0.routeno == routes[nodeCount][routeN].routeNo}.first
-                routes[nodeCount][routeN].routeArr = newRouteInfo?.arrtime
-                routes[nodeCount][routeN].routearrprevstationcnt = newRouteInfo?.arrprevstationcnt
+                    $0.routeno == routes[nodeIndex][routeN].routeNo}.first
+                routes[nodeIndex][routeN].routeArr = newRouteInfo?.arrtime
+                routes[nodeIndex][routeN].routearrprevstationcnt = newRouteInfo?.arrprevstationcnt
             }
             nodeCount += 1
         } else {
@@ -175,6 +180,7 @@ class RouteListViewController: UIViewController {
         if nodeCount == nodes.count {
             print("완료")
             print(routes)
+            print("routes: ", routes)
             routeTableView.reloadData()
             nodeCount = 0
         } else {
@@ -226,6 +232,10 @@ extension RouteListViewController: UITableViewDelegate {
             self.title = .none
         }
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.section, indexPath.row)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -276,7 +286,6 @@ extension RouteListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: BusStopCell.identifier,
                     for: indexPath) as! BusStopCell
-                print("헤더셀")
                 cell.busStopLabel.text = nodes[indexPath.section].nodeNm
                 cell.selectionStyle = .none
                 return cell
