@@ -59,19 +59,12 @@ class RouteDetailViewController: UIViewController {
     }
 
     @objc func handleRefreshControl() {
-//        busLocationIndexPath = []
+        busLocationListIndex = 0
+        busLocationIndexPath = []
+        busLocationList = []
+        specificArriveInfo = nil
 
-//        routeDetailTableView.refreshControl?.endRefreshing()
-//        routeDetailTableView.reloadData()
-
-//        DispatchQueue.main.async {
-//            self.busLocationIndexPath = []
-//            self.callNetworkRefreshFunction()
-//            self.routeDetailTableView.reloadData()
-//            self.routeDetailTableView.refreshControl?.endRefreshing()
-//        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+        DispatchQueue.main.async {
             // self.busLocationIndexPath = []
             self.callNetworkRefreshFunction()
             self.routeDetailTableView.reloadData()
@@ -263,8 +256,8 @@ class RouteDetailViewController: UIViewController {
     func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
         // 여기 특정 노선에 대한 도착 정보 표현 됨.
         guard let response = response else {
-            //        print(error)
-            //        print(error?.localizedDescription)
+//                    print(error)
+//                    print(error?.localizedDescription)
             return
         }
         print("Response: \(response)")
@@ -329,7 +322,8 @@ extension RouteDetailViewController: UITableViewDataSource {
             } else {
 
                 // busLocationListIndex == busLocationList.count까지
-                if(busLocationListIndex < busLocationList.count && busLocationList[busLocationListIndex].nodeord == cellData.nodeord) {
+                if(busLocationListIndex < busLocationList.count
+                   && busLocationList[busLocationListIndex].nodeord == cellData.nodeord) {
                         busLocationListIndex += 1
                         busLocationIndexPath.append(indexPath.row)
                 }
