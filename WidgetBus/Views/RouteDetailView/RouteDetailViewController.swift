@@ -25,6 +25,8 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var endStationLabel: UILabel!
     @IBOutlet weak var busTimeInfoLabel: UILabel!
 
+    @IBOutlet weak var refreshButton: UIButton!
+    
     @IBOutlet weak var routeView: UIView!
     @IBOutlet weak var routeDetailTableView: UITableView!
 
