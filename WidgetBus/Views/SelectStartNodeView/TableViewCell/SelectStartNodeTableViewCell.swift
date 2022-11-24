@@ -64,7 +64,7 @@ final class SelectStartNodeTableViewCell: UITableViewCell, MKMapViewDelegate {
 
     // MARK: 어노테이션 설정
 
-    func addCustomPin() {
+    private func addCustomPin() {
         let pin = MKPointAnnotation()
         pin.coordinate = nodeCoordinate
         pin.title = nodeName.text
