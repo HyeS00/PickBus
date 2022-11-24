@@ -331,26 +331,10 @@ extension RouteDetailViewController: UITableViewDataSource {
                 // busLocationListIndex == busLocationList.count까지
                 if(busLocationListIndex < busLocationList.count) {
                     if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord) {
-                        print("=================================")
-                        print("busLocationListIndex : \(busLocationListIndex)")
-                        print("busLocationList.count : \(busLocationList.count)")
-
                         busLocationListIndex += 1
                         busLocationIndexPath.append(indexPath.row)
                     }
                 }
-//                if(busLocationList[busLocationListIndex].nodeord == cellData.nodeord
-//                   && busLocationListIndex < busLocationList.count + 1) {
-//
-//                    print("=================================")
-//                    print("busLocationListIndex : \(busLocationListIndex)")
-//                    print("busLocationList.count : \(busLocationList.count)")
-//
-//                    busLocationListIndex += 1
-//                    busLocationIndexPath.append(indexPath.row)
-//                } else {
-//                    print("여긴 버스가 없다.")
-//                }
 
                 if(busLocationIndexPath.contains(indexPath.row)) {
                     cell.busView2.isHidden = false
@@ -373,9 +357,7 @@ extension RouteDetailViewController: UITableViewDataSource {
                     cell.busTimeLabel2.isHidden = true
                     print("현재 다가오는 버스가 없어요.")
                 }
-                // end 특정 버스 시간
             }
-            // end 버스 위치
 
             // 회차지 표시
             if(indexPath.row + 1 < nodeList.count
