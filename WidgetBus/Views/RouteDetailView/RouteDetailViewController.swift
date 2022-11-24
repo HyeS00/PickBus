@@ -26,7 +26,6 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var busTimeInfoLabel: UILabel!
 
     @IBOutlet weak var refreshButton: UIButton!
-    
     @IBOutlet weak var routeView: UIView!
     @IBOutlet weak var routeDetailTableView: UITableView!
 
@@ -105,11 +104,9 @@ class RouteDetailViewController: UIViewController {
         self.routeDetailTableView.delegate = self
         busNumberLabel.text = "1000"
 
-        retryButton.backgroundColor = .blue
-        retryButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
-        retryButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
-        retryButton.backgroundColor = .duduDeepBlue
-        self.view.addSubview(retryButton)
+        refreshButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
+        refreshButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
+        refreshButton.backgroundColor = .duduDeepBlue
         self.configureBoardingTapButton()
 
         self.cofigureRefreshControl()

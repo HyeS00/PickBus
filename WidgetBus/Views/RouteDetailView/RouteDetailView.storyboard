@@ -157,10 +157,12 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNh-d1-4yX">
-                                        <rect key="frame" x="310" y="488" width="75" height="75"/>
+                                        <rect key="frame" x="330" y="508" width="55" height="55"/>
                                         <color key="backgroundColor" name="AccentColor"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="HtC-uV-Ebe"/>
                                             <constraint firstAttribute="width" secondItem="QNh-d1-4yX" secondAttribute="height" multiplier="1:1" id="fjr-eT-XSG"/>
+                                            <constraint firstAttribute="height" constant="55" id="qYy-gA-hXh"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
