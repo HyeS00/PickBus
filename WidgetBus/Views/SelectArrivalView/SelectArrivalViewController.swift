@@ -117,6 +117,11 @@ final class SelectArrivalViewController: UIViewController {
         if isArrivalOn {
             navigationController?.popViewController(animated: false)
         }
+        // test
+        else {
+            let testVC = TestViewController()
+            navigationController?.pushViewController(testVC, animated: true)
+        }
     }
 
     // MARK: - Helpers
