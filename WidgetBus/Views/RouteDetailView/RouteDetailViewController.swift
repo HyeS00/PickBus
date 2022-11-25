@@ -35,6 +35,8 @@ class RouteDetailViewController: UIViewController {
 
     let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
 
+    let locationManager = CLLocationManager()
+
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
     // 노선 ID
@@ -66,9 +68,7 @@ class RouteDetailViewController: UIViewController {
         specificArriveInfo = nil
 
         DispatchQueue.main.async {
-
             self.callNetworkRefreshFunction()
-            self.routeDetailTableView.reloadData()
             self.routeDetailTableView.refreshControl?.endRefreshing()
         }
     }
@@ -111,6 +111,11 @@ class RouteDetailViewController: UIViewController {
         self.configureBoardingTapButton()
 
         self.cofigureRefreshControl()
+
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+
     }
     // 네트워크 연결 부르는 함수
     func callNetworkFunction() {
@@ -387,5 +392,18 @@ extension RouteDetailViewController: UITableViewDataSource {
 extension RouteDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 77
+    }
+}
+
+extension RouteDetailViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let coordinate = locations.last?.coordinate {
+            print(coordinate.latitude)
+            print(coordinate.longitude)
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error : \(error.localizedDescription)")
     }
 }
