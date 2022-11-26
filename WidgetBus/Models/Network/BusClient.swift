@@ -197,11 +197,10 @@ class BusClient {
                 url: Endpoints.getArriveList(city: city, busStopId: nodeId).url,
                 responseType: ArriveInfoFromBusStop.self) { response, error in
                     if let response = response {
-                        completion(response.response.body.items.item, nil)
+                        completion(response.response.body.items.item.listValue, nil)
                     } else {
                         completion([], error)
                     }
-//                    print(Endpoints.getArriveList(city: city, busStopId: nodeId).url)
                 }
         }
 
