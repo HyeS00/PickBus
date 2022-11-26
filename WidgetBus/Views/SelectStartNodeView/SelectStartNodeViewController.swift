@@ -28,8 +28,6 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     var newGroup: Group!
     var temp = TmpStruct(cityCode: "", nodeid: "", nodenm: "", nodeno: -1)
 
-
-
     @IBAction private func didKeyboardEndOnExit(_ sender: Any) {
         // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
         workItem?.cancel()
