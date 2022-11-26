@@ -44,7 +44,7 @@ struct ArriveInfoResponseArriveInfo: Decodable {
     /// 노선 ID
     let routeid: String
     /// 노선 번호
-    let routeno: Int
+    let routeno: RouteNoMultiType
     /// 노선 유형(마을 버스 등)
     let routetp: String
     /// 도착예정버스 차량유형(저상 버스 등)

@@ -201,6 +201,7 @@ class BusClient {
                     } else {
                         completion([], error)
                     }
+//                    print(Endpoints.getArriveList(city: city, busStopId: nodeId).url)
                 }
         }
 
