@@ -22,6 +22,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     var dataController: DataController!
     var newNode: Node!
     var newGroup: Group!
+    private var newBus: Bus!
     private var routeNumberCellInfos = [RouteNumberCellStruct]()
 
     @IBOutlet weak var routeNumberTableView: UITableView!
@@ -36,6 +37,10 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         )
         navigationItem.rightBarButtonItem = rightButton
         navigationItem.rightBarButtonItem?.isEnabled = true
+
+        newBus = Bus(context: dataController.viewContext)
+        newBus.startNodeId = newNode.nodeId
+        newBus.startNodeName = newNode.nodeNm
 //        navigationItem.rightBarButtonItem?.tintColor = .white
 
         print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
@@ -49,22 +54,14 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
 
-//        let storyboard = UIStoryboard(name: "RouteNumberViewStoryboard", bundle: nil)
-//        let selectRouteNodeViewController =
-//        storyboard.instantiateViewController(
-//            withIdentifier: "SelectRouteNumberViewController") as! SelectRouteNumberViewController
-//
-//        let newNode = Node(context: dataController.viewContext)
-//        newNode.cityCode = temp.cityCode
-//        newNode.nodeId = temp.nodeid
-//        newNode.nodeNm = temp.nodenm
-//        newNode.nodeNo = String(temp.nodeno)
-//
-//        selectRouteNodeViewController.dataController = dataController
-//        selectRouteNodeViewController.newGroup = newGroup
-//        selectRouteNodeViewController.newNode = newNode
-//
-//        self.navigationController?.pushViewController(selectRouteNodeViewController, animated: true)
+        let selectArrivalviewController = SelectArrivalViewController()
+
+        selectArrivalviewController.newBus = newBus
+        selectArrivalviewController.dataController = dataController
+        selectArrivalviewController.newNode = newNode
+        selectArrivalviewController.newGroup = newGroup
+
+        self.navigationController?.pushViewController(selectArrivalviewController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,12 +75,16 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             let cellData = routeNumberCellInfos[indexPath.row]
             cellContent.text = "\(cellData.routeNumber) 번"
             cellContent.secondaryText = cellData.routeType
+
+            if selectedIndex == indexPath {
+                newBus.routeId = cellData.routeId
+                newBus.routeNo = cellData.routeNumber
+                cell.backgroundColor = UIColor(named: "duduBlue")
+            } else {
+                cell.backgroundColor = UIColor.clear
+            }
         }
-        if selectedIndex == indexPath {
-            cell.backgroundColor = UIColor(named: "duduBlue")
-        } else {
-            cell.backgroundColor = UIColor.clear
-        }
+
         cell.selectionStyle = .none
         cell.contentConfiguration = cellContent
 
