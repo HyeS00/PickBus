@@ -7,14 +7,7 @@
 
 import UIKit
 
-class RouteCell: UITableViewCell {
-
-    // 버스 번호
-    var routeNumber: String = "" {
-        didSet {
-            busNumberLabel.text = routeNumber
-        }
-    }
+final class RouteCell: UITableViewCell {
 
     // 남은 정류장
     var arrprevstationcnt: Int = 1000
@@ -25,10 +18,8 @@ class RouteCell: UITableViewCell {
             switch arrprevstationcnt {
             case 1:
                 busRemainingTimeLabel.text = "곧도착"
-                print("버스가 곧 도착합니다.")
             case 2:
                 busRemainingTimeLabel.text = "전전"
-                print("2번째 전 정류장입니다.")
             default:
                 busRemainingTimeLabel.text = arrTime
             }
@@ -39,9 +30,8 @@ class RouteCell: UITableViewCell {
     var nextArrTime: String = ""
 
     // 버스번호
-    private lazy var busNumberLabel: UILabel = {
+    var busNumberLabel: UILabel = {
         let label = UILabel()
-//        label.text = routeNumber
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
@@ -104,9 +94,9 @@ class RouteCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func layoutSubviews() {
         super.layoutSubviews()
-
         self.contentView.addSubview(busNumberBackgroundView)
         self.contentView.addSubview(busNumberLabel)
         self.contentView.addSubview(busRemainingTimeLabel)
@@ -149,7 +139,5 @@ class RouteCell: UITableViewCell {
 
     @objc func pressedRideButton(_ sender: UIButton) {
         // 버스번호 넘기면서 디테일뷰로 이동
-        print(routeNumber)
-        print(busNumberLabel.text)
     }
 }

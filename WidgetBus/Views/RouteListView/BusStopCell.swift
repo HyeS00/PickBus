@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BusStopCell: UITableViewCell {
+final class BusStopCell: UITableViewCell {
 
     var isNoti: Bool = false
 

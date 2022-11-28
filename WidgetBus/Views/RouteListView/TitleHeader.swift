@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TitleHeader: UITableViewHeaderFooterView {
+final class TitleHeader: UITableViewHeaderFooterView {
 
     // 정류장이름
     let busStopLabel: UILabel = {

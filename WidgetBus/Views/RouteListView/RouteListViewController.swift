@@ -7,38 +7,38 @@
 
 import UIKit
 
-class RouteListViewController: UIViewController {
+final class RouteListViewController: UIViewController {
 
     // API 횟수
-    var nodeCount: Int = 0
+    private var nodeCount: Int = 0
 
     // 그룹 이름
-    var groupTitle: String = "출근"
+    private var groupTitle: String = "출근"
 
     // 정류장
-    var nodes: [Node] = [
+    private var nodes: [Node] = [
         Node(cityCode: "25", nodeId: "DJB8001793", nodeNm: "송강전통시장"),
         Node(cityCode: "25", nodeId: "DJB8001193", nodeNm: "궁동")
     ]
 
     // 버스
-    var routes: [[Route]] = [
+    private var routes: [[Route]] = [
         [Route(routeNo: 301), Route(routeNo: 802), Route(routeNo: 5)],
         [Route(routeNo: 104), Route(routeNo: 105)]
     ]
 
-    var index: [String: Int] = [
+    private var index: [String: Int] = [
         "DJB8001793": 0,
         "DJB8001193": 1
     ]
 
     // Timer 객체 생성
-    var apiTimer = Timer()
+    private var apiTimer = Timer()
 
     // 셀 높이
-    let routeHeaderCellHeight: CGFloat = 35
-    let routeCellHeight: CGFloat = 50
-    let addRouteCellHeight: CGFloat = 78
+    private let routeHeaderCellHeight: CGFloat = 35
+    private let routeCellHeight: CGFloat = 50
+    private let addRouteCellHeight: CGFloat = 78
 
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
@@ -60,7 +60,6 @@ class RouteListViewController: UIViewController {
         table.register(BusStopCell.self, forCellReuseIdentifier: BusStopCell.identifier)
         table.register(RouteCell.self, forCellReuseIdentifier: RouteCell.identifier)
         table.register(AddRouteCell.self, forCellReuseIdentifier: AddRouteCell.identifier)
-
         return table
     }()
 
@@ -73,7 +72,7 @@ class RouteListViewController: UIViewController {
 
         // 타이머 설정 - 30초마다 api 호출
         apiTimer = Timer.scheduledTimer(
-            timeInterval: 1000,
+            timeInterval: 30,
             target: self,
             selector: #selector(updatedTimer(sender:)),
             userInfo: nil, repeats: true
@@ -89,7 +88,6 @@ class RouteListViewController: UIViewController {
 
     private func setupNavigationBar() {
         // 타이틀 설정
-        //        title = group.name
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
 
         // back 버튼
@@ -154,13 +152,13 @@ class RouteListViewController: UIViewController {
             BusClient.getArriveList(
                 city: node.cityCode,
                 busstopId: node.nodeId,
-                completion: getRouteInfo(response:error:)
+                completion: fatchArriveInfo(response:error:)
             )
         }
 
     }
 
-    func getRouteInfo(response: [ArriveInfoResponseArriveInfo], error: Error?) {
+    func fatchArriveInfo(response: [ArriveInfoResponseArriveInfo], error: Error?) {
         if error == nil {
             // 성공
             print("response", response)
@@ -245,7 +243,7 @@ extension RouteListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TitleHeader.identifier) as! TitleHeader
-        header.busStopLabel.text = nodes[section].nodeNm
+        header.busStopLabel.text = groupTitle
         return header
     }
 
@@ -296,9 +294,7 @@ extension RouteListViewController: UITableViewDataSource {
                     for: indexPath) as! RouteCell
 
                 let route = routes[indexPath.section][indexPath.row - 1]
-                print(route.routeNo)
-
-                cell.routeNumber = String(route.routeNo)
+                cell.busNumberLabel.text = String(route.routeNo)
                 cell.arrprevstationcnt = route.routearrprevstationcnt ?? 1000
                 cell.arrTime = secToMin(sec: route.routeArr)
                 cell.nextArrTime = secToMin(sec: route.routeNaextArr)

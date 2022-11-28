@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddRouteCell: UITableViewCell {
+final class AddRouteCell: UITableViewCell {
 
     // 루트추가 이미지
     private let addImageView: UIImageView = {

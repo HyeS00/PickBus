@@ -9,12 +9,14 @@ import Foundation
 
 // Dummy-data
 
+// 정류장
 struct Node {
     var cityCode: String
     var nodeId: String
     var nodeNm: String
 }
 
+// 로트
 struct Route {
     var routeNo: Int
     var routeArr: Int?
