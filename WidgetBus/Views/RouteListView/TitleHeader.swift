@@ -32,8 +32,8 @@ final class TitleHeader: UITableViewHeaderFooterView {
         self.contentView.addSubview(busStopLabel)
 
         NSLayoutConstraint.activate([
-            self.busStopLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            self.busStopLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor)
+            self.busStopLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            self.busStopLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
 }
