@@ -285,6 +285,10 @@ extension RouteDetailViewController: UITableViewDataSource {
         let startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }
         let endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }
 
+        cell.busImageLabel2.layer.masksToBounds = true
+        cell.busImageLabel2.layer.cornerRadius = 0.5 * 14
+
+
         // 출발지~목적지 색상 변경
         if (indexPath.row >= startNodeIdIndex! && indexPath.row <= endNodeIdIndex!) {
             cell.routePointImageView.tintColor = .duduDeepBlue

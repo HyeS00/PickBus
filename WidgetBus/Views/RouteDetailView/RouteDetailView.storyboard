@@ -119,18 +119,19 @@
                                                                                 <constraint firstAttribute="height" constant="30" id="v5X-Jv-cI5"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sh-BP-oGy">
-                                                                            <rect key="frame" x="18" y="0.0" width="12" height="12"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sh-BP-oGy">
+                                                                            <rect key="frame" x="16" y="0.0" width="14" height="14"/>
+                                                                            <color key="backgroundColor" name="duduRed"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="12" id="CcW-6C-gZr"/>
-                                                                                <constraint firstAttribute="width" constant="12" id="INZ-JN-rJz"/>
+                                                                                <constraint firstAttribute="height" constant="14" id="CcW-6C-gZr"/>
+                                                                                <constraint firstAttribute="width" constant="14" id="INZ-JN-rJz"/>
                                                                             </constraints>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="trailing" secondItem="8Sh-BP-oGy" secondAttribute="trailing" id="0mg-K7-bAO"/>
                                                                         <constraint firstAttribute="trailing" secondItem="HxK-uL-I1j" secondAttribute="trailing" id="3vh-KY-CMX"/>
@@ -165,6 +166,8 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="busImageBoundView2" destination="hZL-q1-8cU" id="R1d-mM-1kV"/>
+                                                    <outlet property="busImageLabel2" destination="8Sh-BP-oGy" id="BKP-rz-6Fy"/>
                                                     <outlet property="busImageView" destination="Jf7-8v-JAB" id="2ea-iw-ZIN"/>
                                                     <outlet property="busImageView2" destination="HxK-uL-I1j" id="bIn-Fd-CFl"/>
                                                     <outlet property="busStationLabel" destination="n5M-gO-6h2" id="UkD-HM-nlf"/>
