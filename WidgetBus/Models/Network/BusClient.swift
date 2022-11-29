@@ -224,7 +224,6 @@ class BusClient {
                         completion([], error)
                     }
                 }
-            print(Endpoints.getAllRoutesFromNode(city: city, nodeId: nodeId).url)
         }
 
     class func getNodesListBody(
