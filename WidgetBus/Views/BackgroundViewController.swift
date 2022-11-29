@@ -40,7 +40,6 @@ class BackgroundViewController: UIViewController {
 
     let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemPink
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
