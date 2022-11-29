@@ -41,6 +41,8 @@ class RouteDetailViewController: UIViewController {
     var boardingStatus: BoardingStatus = .onBoard
 
     let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
+    var startNodeIdIndex = 0
+    var endNodeIdIndex = 0
 
     let locationManager = CLLocationManager()
 
@@ -87,9 +89,8 @@ class RouteDetailViewController: UIViewController {
             self.boardingStatus = .getOff
             self.boardingStateButton.isSelected = true
 
-            let moveIndex = IndexPath(row: 9, section: 0)
+            let moveIndex = IndexPath(row: startNodeIdIndex, section: 0)
             self.routeDetailTableView.scrollToRow(at: moveIndex, at: .middle, animated: true)
-
         case .getOff:
             self.boardingStatus = .onBoard
             self.boardingStateButton.isSelected = false
@@ -214,6 +215,9 @@ class RouteDetailViewController: UIViewController {
 
         nodeList.sort { $0.nodeord < $1.nodeord }
 
+        startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
+        endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
+
         print("Node List: \(nodeList.count)")
         routeDetailTableView.reloadData()
 
@@ -290,19 +294,16 @@ extension RouteDetailViewController: UITableViewDataSource {
             for: indexPath) as! RouteDetailTableViewCell
         let cellData = nodeList[indexPath.row]
 
-        let startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }
-        let endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }
-
         cell.busImageLabel2.layer.masksToBounds = true
         cell.busImageLabel2.layer.cornerRadius = 0.5 * 14
 
         // 출발지~목적지 색상 변경
-        if (indexPath.row >= startNodeIdIndex! && indexPath.row <= endNodeIdIndex!) {
+        if (indexPath.row >= startNodeIdIndex && indexPath.row <= endNodeIdIndex) {
             cell.routePointImageView.tintColor = .duduDeepBlue
         } else {
             cell.routePointImageView.tintColor = .duduGray
         }
-        if (indexPath.row >= startNodeIdIndex! && indexPath.row <= endNodeIdIndex! - 1) {
+        if (indexPath.row >= startNodeIdIndex && indexPath.row <= endNodeIdIndex - 1) {
             cell.routeLineView.backgroundColor = .duduDeepBlue
         } else {
             cell.routeLineView.backgroundColor = .duduGray
@@ -366,7 +367,7 @@ extension RouteDetailViewController: UITableViewDataSource {
 
                 // 특정 버스 시간
                 if let specificBusInfo = specificArriveInfo {
-                    let specificBusLocation = startNodeIdIndex! - specificBusInfo.arrprevstationcnt
+                    let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
                     if(specificBusLocation > 0) {
                         if(indexPath.row == specificBusLocation) {
                             cell.busTimeLabel2.isHidden = false
