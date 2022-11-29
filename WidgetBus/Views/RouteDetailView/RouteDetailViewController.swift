@@ -341,8 +341,6 @@ extension RouteDetailViewController: UITableViewDataSource {
                    && busLocationList[busLocationListIndex].nodeord == cellData.nodeord
                    && nodeList.endIndex != busLocationList[busLocationListIndex].nodeord) {
 
-                    busLocationListIndex += 1
-
                     if(busLocationListIndex != 0
                        && busLocationList[busLocationListIndex - 1].nodeord == busLocationList[busLocationListIndex].nodeord) {
                         busLocationIndexPath[busLocationIndexPathIndex].cnt += 1
@@ -350,6 +348,7 @@ extension RouteDetailViewController: UITableViewDataSource {
                         busLocationIndexPath.append(CurrentBusLocationInfo(nodeord: indexPath.row, cnt: 1))
                         busLocationIndexPathIndex += 1
                     }
+                    busLocationListIndex += 1
                 }
 
                 if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 1}) {
