@@ -18,6 +18,13 @@ struct RouteModel {
     let endNodeId: String
 }
 
+struct CurrentBusLocationInfo {
+    // 버스 위치
+    var nodeord: Int
+    // 버스 개수
+    var cnt: Int
+}
+
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -50,7 +57,8 @@ class RouteDetailViewController: UIViewController {
     // 버스 위치
     private var busLocationList = [BusLocationsInfo]()
     private var busLocationListIndex = 0
-    private var busLocationIndexPath: [Int] = []
+    private var busLocationIndexPath = [CurrentBusLocationInfo]()
+    private var busLocationIndexPathIndex = 0
     // 특정 정류장에 도착예정 버스
     private var specificArriveInfo: SpecificArriveInfo?
 
@@ -288,7 +296,6 @@ extension RouteDetailViewController: UITableViewDataSource {
         cell.busImageLabel2.layer.masksToBounds = true
         cell.busImageLabel2.layer.cornerRadius = 0.5 * 14
 
-
         // 출발지~목적지 색상 변경
         if (indexPath.row >= startNodeIdIndex! && indexPath.row <= endNodeIdIndex!) {
             cell.routePointImageView.tintColor = .duduDeepBlue
@@ -329,16 +336,31 @@ extension RouteDetailViewController: UITableViewDataSource {
                 print("busLocationList 불러오는 중")
             } else {
 
-                // busLocationListIndex == busLocationList.count까지
+                // 버스 위치 저장하기
                 if(busLocationListIndex < busLocationList.count
                    && busLocationList[busLocationListIndex].nodeord == cellData.nodeord
                    && nodeList.endIndex != busLocationList[busLocationListIndex].nodeord) {
-                        busLocationListIndex += 1
-                        busLocationIndexPath.append(indexPath.row)
+
+                    busLocationListIndex += 1
+
+                    if(busLocationListIndex != 0
+                       && busLocationList[busLocationListIndex - 1].nodeord == busLocationList[busLocationListIndex].nodeord) {
+                        busLocationIndexPath[busLocationIndexPathIndex].cnt += 1
+                    } else {
+                        busLocationIndexPath.append(CurrentBusLocationInfo(nodeord: indexPath.row, cnt: 1))
+                        busLocationIndexPathIndex += 1
+                    }
                 }
 
-                if(busLocationIndexPath.contains(indexPath.row)) {
+                if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 1}) {
                     cell.busView2.isHidden = false
+                    cell.busImageLabel2.isHidden = true
+                } else if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 2}) {
+                    cell.busImageLabel2.isHidden = false
+                    cell.busImageLabel2.text = "2"
+                } else if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 3}) {
+                    cell.busImageLabel2.isHidden = false
+                    cell.busImageLabel2.text = "3"
                 } else {
                     cell.busView2.isHidden = true
                 }
