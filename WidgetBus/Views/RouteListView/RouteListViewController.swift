@@ -9,6 +9,10 @@ import UIKit
 
 class RouteListViewController: UIViewController {
 
+    // 코어 데이터
+    var dataController: DataController!
+    var myGroup: Group!
+
     // 더미 데이터
     var busStops = BusData.busStops
 
@@ -92,7 +96,8 @@ class RouteListViewController: UIViewController {
 
     // 뒤로가기
     @objc private func pressedBackButton(_ sender: UIButton!) {
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     // 편집하기
