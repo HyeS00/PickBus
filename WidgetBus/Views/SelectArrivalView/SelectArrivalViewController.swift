@@ -15,14 +15,19 @@ final class SelectArrivalViewController: UIViewController {
     // 변수 이름은 원하는 대로 변경하시면 됩니다.
     private var nodeListJedi = [RouteNodesInfo]()
 
+    var newBus: Bus!
+    var dataController: DataController!
+    var newNode: Node!
+    var newGroup: Group!
+
     // Jedi
     // 이전 뷰에서 넘어올 정보들
-    // 노선 ID
-    var routeId: String = "DJB30300004"
-    // 정류장 ID
-    var nodeId: String = "DJB8001793"
-    // 도시 코드
-    var cityCode: Int = 25
+    /// 노선 ID
+    private var routeId: String = "DJB30300004"
+    /// 정류장 ID
+    private var nodeId: String = "DJB8001793"
+    /// 도시 코드
+    private var cityCode: String = "25"
 
     private var pageCount: Int = -1
 
@@ -34,7 +39,7 @@ final class SelectArrivalViewController: UIViewController {
     private var upOrDown: Int?
     // 출발 정류장 인덱스
     private var departNodeIdx: Int = 0
-    // 도착정류장 선택 유뮤 
+    // 도착정류장 선택 유뮤
     private var isArrivalOn: Bool = false
 
     //
@@ -103,7 +108,7 @@ final class SelectArrivalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setInformations()
         setBusNodeList()
 
         view.backgroundColor = UIColor.duduDeepBlue
@@ -113,11 +118,33 @@ final class SelectArrivalViewController: UIViewController {
 
     }
 
+    func setInformations() {
+        routeId = newBus.routeId!
+        nodeId = newNode.nodeId!
+        cityCode = newNode.cityCode!
+        busNum = newBus.routeNo!
+    }
+
     // MARK: - Actions
     // 완료 버튼 Actions
     @objc func doneButtonSelect() {
         if isArrivalOn {
-            navigationController?.popViewController(animated: false)
+//            navigationController?.popViewController(animated: false)
+
+            for myNode in nodeList {
+                if case .arrival = myNode?.userSelected {
+                    newBus.endNodeId = myNode?.code
+                    newBus.endNodeName = myNode?.name
+                }
+            }
+            newGroup.createDate = Date()
+            newNode.group = newGroup
+            newBus.node = newNode
+
+            try? dataController.viewContext.save()
+            let routeListViewController = RouteListViewController()
+            routeListViewController.myGroup = newGroup
+            self.navigationController?.pushViewController(routeListViewController, animated: true)
         }
         // test
         else {
@@ -195,7 +222,7 @@ final class SelectArrivalViewController: UIViewController {
 
     func setBusNodeList() {
         BusClient.getNodesListBody(
-            city: String(cityCode),
+            city: cityCode,
             routeId: routeId,
             completion: handleRequestNodesTotalNumberResponse(response:error:))
     }
@@ -205,9 +232,10 @@ final class SelectArrivalViewController: UIViewController {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
             pageCount = iterater
+            print(pageCount)
             for index in 1...iterater {
                 BusClient.getNodeList(
-                    city: String(cityCode),
+                    city: cityCode,
                     routeId: routeId,
                     pageNo: String(index),
                     completion: handleRequestNodesListResponse(response:error:))
@@ -220,7 +248,6 @@ final class SelectArrivalViewController: UIViewController {
         if !response.isEmpty {
             nodeListJedi += response
             pageCount -= 1
-
         }
 
         if pageCount == 0 {

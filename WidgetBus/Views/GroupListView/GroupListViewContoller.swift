@@ -5,13 +5,21 @@
 //  Created by Shin yongjun on 2022/11/11.
 //
 
+import CoreData
 import UIKit
+
 struct GroupListArray: Decodable {
     let groupName: String
 }
 final class GroupListViewContoller: UIViewController {
     let initMain = false
     var groupName = ["출근길", "퇴근길", "백화점으로", "어디로", "시장으로", "제주도로", "어디로가죠", "저도 모르는 곳으로 가요"]
+
+    // CoreData 컨트롤러
+    var dataController: DataController!
+
+    // Group Array
+    var coreDataGroups = [Group]()
 
     // 그룹 리스트 테이블
     private lazy var groupListView: UITableView = {
@@ -54,8 +62,23 @@ final class GroupListViewContoller: UIViewController {
         return addButton
     }()
 
+    func getGroupsFromCoreData() {
+        let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: false)
+
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            coreDataGroups = result
+        }
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        getGroupsFromCoreData()
+
         groupListView.delegate = self
         groupListView.dataSource = self
 
@@ -114,8 +137,11 @@ private extension GroupListViewContoller {
         addButton.addTarget(self, action: #selector(btnAddGroupList(_:)), for: .touchUpInside)
     }
 
+    // 데이터 없을 때, 여기 추가.
     @objc func btnAddGroupList(_ sender: UIButton) {
         let addGroupListNameView = AddGroupListNameViewController()
+        addGroupListNameView.dataController = dataController
+
         self.navigationController?.pushViewController(addGroupListNameView, animated: true)
     }
 }
@@ -134,12 +160,16 @@ private extension GroupListViewContoller {
 extension GroupListViewContoller: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 데이터 있을 때, 여기 추가.
         if indexPath.row == groupName.count {
-            let settingView = AddGroupListNameViewController()
-            self.navigationController?.pushViewController(settingView, animated: true)
+            let addGroupListNameView = AddGroupListNameViewController()
+            addGroupListNameView.dataController = dataController
+
+            self.navigationController?.pushViewController(addGroupListNameView, animated: true)
         } else {
             let settingView = SettingViewController()
             self.navigationController?.pushViewController(settingView, animated: true)
+
         }
     }
 }
