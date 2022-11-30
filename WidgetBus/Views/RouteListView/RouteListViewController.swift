@@ -10,8 +10,6 @@ import CoreData
 
 final class RouteListViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
-    var nodeArray = [Node]()
-
     // API 횟수
     private var nodeCount: Int = 0
 
@@ -41,21 +39,42 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     // 코어 데이터
     var dataController: DataController!
     var myGroup: Group!
-    var fetchedNodeController: NSFetchedResultsController<Node>!
-    var fetchedBusController: NSFetchedResultsController<Bus>!
+    var nodeArray = [Node]()
+    var busArray = [[Bus]]()
 
-    fileprivate func fetchNodes() {
-        let fetchRequset: NSFetchRequest<Node> = Node.fetchRequest()
-
-        // NSPredicate란? 메모리 내에서 어떤 값을 가져올때 filter에 대한 조건
+    fileprivate func loadNodes() {
+        let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
         let predicate = NSPredicate(format: "group == %@", myGroup)
-        fetchRequset.predicate = predicate
+        fetchRequest.predicate = predicate
         let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
-        fetchRequset.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [sortDescriptor]
 
-        if let result = try?
-        dataController.viewContext.fetch(fetchRequset) {
-            nodeArray = result
+        do {
+            nodeArray = try dataController.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Error fetching node data from context \(error)")
+        }
+    }
+
+    fileprivate func loadBuses(myNode: Node) {
+        let fetchRequest: NSFetchRequest<Bus> = Bus.fetchRequest()
+        let predicate = NSPredicate(format: "node == %@", myNode)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "routeId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        do {
+            let buses = try dataController.viewContext.fetch(fetchRequest)
+            busArray.append(buses)
+        } catch {
+            print("Error fatching bus data from context \(error)")
+        }
+    }
+
+    fileprivate func setupData() {
+        loadNodes()
+        for num in nodeArray.indices {
+            loadBuses(myNode: nodeArray[num])
         }
     }
 
@@ -90,7 +109,9 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
-        fetchNodes()
+
+        // 코어데이터 셋
+        setupData()
 
         // 타이머 실행전 1회 api 호출
         requestArriveInfo()
@@ -242,11 +263,12 @@ extension RouteListViewController: UITableViewDelegate {
     //        }
     //    }
 
-    // 첫번째 셀은 삭제 불가능 - 정류장 이름 셀, 루트 차가하기 셀
+    // 정류장 셀은 삭제 불가 기능
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         indexPath.row == 0 ? false : true
     }
 
+    // 스크롤 위치변화에 따른 네비게이션 타이틀 표시
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if routeTableView.contentOffset.y > -40 {
             self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -281,7 +303,7 @@ extension RouteListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TitleHeader.identifier) as! TitleHeader
-        header.busStopLabel.text = groupTitle
+        header.busStopLabel.text = myGroup.name
         return header
     }
 
@@ -292,24 +314,29 @@ extension RouteListViewController: UITableViewDataSource {
 
     // 섹션 수
     func numberOfSections(in tableView: UITableView) -> Int {
-        nodes.count + 1
+        // 기존
+//        nodes.count + 1
+        nodeArray.count + 1
     }
 
     // 셀 수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == nodes.count ? 1 : routes[section].count + 1
+        // 기존
+//        section == nodes.count ? 1 : routes[section].count + 1
+        section == nodeArray.count ? 1 : 2 // 임시: 2를 bus의 카운트 + 1 로 수정해야함
     }
 
     // 셀 높이
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        indexPath.section == nodes.count ?
+        indexPath.section == nodeArray.count ?
         addRouteCellHeight : indexPath.row == 0 ?
         routeHeaderCellHeight : routeCellHeight
     }
 
     // 셀 정의 - 마지막 섹션이면 루트 추가 셀 적용 / 기본 섹션이면 루트 셀 적용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == nodes.count {
+
+        if indexPath.section == nodeArray.count {
             // 마지막 섹션
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddRouteCell.identifier,
@@ -318,26 +345,16 @@ extension RouteListViewController: UITableViewDataSource {
         } else {
             // 기본 섹션
             if indexPath.row == 0 {
-                // 헤더 셀
+                // 정류장 셀
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: BusStopCell.identifier,
                     for: indexPath) as! BusStopCell
-                cell.busStopLabel.text = nodes[indexPath.section].nodeNm
+                cell.busStopLabel.text = nodeArray[indexPath.section].nodeNm
                 cell.selectionStyle = .none
                 return cell
             } else {
                 // 기본 셀
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: RouteCell.identifier,
-                    for: indexPath) as! RouteCell
-
-                let route = routes[indexPath.section][indexPath.row - 1]
-                cell.busNumberLabel.text = String(route.routeNo)
-                cell.arrprevstationcnt = route.routearrprevstationcnt ?? 1000
-                cell.arrTime = secToMin(sec: route.routeArr)
-                cell.nextArrTime = secToMin(sec: route.routeNaextArr)
-                cell.selectionStyle = .none
-                return cell
+                return UITableViewCell()
             }
         }
     }
