@@ -25,6 +25,11 @@ struct CurrentBusLocationInfo {
     var cnt: Int
 }
 
+struct ClientBoardingStatus {
+    var boardingState: BoardingStatus
+    var vehicleno: String?
+}
+
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -43,6 +48,8 @@ class RouteDetailViewController: UIViewController {
     let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
     var startNodeIdIndex = 0
     var endNodeIdIndex = 0
+
+    var clientBoardingStatus = ClientBoardingStatus(boardingState: .getOff, vehicleno : nil)
 
     let locationManager = CLLocationManager()
 
@@ -90,7 +97,7 @@ class RouteDetailViewController: UIViewController {
             self.boardingStateButton.isSelected = true
 
             let moveIndex = IndexPath(row: startNodeIdIndex, section: 0)
-            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .middle, animated: true)
+            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .bottom, animated: true)
         case .getOff:
             self.boardingStatus = .onBoard
             self.boardingStateButton.isSelected = false
@@ -124,7 +131,6 @@ class RouteDetailViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-
     }
     // 네트워크 연결 부르는 함수
     func callNetworkFunction() {
@@ -220,6 +226,7 @@ class RouteDetailViewController: UIViewController {
 
         print("Node List: \(nodeList.count)")
         routeDetailTableView.reloadData()
+        scrollToRow()
 
     }
 
@@ -279,6 +286,22 @@ class RouteDetailViewController: UIViewController {
         print("Response: \(response)")
         specificArriveInfo = response
         routeDetailTableView.reloadData()
+    }
+
+    // 뷰가 로드된 후 상황에 맞게 scroll이동
+    func scrollToRow() {
+        var moveIndex: IndexPath
+
+        switch clientBoardingStatus.boardingState {
+        case .getOff:
+            moveIndex = IndexPath(row: startNodeIdIndex, section: 0)
+            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .bottom, animated: true)
+        case .onBoard:
+            if let bus = busLocationList.first(where: {$0.vehicleno == clientBoardingStatus.vehicleno}) {
+                moveIndex = IndexPath(row: bus.nodeord, section: 0)
+                self.routeDetailTableView.scrollToRow(at: moveIndex, at: .bottom, animated: true)
+            }
+        }
     }
 }
 
@@ -344,6 +367,7 @@ extension RouteDetailViewController: UITableViewDataSource {
 
                     if(busLocationListIndex != 0
                        && busLocationList[busLocationListIndex - 1].nodeord == busLocationList[busLocationListIndex].nodeord) {
+
                         busLocationIndexPath[busLocationIndexPathIndex].cnt += 1
                     } else {
                         busLocationIndexPath.append(CurrentBusLocationInfo(nodeord: indexPath.row, cnt: 1))
