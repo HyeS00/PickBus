@@ -13,6 +13,7 @@
 		099287E82924B23800CB7DBE /* SelectArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */; };
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
 		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; };
+		C122560E29376472005B9B1C /* StartNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C122560D29376472005B9B1C /* StartNodeModel.swift */; };
 		C13E0E412929941500818085 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E0E402929941500818085 /* UITextField+.swift */; };
 		C146115429237E11003E03E3 /* SelectStartNodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C146115229237E11003E03E3 /* SelectStartNodeTableViewCell.swift */; };
 		C146115529237E11003E03E3 /* SelectStartNodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C146115329237E11003E03E3 /* SelectStartNodeTableViewCell.xib */; };
@@ -96,6 +97,7 @@
 		7EC20A1B8AEA1509993C81A6 /* Pods-WidgetBusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBusTests.debug.xcconfig"; path = "Target Support Files/Pods-WidgetBusTests/Pods-WidgetBusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		95C0C9BA31DBED1269202E64 /* Pods-WidgetBus-WidgetBusUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus-WidgetBusUITests.debug.xcconfig"; path = "Target Support Files/Pods-WidgetBus-WidgetBusUITests/Pods-WidgetBus-WidgetBusUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus_WidgetBusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C122560D29376472005B9B1C /* StartNodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNodeModel.swift; sourceTree = "<group>"; };
 		C13E0E402929941500818085 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C146115229237E11003E03E3 /* SelectStartNodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStartNodeTableViewCell.swift; sourceTree = "<group>"; };
 		C146115329237E11003E03E3 /* SelectStartNodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectStartNodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -384,8 +386,9 @@
 		E1707845291EC271001D324C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CFEC63D12928B66500B75795 /* CoreData */,
+				C122560D29376472005B9B1C /* StartNodeModel.swift */,
 				099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */,
+				CFEC63D12928B66500B75795 /* CoreData */,
 				CFE0A865291CCB29002779C6 /* Network */,
 			);
 			path = Models;
@@ -659,6 +662,7 @@
 				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
 				CF2F03712931B9AC00414507 /* ArriveInfoMultiTypes.swift in Sources */,
 				CF3D0A382929CC1B00639E5C /* SearchNode.swift in Sources */,
+				C122560E29376472005B9B1C /* StartNodeModel.swift in Sources */,
 				C1B745652923699400167496 /* SelectStartNodeViewController.swift in Sources */,
 				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
 				C175CD0F292B719900140CDC /* AddGroupTableViewCell.swift in Sources */,

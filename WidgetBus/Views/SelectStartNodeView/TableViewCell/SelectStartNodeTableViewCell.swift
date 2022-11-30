@@ -16,7 +16,7 @@ final class SelectStartNodeTableViewCell: UITableViewCell, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    private let nodeCoordinate = CLLocationCoordinate2D(
+    var nodeCoordinate = CLLocationCoordinate2D(
         latitude: 36.014099310928216,
         longitude: 129.32591317393107
     )
