@@ -257,8 +257,19 @@ extension RouteListViewController: UITableViewDelegate {
         }
     }
 
+    // 셀 선택
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == nodes.count {
+            let storyboard = UIStoryboard(name: "SelectStartNodeView", bundle: nil)
+            let selectStartNodeViewController =
+            storyboard.instantiateViewController(
+                withIdentifier: "SelectStartNodeView") as! SelectStartNodeViewController
 
+            selectStartNodeViewController.dataController = dataController
+            selectStartNodeViewController.newGroup = myGroup
+
+            self.navigationController?.pushViewController(selectStartNodeViewController, animated: true)
+        }
     }
 
 }
