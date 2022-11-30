@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
-final class RouteListViewController: UIViewController {
+final class RouteListViewController: UIViewController, NSFetchedResultsControllerDelegate {
+
+    var nodeArray = [Node]()
 
     // API 횟수
     private var nodeCount: Int = 0
@@ -38,6 +41,23 @@ final class RouteListViewController: UIViewController {
     // 코어 데이터
     var dataController: DataController!
     var myGroup: Group!
+    var fetchedNodeController: NSFetchedResultsController<Node>!
+    var fetchedBusController: NSFetchedResultsController<Bus>!
+
+    fileprivate func fetchNodes() {
+        let fetchRequset: NSFetchRequest<Node> = Node.fetchRequest()
+
+        // NSPredicate란? 메모리 내에서 어떤 값을 가져올때 filter에 대한 조건
+        let predicate = NSPredicate(format: "group == %@", myGroup)
+        fetchRequset.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
+        fetchRequset.sortDescriptors = [sortDescriptor]
+
+        if let result = try?
+        dataController.viewContext.fetch(fetchRequset) {
+            nodeArray = result
+        }
+    }
 
     // 셀 높이
     private let routeHeaderCellHeight: CGFloat = 35
@@ -70,6 +90,7 @@ final class RouteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
+        fetchNodes()
 
         // 타이머 실행전 1회 api 호출
         requestArriveInfo()
@@ -237,8 +258,9 @@ extension RouteListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.section, indexPath.row)
+
     }
+
 }
 
 // MARK: - UITableViewDataSource

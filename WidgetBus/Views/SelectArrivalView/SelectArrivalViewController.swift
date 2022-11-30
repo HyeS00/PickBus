@@ -142,6 +142,7 @@ class SelectArrivalViewController: UIViewController {
             try? dataController.viewContext.save()
             let routeListViewController = RouteListViewController()
             routeListViewController.myGroup = newGroup
+            routeListViewController.dataController = dataController
             self.navigationController?.pushViewController(routeListViewController, animated: true)
         }
     }
