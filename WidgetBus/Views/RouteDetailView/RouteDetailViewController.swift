@@ -92,14 +92,22 @@ class RouteDetailViewController: UIViewController {
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
-        case .onBoard:
+            // 탑승
+        case .onBoard: //
             self.boardingStatus = .getOff
             self.boardingStateButton.isSelected = true
 
-            let moveIndex = IndexPath(row: startNodeIdIndex, section: 0)
-            self.routeDetailTableView.scrollToRow(at: moveIndex, at: .bottom, animated: true)
+            /*
+             내 위치와 가까운 버스위치 찾기
+             tableView cellForAt에서 label바꿔주기
+             clientBoardingStatus에 값바꿔주기
+             tableView.reload
+             */
+
         case .getOff:
             self.boardingStatus = .onBoard
+            self.clientBoardingStatus.boardingState = .getOff
+            self.clientBoardingStatus.vehicleno = nil
             self.boardingStateButton.isSelected = false
         }
     }
@@ -128,6 +136,7 @@ class RouteDetailViewController: UIViewController {
 
         self.cofigureRefreshControl()
 
+        // 여기 화면을 로드할떄 리퀘스트
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
@@ -366,7 +375,8 @@ extension RouteDetailViewController: UITableViewDataSource {
                    && nodeList.endIndex != busLocationList[busLocationListIndex].nodeord) {
 
                     if(busLocationListIndex != 0
-                       && busLocationList[busLocationListIndex - 1].nodeord == busLocationList[busLocationListIndex].nodeord) {
+                       && busLocationList[busLocationListIndex - 1].nodeord
+                       == busLocationList[busLocationListIndex].nodeord) {
 
                         busLocationIndexPath[busLocationIndexPathIndex].cnt += 1
                     } else {
@@ -376,15 +386,14 @@ extension RouteDetailViewController: UITableViewDataSource {
                     busLocationListIndex += 1
                 }
 
-                if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 1}) {
+                if let bus = busLocationIndexPath.first(where: {$0.nodeord == indexPath.row}) {
                     cell.busView2.isHidden = false
-                    cell.busImageLabel2.isHidden = true
-                } else if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 2}) {
-                    cell.busImageLabel2.isHidden = false
-                    cell.busImageLabel2.text = "2"
-                } else if(busLocationIndexPath.contains { $0.nodeord == indexPath.row && $0.cnt == 3}) {
-                    cell.busImageLabel2.isHidden = false
-                    cell.busImageLabel2.text = "3"
+                    if(bus.cnt == 1) {
+                        cell.busImageLabel2.isHidden = true
+                    } else {
+                        cell.busImageLabel2.isHidden = false
+                        cell.busImageLabel2.text = String(bus.cnt)
+                    }
                 } else {
                     cell.busView2.isHidden = true
                 }
@@ -450,6 +459,9 @@ extension RouteDetailViewController: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate {
             print(coordinate.latitude)
             print(coordinate.longitude)
+            // start 가져오고싶을때 stop
+            // startUpdatingLocation - stopUpdatingLocation / requireLocation
+            // coreLocation Developer.com
         }
     }
 
