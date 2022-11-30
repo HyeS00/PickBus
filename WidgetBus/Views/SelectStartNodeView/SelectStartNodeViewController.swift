@@ -20,10 +20,10 @@ struct TmpStruct {
 }
 
 final class SelectStartNodeViewController:
-    BackgroundViewController, UITableViewDelegate, UITableViewDataSource {
+    BackgroundViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var contentStackView: UIStackView!
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var startBusNodeTableView: UITableView!
     @IBOutlet private weak var busNodeSearchTextField: UITextField!
 
     // CoreData Controller
@@ -131,7 +131,7 @@ final class SelectStartNodeViewController:
 
     // MARK: 테이블
     func settingDefaultTableView() {
-        tableView.register(
+        startBusNodeTableView.register(
             SelectStartNodeTableViewCell.nib(),
             forCellReuseIdentifier: SelectStartNodeTableViewCell.identifier
         )
@@ -221,6 +221,13 @@ final class SelectStartNodeViewController:
         self.view.frame.origin.y = 0
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nodeList.removeAll()
+        selectedTableViewCellIndexPath = nil
+        startBusNodeTableView.reloadData()
+        return true
+    }
+
     // MARK: 검색
 
     // 검색 시작
@@ -301,7 +308,7 @@ final class SelectStartNodeViewController:
             temp.nodeid = response[0].nodeid
             temp.nodenm = response[0].nodenm
 
-            tableView.beginUpdates()
+            startBusNodeTableView.beginUpdates()
             response.forEach {
                 nodeList.append(
                     StartNodeModel(
@@ -317,9 +324,9 @@ final class SelectStartNodeViewController:
                     )
                 )
 
-                tableView.insertRows(at: [IndexPath(row: nodeList.count - 1, section: 0)], with: .automatic)
+                startBusNodeTableView.insertRows(at: [IndexPath(row: nodeList.count - 1, section: 0)], with: .automatic)
             }
-            tableView.endUpdates()
+            startBusNodeTableView.endUpdates()
 
         }
     }
