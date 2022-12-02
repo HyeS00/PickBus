@@ -198,7 +198,6 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
                 guard let fetchBusInfo = response.filter { $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }.first else { fatalError() }
 //                let newRouteInfo = response.filter {
 //                    $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }.first
-//                print("response: " ,response)
                 print("번호: ", String(busArray[nodeIndex][busIndex].routeNo!))
                 arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
                 print("=========")
@@ -230,27 +229,42 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
             return String(sec! / 60) + "분"
         }
     }
+
+    func deleteNode(section: Int) {
+        let nodeToDelete = nodeArray[section]
+        nodeArray.remove(at: section)
+        dataController.viewContext.delete(nodeToDelete)
+        try? dataController.viewContext.save()
+    }
+
+    func deleteBus(section: Int, row: Int) {
+        let busToDelete = busArray[section][row]
+        busArray[section].remove(at: row)
+        dataController.viewContext.delete(busToDelete)
+        try? dataController.viewContext.save()
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension RouteListViewController: UITableViewDelegate {
 
     // 섹션, 루트 삭제 기능
-    //    func tableView(
-    //        _ tableView: UITableView,
-    //        commit editingStyle: UITableViewCell.EditingStyle,
-    //        forRowAt indexPath: IndexPath
-    //    ) {
-    //        if busStops[indexPath.section].routes.count == 1 {
-    //            // 섹션 제거
-    //            busStops.remove(at: indexPath.section)
-    //            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
-    //        } else {
-    //            // 루트 제거
-    //            busStops[indexPath.section].routes.remove(at: indexPath.row - 1)
-    //            tableView.deleteRows(at: [indexPath], with: .automatic)
-    //        }
-    //    }
+
+        func tableView(
+            _ tableView: UITableView,
+            commit editingStyle: UITableViewCell.EditingStyle,
+            forRowAt indexPath: IndexPath
+        ) {
+            if busArray[indexPath.section].count == 1 {
+                // 섹션 제거
+                deleteNode(section: indexPath.section)
+                tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+            } else {
+                // 루트 제거
+                deleteBus(section: indexPath.section, row: indexPath.row - 1)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
 
     // 정류장 셀은 삭제 불가 기능
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
