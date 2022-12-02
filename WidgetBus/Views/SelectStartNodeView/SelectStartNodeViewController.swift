@@ -18,8 +18,10 @@ struct TmpStruct {
     var nodeno: Int
 }
 
-final class SelectStartNodeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class SelectStartNodeViewController:
+    BackgroundViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var busNodeSearchTextField: UITextField!
 
@@ -75,6 +77,15 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setTitleAndIndicator(titleText: "출발 정류장을\n선택해 주세요", indicatorStep: .stepTwo)
+
+        contentView.addSubview(contentStackView)
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
         // 텍스트 필드 레이아웃 설정
         busNodeSearchTextField.layer.cornerRadius = 15
         busNodeSearchTextField.layer.borderWidth = 2
@@ -88,7 +99,7 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
             action: #selector(pressButton(_:))
         )
         navigationItem.rightBarButtonItem = rightButton
-        navigationItem.rightBarButtonItem?.isEnabled = true
+        navigationItem.rightBarButtonItem?.isEnabled = false
         navigationItem.rightBarButtonItem?.tintColor = .white
 
         // 도시 코드 가져오기
@@ -171,6 +182,9 @@ final class SelectStartNodeViewController: UIViewController, UITableViewDelegate
             }
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
+
+        // 셀이 선택되어 있을 때 네비게이션 바의 다음 버튼 활성화
+        navigationItem.rightBarButtonItem?.isEnabled = selectedTableViewCellIndexPath != nil
     }
 
     // MARK: 키보드
