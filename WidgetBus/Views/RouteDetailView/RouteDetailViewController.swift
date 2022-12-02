@@ -30,6 +30,11 @@ struct ClientBoardingStatus {
     var vehicleno: String?
 }
 
+struct ClientLocation {
+    var latitude: CLLocationDegrees?
+    var longtitude: CLLocationDegrees?
+}
+
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -50,6 +55,7 @@ class RouteDetailViewController: UIViewController {
     var endNodeIdIndex = 0
 
     var clientBoardingStatus = ClientBoardingStatus(boardingState: .getOff, vehicleno : nil)
+    var clientLocation = ClientLocation()
 
     let locationManager = CLLocationManager()
 
@@ -92,17 +98,54 @@ class RouteDetailViewController: UIViewController {
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
-            // 탑승
-        case .onBoard: //
-            self.boardingStatus = .getOff
-            self.boardingStateButton.isSelected = true
 
-            /*
-             내 위치와 가까운 버스위치 찾기
-             tableView cellForAt에서 label바꿔주기
-             clientBoardingStatus에 값바꿔주기
-             tableView.reload
-             */
+        case .onBoard:
+            if !busLocationList.isEmpty, clientLocation.latitude != nil, clientLocation.longtitude != nil {
+
+                var nearestBus = CLLocationDistance(10000000)
+                var nearestBusIndex = -1
+
+                let clientLocation = CLLocationCoordinate2D(
+                    latitude: clientLocation.latitude!,
+                    longitude: clientLocation.longtitude!
+                )
+
+                for index in 0..<busLocationList.count {
+                    let busLocation = CLLocationCoordinate2D(
+                        latitude: busLocationList[index].gpslati,
+                        longitude: busLocationList[index].gpslong
+                    )
+                    let distance = CLLocation.distance(
+                        clientLocation: clientLocation,
+                        busLocation: busLocation
+                    )
+                    if(nearestBus > distance) {
+                        nearestBus = distance
+                        nearestBusIndex = index
+                    }
+                    print("========차례로 버스거리\(distance)")
+                }
+
+                if(nearestBus < 1000000000000000) { // 특정 거리 설정을 어떻게 할까?
+                    self.boardingStatus = .getOff
+                    self.boardingStateButton.isSelected = true
+
+                    clientBoardingStatus.boardingState = .onBoard
+                    clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno
+                    routeDetailTableView.reloadData()
+//                    print("====================버스 위치 \(clientBoardingStatus.vehicleno)")
+//                    print("====================버스 거리 \(nearestBus)")
+                }
+
+            } else {
+                if(!busLocationList.isEmpty) {
+
+                } else if(clientLocation.latitude != nil && clientLocation.longtitude != nil) {
+
+                } else {
+
+                }
+            }
 
         case .getOff:
             self.boardingStatus = .onBoard
@@ -140,6 +183,7 @@ class RouteDetailViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+
     }
     // 네트워크 연결 부르는 함수
     func callNetworkFunction() {
@@ -459,6 +503,8 @@ extension RouteDetailViewController: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate {
             print(coordinate.latitude)
             print(coordinate.longitude)
+            clientLocation.latitude = coordinate.latitude
+            clientLocation.longtitude = coordinate.longitude
             // start 가져오고싶을때 stop
             // startUpdatingLocation - stopUpdatingLocation / requireLocation
             // coreLocation Developer.com
@@ -467,5 +513,19 @@ extension RouteDetailViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error : \(error.localizedDescription)")
+    }
+}
+
+extension CLLocation {
+    class func distance(clientLocation: CLLocationCoordinate2D,
+                        busLocation: CLLocationCoordinate2D) -> CLLocationDistance {
+
+        let clientLocation = CLLocation(
+            latitude: clientLocation.latitude,
+            longitude: clientLocation.longitude
+        )
+        let busLocation = CLLocation(latitude: busLocation.latitude, longitude: busLocation.longitude)
+
+        return clientLocation.distance(from: busLocation)
     }
 }
