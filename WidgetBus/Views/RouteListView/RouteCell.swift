@@ -27,7 +27,7 @@ final class RouteCell: UITableViewCell {
     }
 
     // 다음 남은 시간
-    var nextArrTime: String = ""
+    var nextArrTime: String = "정보없음"
 
     // 버스번호
     var busNumberLabel: UILabel = {
@@ -97,17 +97,17 @@ final class RouteCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.addSubview(busNumberBackgroundView)
-        self.addSubview(busNumberLabel)
-        self.addSubview(busRemainingTimeLabel)
-        self.addSubview(nextBusRemainingTimeLabel)
-        self.addSubview(rideButton)
+        self.contentView.addSubview(busNumberBackgroundView)
+        self.contentView.addSubview(busNumberLabel)
+        self.contentView.addSubview(busRemainingTimeLabel)
+        self.contentView.addSubview(nextBusRemainingTimeLabel)
+        self.contentView.addSubview(rideButton)
 
         NSLayoutConstraint.activate([
             // 버스번호 배경
-            busNumberBackgroundView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            busNumberBackgroundView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             busNumberBackgroundView.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor, constant: 16),
+                equalTo: self.contentView.leadingAnchor, constant: 16),
             busNumberBackgroundView.widthAnchor.constraint(equalToConstant: 80),
             busNumberBackgroundView.heightAnchor.constraint(equalToConstant: 30),
 
@@ -118,9 +118,9 @@ final class RouteCell: UITableViewCell {
             busNumberLabel.heightAnchor.constraint(equalToConstant: 30),
 
             // 버스남은시간
-            busRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            busRemainingTimeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             busRemainingTimeLabel.leadingAnchor.constraint(
-                equalTo: self.centerXAnchor, constant: -20),
+                equalTo: self.contentView.centerXAnchor, constant: -20),
 
             // 다음버스남은시간
             nextBusRemainingTimeLabel.bottomAnchor.constraint(
