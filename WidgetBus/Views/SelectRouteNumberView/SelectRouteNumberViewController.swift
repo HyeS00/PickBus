@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SelectRouteNumberViewController: BackgroundViewController, UITableViewDataSource, UITableViewDelegate {
     private struct RouteNumberCellStruct: Hashable {
         let routeNumber: String
         let routeType: String
@@ -26,28 +26,12 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet weak var routeNumberTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let rightButton = UIBarButtonItem(
-            title: "다음",
-            style: .plain,
-            target: self,
-            action: #selector(pressButton(_:))
-        )
-        navigationItem.rightBarButtonItem = rightButton
-        navigationItem.rightBarButtonItem?.isEnabled = true
+        setNavigation()
+        setBackground()
 
         newBus = Bus(context: dataController.viewContext)
         newBus.startNodeId = newNode.nodeId
         newBus.startNodeName = newNode.nodeNm
-//        navigationItem.rightBarButtonItem?.tintColor = .white
-
-//        super.setTitleAndIndicator(titleText: "test", indicatorStep:.stepThree)
-
-//        super.bottomView.addSubview(routeNumberTableView)
-//        routeNumberTableView.translatesAutoresizingMaskIntoConstraints = false
-//        routeNumberTableView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//        routeNumberTableView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor).isActive = true
-//        routeNumberTableView.topAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
 
         print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
         self.navigationItem.title = "\(newNode.nodeNm!)"
@@ -56,7 +40,34 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             nodeId: newNode.nodeId!,
             completion: handleRequestAllRoutesInfoResponse(response:error:))
     }
-//    여기 변수 타입 변경.
+
+    func setNavigation() {
+        let backButton = UIBarButtonItem()
+        backButton.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
+        let rightButton = UIBarButtonItem(
+            title: "다음",
+            style: .plain,
+            target: self,
+            action: #selector(pressButton(_:))
+        )
+        rightButton.tintColor = .white
+        navigationItem.rightBarButtonItem = rightButton
+        navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+
+    func setBackground() {
+        setTitleAndIndicator(titleText: "버스 번호 선택", indicatorStep: .stepThree)
+
+        contentView.addSubview(routeNumberTableView)
+//        routeNumberTableView.translatesAutoresizingMaskIntoConstraints = false
+        routeNumberTableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        routeNumberTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        routeNumberTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        routeNumberTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+    }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
 
