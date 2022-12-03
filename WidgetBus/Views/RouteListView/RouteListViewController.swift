@@ -27,6 +27,9 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     var arriveBusstrop = [[Int]]() // 남은 정류장 배열
     var nodeIdDic = [String: Int]() // 정류장 인덱스 딕셔너리
 
+    // 테이블뷰 타이틀 위치
+    var defautY: Double?
+
     fileprivate func loadNodes() {
         let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
         let predicate = NSPredicate(format: "group == %@", myGroup)
@@ -63,7 +66,6 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
             loadBuses(myNode: nodeArray[num])
             nodeIdDic[nodeArray[num].nodeId!] = num
             arriveArray.append(Array(repeating: nil, count: busArray[num].count))
-//            arriveBusstrop.append(Array(repeating: nil, count: busArray[num].count))
         }
     }
 
@@ -183,9 +185,11 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
 
     func requestArriveInfo() {
         for node in nodeArray {
-            BusClient.getArriveList(city: node.cityCode!,
-                                    nodeId: node.nodeId!,
-                                    completion: fetchArriveInfo(response:error:))
+            BusClient.getArriveList(
+                city: node.cityCode!,
+                nodeId: node.nodeId!,
+                completion: fetchArriveInfo(response:error:)
+            )
         }
     }
 
@@ -194,17 +198,11 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
             // 성공
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-                print("response: ", response)
-                guard let fetchBusInfo = response.filter { $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }.first else { fatalError() }
+
+                guard let fetchBusInfo = response.filter({ $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }).first else { fatalError() }
 //                let newRouteInfo = response.filter {
 //                    $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }.first
-                print("번호: ", String(busArray[nodeIndex][busIndex].routeNo!))
                 arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
-                print("=========")
-                print("nodeIndex: ", nodeIndex)
-                print("busIndex: ", busIndex)
-                print(arriveArray)
-//                routes[nodeIndex][busIndex].routearrprevstationcnt = newRouteInfo?.arrprevstationcnt
                 // 두번째 정류장 받아올 때
             }
             nodeCount += 1
@@ -273,30 +271,38 @@ extension RouteListViewController: UITableViewDelegate {
 
     // 스크롤 위치변화에 따른 네비게이션 타이틀 표시
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if routeTableView.contentOffset.y > -40 {
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-            self.title = myGroup.name
+        if defautY == nil {
+            defautY = routeTableView.contentOffset.y
         } else {
-            self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
-            self.title = .none
+            if defautY! - routeTableView.contentOffset.y < -52 {
+                self.navigationController?.navigationBar.titleTextAttributes = [
+                    .foregroundColor: UIColor.white
+                ]
+                self.title = myGroup.name
+            } else {
+                self.navigationController?.navigationBar.titleTextAttributes = [
+                    .foregroundColor: UIColor.clear
+                ]
+                self.title = .none
+            }
         }
     }
 
     // 셀 선택
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 루트추가 셀 선택
         if indexPath.section == busArray.count {
             let storyboard = UIStoryboard(name: "SelectStartNodeView", bundle: nil)
             let selectStartNodeViewController =
             storyboard.instantiateViewController(
                 withIdentifier: "SelectStartNodeView") as! SelectStartNodeViewController
-
             selectStartNodeViewController.dataController = dataController
             selectStartNodeViewController.newGroup = myGroup
-
             self.navigationController?.pushViewController(selectStartNodeViewController, animated: true)
+        } else {
+            // 버스 셀 선택
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource
@@ -317,16 +323,12 @@ extension RouteListViewController: UITableViewDataSource {
 
     // 섹션 수
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 기존
-        //        nodes.count + 1
         nodeArray.count + 1
     }
 
     // 셀 수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 기존
-        //        section == nodes.count ? 1 : routes[section].count + 1
-        section == nodeArray.count ? 1 : 2 // 임시: 2를 bus의 카운트 + 1 로 수정해야함
+        section == nodeArray.count ? 1 : busArray.count + 1
     }
 
     // 셀 높이
