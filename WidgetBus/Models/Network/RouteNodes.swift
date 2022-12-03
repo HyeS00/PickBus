@@ -42,7 +42,7 @@ struct RouteNodesInfo: Decodable {
     /// 정류소 명
     let nodenm: String
     /// 정류소 번호
-    let nodeno: Int
+    let nodeno: Int?
     /// 정류소 순번
     let nodeord: Int
     /// 노선 ID

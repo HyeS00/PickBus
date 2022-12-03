@@ -14,7 +14,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         let routeId: String
     }
 
-//    private var routeNumberInfos = [ArriveInfoResponseArriveInfo]()
     var selectedIndex = IndexPath(row: -1, section: 0)
 
     var dataController: DataController!
@@ -33,7 +32,7 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         newBus.startNodeId = newNode.nodeId
         newBus.startNodeName = newNode.nodeNm
 
-        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
+//        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
         self.navigationItem.title = "\(newNode.nodeNm!)"
         BusClient.getAllRoutesFromNode(
             city: newNode.cityCode!,
