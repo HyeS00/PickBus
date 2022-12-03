@@ -24,50 +24,11 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     var nodeArray = [Node]() // 정류장 배열
     var busArray = [[Bus]]() // 버스 배열
     var arriveArray = [[Int?]]() // 남은시간 배열
-    var arriveBusstrop = [[Int]]() // 남은 정류장 배열
+    var arriveBusStop = [[Int]]() // 남은 정류장 배열
     var nodeIdDic = [String: Int]() // 정류장 인덱스 딕셔너리
 
     // 테이블뷰 타이틀 위치
     var defautY: Double?
-
-    fileprivate func loadNodes() {
-        let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
-        let predicate = NSPredicate(format: "group == %@", myGroup)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
-        do {
-            nodeArray = try dataController.viewContext.fetch(fetchRequest)
-        } catch {
-            print("Error fetching node data from context \(error)")
-        }
-    }
-
-    fileprivate func loadBuses(myNode: Node) {
-        let fetchRequest: NSFetchRequest<Bus> = Bus.fetchRequest()
-        let predicate = NSPredicate(format: "node == %@", myNode)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "routeId", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
-        do {
-            let buses = try dataController.viewContext.fetch(fetchRequest)
-            busArray.append(buses)
-        } catch {
-            print("Error fatching bus data from context \(error)")
-        }
-    }
-
-    fileprivate func setupData() {
-        loadNodes()
-
-        for num in nodeArray.indices {
-            loadBuses(myNode: nodeArray[num])
-            nodeIdDic[nodeArray[num].nodeId!] = num
-            arriveArray.append(Array(repeating: nil, count: busArray[num].count))
-        }
-    }
 
     // 셀 높이
     private let routeHeaderCellHeight: CGFloat = 35
@@ -82,6 +43,7 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         table.backgroundColor = .clear
         table.separatorStyle = .none
         table.translatesAutoresizingMaskIntoConstraints = false
+
         // 그림자
         table.layer.masksToBounds = false
         table.layer.shadowColor = UIColor.black.cgColor
@@ -124,6 +86,7 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     }
 
     private func setupNavigationBar() {
+        print("setupNavigationBar 함수 실행")
         // 타이틀 설정
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
 
@@ -145,6 +108,7 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     }
 
     private func setupLayout() {
+        print("setupLayout 함수 실행")
         self.view.addSubview(routeTableView)
     }
 
@@ -184,12 +148,15 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     }
 
     func requestArriveInfo() {
-        for node in nodeArray {
-            BusClient.getArriveList(
-                city: node.cityCode!,
-                nodeId: node.nodeId!,
-                completion: fetchArriveInfo(response:error:)
-            )
+        print("requestArriveInfo 함수 실행")
+        if !nodeArray.isEmpty {
+            for node in nodeArray {
+                BusClient.getArriveList(
+                    city: node.cityCode!,
+                    nodeId: node.nodeId!,
+                    completion: fetchArriveInfo(response:error:)
+                )
+            }
         }
     }
 
@@ -200,8 +167,6 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
             for busIndex in busArray[nodeIndex].indices {
 
                 guard let fetchBusInfo = response.filter({ $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }).first else { fatalError() }
-//                let newRouteInfo = response.filter {
-//                    $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }.first
                 arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
                 // 두번째 정류장 받아올 때
             }
@@ -241,13 +206,52 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         dataController.viewContext.delete(busToDelete)
         try? dataController.viewContext.save()
     }
+
+    fileprivate func loadNodes() {
+        let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
+        let predicate = NSPredicate(format: "group == %@", myGroup)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        do {
+            nodeArray = try dataController.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Error fetching node data from context \(error)")
+        }
+    }
+
+    fileprivate func loadBuses(myNode: Node) {
+        let fetchRequest: NSFetchRequest<Bus> = Bus.fetchRequest()
+        let predicate = NSPredicate(format: "node == %@", myNode)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "routeId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        do {
+            let buses = try dataController.viewContext.fetch(fetchRequest)
+            busArray.append(buses)
+        } catch {
+            print("Error fatching bus data from context \(error)")
+        }
+    }
+
+    fileprivate func setupData() {
+        print("setupData 함수 실행")
+        loadNodes()
+
+        for num in nodeArray.indices {
+            loadBuses(myNode: nodeArray[num])
+            nodeIdDic[nodeArray[num].nodeId!] = num
+            arriveArray.append(Array(repeating: nil, count: busArray[num].count))
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension RouteListViewController: UITableViewDelegate {
 
     // 섹션, 루트 삭제 기능
-
         func tableView(
             _ tableView: UITableView,
             commit editingStyle: UITableViewCell.EditingStyle,
@@ -328,7 +332,7 @@ extension RouteListViewController: UITableViewDataSource {
 
     // 셀 수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == nodeArray.count ? 1 : busArray.count + 1
+        section == nodeArray.count ? 1 : busArray[section].count + 1
     }
 
     // 셀 높이
@@ -340,7 +344,6 @@ extension RouteListViewController: UITableViewDataSource {
 
     // 셀 정의 - 마지막 섹션이면 루트 추가 셀 적용 / 기본 섹션이면 루트 셀 적용
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if indexPath.section == nodeArray.count {
             // 마지막 섹션
             let cell = tableView.dequeueReusableCell(
