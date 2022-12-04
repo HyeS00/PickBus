@@ -8,7 +8,11 @@
 import UIKit
 import CoreData
 
-final class RouteListViewController: UIViewController, NSFetchedResultsControllerDelegate {
+final class RouteListViewController: UIViewController {
+
+    // 코어 데이터
+    var dataController: DataController!
+    var myGroup: Group!
 
     // API 횟수
     private var nodeCount: Int = 0
@@ -16,46 +20,43 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     // Timer 객체 생성
     private var apiTimer: Timer? = Timer()
 
-    // 코어 데이터
-    var dataController: DataController!
-    var myGroup: Group!
-
     // 셋 데이터
-    var nodeArray = [Node]() // 정류장 배열
-    var busArray = [[Bus]]() // 버스 배열
-    var arriveArray = [[Int?]]() // 남은시간 배열
-    var arriveBusStop = [[Int]]() // 남은 정류장 배열
-    var nodeIdDic = [String: Int]() // 정류장 인덱스 딕셔너리
+    private var nodeIdDic = [String: Int]()
+    private var arriveBusStop = [[Int]]()
+    private var arriveArray = [[Int?]]()
+    private var nodeArray = [Node]()
+    private var busArray = [[Bus]]()
 
     // 테이블뷰 타이틀 위치
-    var defautY: Double?
+    private var defautY: Double?
 
     // 셀 높이
     private let routeHeaderCellHeight: CGFloat = 35
-    private let routeCellHeight: CGFloat = 50
     private let addRouteCellHeight: CGFloat = 78
+    private let routeCellHeight: CGFloat = 50
 
     // 루트테이블 뷰
     private let routeTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.translatesAutoresizingMaskIntoConstraints = false
         table.showsVerticalScrollIndicator = false
         table.sectionHeaderTopPadding = 25
         table.backgroundColor = .clear
         table.separatorStyle = .none
-        table.translatesAutoresizingMaskIntoConstraints = false
 
         // 그림자
-        table.layer.masksToBounds = false
+        table.layer.shadowOffset = .init(width: 0, height: 2)
         table.layer.shadowColor = UIColor.black.cgColor
+        table.layer.masksToBounds = false
         table.layer.shadowOpacity = 0.2
         table.layer.shadowRadius = 10
-        table.layer.shadowOffset = .init(width: 0, height: 2)
 
         // 테이블 뷰 요소 등록 - 타이틀, 정류장, 루트, 루트추가
         table.register(TitleHeader.self, forHeaderFooterViewReuseIdentifier: TitleHeader.identifier)
+        table.register(AddRouteCell.self, forCellReuseIdentifier: AddRouteCell.identifier)
         table.register(BusStopCell.self, forCellReuseIdentifier: BusStopCell.identifier)
         table.register(RouteCell.self, forCellReuseIdentifier: RouteCell.identifier)
-        table.register(AddRouteCell.self, forCellReuseIdentifier: AddRouteCell.identifier)
+
         return table
     }()
 
@@ -92,7 +93,6 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     }
 
     private func setupNavigationBar() {
-        print("setupNavigationBar 함수 실행")
         // 타이틀 설정
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.clear]
 
@@ -114,13 +114,11 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     }
 
     private func setupLayout() {
-        print("setupLayout 함수 실행")
         self.view.addSubview(routeTableView)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-
             // 루트테이블뷰
             routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             routeTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
@@ -147,15 +145,13 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         }
     }
 
-    // 버스정보 API 호출
-    @objc func updatedTimer(sender: Timer) {
-        // API를 호출함수 호출
-        print("30초가 경과하여 updateRouteInfo 함수가 실행되었습니다.")
+    // Timer가 API request 함수 호출
+    @objc private func updatedTimer(sender: Timer) {
         requestArriveInfo()
     }
 
-    func requestArriveInfo() {
-        print("requestArriveInfo 함수 실행")
+    // request
+    private func requestArriveInfo() {
         if !nodeArray.isEmpty {
             for node in nodeArray {
                 BusClient.getArriveList(
@@ -167,13 +163,16 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         }
     }
 
+    // fetch
     func fetchArriveInfo(response: [ArriveInfoResponseArriveInfo], error: Error?) {
         if error == nil {
             // 성공
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-
-                guard let fetchBusInfo = response.filter({ $0.routeno.stringValue == String(busArray[nodeIndex][busIndex].routeNo!) }).first else { fatalError() }
+                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {fatalError()}
+                guard let fetchBusInfo = response.filter({
+                    $0.routeno.stringValue == String(myRouteNo)
+                }).first else { fatalError() }
                 arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
                 // 두번째 정류장 받아올 때
             }
@@ -182,17 +181,13 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
             // 실패
             nodeCount += 1
         }
-
         if nodeCount == nodeArray.count {
-            print("완료")
-            routeTableView.reloadData()
             nodeCount = 0
-        } else {
-            print("미완료")
+            routeTableView.reloadData()
         }
     }
 
-    func secToMin(sec: Int?) -> String {
+    private func secToMin(sec: Int?) -> String {
         if sec == nil {
             return "정보없음"
         } else {
@@ -200,71 +195,6 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         }
     }
 
-    func deleteGroup() {
-        guard let groupToDelete = myGroup else { fatalError() }
-        dataController.viewContext.delete(groupToDelete)
-        try? dataController.viewContext.save()
-    }
-
-    func deleteNode(section: Int) {
-        let nodeToDelete = nodeArray[section]
-        nodeArray.remove(at: section)
-        dataController.viewContext.delete(nodeToDelete)
-        try? dataController.viewContext.save()
-    }
-
-    func deleteBus(section: Int, row: Int) {
-        let busToDelete = busArray[section][row]
-        busArray[section].remove(at: row)
-        dataController.viewContext.delete(busToDelete)
-        try? dataController.viewContext.save()
-    }
-
-    func editGroupName(newName: String) {
-        myGroup.name = newName
-        dataController.viewContext.refresh(myGroup, mergeChanges: true)
-        try? dataController.viewContext.save()
-    }
-
-    fileprivate func loadNodes() {
-        let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
-        let predicate = NSPredicate(format: "group == %@", myGroup)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
-        do {
-            nodeArray = try dataController.viewContext.fetch(fetchRequest)
-        } catch {
-            print("Error fetching node data from context \(error)")
-        }
-    }
-
-    fileprivate func loadBuses(myNode: Node) {
-        let fetchRequest: NSFetchRequest<Bus> = Bus.fetchRequest()
-        let predicate = NSPredicate(format: "node == %@", myNode)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "routeId", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
-        do {
-            let buses = try dataController.viewContext.fetch(fetchRequest)
-            busArray.append(buses)
-        } catch {
-            print("Error fatching bus data from context \(error)")
-        }
-    }
-
-    fileprivate func setupData() {
-        print("setupData 함수 실행")
-        loadNodes()
-
-        for num in nodeArray.indices {
-            loadBuses(myNode: nodeArray[num])
-            nodeIdDic[nodeArray[num].nodeId!] = num
-            arriveArray.append(Array(repeating: nil, count: busArray[num].count))
-        }
-    }
     // 그룹 삭제 버튼
     @objc private func pressedDeleteTitleButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
@@ -367,8 +297,16 @@ extension RouteListViewController: UITableViewDataSource {
         let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TitleHeader.identifier) as! TitleHeader
         header.busStopLabel.text = myGroup.name
-        header.deleteButton.addTarget(self, action: #selector(pressedDeleteTitleButton(_ :)), for: .touchUpInside)
-        header.editButton.addTarget(self, action: #selector(pressedEditTitleButton(_ :)), for: .touchUpInside)
+        header.deleteButton.addTarget(
+            self,
+            action: #selector(pressedDeleteTitleButton(_ :)),
+            for: .touchUpInside
+        )
+        header.editButton.addTarget(
+            self,
+            action: #selector(pressedEditTitleButton(_ :)),
+            for: .touchUpInside
+        )
         header.isEditinMode = !routeTableView.isEditing
         return header
     }
@@ -424,5 +362,79 @@ extension RouteListViewController: UITableViewDataSource {
                 return cell
             }
         }
+    }
+}
+
+// MARK: - CoreData
+extension RouteListViewController: NSFetchedResultsControllerDelegate {
+    // 정류장 로드
+    private func loadNodes() {
+        let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
+        let predicate = NSPredicate(format: "group == %@", myGroup)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        do {
+            nodeArray = try dataController.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Error fetching node data from context \(error)")
+        }
+    }
+
+    // 버스 로드
+    private func loadBuses(myNode: Node) {
+        let fetchRequest: NSFetchRequest<Bus> = Bus.fetchRequest()
+        let predicate = NSPredicate(format: "node == %@", myNode)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "routeId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        do {
+            let buses = try dataController.viewContext.fetch(fetchRequest)
+            busArray.append(buses)
+        } catch {
+            print("Error fatching bus data from context \(error)")
+        }
+    }
+
+    // setup
+    private func setupData() {
+        loadNodes()
+        for num in nodeArray.indices {
+            loadBuses(myNode: nodeArray[num])
+            nodeIdDic[nodeArray[num].nodeId!] = num
+            arriveArray.append(Array(repeating: nil, count: busArray[num].count))
+        }
+    }
+
+    // 그룹 삭제
+    private func deleteGroup() {
+        guard let groupToDelete = myGroup else { fatalError() }
+        dataController.viewContext.delete(groupToDelete)
+        try? dataController.viewContext.save()
+    }
+
+    // 정류장 삭제
+    private func deleteNode(section: Int) {
+        let nodeToDelete = nodeArray[section]
+        nodeArray.remove(at: section)
+        dataController.viewContext.delete(nodeToDelete)
+        try? dataController.viewContext.save()
+    }
+
+    // 버스 삭제
+    private func deleteBus(section: Int, row: Int) {
+        let busToDelete = busArray[section][row]
+        busArray[section].remove(at: row)
+        dataController.viewContext.delete(busToDelete)
+        try? dataController.viewContext.save()
+    }
+
+    // 그룹 수정
+    private func editGroupName(newName: String) {
+        myGroup.name = newName
+        dataController.viewContext.refresh(myGroup, mergeChanges: true)
+        try? dataController.viewContext.save()
     }
 }
