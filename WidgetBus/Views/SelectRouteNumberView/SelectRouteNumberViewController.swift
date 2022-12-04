@@ -11,9 +11,7 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     private struct RouteNumberCellStruct: Hashable {
         let routeNumber: String
         let routeType: String
-        let nodeId: String
         let routeId: String
-        let nodeName: String
     }
 
 //    private var routeNumberInfos = [ArriveInfoResponseArriveInfo]()
@@ -43,12 +41,20 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         newBus.startNodeName = newNode.nodeNm
 //        navigationItem.rightBarButtonItem?.tintColor = .white
 
+//        super.setTitleAndIndicator(titleText: "test", indicatorStep:.stepThree)
+
+//        super.bottomView.addSubview(routeNumberTableView)
+//        routeNumberTableView.translatesAutoresizingMaskIntoConstraints = false
+//        routeNumberTableView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        routeNumberTableView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor).isActive = true
+//        routeNumberTableView.topAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
+
         print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
         self.navigationItem.title = "\(newNode.nodeNm!)"
-        BusClient.getArriveList(
+        BusClient.getAllRoutesFromNode(
             city: newNode.cityCode!,
             nodeId: newNode.nodeId!,
-            completion: handleRequestArriveInfoResponse(response:error:))
+            completion: handleRequestAllRoutesInfoResponse(response:error:))
     }
 //    여기 변수 타입 변경.
 
@@ -105,14 +111,12 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
         }
     }
 
-    func handleRequestArriveInfoResponse(response: [ArriveInfoResponseArriveInfo], error: Error?) {
+    func handleRequestAllRoutesInfoResponse(response: [AllRoutesFromNodeInfo], error: Error?) {
         routeNumberCellInfos = response.map { res in
             RouteNumberCellStruct(
                 routeNumber: res.routeno.stringValue,
                 routeType: res.routetp,
-                nodeId: res.nodeid,
-                routeId: res.routeid,
-                nodeName: res.nodenm)
+                routeId: res.routeid)
         }
         routeNumberCellInfos = Array(Set(routeNumberCellInfos))
         routeNumberCellInfos.sort {
