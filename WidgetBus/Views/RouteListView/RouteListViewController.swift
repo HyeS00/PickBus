@@ -132,11 +132,12 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     @objc private func pressedEditButton(_ sender: UIButton!) {
         if self.routeTableView.isEditing {
             navigationItem.rightBarButtonItem?.title = "편집"
-            self.routeTableView.setEditing(false, animated: true)
+            self.routeTableView.setEditing(false, animated: false)
             self.routeTableView.reloadData()
         } else {
             navigationItem.rightBarButtonItem?.title = "완료"
-            self.routeTableView.setEditing(true, animated: true)
+            self.routeTableView.setEditing(true, animated: false)
+            self.routeTableView.reloadData()
         }
     }
 
@@ -193,6 +194,12 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         }
     }
 
+    func deleteGroup() {
+        guard let groupToDelete = myGroup else { fatalError() }
+        dataController.viewContext.delete(groupToDelete)
+        try? dataController.viewContext.save()
+    }
+
     func deleteNode(section: Int) {
         let nodeToDelete = nodeArray[section]
         nodeArray.remove(at: section)
@@ -204,6 +211,12 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         let busToDelete = busArray[section][row]
         busArray[section].remove(at: row)
         dataController.viewContext.delete(busToDelete)
+        try? dataController.viewContext.save()
+    }
+
+    func editGroupName(newName: String) {
+        myGroup.name = newName
+        dataController.viewContext.refresh(myGroup, mergeChanges: true)
         try? dataController.viewContext.save()
     }
 
@@ -245,6 +258,37 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
             nodeIdDic[nodeArray[num].nodeId!] = num
             arriveArray.append(Array(repeating: nil, count: busArray[num].count))
         }
+    }
+    // 그룹 삭제 버튼
+    @objc private func pressedDeleteTitleButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            self.navigationController?.popViewController(animated: true)
+            self.deleteGroup()
+        }
+        let cancle = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(delete)
+        alert.addAction(cancle)
+        present(alert, animated: true)
+    }
+
+    // 그룹 수정 버튼
+    @objc private func pressedEditTitleButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "그룹이름 수정하기", message: nil, preferredStyle: .alert)
+        let enter = UIAlertAction(title: "확인", style: .default) { _ in
+            if let newName = alert.textFields?[0].text {
+                self.editGroupName(newName: newName)
+                self.routeTableView.reloadData()
+            }
+
+        }
+        let cancle = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(enter)
+        alert.addAction(cancle)
+        alert.addTextField { textField in
+            textField.placeholder = self.myGroup.name
+        }
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -317,6 +361,9 @@ extension RouteListViewController: UITableViewDataSource {
         let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: TitleHeader.identifier) as! TitleHeader
         header.busStopLabel.text = myGroup.name
+        header.deleteButton.addTarget(self, action: #selector(pressedDeleteTitleButton(_ :)), for: .touchUpInside)
+        header.editButton.addTarget(self, action: #selector(pressedEditTitleButton(_ :)), for: .touchUpInside)
+        header.isEditinMode = !routeTableView.isEditing
         return header
     }
 
