@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SelectArrivalViewController: UIViewController {
+final class SelectArrivalViewController: BackgroundViewController {
 
     // MARK: - Properties
     private var nodeList: [ArrivalNodeModel?] = []
@@ -42,57 +42,16 @@ final class SelectArrivalViewController: UIViewController {
     // 도착정류장 선택 유뮤
     private var isArrivalOn: Bool = false
 
-    //
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.white
-        label.text = "도착정류장을 선택해 주세요."
-        label.font = UIFont.systemFont(ofSize: 25)
-        return label
-    }()
-
-    private let indicatorImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "progressIndicator4")
-        return imageView
-    }()
-
-    private let busBadgeView: UIView = {
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 91, height: 31)
-        view.layer.cornerRadius = 8
-        view.backgroundColor = UIColor.duduDeepBlue
-        return view
-    }()
-
-    private lazy var busBadgeLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = busNum
-        return label
-    }()
-
-    private let busBadgeIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "bus.fill")
-        imageView.tintColor = UIColor.white
-        return imageView
-    }()
-
-    //
-    private let bottomView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 15
-        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        view.backgroundColor = .white
-
+    private lazy var busBadgeView: BusBadgeView = {
+        let view = BusBadgeView(frame: .zero, busNum: self.busNum ?? "버스번호미입력")
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private let arrivalTableView: UITableView =  {
         let tableView = UITableView()
         tableView.register(ArrivalTableViewCell.self, forCellReuseIdentifier: ArrivalTableViewCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
@@ -108,6 +67,9 @@ final class SelectArrivalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        super.setTitleAndIndicator(titleText: "도착 정류장을\n선택해 주세요", indicatorStep: .stepFour)
+
         setInformations()
         setBusNodeList()
 
@@ -146,11 +108,6 @@ final class SelectArrivalViewController: UIViewController {
             routeListViewController.myGroup = newGroup
             self.navigationController?.pushViewController(routeListViewController, animated: true)
         }
-        // test
-        else {
-            let testVC = TestViewController()
-            navigationController?.pushViewController(testVC, animated: true)
-        }
     }
 
     // MARK: - Helpers
@@ -168,56 +125,21 @@ final class SelectArrivalViewController: UIViewController {
     }
 
     func configureUI() {
-        view.addSubview(bottomView)
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        bottomView.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.75).isActive = true
-        bottomView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        bottomView.addSubview(busBadgeView)
-        busBadgeView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(busBadgeView)
         busBadgeView.widthAnchor
-            .constraint(equalToConstant: busBadgeLabel.intrinsicContentSize.width + 42).isActive = true
+            .constraint(equalToConstant: busBadgeView.frame.width).isActive = true
         busBadgeView.heightAnchor.constraint(equalToConstant: busBadgeView.frame.height).isActive = true
-        busBadgeView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 9).isActive = true
+        busBadgeView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 9).isActive = true
         busBadgeView.trailingAnchor
-            .constraint(equalTo: bottomView.trailingAnchor, constant: -17).isActive = true
+            .constraint(equalTo: contentView.trailingAnchor, constant: -17).isActive = true
 
-        busBadgeView.addSubview(busBadgeIcon)
-        busBadgeIcon.translatesAutoresizingMaskIntoConstraints = false
-        busBadgeIcon.widthAnchor
-            .constraint(equalToConstant: 22).isActive = true
-        busBadgeIcon.heightAnchor.constraint(equalToConstant: 19).isActive = true
-        busBadgeIcon.centerYAnchor.constraint(equalTo: busBadgeView.centerYAnchor).isActive = true
-        busBadgeIcon.leadingAnchor
-            .constraint(equalTo: busBadgeView.leadingAnchor, constant: 7)
-            .isActive = true
+        view.addSubview(arrivalTableView)
+        arrivalTableView.topAnchor.constraint(equalTo: busBadgeView.bottomAnchor, constant: 5).isActive = true
+        arrivalTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        arrivalTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        arrivalTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
-        busBadgeView.addSubview(busBadgeLabel)
-        busBadgeLabel.translatesAutoresizingMaskIntoConstraints = false
-        busBadgeLabel.centerYAnchor.constraint(equalTo: busBadgeView.centerYAnchor).isActive = true
-        busBadgeLabel.leadingAnchor
-            .constraint(equalTo: busBadgeIcon.trailingAnchor, constant: 5).isActive = true
-
-        bottomView.addSubview(arrivalTableView)
-        arrivalTableView.translatesAutoresizingMaskIntoConstraints = false
-        arrivalTableView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        arrivalTableView.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor).isActive = true
-        arrivalTableView.topAnchor
-            .constraint(equalTo: busBadgeView.bottomAnchor, constant: 10).isActive = true
-        arrivalTableView.bottomAnchor.constraint(equalTo:bottomView.bottomAnchor).isActive = true
-
-        view.addSubview(indicatorImage)
-        indicatorImage.translatesAutoresizingMaskIntoConstraints = false
-        indicatorImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        indicatorImage.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -10).isActive = true
-
-        view.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.topAnchor
-            .constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.1).isActive = true
     }
 
     func setBusNodeList() {
