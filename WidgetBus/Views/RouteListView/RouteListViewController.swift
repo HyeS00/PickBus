@@ -14,7 +14,7 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
     private var nodeCount: Int = 0
 
     // Timer 객체 생성
-    private var apiTimer = Timer()
+    private var apiTimer: Timer? = Timer()
 
     // 코어 데이터
     var dataController: DataController!
@@ -83,6 +83,12 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
         routeTableView.reloadData()
         routeTableView.delegate = self
         routeTableView.dataSource = self
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        apiTimer?.invalidate()
+        apiTimer = nil
     }
 
     private func setupNavigationBar() {
@@ -296,21 +302,21 @@ final class RouteListViewController: UIViewController, NSFetchedResultsControlle
 extension RouteListViewController: UITableViewDelegate {
 
     // 섹션, 루트 삭제 기능
-        func tableView(
-            _ tableView: UITableView,
-            commit editingStyle: UITableViewCell.EditingStyle,
-            forRowAt indexPath: IndexPath
-        ) {
-            if busArray[indexPath.section].count == 1 {
-                // 섹션 제거
-                deleteNode(section: indexPath.section)
-                tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
-            } else {
-                // 루트 제거
-                deleteBus(section: indexPath.section, row: indexPath.row - 1)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath
+    ) {
+        if busArray[indexPath.section].count == 1 {
+            // 섹션 제거
+            deleteNode(section: indexPath.section)
+            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+        } else {
+            // 루트 제거
+            deleteBus(section: indexPath.section, row: indexPath.row - 1)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
 
     // 정류장 셀은 삭제 불가 기능
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
