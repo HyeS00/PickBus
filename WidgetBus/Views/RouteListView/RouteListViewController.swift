@@ -64,20 +64,14 @@ final class RouteListViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .duduDeepBlue
 
-        // 코어데이터 셋
         setupData()
-
-        // 타이머 실행전 1회 api 호출
         requestArriveInfo()
-
-        // 타이머 설정 - 30초마다 api 호출
         apiTimer = Timer.scheduledTimer(
             timeInterval: 30,
             target: self,
             selector: #selector(updatedTimer(sender:)),
             userInfo: nil, repeats: true
         )
-
         setupNavigationBar()
         setupLayout()
         setupConstraints()
@@ -119,7 +113,6 @@ final class RouteListViewController: UIViewController {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // 루트테이블뷰
             routeTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
             routeTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             routeTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -174,7 +167,6 @@ final class RouteListViewController: UIViewController {
                     $0.routeno.stringValue == String(myRouteNo)
                 }).first else { fatalError() }
                 arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
-                // 두번째 정류장 받아올 때
             }
             nodeCount += 1
         } else {
