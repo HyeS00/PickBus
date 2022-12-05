@@ -364,6 +364,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         return nodeList.count
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "routeDetailCell",
