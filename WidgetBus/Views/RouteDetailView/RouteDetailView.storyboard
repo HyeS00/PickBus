@@ -46,7 +46,6 @@
                                                                 <constraint firstItem="hDh-Wm-5L9" firstAttribute="centerY" secondItem="vut-Jn-ywC" secondAttribute="centerY" id="1XV-yq-5wt"/>
                                                                 <constraint firstAttribute="trailing" secondItem="hDh-Wm-5L9" secondAttribute="trailing" constant="10" id="K6g-hC-sNK"/>
                                                                 <constraint firstAttribute="height" constant="38" id="ZRb-3s-aQr"/>
-                                                                <constraint firstAttribute="width" constant="303" id="fAh-28-JdJ"/>
                                                             </constraints>
                                                         </view>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="e84-a0-P7M">
@@ -96,10 +95,10 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Gkf-bI-5yq">
-                                                            <rect key="frame" x="16" y="36.666666666666664" width="74" height="41.999999999999993"/>
+                                                            <rect key="frame" x="16" y="42.666666666666664" width="74" height="29.999999999999993"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10분" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrZ-K8-3Os">
-                                                                    <rect key="frame" x="0.0" y="11" width="38" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="5" width="38" height="20"/>
                                                                     <color key="backgroundColor" name="duduDeepBlue"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="1b9-uS-rJl"/>
@@ -109,18 +108,42 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bus2" translatesAutoresizingMaskIntoConstraints="NO" id="HxK-uL-I1j">
-                                                                    <rect key="frame" x="44" y="6" width="30" height="30"/>
-                                                                    <color key="tintColor" name="duduDeepBlue"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZL-q1-8cU">
+                                                                    <rect key="frame" x="44" y="0.0" width="30" height="30"/>
+                                                                    <subviews>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bus" translatesAutoresizingMaskIntoConstraints="NO" id="HxK-uL-I1j">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                                            <color key="tintColor" name="duduDeepBlue"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="30" id="JDw-g3-ShT"/>
+                                                                                <constraint firstAttribute="height" constant="30" id="v5X-Jv-cI5"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sh-BP-oGy">
+                                                                            <rect key="frame" x="16" y="0.0" width="14" height="14"/>
+                                                                            <color key="backgroundColor" name="duduRed"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="14" id="CcW-6C-gZr"/>
+                                                                                <constraint firstAttribute="width" constant="14" id="INZ-JN-rJz"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="30" id="JDw-g3-ShT"/>
-                                                                        <constraint firstAttribute="height" constant="30" id="v5X-Jv-cI5"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="8Sh-BP-oGy" secondAttribute="trailing" id="0mg-K7-bAO"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="HxK-uL-I1j" secondAttribute="trailing" id="3vh-KY-CMX"/>
+                                                                        <constraint firstItem="HxK-uL-I1j" firstAttribute="top" secondItem="hZL-q1-8cU" secondAttribute="top" id="5A6-aG-SYo"/>
+                                                                        <constraint firstAttribute="width" constant="30" id="Vw4-8C-mSC"/>
+                                                                        <constraint firstItem="HxK-uL-I1j" firstAttribute="leading" secondItem="hZL-q1-8cU" secondAttribute="leading" id="gUI-EE-f8P"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="ibH-Dz-YSX"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="HxK-uL-I1j" secondAttribute="bottom" id="lnS-c5-m5A"/>
+                                                                        <constraint firstItem="8Sh-BP-oGy" firstAttribute="top" secondItem="hZL-q1-8cU" secondAttribute="top" id="yx1-dE-U0p"/>
                                                                     </constraints>
-                                                                </imageView>
+                                                                </view>
                                                             </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="HxK-uL-I1j" firstAttribute="top" secondItem="Gkf-bI-5yq" secondAttribute="top" constant="6" id="Mfr-hv-GKA"/>
-                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -132,9 +155,10 @@
                                                         <constraint firstAttribute="trailing" secondItem="vut-Jn-ywC" secondAttribute="trailing" constant="45" id="Rcs-uC-3vl"/>
                                                         <constraint firstAttribute="bottom" secondItem="muD-5j-a98" secondAttribute="bottom" id="UEd-5W-hE2"/>
                                                         <constraint firstItem="vut-Jn-ywC" firstAttribute="centerX" secondItem="7Mk-uT-sw5" secondAttribute="centerX" id="V5y-fT-LbR"/>
-                                                        <constraint firstItem="HxK-uL-I1j" firstAttribute="centerX" secondItem="Jf7-8v-JAB" secondAttribute="centerX" id="Z81-UX-bOb"/>
                                                         <constraint firstItem="Jf7-8v-JAB" firstAttribute="centerY" secondItem="e84-a0-P7M" secondAttribute="centerY" id="byD-2h-Uwt"/>
                                                         <constraint firstItem="vut-Jn-ywC" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leading" constant="45" id="cvA-y0-HIQ"/>
+                                                        <constraint firstItem="hZL-q1-8cU" firstAttribute="centerY" secondItem="muD-5j-a98" secondAttribute="centerY" id="jWD-wm-yF5"/>
+                                                        <constraint firstItem="hZL-q1-8cU" firstAttribute="centerX" secondItem="muD-5j-a98" secondAttribute="centerX" id="m9z-Vg-kHe"/>
                                                         <constraint firstItem="vut-Jn-ywC" firstAttribute="top" secondItem="7Mk-uT-sw5" secondAttribute="top" id="nFA-Mv-q58"/>
                                                         <constraint firstItem="n5M-gO-6h2" firstAttribute="leading" secondItem="e84-a0-P7M" secondAttribute="trailing" constant="10" id="nal-KY-HeL"/>
                                                         <constraint firstItem="e84-a0-P7M" firstAttribute="leading" secondItem="7Mk-uT-sw5" secondAttribute="leading" constant="62" id="q6G-c5-jt2"/>
@@ -142,6 +166,8 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="busImageBoundView2" destination="hZL-q1-8cU" id="R1d-mM-1kV"/>
+                                                    <outlet property="busImageLabel2" destination="8Sh-BP-oGy" id="BKP-rz-6Fy"/>
                                                     <outlet property="busImageView" destination="Jf7-8v-JAB" id="2ea-iw-ZIN"/>
                                                     <outlet property="busImageView2" destination="HxK-uL-I1j" id="bIn-Fd-CFl"/>
                                                     <outlet property="busStationLabel" destination="n5M-gO-6h2" id="UkD-HM-nlf"/>
@@ -157,13 +183,26 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNh-d1-4yX">
+                                        <rect key="frame" x="330" y="508" width="55" height="55"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="HtC-uV-Ebe"/>
+                                            <constraint firstAttribute="width" secondItem="QNh-d1-4yX" secondAttribute="height" multiplier="1:1" id="fjr-eT-XSG"/>
+                                            <constraint firstAttribute="height" constant="55" id="qYy-gA-hXh"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="QNh-d1-4yX" secondAttribute="bottom" id="7wT-D2-uMY"/>
                                     <constraint firstItem="14w-zT-xrL" firstAttribute="leading" secondItem="7Vo-zH-5Sc" secondAttribute="leading" id="P9x-zo-kCB"/>
                                     <constraint firstItem="14w-zT-xrL" firstAttribute="centerX" secondItem="7Vo-zH-5Sc" secondAttribute="centerX" id="TIq-Ee-yYv"/>
                                     <constraint firstItem="14w-zT-xrL" firstAttribute="top" secondItem="7Vo-zH-5Sc" secondAttribute="top" id="fft-KD-oVr"/>
                                     <constraint firstAttribute="bottom" secondItem="14w-zT-xrL" secondAttribute="bottom" id="jIS-JO-P8C"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="QNh-d1-4yX" secondAttribute="trailing" id="wXK-kI-mOq"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -171,34 +210,29 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3v-9d-oaG">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ya-Qv-9H5">
                                 <rect key="frame" x="0.0" y="772" width="393" height="80"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="7Ya-Qv-9H5">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" titleAlignment="center">
-                                            <backgroundConfiguration key="background">
-                                                <color key="backgroundColor" name="duduDeepBlue"/>
-                                            </backgroundConfiguration>
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="버튼">
-                                                    <attributes>
-                                                        <font key="NSFont" size="40" name="AppleSDGothicNeo-Bold"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="tapBoardingStateButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VZ8-7W-JBo"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" name="duduDeepBlue"/>
-                            </view>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="POG-cr-d3o"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" titleAlignment="center">
+                                    <backgroundConfiguration key="background"/>
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="버튼">
+                                            <attributes>
+                                                <font key="NSFont" size="40" name="AppleSDGothicNeo-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tapBoardingStateButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VZ8-7W-JBo"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="207" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfo-E8-el5">
                                 <rect key="frame" x="174" y="73" width="45" height="30.666666666666671"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
@@ -220,8 +254,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="5Wo-t4-cmr">
                                 <rect key="frame" x="145" y="105.66666666666667" width="103" height="19"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:20 ~ 22:50 배차간격 12분 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-Om-sW3">
-                                <rect key="frame" x="93" y="136" width="207" height="19.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="버스운행시간 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-Om-sW3">
+                                <rect key="frame" x="153" y="136" width="87" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -230,24 +264,23 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7Ya-Qv-9H5" secondAttribute="bottom" id="0nX-WW-IZq"/>
                             <constraint firstItem="7Vo-zH-5Sc" firstAttribute="top" secondItem="1QU-Om-sW3" secondAttribute="bottom" constant="45.666666666666657" id="2zb-gy-ulS"/>
                             <constraint firstItem="5Wo-t4-cmr" firstAttribute="top" secondItem="qfo-E8-el5" secondAttribute="bottom" constant="2" id="BKr-Rw-KOF"/>
                             <constraint firstItem="7Vo-zH-5Sc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="BW0-mg-Egn"/>
-                            <constraint firstItem="c3v-9d-oaG" firstAttribute="top" secondItem="7Vo-zH-5Sc" secondAttribute="bottom" id="Bkn-hL-xxn"/>
-                            <constraint firstItem="c3v-9d-oaG" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="772" id="CJ3-gD-xFV"/>
                             <constraint firstItem="nWJ-Vq-Byg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="41" id="Gcr-an-bCI"/>
                             <constraint firstItem="qfo-E8-el5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="14" id="Ohx-gb-I3X"/>
+                            <constraint firstItem="7Ya-Qv-9H5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="PGB-sX-D1k"/>
                             <constraint firstItem="qfo-E8-el5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="SEN-1T-2Mg"/>
                             <constraint firstItem="nWJ-Vq-Byg" firstAttribute="baseline" secondItem="l7b-0z-UeT" secondAttribute="baseline" id="UaZ-zv-V6h"/>
+                            <constraint firstItem="7Ya-Qv-9H5" firstAttribute="top" secondItem="7Vo-zH-5Sc" secondAttribute="bottom" id="V8D-1C-Hd2"/>
                             <constraint firstItem="5Wo-t4-cmr" firstAttribute="centerX" secondItem="1QU-Om-sW3" secondAttribute="centerX" id="VkO-0d-oWQ"/>
                             <constraint firstItem="1QU-Om-sW3" firstAttribute="top" secondItem="nWJ-Vq-Byg" secondAttribute="bottom" constant="6" id="WX2-Vp-Q2j"/>
                             <constraint firstItem="5Wo-t4-cmr" firstAttribute="centerY" secondItem="l7b-0z-UeT" secondAttribute="centerY" id="cmW-mC-kP9"/>
-                            <constraint firstItem="7Vo-zH-5Sc" firstAttribute="leading" secondItem="c3v-9d-oaG" secondAttribute="leading" id="d2o-gX-p69"/>
                             <constraint firstItem="5Wo-t4-cmr" firstAttribute="leading" secondItem="nWJ-Vq-Byg" secondAttribute="trailing" constant="9.9999999999999716" id="fpf-Xt-h4r"/>
                             <constraint firstItem="l7b-0z-UeT" firstAttribute="leading" secondItem="5Wo-t4-cmr" secondAttribute="trailing" constant="10.000000000000028" id="h7d-eH-8Ly"/>
-                            <constraint firstItem="7Vo-zH-5Sc" firstAttribute="trailing" secondItem="c3v-9d-oaG" secondAttribute="trailing" id="lSZ-Bh-oml"/>
+                            <constraint firstItem="7Ya-Qv-9H5" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="rcd-V5-rco"/>
                             <constraint firstItem="qfo-E8-el5" firstAttribute="centerX" secondItem="5Wo-t4-cmr" secondAttribute="centerX" id="snW-3q-UvL"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="c3v-9d-oaG" secondAttribute="bottom" constant="-34" id="vOa-Zz-aZt"/>
                             <constraint firstItem="1QU-Om-sW3" firstAttribute="centerX" secondItem="7Vo-zH-5Sc" secondAttribute="centerX" id="wsN-qF-1tg"/>
                         </constraints>
                     </view>
@@ -256,6 +289,7 @@
                         <outlet property="busNumberLabel" destination="qfo-E8-el5" id="1DX-Q0-WWm"/>
                         <outlet property="busTimeInfoLabel" destination="1QU-Om-sW3" id="Jjb-Gf-NMB"/>
                         <outlet property="endStationLabel" destination="l7b-0z-UeT" id="mxa-Fw-3Fd"/>
+                        <outlet property="refreshButton" destination="QNh-d1-4yX" id="Caw-RM-STd"/>
                         <outlet property="routeDetailTableView" destination="14w-zT-xrL" id="G0R-GO-ohW"/>
                         <outlet property="routeView" destination="7Vo-zH-5Sc" id="SqR-CF-SbK"/>
                         <outlet property="startStationLabel" destination="nWJ-Vq-Byg" id="mwA-jp-Yg0"/>
@@ -268,9 +302,11 @@
     </scenes>
     <resources>
         <image name="Bus" width="35" height="31"/>
-        <image name="Bus2" width="35" height="33"/>
         <image name="arrow" width="103" height="19"/>
         <image name="chevron.down.circle" catalog="system" width="128" height="123"/>
+        <namedColor name="AccentColor">
+            <color red="0.17254901960784313" green="0.20392156862745098" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="duduDeepBlue">
             <color red="0.17254901960784313" green="0.20392156862745098" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

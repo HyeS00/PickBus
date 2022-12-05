@@ -65,6 +65,7 @@
 		E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */; };
 		E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */; };
 		E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1707842291EC1B0001D324C /* RouteDetailView.storyboard */; };
+		E1AAE81C293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AAE81B293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailViewController.swift; sourceTree = "<group>"; };
 		E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E1707842291EC1B0001D324C /* RouteDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteDetailView.storyboard; sourceTree = "<group>"; };
+		E1AAE81B293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RouteDetailViewController-+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -397,6 +399,7 @@
 				E1707842291EC1B0001D324C /* RouteDetailView.storyboard */,
 				E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */,
 				E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */,
+				E1AAE81B293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift */,
 			);
 			path = RouteDetailView;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				C175CD24292CA0EF00140CDC /* BusStopCell.swift in Sources */,
 				C146115429237E11003E03E3 /* SelectStartNodeTableViewCell.swift in Sources */,
 				E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */,
+				E1AAE81C293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift in Sources */,
 				E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
