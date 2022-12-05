@@ -112,8 +112,8 @@ class RouteDetailViewController: UIViewController {
 
                 for index in 0..<busLocationList.count {
                     let busLocation = CLLocationCoordinate2D(
-                        latitude: busLocationList[index].gpslati,
-                        longitude: busLocationList[index].gpslong
+                        latitude: Double(busLocationList[index].gpslati.stringValue) ?? -1,
+                        longitude: Double(busLocationList[index].gpslong.stringValue) ?? -1
                     )
                     let distance = CLLocation.distance(
                         clientLocation: clientLocation,
