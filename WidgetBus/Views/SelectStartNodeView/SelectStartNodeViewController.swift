@@ -158,7 +158,7 @@ final class SelectStartNodeViewController:
         }
 
         cell.nodeName.text = nodeList[indexPath.row].nodeName
-        cell.nodeDirection.text = "방향 추가 예정"
+        cell.nodeRegion.text = nodeList[indexPath.row].nodeCityName
         cell.nodeDistance.text = "거리 추가 예정"
         cell.nodeCoordinate = nodeList[indexPath.row].nodeCLLocationCoordinate2D
         cell.settingData(isClicked: selectedTableViewCellIndexPath == indexPath)
