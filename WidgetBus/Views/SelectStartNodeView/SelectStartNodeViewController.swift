@@ -25,6 +25,7 @@ final class SelectStartNodeViewController:
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var startBusNodeTableView: UITableView!
     @IBOutlet private weak var busNodeSearchTextField: UITextField!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     // CoreData Controller
     var dataController: DataController!
@@ -73,6 +74,13 @@ final class SelectStartNodeViewController:
         contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+        contentView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: startBusNodeTableView.centerXAnchor)
+            .isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: startBusNodeTableView.centerYAnchor)
+            .isActive = true
 
         // 텍스트 필드 레이아웃 설정
         busNodeSearchTextField.layer.cornerRadius = 15
@@ -225,6 +233,7 @@ final class SelectStartNodeViewController:
         nodeList.removeAll()
         selectedTableViewCellIndexPath = nil
         startBusNodeTableView.reloadData()
+        activityIndicator.startAnimating()
         return true
     }
 
@@ -308,6 +317,7 @@ final class SelectStartNodeViewController:
             temp.nodeid = response[0].nodeid
             temp.nodenm = response[0].nodenm
 
+            activityIndicator.stopAnimating()
             startBusNodeTableView.beginUpdates()
             response.forEach {
                 nodeList.append(
@@ -324,7 +334,10 @@ final class SelectStartNodeViewController:
                     )
                 )
 
-                startBusNodeTableView.insertRows(at: [IndexPath(row: nodeList.count - 1, section: 0)], with: .automatic)
+                startBusNodeTableView.insertRows(
+                    at: [IndexPath(row: nodeList.count - 1, section: 0)]
+                    , with: .automatic
+                )
             }
             startBusNodeTableView.endUpdates()
 
