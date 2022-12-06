@@ -136,19 +136,17 @@ class RouteDetailViewController: UIViewController {
 //                    print("====================버스 위치 \(clientBoardingStatus.vehicleno)")
 //                    print("====================버스 거리 \(nearestBus)")
                 } else {
-                    print("근처에 버스가 없습니다. 다시한번확인해주세요.")
+                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 }
-
             } else {
-                if(!busLocationList.isEmpty) {
-                    // 새로고침을 해주세ㅛㅇ
-                    print("잠시후에 다시 시도해주세요.")
+                if(busLocationList.isEmpty) {
+                    // 새로고침을 해주세요
+                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 } else if(clientLocation.latitude == nil || clientLocation.longtitude == nil) {
                     // 사용자 위치 설정
-                    print("사용자 위치 설정")
+                    alertManager("설정에서 위치허용을 해주세요.")
                 } else {
-                    // 현재 주변에 탑승중인 버스가 없습니다. 다시한번 확인해주세요.
-                    print("현재 주변에 탑승중인 버스가 없습니다. 다시한번 확인해주세요.")
+                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 }
             }
 
@@ -158,6 +156,13 @@ class RouteDetailViewController: UIViewController {
             self.clientBoardingStatus.vehicleno = nil
             self.boardingStateButton.isSelected = false
         }
+    }
+
+    func alertManager(_ message: String) {
+        let alret = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alret.addAction(confirm)
+        present(alret, animated: true, completion: nil)
     }
 
     let retryButton = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
@@ -497,7 +502,6 @@ extension RouteDetailViewController: UITableViewDataSource {
         return 10
     }
 }
-
 extension RouteDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 77
