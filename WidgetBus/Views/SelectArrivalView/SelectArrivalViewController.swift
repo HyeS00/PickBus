@@ -31,8 +31,7 @@ final class SelectArrivalViewController: BackgroundViewController {
 
     private var pageCount: Int = -1
 
-     var busNum: String?
-//    var busNum: String = "207 (임시)"
+    var busNum: String?
 
     // 0 정방향 or 1 역방향 / 회차지 구분용
     // 예) 0 > 0(회차지) > 1 > 1
@@ -41,6 +40,16 @@ final class SelectArrivalViewController: BackgroundViewController {
     private var departNodeIdx: Int = 0
     // 도착정류장 선택 유뮤
     private var isArrivalOn: Bool = false
+
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
 
     private lazy var busBadgeView: BusBadgeView = {
         let view = BusBadgeView(frame: .zero, busNum: self.busNum ?? "버스번호미입력")
@@ -73,7 +82,6 @@ final class SelectArrivalViewController: BackgroundViewController {
         setInformations()
         setBusNodeList()
 
-        view.backgroundColor = UIColor.duduDeepBlue
         configureTableView()
         configureNavigationBar()
         configureUI()
@@ -91,8 +99,6 @@ final class SelectArrivalViewController: BackgroundViewController {
     // 완료 버튼 Actions
     @objc func doneButtonSelect() {
         if isArrivalOn {
-//            navigationController?.popViewController(animated: false)
-
             for myNode in nodeList {
                 if case .arrival = myNode?.userSelected {
                     newBus.endNodeId = myNode?.code
@@ -126,7 +132,6 @@ final class SelectArrivalViewController: BackgroundViewController {
     }
 
     func configureUI() {
-
         view.addSubview(busBadgeView)
         busBadgeView.widthAnchor
             .constraint(equalToConstant: busBadgeView.frame.width).isActive = true
@@ -141,6 +146,13 @@ final class SelectArrivalViewController: BackgroundViewController {
         arrivalTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         arrivalTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
+        view.addSubview(activityIndicator)
+        activityIndicator.heightAnchor.constraint(equalToConstant: activityIndicator.bounds.height)
+            .isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: activityIndicator.bounds.width)
+            .isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
 
     func setBusNodeList() {
@@ -181,6 +193,8 @@ final class SelectArrivalViewController: BackgroundViewController {
             // 출발정류장 인덱스부터 슬라이싱
             let slice = nodeList[departNodeIdx...]
             nodeList = Array(slice)
+
+            activityIndicator.stopAnimating()
             arrivalTableView.reloadData()
         }
     }
