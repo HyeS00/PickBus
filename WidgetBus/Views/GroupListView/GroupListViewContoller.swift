@@ -76,8 +76,6 @@ final class GroupListViewContoller: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       // getGroupsFromCoreData()
-
         groupListView.delegate = self
         groupListView.dataSource = self
 
@@ -88,25 +86,26 @@ final class GroupListViewContoller: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.view.backgroundColor = .white
-
-//        if coreDataGroups.isEmpty {
-//            setupMainView()
-//            groupListView.reloadData()
-//        } else {
+        getGroupsFromCoreData()
+        print(coreDataGroups.count)
+        if coreDataGroups.isEmpty {
+            setupMainView()
+            groupListView.reloadData()
+        } else {
             setupTableView()
             getGroupsFromCoreData()
             groupListView.reloadData()
-        //}
+        }
     }
 }
 
 private extension GroupListViewContoller {
     func setupNavigationController() {
-        let titleLabel = UILabel()
-        titleLabel.textColor = UIColor.systemGray2
-        titleLabel.text = "뜌벅초"
-        titleLabel.font = UIFont.systemFont(ofSize: 42, weight: .bold)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
+        let logo = UIImage(named: "MainLogo")
+        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        logoView.contentMode = .scaleAspectFit
+        logoView.image = logo
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: logoView)
 
         let button = UIButton(type: .system)
         let buttonImage = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
@@ -172,7 +171,7 @@ extension GroupListViewContoller: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 데이터 있을 때, 여기 추가.
-        if indexPath.row == coreDataGroups.count {
+        if indexPath.section == coreDataGroups.count {
             let addGroupListNameView = AddGroupListNameViewController()
             addGroupListNameView.dataController = dataController
 
@@ -194,13 +193,18 @@ extension GroupListViewContoller: UITableViewDelegate {
 extension GroupListViewContoller: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return coreDataGroups.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let coreDataGroup = coreDataGroups[indexPath.row]
-        print(coreDataGroup)
-        if indexPath.row == coreDataGroups.count {
+
+        print(coreDataGroups)
+        if indexPath.section == coreDataGroups.count {
             // 마지막 섹션
             let cell = groupListView.dequeueReusableCell(
                 withIdentifier: AddGroupTableViewCell.identifier,

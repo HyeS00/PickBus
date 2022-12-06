@@ -136,7 +136,7 @@ final class AddGroupListNameViewController: BackgroundViewController {
 private extension AddGroupListNameViewController {
     func setupLayout() {
         setTitleAndIndicator(titleText: "어떨때 이용하는 \n대중교통인가요?", indicatorStep: .stepOne)
-        
+
         contentView.addSubview(groupListTextfield)
         groupListTextfield.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20)
             .isActive = true
