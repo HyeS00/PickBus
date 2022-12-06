@@ -14,6 +14,7 @@
 		099287E82924B23800CB7DBE /* SelectArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */; };
 		1C6644B86924D9EECF957A96 /* Pods_WidgetBus_WidgetBusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */; };
 		2D7D86A573430533DAECD5C8 /* Pods_WidgetBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */; };
+		C122560E29376472005B9B1C /* StartNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C122560D29376472005B9B1C /* StartNodeModel.swift */; };
 		C13E0E412929941500818085 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E0E402929941500818085 /* UITextField+.swift */; };
 		C146115429237E11003E03E3 /* SelectStartNodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C146115229237E11003E03E3 /* SelectStartNodeTableViewCell.swift */; };
 		C146115529237E11003E03E3 /* SelectStartNodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C146115329237E11003E03E3 /* SelectStartNodeTableViewCell.xib */; };
@@ -35,7 +36,6 @@
 		C175CD0F292B719900140CDC /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */; };
 		C175CD24292CA0EF00140CDC /* BusStopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD1E292CA0EF00140CDC /* BusStopCell.swift */; };
 		C175CD25292CA0EF00140CDC /* RouteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD1F292CA0EF00140CDC /* RouteListViewController.swift */; };
-		C175CD26292CA0EF00140CDC /* BusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD20292CA0EF00140CDC /* BusData.swift */; };
 		C175CD27292CA0EF00140CDC /* RouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD21292CA0EF00140CDC /* RouteCell.swift */; };
 		C175CD28292CA0EF00140CDC /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD22292CA0EF00140CDC /* TitleHeader.swift */; };
 		C175CD29292CA0EF00140CDC /* AddRouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD23292CA0EF00140CDC /* AddRouteCell.swift */; };
@@ -66,6 +66,7 @@
 		E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */; };
 		E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */; };
 		E1707843291EC1B0001D324C /* RouteDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1707842291EC1B0001D324C /* RouteDetailView.storyboard */; };
+		E1AAE81C293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1AAE81B293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		7EC20A1B8AEA1509993C81A6 /* Pods-WidgetBusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBusTests.debug.xcconfig"; path = "Target Support Files/Pods-WidgetBusTests/Pods-WidgetBusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		95C0C9BA31DBED1269202E64 /* Pods-WidgetBus-WidgetBusUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WidgetBus-WidgetBusUITests.debug.xcconfig"; path = "Target Support Files/Pods-WidgetBus-WidgetBusUITests/Pods-WidgetBus-WidgetBusUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7432563FC3979F2A211FE77 /* Pods_WidgetBus_WidgetBusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus_WidgetBusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C122560D29376472005B9B1C /* StartNodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNodeModel.swift; sourceTree = "<group>"; };
 		C13E0E402929941500818085 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C146115229237E11003E03E3 /* SelectStartNodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStartNodeTableViewCell.swift; sourceTree = "<group>"; };
 		C146115329237E11003E03E3 /* SelectStartNodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectStartNodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -123,7 +125,6 @@
 		C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		C175CD1E292CA0EF00140CDC /* BusStopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusStopCell.swift; sourceTree = "<group>"; };
 		C175CD1F292CA0EF00140CDC /* RouteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteListViewController.swift; sourceTree = "<group>"; };
-		C175CD20292CA0EF00140CDC /* BusData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusData.swift; sourceTree = "<group>"; };
 		C175CD21292CA0EF00140CDC /* RouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteCell.swift; sourceTree = "<group>"; };
 		C175CD22292CA0EF00140CDC /* TitleHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 		C175CD23292CA0EF00140CDC /* AddRouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRouteCell.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailViewController.swift; sourceTree = "<group>"; };
 		E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailTableViewCell.swift; sourceTree = "<group>"; };
 		E1707842291EC1B0001D324C /* RouteDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RouteDetailView.storyboard; sourceTree = "<group>"; };
+		E1AAE81B293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RouteDetailViewController-+CLLocationManagerDelegate.swift"; sourceTree = "<group>"; };
 		F7114B61860A7522DA2A7FF0 /* Pods_WidgetBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBA6996637A95E6D10EC4705 /* Pods_WidgetBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WidgetBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -249,8 +251,8 @@
 				D784808C291E18DC009F8FDB /* Extensions */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
-				C16920712907B75D0021D17F /* Info.plist */,
 				C16920692907B75C0021D17F /* WidgetBus.xcdatamodeld */,
+				C16920712907B75D0021D17F /* Info.plist */,
 				CFD79B03291E45050091202C /* Service Key.plist */,
 			);
 			path = WidgetBus;
@@ -290,7 +292,6 @@
 			children = (
 				C175CD1E292CA0EF00140CDC /* BusStopCell.swift */,
 				C175CD1F292CA0EF00140CDC /* RouteListViewController.swift */,
-				C175CD20292CA0EF00140CDC /* BusData.swift */,
 				C175CD21292CA0EF00140CDC /* RouteCell.swift */,
 				C175CD22292CA0EF00140CDC /* TitleHeader.swift */,
 				C175CD23292CA0EF00140CDC /* AddRouteCell.swift */,
@@ -387,8 +388,9 @@
 		E1707845291EC271001D324C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CFEC63D12928B66500B75795 /* CoreData */,
+				C122560D29376472005B9B1C /* StartNodeModel.swift */,
 				099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */,
+				CFEC63D12928B66500B75795 /* CoreData */,
 				CFE0A865291CCB29002779C6 /* Network */,
 			);
 			path = Models;
@@ -400,6 +402,7 @@
 				E1707842291EC1B0001D324C /* RouteDetailView.storyboard */,
 				E12150D6291F8C3E000440F8 /* RouteDetailViewController.swift */,
 				E12150D8291F910A000440F8 /* RouteDetailTableViewCell.swift */,
+				E1AAE81B293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift */,
 			);
 			path = RouteDetailView;
 			sourceTree = "<group>";
@@ -644,7 +647,6 @@
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
 				C175CD27292CA0EF00140CDC /* RouteCell.swift in Sources */,
 				C175CD28292CA0EF00140CDC /* TitleHeader.swift in Sources */,
-				C175CD26292CA0EF00140CDC /* BusData.swift in Sources */,
 				CF3D0A3A292A2B9700639E5C /* MySearchNodeInfo.swift in Sources */,
 				CFEC63D32928B67E00B75795 /* DataController.swift in Sources */,
 				CFA1F63C2935EA5D00D1C513 /* MyAllRoutesFromNodeMultiType.swift in Sources */,
@@ -658,11 +660,13 @@
 				C175CD24292CA0EF00140CDC /* BusStopCell.swift in Sources */,
 				C146115429237E11003E03E3 /* SelectStartNodeTableViewCell.swift in Sources */,
 				E12150D7291F8C3E000440F8 /* RouteDetailViewController.swift in Sources */,
+				E1AAE81C293A374800453478 /* RouteDetailViewController-+CLLocationManagerDelegate.swift in Sources */,
 				E12150D9291F910A000440F8 /* RouteDetailTableViewCell.swift in Sources */,
 				C16920652907B75C0021D17F /* ViewController.swift in Sources */,
 				D7103DF4292218E900DA7CDD /* UIColor+.swift in Sources */,
 				CF2F03712931B9AC00414507 /* ArriveInfoMultiTypes.swift in Sources */,
 				CF3D0A382929CC1B00639E5C /* SearchNode.swift in Sources */,
+				C122560E29376472005B9B1C /* StartNodeModel.swift in Sources */,
 				C1B745652923699400167496 /* SelectStartNodeViewController.swift in Sources */,
 				D784808E291E1B9C009F8FDB /* NSObject+.swift in Sources */,
 				C175CD0F292B719900140CDC /* AddGroupTableViewCell.swift in Sources */,
@@ -862,8 +866,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -895,8 +899,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

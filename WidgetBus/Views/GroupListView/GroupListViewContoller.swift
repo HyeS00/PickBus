@@ -167,9 +167,15 @@ extension GroupListViewContoller: UITableViewDelegate {
 
             self.navigationController?.pushViewController(addGroupListNameView, animated: true)
         } else {
-            let settingView = SettingViewController()
-            self.navigationController?.pushViewController(settingView, animated: true)
-
+            if coreDataGroups.isEmpty {
+                print("코어데이터에 저장된 데이터가 없습니다.")
+            } else {
+                print("코어데이터에 저장된 데이터가 있습니다. 뷰를 이동합니다.")
+                let routeListView = RouteListViewController()
+                routeListView.dataController = dataController
+                routeListView.myGroup = coreDataGroups.first
+                self.navigationController?.pushViewController(routeListView, animated: true)
+            }
         }
     }
 }

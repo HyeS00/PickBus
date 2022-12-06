@@ -11,12 +11,12 @@ import UIKit
 final class SelectStartNodeTableViewCell: UITableViewCell, MKMapViewDelegate {
 
     @IBOutlet weak var nodeName: UILabel!
-    @IBOutlet weak var nodeDirection: UILabel!
+    @IBOutlet weak var nodeRegion: UILabel!
     @IBOutlet weak var nodeDistance: UILabel!
 
     @IBOutlet weak var mapView: MKMapView!
 
-    private let nodeCoordinate = CLLocationCoordinate2D(
+    var nodeCoordinate = CLLocationCoordinate2D(
         latitude: 36.014099310928216,
         longitude: 129.32591317393107
     )
@@ -68,7 +68,7 @@ final class SelectStartNodeTableViewCell: UITableViewCell, MKMapViewDelegate {
         let pin = MKPointAnnotation()
         pin.coordinate = nodeCoordinate
         pin.title = nodeName.text
-        pin.subtitle = nodeDirection.text
+        pin.subtitle = nodeRegion.text
         mapView.addAnnotation(pin)
     }
 
