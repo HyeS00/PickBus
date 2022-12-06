@@ -8,33 +8,6 @@
 import UIKit
 import CoreLocation
 
-enum BoardingStatus {
-    case onBoard
-    case getOff
-}
-
-struct RouteModel {
-    let startNodeId: String
-    let endNodeId: String
-}
-
-struct CurrentBusLocationInfo {
-    // 버스 위치
-    var nodeord: Int
-    // 버스 개수
-    var cnt: Int
-}
-
-struct ClientBoardingStatus {
-    var boardingState: BoardingStatus
-    var vehicleno: String?
-}
-
-struct ClientLocation {
-    var latitude: CLLocationDegrees?
-    var longtitude: CLLocationDegrees?
-}
-
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -49,14 +22,11 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var boardingStateButton: UIButton!
 
     var boardingStatus: BoardingStatus = .onBoard
-
     let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
     var startNodeIdIndex = 0
     var endNodeIdIndex = 0
-
     var clientBoardingStatus = ClientBoardingStatus(boardingState: .getOff, vehicleno : nil)
     var clientLocation = ClientLocation()
-
     let locationManager = CLLocationManager()
 
     // Jedi
@@ -123,10 +93,8 @@ class RouteDetailViewController: UIViewController {
                         nearestBus = distance
                         nearestBusIndex = index
                     }
-                    print("========차례로 버스거리\(distance)")
                 }
-
-                if(nearestBus < 1000000000000000) { // 특정 거리 설정을 어떻게 할까?
+                if(nearestBus < 20) { // 특정 거리 설정을 어떻게 할까?
                     self.boardingStatus = .getOff
                     self.boardingStateButton.isSelected = true
 
@@ -135,15 +103,33 @@ class RouteDetailViewController: UIViewController {
                     routeDetailTableView.reloadData()
 //                    print("====================버스 위치 \(clientBoardingStatus.vehicleno)")
 //                    print("====================버스 거리 \(nearestBus)")
-                }
-
-            } else {
-                if(!busLocationList.isEmpty) {
-
-                } else if(clientLocation.latitude != nil && clientLocation.longtitude != nil) {
-
                 } else {
+                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
+                }
+            } else {
+                if(busLocationList.isEmpty) {
+                    // 새로고침을 해주세요
+                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
+                } else if(clientLocation.latitude == nil || clientLocation.longtitude == nil) {
+                    // 사용자 위치 설정
+                    let authAlertController : UIAlertController
 
+                    authAlertController = UIAlertController(
+                        title: "위치 사용 권한이 필요합니다.",
+                        message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.",
+                        preferredStyle: .alert)
+
+                    let getAuthAction : UIAlertAction
+
+                    getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (_) in
+                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(appSettings,options: [:],completionHandler: nil)
+                        }
+                    })
+                    authAlertController.addAction(getAuthAction)
+                    self.present(authAlertController, animated: true, completion: nil)
+                } else {
+                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 }
             }
 
@@ -153,6 +139,13 @@ class RouteDetailViewController: UIViewController {
             self.clientBoardingStatus.vehicleno = nil
             self.boardingStateButton.isSelected = false
         }
+    }
+
+    func alertManager(_ message: String) {
+        let alret = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alret.addAction(confirm)
+        present(alret, animated: true, completion: nil)
     }
 
     let retryButton = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
@@ -467,7 +460,6 @@ extension RouteDetailViewController: UITableViewDataSource {
             } else {
                 cell.routePointImageView.image = UIImage(systemName: "chevron.down.circle")
             }
-
         }
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
@@ -492,7 +484,6 @@ extension RouteDetailViewController: UITableViewDataSource {
         return 10
     }
 }
-
 extension RouteDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 77

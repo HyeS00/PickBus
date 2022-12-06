@@ -15,9 +15,7 @@ extension RouteDetailViewController: CLLocationManagerDelegate {
             print(coordinate.longitude)
             clientLocation.latitude = coordinate.latitude
             clientLocation.longtitude = coordinate.longitude
-            // start 가져오고싶을때 stop
-            // startUpdatingLocation - stopUpdatingLocation / requireLocation
-            // coreLocation Developer.com
+            // start 가져오고싶을때 stop / startUpdatingLocation - stopUpdatingLocation / requireLocation
         }
     }
 
@@ -38,4 +36,27 @@ extension CLLocation {
 
         return clientLocation.distance(from: busLocation)
     }
+}
+
+enum BoardingStatus {
+    case onBoard
+    case getOff
+}
+struct RouteModel {
+    let startNodeId: String
+    let endNodeId: String
+}
+struct CurrentBusLocationInfo {
+    // 버스 위치
+    var nodeord: Int
+    // 버스 개수
+    var cnt: Int
+}
+struct ClientBoardingStatus {
+    var boardingState: BoardingStatus
+    var vehicleno: String?
+}
+struct ClientLocation {
+    var latitude: CLLocationDegrees?
+    var longtitude: CLLocationDegrees?
 }
