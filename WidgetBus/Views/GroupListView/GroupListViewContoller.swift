@@ -11,7 +11,7 @@ import UIKit
 struct GroupListArray: Decodable {
     let groupName: String
 }
-final class GroupListViewContoller: UIViewController {
+final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
     let initMain = false
     var groupName = ["출근길", "퇴근길", "백화점으로", "어디로", "시장으로", "제주도로", "어디로가죠", "저도 모르는 곳으로 가요"]
 
@@ -20,6 +20,10 @@ final class GroupListViewContoller: UIViewController {
 
     // Group Array
     var coreDataGroups = [Group]()
+
+    // TransitInfo Protocol
+    private var cellOriginFrame: CGRect?
+    private var cellInfo: UITableViewCell?
 
     // 그룹 리스트 테이블
     private lazy var groupListView: UITableView = {
@@ -72,6 +76,14 @@ final class GroupListViewContoller: UIViewController {
             coreDataGroups = result
         }
 
+    }
+
+    func getCellFrame() -> CGRect? {
+        return cellOriginFrame
+    }
+
+    func getCell() -> UITableViewCell? {
+        return cellInfo
     }
 
     override func viewDidLoad() {
@@ -162,6 +174,13 @@ private extension GroupListViewContoller {
 extension GroupListViewContoller: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = groupListView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        cellOriginFrame = cell.convert(cell.subviews[0].frame, to: nil)
+        cellInfo = cell
+
         // 데이터 있을 때, 여기 추가.
         if indexPath.row == groupName.count {
             let addGroupListNameView = AddGroupListNameViewController()
@@ -222,11 +241,9 @@ extension GroupListViewContoller: UINavigationControllerDelegate {
         switch (fromVC, toVC) {
         case (fromVC as GroupListViewContoller,
               toVC as RouteListViewController):
-            print("1")
             transition = nil
         case (fromVC as RouteListViewController,
               toVC as GroupListViewContoller):
-            print("2")
             transition = nil
         default:
             transition = nil
