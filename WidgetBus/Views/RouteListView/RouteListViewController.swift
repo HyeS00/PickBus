@@ -203,11 +203,13 @@ final class RouteListViewController: UIViewController {
         guard let routeId = busInfo.routeId else { fatalError() }
         guard let startNodeId = busInfo.startNodeId else { fatalError() }
         guard let endNodeId = busInfo.endNodeId else { fatalError() }
+        guard let routeNo = busInfo.routeNo else { fatalError() }
 
         let storyboard = UIStoryboard(name: "RouteDetailView", bundle: nil)
         let routeDetailView =
         storyboard.instantiateViewController(
             withIdentifier: "RouteDetailView") as! RouteDetailViewController
+        routeDetailView.routeNo = routeNo
         routeDetailView.boardingStatus = bordingStatus
         routeDetailView.nodeId = nodeId
         routeDetailView.cityCode = Int(cityCode)!
