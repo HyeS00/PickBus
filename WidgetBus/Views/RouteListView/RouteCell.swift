@@ -9,6 +9,8 @@ import UIKit
 
 final class RouteCell: UITableViewCell {
 
+    var closure: (() -> Void)?
+
     // 남은 정류장
     var arrprevstationcnt: Int = 1000
 
@@ -139,5 +141,6 @@ final class RouteCell: UITableViewCell {
 
     @objc func pressedRideButton(_ sender: UIButton) {
         // 버스번호 넘기면서 디테일뷰로 이동
+        closure?()
     }
 }

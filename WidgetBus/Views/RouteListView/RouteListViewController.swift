@@ -160,13 +160,20 @@ final class RouteListViewController: UIViewController {
     func fetchArriveInfo(response: [ArriveInfoResponseArriveInfo], error: Error?) {
         if error == nil {
             // 성공
+            // 수정할 부분 값이 nil인 경우 처리
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
                 guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {fatalError()}
-                guard let fetchBusInfo = response.filter({
+                if let fetchBusInfo = response.filter({
                     $0.routeno.stringValue == String(myRouteNo)
-                }).first else { fatalError() }
-                arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
+                }).first {
+                    // 버스 정보가 있음
+                    arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
+                } else {
+                    // 버스 정보가 없음
+                    print("도착정보가 없습니다.")
+                }
+
             }
             nodeCount += 1
         } else {
@@ -185,6 +192,28 @@ final class RouteListViewController: UIViewController {
         } else {
             return String(sec! / 60) + "분"
         }
+    }
+
+    func toRouteDetilView(indexPath: IndexPath, bordingStatus: BoardingStatus) {
+        let nodeInfo = nodeArray[indexPath.section]
+        let busInfo = busArray[indexPath.section][indexPath.row - 1]
+
+        guard let nodeId = nodeInfo.nodeId else { fatalError() }
+        guard let cityCode = nodeInfo.cityCode else { fatalError() }
+        guard let routeId = busInfo.routeId else { fatalError() }
+        guard let startNodeId = busInfo.startNodeId else { fatalError() }
+        guard let endNodeId = busInfo.endNodeId else { fatalError() }
+
+        let storyboard = UIStoryboard(name: "RouteDetailView", bundle: nil)
+        let routeDetailView =
+        storyboard.instantiateViewController(
+            withIdentifier: "RouteDetailView") as! RouteDetailViewController
+        routeDetailView.boardingStatus = bordingStatus
+        routeDetailView.nodeId = nodeId
+        routeDetailView.cityCode = Int(cityCode)!
+        routeDetailView.routeId = routeId
+        routeDetailView.route = RouteModel(startNodeId: startNodeId, endNodeId: endNodeId)
+        self.navigationController?.pushViewController(routeDetailView, animated: true)
     }
 
     // 그룹 삭제 버튼
@@ -276,7 +305,8 @@ extension RouteListViewController: UITableViewDelegate {
             selectStartNodeViewController.newGroup = myGroup
             self.navigationController?.pushViewController(selectStartNodeViewController, animated: true)
         } else {
-            // 버스 셀 선택
+            // 버스 셀 선택 - 디테일뷰
+            toRouteDetilView(indexPath: indexPath, bordingStatus: .getOff)
         }
     }
 }
@@ -348,6 +378,10 @@ extension RouteListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: RouteCell.identifier,
                     for: indexPath) as! RouteCell
+                cell.selectionStyle = .none
+                cell.closure = {
+                    self.toRouteDetilView(indexPath: indexPath, bordingStatus: .onBoard)
+                }
                 cell.busNumberLabel.text = busArray[indexPath.section][indexPath.row - 1].routeNo
                 cell.arrTime = secToMin(
                     sec: arriveArray[indexPath.section][indexPath.row - 1])

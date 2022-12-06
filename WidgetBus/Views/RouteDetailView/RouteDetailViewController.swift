@@ -50,7 +50,8 @@ class RouteDetailViewController: UIViewController {
 
     var boardingStatus: BoardingStatus = .onBoard
 
-    let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
+    // startNodeId 와 endNodeId의 값을 받기 위해 let에서 var로 수정합니다.
+    var route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
     var startNodeIdIndex = 0
     var endNodeIdIndex = 0
 
