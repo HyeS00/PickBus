@@ -49,9 +49,10 @@ final class GroupListViewContoller: UIViewController {
     // 메인 그룹 추가 버튼
     private lazy var addButton: UIButton = {
         let addButton = UIButton()
-        addButton.setTitle("추가하기", for: .normal)
+        addButton.setTitle("+", for: .normal)
         addButton.setTitleColor(.white, for: .normal)
-        addButton.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        addButton.backgroundColor = .duduDeepBlue
+        addButton.titleLabel?.font = UIFont.systemFont(ofSize: 50)
         addButton.layer.opacity = 0.4
         addButton.layer.cornerRadius = 15
         addButton.layer.shadowColor = UIColor.black.cgColor
@@ -90,6 +91,11 @@ final class GroupListViewContoller: UIViewController {
             setupTableView()
         }
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.view.backgroundColor = .white
+    }
 }
 
 private extension GroupListViewContoller {
@@ -111,6 +117,9 @@ private extension GroupListViewContoller {
         barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 30).isActive = true
         self.navigationItem.rightBarButtonItem = barButtonItem
 
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = .white
+
     }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
@@ -125,7 +134,7 @@ private extension GroupListViewContoller {
 
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         mainLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        mainLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        mainLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -120).isActive = true
 
         self.view.addSubview(addButton)
 

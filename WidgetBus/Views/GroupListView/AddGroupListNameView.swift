@@ -16,7 +16,7 @@ final class AddGroupListNameViewController: UIViewController {
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        view.backgroundColor = .duduDeepBlue
 
         return view
     }()
@@ -67,6 +67,7 @@ final class AddGroupListNameViewController: UIViewController {
         groupListTextfield.layer.shadowRadius = 2
         groupListTextfield.borderStyle = .roundedRect
         groupListTextfield.clearButtonMode = .whileEditing
+        groupListTextfield.autocorrectionType = .no
 
         return groupListTextfield
     }()
@@ -86,12 +87,12 @@ final class AddGroupListNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.groupListTextfield.delegate = self
-        setupLayout()
 
         let backButton = UIBarButtonItem()
         backButton.tintColor = .white
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-
+        setupNavigationController()
+        setupLayout()
         let rightButton = UIBarButtonItem(
             title: "다음",
             style: .plain,
@@ -141,7 +142,7 @@ private extension AddGroupListNameViewController {
         backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
 
         backgroundView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 70).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
@@ -176,10 +177,6 @@ private extension AddGroupListNameViewController {
 }
 extension AddGroupListNameViewController: UITextFieldDelegate {
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        navigationItem.rightBarButtonItem?.isEnabled = true
-    }
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.groupListTextfield.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
@@ -190,7 +187,46 @@ extension AddGroupListNameViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String
     ) -> Bool {
+        let text = (groupListTextfield.text! as NSString).replacingCharacters(in: range, with: string)
         guard groupListTextfield.text!.count < 17 else { return false }
+
+        if !text.isEmpty == true {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+
         return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+                return true
+            }
+}
+
+private extension AddGroupListNameViewController {
+    func setupNavigationController() {
+        let button = UIButton(type: .system)
+        let barButtonItem = UIBarButtonItem(customView: button)
+        barButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
+
+        self.navigationItem.rightBarButtonItem = barButtonItem
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.view.backgroundColor = .duduDeepBlue
+
+        let rightButton = UIBarButtonItem(
+            title: "다음",
+            style: .plain,
+            target: self,
+            action: #selector(pressButton(_:))
+        )
+
+        navigationItem.rightBarButtonItem = rightButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.rightBarButtonItem?.tintColor = .white
     }
 }
