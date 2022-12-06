@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		091BF3D0292F707E004B8275 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF3CF292F707E004B8275 /* BackgroundViewController.swift */; };
+		091BF42A293FAA86004B8275 /* TransitInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF429293FAA86004B8275 /* TransitInfoProtocol.swift */; };
 		099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */; };
 		099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */; };
 		099287E82924B23800CB7DBE /* SelectArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */; };
@@ -87,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		091BF3CF292F707E004B8275 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
+		091BF429293FAA86004B8275 /* TransitInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitInfoProtocol.swift; sourceTree = "<group>"; };
 		099287E32924B22A00CB7DBE /* ArrivalNodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalNodeModel.swift; sourceTree = "<group>"; };
 		099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTableViewCell.swift; sourceTree = "<group>"; };
 		099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectArrivalViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		091BF424293F7610004B8275 /* CustomAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				091BF429293FAA86004B8275 /* TransitInfoProtocol.swift */,
 			);
 			path = CustomAnimation;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 			files = (
 				CF3C88E9292669B20069E8CE /* SpecificArrive.swift in Sources */,
 				CFE0A867291CCD15002779C6 /* ArriveInfoFromBusStop.swift in Sources */,
+				091BF42A293FAA86004B8275 /* TransitInfoProtocol.swift in Sources */,
 				CFE0A864291CCB11002779C6 /* SelectRouteNumberViewController.swift in Sources */,
 				CFFDB0A429260591007AE8C3 /* RouteInformation.swift in Sources */,
 				CFFDB0A629262701007AE8C3 /* BusLocationsOnRoute.swift in Sources */,
