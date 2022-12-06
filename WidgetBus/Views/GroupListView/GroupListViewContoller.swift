@@ -83,19 +83,20 @@ final class GroupListViewContoller: UIViewController {
 
         setupNavigationController()
 
-        if coreDataGroups.isEmpty {
-            setupMainView()
-            groupListView.reloadData()
-        } else {
-            setupTableView()
-            getGroupsFromCoreData()
-            groupListView.reloadData()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.view.backgroundColor = .white
+
+//        if coreDataGroups.isEmpty {
+//            setupMainView()
+//            groupListView.reloadData()
+//        } else {
+            setupTableView()
+            getGroupsFromCoreData()
+            groupListView.reloadData()
+        //}
     }
 }
 
@@ -198,7 +199,7 @@ extension GroupListViewContoller: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let coreDataGroup = coreDataGroups[indexPath.row]
-
+        print(coreDataGroup)
         if indexPath.row == coreDataGroups.count {
             // 마지막 섹션
             let cell = groupListView.dequeueReusableCell(
