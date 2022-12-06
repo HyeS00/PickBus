@@ -34,7 +34,6 @@
 		C175CD0F292B719900140CDC /* AddGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */; };
 		C175CD24292CA0EF00140CDC /* BusStopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD1E292CA0EF00140CDC /* BusStopCell.swift */; };
 		C175CD25292CA0EF00140CDC /* RouteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD1F292CA0EF00140CDC /* RouteListViewController.swift */; };
-		C175CD26292CA0EF00140CDC /* BusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD20292CA0EF00140CDC /* BusData.swift */; };
 		C175CD27292CA0EF00140CDC /* RouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD21292CA0EF00140CDC /* RouteCell.swift */; };
 		C175CD28292CA0EF00140CDC /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD22292CA0EF00140CDC /* TitleHeader.swift */; };
 		C175CD29292CA0EF00140CDC /* AddRouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C175CD23292CA0EF00140CDC /* AddRouteCell.swift */; };
@@ -122,7 +121,6 @@
 		C175CCF8292B719900140CDC /* AddGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupTableViewCell.swift; sourceTree = "<group>"; };
 		C175CD1E292CA0EF00140CDC /* BusStopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusStopCell.swift; sourceTree = "<group>"; };
 		C175CD1F292CA0EF00140CDC /* RouteListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteListViewController.swift; sourceTree = "<group>"; };
-		C175CD20292CA0EF00140CDC /* BusData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusData.swift; sourceTree = "<group>"; };
 		C175CD21292CA0EF00140CDC /* RouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteCell.swift; sourceTree = "<group>"; };
 		C175CD22292CA0EF00140CDC /* TitleHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 		C175CD23292CA0EF00140CDC /* AddRouteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRouteCell.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 			children = (
 				C175CD1E292CA0EF00140CDC /* BusStopCell.swift */,
 				C175CD1F292CA0EF00140CDC /* RouteListViewController.swift */,
-				C175CD20292CA0EF00140CDC /* BusData.swift */,
 				C175CD21292CA0EF00140CDC /* RouteCell.swift */,
 				C175CD22292CA0EF00140CDC /* TitleHeader.swift */,
 				C175CD23292CA0EF00140CDC /* AddRouteCell.swift */,
@@ -644,7 +641,6 @@
 				C169206B2907B75C0021D17F /* WidgetBus.xcdatamodeld in Sources */,
 				C175CD27292CA0EF00140CDC /* RouteCell.swift in Sources */,
 				C175CD28292CA0EF00140CDC /* TitleHeader.swift in Sources */,
-				C175CD26292CA0EF00140CDC /* BusData.swift in Sources */,
 				CF3D0A3A292A2B9700639E5C /* MySearchNodeInfo.swift in Sources */,
 				CFEC63D32928B67E00B75795 /* DataController.swift in Sources */,
 				CFA1F63C2935EA5D00D1C513 /* MyAllRoutesFromNodeMultiType.swift in Sources */,
