@@ -82,6 +82,8 @@ final class GroupListViewContoller: UIViewController {
         groupListView.delegate = self
         groupListView.dataSource = self
 
+        navigationController?.delegate = self
+
         setupNavigationController()
 
         if initMain == true {
@@ -205,5 +207,32 @@ extension GroupListViewContoller: UITableViewDataSource {
 
             return cell
         }
+    }
+}
+
+extension GroupListViewContoller: UINavigationControllerDelegate {
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+
+        let transition: UIViewControllerAnimatedTransitioning?
+
+        switch (fromVC, toVC) {
+        case (fromVC as GroupListViewContoller,
+              toVC as RouteListViewController):
+            print("1")
+            transition = nil
+        case (fromVC as RouteListViewController,
+              toVC as GroupListViewContoller):
+            print("2")
+            transition = nil
+        default:
+            transition = nil
+        }
+
+        return transition
+
     }
 }
