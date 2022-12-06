@@ -77,7 +77,10 @@ final class SelectArrivalViewController: BackgroundViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        super.setTitleAndIndicator(titleText: "도착 정류장을\n선택해 주세요", indicatorStep: .stepFour)
+        super.setTitleAndIndicator(
+            titleText: "도착 정류장을\n선택해 주세요",
+            indicatorStep: checkAddGroupViewInStack() ? .stepFour : .stepThreeOfThree
+        )
 
         setInformations()
         setBusNodeList()
@@ -86,6 +89,17 @@ final class SelectArrivalViewController: BackgroundViewController {
         configureNavigationBar()
         configureUI()
 
+    }
+
+    // 네비게이션 스택에 AddGroupListNameViewController가 있는지 확인
+    func checkAddGroupViewInStack() -> Bool {
+        if let viewControllers = self.navigationController?.viewControllers {
+            for viewController in viewControllers
+            where viewController.isKind(of: AddGroupListNameViewController.classForCoder()) {
+                return true
+            }
+        }
+        return false
     }
 
     func setInformations() {
