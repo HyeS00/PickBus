@@ -12,24 +12,20 @@ enum BoardingStatus {
     case onBoard
     case getOff
 }
-
 struct RouteModel {
     let startNodeId: String
     let endNodeId: String
 }
-
 struct CurrentBusLocationInfo {
     // 버스 위치
     var nodeord: Int
     // 버스 개수
     var cnt: Int
 }
-
 struct ClientBoardingStatus {
     var boardingState: BoardingStatus
     var vehicleno: String?
 }
-
 struct ClientLocation {
     var latitude: CLLocationDegrees?
     var longtitude: CLLocationDegrees?
@@ -49,14 +45,11 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var boardingStateButton: UIButton!
 
     var boardingStatus: BoardingStatus = .onBoard
-
     let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
     var startNodeIdIndex = 0
     var endNodeIdIndex = 0
-
     var clientBoardingStatus = ClientBoardingStatus(boardingState: .getOff, vehicleno : nil)
     var clientLocation = ClientLocation()
-
     let locationManager = CLLocationManager()
 
     // Jedi
@@ -123,9 +116,7 @@ class RouteDetailViewController: UIViewController {
                         nearestBus = distance
                         nearestBusIndex = index
                     }
-                    print("========차례로 버스거리\(distance)")
                 }
-
                 if(nearestBus < 20) { // 특정 거리 설정을 어떻게 할까?
                     self.boardingStatus = .getOff
                     self.boardingStateButton.isSelected = true
@@ -477,7 +468,6 @@ extension RouteDetailViewController: UITableViewDataSource {
             } else {
                 cell.routePointImageView.image = UIImage(systemName: "chevron.down.circle")
             }
-
         }
         cell.busTimeLabel.layer.masksToBounds = true
         cell.busTimeLabel.layer.cornerRadius = 6.5
