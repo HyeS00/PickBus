@@ -26,7 +26,9 @@ class ExtendFromCellTransition: NSObject, UIViewControllerAnimatedTransitioning 
             return
         }
 
-        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! TransitInfoProtocol
+        let fromViewController = transitionContext.viewController(
+            forKey: UITransitionContextViewControllerKey.from
+        ) as! TransitInfoProtocol
 
         // 초기화
         let cell = fromViewController.getCell()!
@@ -63,25 +65,23 @@ class ExtendFromCellTransition: NSObject, UIViewControllerAnimatedTransitioning 
         })
 
         let animation4 = UIViewPropertyAnimator(duration: duration * 0.25, curve: .linear)
-        animation4.addAnimations ({
+        animation4.addAnimations({
             toView.transform = .identity
         })
-
-
-        animation1.addCompletion { position in
+        animation1.addCompletion { _ in
             toView.alpha = 0.99
             animation2.startAnimation()
         }
 
-        animation2.addCompletion { position in
+        animation2.addCompletion { _ in
             animation3.startAnimation()
         }
 
-        animation3.addCompletion { position in
+        animation3.addCompletion { _ in
             animation4.startAnimation()
         }
 
-        animation4.addCompletion { position in
+        animation4.addCompletion { _ in
             transitionContext.completeTransition(true)
         }
 
@@ -90,4 +90,3 @@ class ExtendFromCellTransition: NSObject, UIViewControllerAnimatedTransitioning 
 
     }
 }
-

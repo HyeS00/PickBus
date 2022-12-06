@@ -26,7 +26,9 @@ class ShrinkToCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             return
         }
 
-        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! TransitInfoProtocol
+        let toViewController = transitionContext.viewController(
+            forKey: UITransitionContextViewControllerKey.to
+        ) as! TransitInfoProtocol
 
         // 초기화
         let cellFrame = toViewController.getCellFrame()!
@@ -50,10 +52,10 @@ class ShrinkToCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
             fromView.alpha = 0
         })
 
-        animation1.addCompletion { position in
+        animation1.addCompletion { _ in
             animation2.startAnimation()
         }
-        animation2.addCompletion { position in
+        animation2.addCompletion { _ in
             transitionContext.completeTransition(true)
         }
 
@@ -61,4 +63,3 @@ class ShrinkToCellTransition: NSObject, UIViewControllerAnimatedTransitioning {
         animation1.startAnimation()
     }
 }
-
