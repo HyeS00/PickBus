@@ -11,7 +11,7 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="SelectStartNodeView" id="Y6W-OH-hqX" customClass="SelectStartNodeViewController" customModule="WidgetBus" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -37,6 +37,7 @@
                                         <connections>
                                             <action selector="didKeyboardEndOnExit:" destination="Y6W-OH-hqX" eventType="editingDidEndOnExit" id="y5a-XY-Ug5"/>
                                             <action selector="editingTextFieldChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="lr0-XU-6tP"/>
+                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="DlD-Ge-0Re"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -45,13 +46,18 @@
                                     <constraint firstItem="dLC-aU-oT4" firstAttribute="width" secondItem="yYG-0a-brm" secondAttribute="width" id="NfB-Qq-N1T"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="gp5-iz-NpP">
+                                <rect key="frame" x="177" y="200" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="gp5-iz-NpP" id="nhM-28-AqG"/>
                         <outlet property="busNodeSearchTextField" destination="4MV-ap-3EY" id="l5I-F3-g7q"/>
                         <outlet property="contentStackView" destination="yYG-0a-brm" id="dzA-Ve-kTM"/>
-                        <outlet property="tableView" destination="dLC-aU-oT4" id="y2O-Lz-zXC"/>
+                        <outlet property="startBusNodeTableView" destination="dLC-aU-oT4" id="y2O-Lz-zXC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

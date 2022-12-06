@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vvu-On-jQY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vvu-On-jQY">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -54,11 +54,7 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vvu-On-jQY" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="6yl-uX-x33"/>
-                            <constraint firstItem="vvu-On-jQY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="7N3-0K-gjQ"/>
-                            <constraint firstItem="vvu-On-jQY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="GEg-Dv-S7C"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="vvu-On-jQY" secondAttribute="bottom" id="sXo-bj-wGh"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vvu-On-jQY" secondAttribute="trailing" id="yNg-Eo-mzc"/>
+                            <constraint firstItem="vvu-On-jQY" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" id="ayp-nl-8bO"/>
                         </constraints>
                     </view>
                     <connections>
