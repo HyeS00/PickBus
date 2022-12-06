@@ -34,8 +34,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="버스 진행 방향" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lmh-vn-M6B">
-                                                <rect key="frame" x="0.0" y="14.333333333333336" width="86" height="18"/>
+                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="정류장 지역 이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lmh-vn-M6B" userLabel="Node Region">
+                                                <rect key="frame" x="0.0" y="14.333333333333336" width="99" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <color key="textColor" systemColor="systemGrayColor"/>
@@ -82,9 +82,9 @@
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
             <connections>
                 <outlet property="mapView" destination="1TU-A3-Kdf" id="niT-k6-8U1"/>
-                <outlet property="nodeDirection" destination="lmh-vn-M6B" id="kP9-N2-pfa"/>
                 <outlet property="nodeDistance" destination="eUn-Ku-e9Q" id="DMM-IP-DGh"/>
                 <outlet property="nodeName" destination="aPW-LQ-Mmw" id="vfE-eW-6sV"/>
+                <outlet property="nodeRegion" destination="lmh-vn-M6B" id="NAs-iF-KbI"/>
             </connections>
             <point key="canvasLocation" x="56.488549618320612" y="59.154929577464792"/>
         </tableViewCell>

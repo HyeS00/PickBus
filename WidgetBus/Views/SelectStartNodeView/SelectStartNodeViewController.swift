@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 struct TmpStruct {
     /// cityCode
@@ -19,11 +20,12 @@ struct TmpStruct {
 }
 
 final class SelectStartNodeViewController:
-    BackgroundViewController, UITableViewDelegate, UITableViewDataSource {
+    BackgroundViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet private weak var contentStackView: UIStackView!
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var startBusNodeTableView: UITableView!
     @IBOutlet private weak var busNodeSearchTextField: UITextField!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     // CoreData Controller
     var dataController: DataController!
@@ -59,20 +61,7 @@ final class SelectStartNodeViewController:
     // 도시코드 딕션어리
     private var cityCodeDictionary = [Int: String]()
 
-    var nodeName: [String] = [
-        "정류장1", "정류장2", "정류장3", "정류장4", "정류장5", "정류장6", "정류장7", "정류장8", "정류장9", "정류장10",
-        "정류장11", "정류장12", "정류장13", "정류장14", "정류장15", "정류장16", "정류장17", "정류장18", "정류장19", "정류장20"
-    ]
-    var nodeDirection: [String] = [
-        "정류장2방면", "정류장3방면", "정류장4방면", "정류장5방면", "정류장6방면",
-        "정류장7방면", "정류장8방면", "정류장9방면", "정류장10방면", "정류장11방면",
-        "정류장12방면", "정류장13방면", "정류장14방면", "정류장15방면", "정류장16방면",
-        "정류장17방면", "정류장18방면", "정류장19방면", "정류장20방면", "정류장1방면"
-    ]
-    var nodeDistance: [String] = [
-        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
-    ]
+    private var nodeList = [StartNodeModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +74,13 @@ final class SelectStartNodeViewController:
         contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+        contentView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: startBusNodeTableView.centerXAnchor)
+            .isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: startBusNodeTableView.centerYAnchor)
+            .isActive = true
 
         // 텍스트 필드 레이아웃 설정
         busNodeSearchTextField.layer.cornerRadius = 15
@@ -143,14 +139,14 @@ final class SelectStartNodeViewController:
 
     // MARK: 테이블
     func settingDefaultTableView() {
-        tableView.register(
+        startBusNodeTableView.register(
             SelectStartNodeTableViewCell.nib(),
             forCellReuseIdentifier: SelectStartNodeTableViewCell.identifier
         )
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nodeName.count
+        return nodeList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -161,9 +157,10 @@ final class SelectStartNodeViewController:
             return UITableViewCell()
         }
 
-        cell.nodeName.text = nodeName[indexPath.row]
-        cell.nodeDirection.text = nodeDirection[indexPath.row]
-        cell.nodeDistance.text = nodeDistance[indexPath.row]
+        cell.nodeName.text = nodeList[indexPath.row].nodeName
+        cell.nodeRegion.text = nodeList[indexPath.row].nodeCityName
+        cell.nodeDistance.text = "거리 추가 예정"
+        cell.nodeCoordinate = nodeList[indexPath.row].nodeCLLocationCoordinate2D
         cell.settingData(isClicked: selectedTableViewCellIndexPath == indexPath)
 
         return cell
@@ -230,6 +227,14 @@ final class SelectStartNodeViewController:
 
     @objc func keyboardWillHide(_ sender: Notification) {
         self.view.frame.origin.y = 0
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nodeList.removeAll()
+        selectedTableViewCellIndexPath = nil
+        startBusNodeTableView.reloadData()
+        activityIndicator.startAnimating()
+        return true
     }
 
     // MARK: 검색
@@ -307,14 +312,34 @@ final class SelectStartNodeViewController:
 
         // API 응답 결과
         if !response.isEmpty {
-            print(cityCode!)
-            print(cityCodeDictionary[cityCode!] ?? "Nil_")
-            print(response)
-
             temp.cityCode = String(cityCode ?? -1)
             temp.nodeno = response[0].nodeno
             temp.nodeid = response[0].nodeid
             temp.nodenm = response[0].nodenm
+
+            activityIndicator.stopAnimating()
+            startBusNodeTableView.beginUpdates()
+            response.forEach {
+                nodeList.append(
+                    StartNodeModel(
+                        nodeName: $0.nodenm,
+                        nodeID: $0.nodeid,
+                        nodeCityCode: cityCode ?? -1,
+                        nodeCityName: cityCodeDictionary[cityCode ?? -1] ?? "Nil_"
+                        ,
+                        nodeCLLocationCoordinate2D: CLLocationCoordinate2D(
+                            latitude: Double($0.gpslati.stringValue) ?? -1,
+                            longitude: Double($0.gpslong.stringValue) ?? -1
+                        )
+                    )
+                )
+
+                startBusNodeTableView.insertRows(
+                    at: [IndexPath(row: nodeList.count - 1, section: 0)]
+                    , with: .automatic
+                )
+            }
+            startBusNodeTableView.endUpdates()
 
         }
     }
