@@ -241,7 +241,7 @@ extension GroupListViewContoller: UINavigationControllerDelegate {
         switch (fromVC, toVC) {
         case (fromVC as GroupListViewContoller,
               toVC as RouteListViewController):
-            transition = nil
+            transition = ExtendFromCellTransition()
         case (fromVC as RouteListViewController,
               toVC as GroupListViewContoller):
             transition = nil
