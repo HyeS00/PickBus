@@ -76,7 +76,7 @@ final class GroupListViewContoller: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getGroupsFromCoreData()
+       // getGroupsFromCoreData()
 
         groupListView.delegate = self
         groupListView.dataSource = self
@@ -85,9 +85,11 @@ final class GroupListViewContoller: UIViewController {
 
         if coreDataGroups.isEmpty {
             setupMainView()
+            groupListView.reloadData()
         } else {
             setupTableView()
             getGroupsFromCoreData()
+            groupListView.reloadData()
         }
     }
 
@@ -210,7 +212,7 @@ extension GroupListViewContoller: UITableViewDataSource {
                 withIdentifier: GroupTableViewCell.identifier,
                 for: indexPath) as! GroupTableViewCell
             cell.selectionStyle = .none
-            cell.groupListLabel.text = coreDataGroup.name   
+            cell.groupListLabel.text = coreDataGroup.name
 
             return cell
         }
