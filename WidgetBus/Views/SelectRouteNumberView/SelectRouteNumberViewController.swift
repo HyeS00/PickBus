@@ -7,14 +7,13 @@
 
 import UIKit
 
-class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SelectRouteNumberViewController: BackgroundViewController, UITableViewDataSource, UITableViewDelegate {
     private struct RouteNumberCellStruct: Hashable {
         let routeNumber: String
         let routeType: String
         let routeId: String
     }
 
-//    private var routeNumberInfos = [ArriveInfoResponseArriveInfo]()
     var selectedIndex = IndexPath(row: -1, section: 0)
 
     var dataController: DataController!
@@ -22,10 +21,30 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     var newGroup: Group!
     private var newBus: Bus!
     private var routeNumberCellInfos = [RouteNumberCellStruct]()
+    private var isReady = false
 
     @IBOutlet weak var routeNumberTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigation()
+        setBackground()
+
+        newBus = Bus(context: dataController.viewContext)
+        newBus.startNodeId = newNode.nodeId
+        newBus.startNodeName = newNode.nodeNm
+
+        //        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
+        self.navigationItem.title = "\(newNode.nodeNm!)"
+        BusClient.getAllRoutesFromNode(
+            city: newNode.cityCode!,
+            nodeId: newNode.nodeId!,
+            completion: handleRequestAllRoutesInfoResponse(response:error:))
+    }
+
+    func setNavigation() {
+        let backButton = UIBarButtonItem()
+        backButton.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
 
         let rightButton = UIBarButtonItem(
             title: "다음",
@@ -33,30 +52,22 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             target: self,
             action: #selector(pressButton(_:))
         )
+        rightButton.tintColor = .white
         navigationItem.rightBarButtonItem = rightButton
-        navigationItem.rightBarButtonItem?.isEnabled = true
-
-        newBus = Bus(context: dataController.viewContext)
-        newBus.startNodeId = newNode.nodeId
-        newBus.startNodeName = newNode.nodeNm
-//        navigationItem.rightBarButtonItem?.tintColor = .white
-
-//        super.setTitleAndIndicator(titleText: "test", indicatorStep:.stepThree)
-
-//        super.bottomView.addSubview(routeNumberTableView)
-//        routeNumberTableView.translatesAutoresizingMaskIntoConstraints = false
-//        routeNumberTableView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//        routeNumberTableView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor).isActive = true
-//        routeNumberTableView.topAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
-
-        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
-        self.navigationItem.title = "\(newNode.nodeNm!)"
-        BusClient.getAllRoutesFromNode(
-            city: newNode.cityCode!,
-            nodeId: newNode.nodeId!,
-            completion: handleRequestAllRoutesInfoResponse(response:error:))
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
-//    여기 변수 타입 변경.
+
+    func setBackground() {
+        setTitleAndIndicator(titleText: "버스 번호 선택", indicatorStep: .stepThree)
+
+        contentView.addSubview(routeNumberTableView)
+        //        routeNumberTableView.translatesAutoresizingMaskIntoConstraints = false
+        routeNumberTableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        routeNumberTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        routeNumberTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        routeNumberTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+    }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
 
@@ -99,6 +110,9 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
         selectedIndex = indexPath
+
+        navigationItem.rightBarButtonItem?.isEnabled = isReady
+
         tableView.reloadData()
     }
 
@@ -123,11 +137,17 @@ class SelectRouteNumberViewController: UIViewController, UITableViewDataSource, 
             $0.routeNumber < $1.routeNumber
         }
         routeNumberTableView.reloadData()
-        for test in response {
-            print(test)
+        //        for test in response {
+        //            print(test)
+        //        }
+
+        guard error == nil else {
+            print("error")
+            print(error?.localizedDescription ?? "")
+            isReady = false
+            return
         }
+        isReady = true
         print("response")
-        print("error")
-        print(error?.localizedDescription ?? "")
     }
 }
