@@ -126,7 +126,7 @@ class RouteDetailViewController: UIViewController {
                     print("========차례로 버스거리\(distance)")
                 }
 
-                if(nearestBus < 1000000000000000) { // 특정 거리 설정을 어떻게 할까?
+                if(nearestBus < 20) { // 특정 거리 설정을 어떻게 할까?
                     self.boardingStatus = .getOff
                     self.boardingStateButton.isSelected = true
 
@@ -135,15 +135,20 @@ class RouteDetailViewController: UIViewController {
                     routeDetailTableView.reloadData()
 //                    print("====================버스 위치 \(clientBoardingStatus.vehicleno)")
 //                    print("====================버스 거리 \(nearestBus)")
+                } else {
+                    print("근처에 버스가 없습니다. 다시한번확인해주세요.")
                 }
 
             } else {
                 if(!busLocationList.isEmpty) {
-
-                } else if(clientLocation.latitude != nil && clientLocation.longtitude != nil) {
-
+                    // 새로고침을 해주세ㅛㅇ
+                    print("잠시후에 다시 시도해주세요.")
+                } else if(clientLocation.latitude == nil || clientLocation.longtitude == nil) {
+                    // 사용자 위치 설정
+                    print("사용자 위치 설정")
                 } else {
-
+                    // 현재 주변에 탑승중인 버스가 없습니다. 다시한번 확인해주세요.
+                    print("현재 주변에 탑승중인 버스가 없습니다. 다시한번 확인해주세요.")
                 }
             }
 

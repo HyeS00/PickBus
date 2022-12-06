@@ -15,9 +15,7 @@ extension RouteDetailViewController: CLLocationManagerDelegate {
             print(coordinate.longitude)
             clientLocation.latitude = coordinate.latitude
             clientLocation.longtitude = coordinate.longitude
-            // start 가져오고싶을때 stop
-            // startUpdatingLocation - stopUpdatingLocation / requireLocation
-            // coreLocation Developer.com
+            // start 가져오고싶을때 stop / startUpdatingLocation - stopUpdatingLocation / requireLocation
         }
     }
 
