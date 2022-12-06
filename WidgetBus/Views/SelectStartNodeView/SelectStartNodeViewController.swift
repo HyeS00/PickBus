@@ -8,17 +8,6 @@
 import UIKit
 import CoreLocation
 
-struct TmpStruct {
-    /// cityCode
-    var cityCode: String
-    /// 정류장 ID
-    var nodeid: String
-    /// 정류장 이름
-    var nodenm: String
-    /// 정류장 번호
-    var nodeno: Int
-}
-
 final class SelectStartNodeViewController:
     BackgroundViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
@@ -30,7 +19,6 @@ final class SelectStartNodeViewController:
     // CoreData Controller
     var dataController: DataController!
     var newGroup: Group!
-    var temp = TmpStruct(cityCode: "", nodeid: "", nodenm: "", nodeno: -1)
 
     @IBAction private func didKeyboardEndOnExit(_ sender: Any) {
         // 키보드 완료 버튼 눌렀을 때 busNodeSearchTextField.text를 이용해 API 호출
@@ -113,10 +101,15 @@ final class SelectStartNodeViewController:
             withIdentifier: "SelectRouteNumberViewController") as! SelectRouteNumberViewController
 
         let newNode = Node(context: dataController.viewContext)
-        newNode.cityCode = temp.cityCode
-        newNode.nodeId = temp.nodeid
-        newNode.nodeNm = temp.nodenm
-        newNode.nodeNo = String(temp.nodeno)
+
+        if let selectedTableViewCellIndexPath = selectedTableViewCellIndexPath {
+            newNode.cityCode = String(nodeList[selectedTableViewCellIndexPath.row].nodeCityCode)
+            newNode.nodeId = nodeList[selectedTableViewCellIndexPath.row].nodeID
+            newNode.nodeNm = nodeList[selectedTableViewCellIndexPath.row].nodeName
+            if let nodeNo = nodeList[selectedTableViewCellIndexPath.row].nodeNo {
+                newNode.nodeNo = String(nodeNo)
+            }
+        }
 
         selectRouteNodeViewController.dataController = dataController
         selectRouteNodeViewController.newGroup = newGroup
@@ -312,11 +305,6 @@ final class SelectStartNodeViewController:
 
         // API 응답 결과
         if !response.isEmpty {
-            temp.cityCode = String(cityCode ?? -1)
-            temp.nodeno = response[0].nodeno
-            temp.nodeid = response[0].nodeid
-            temp.nodenm = response[0].nodenm
-
             activityIndicator.stopAnimating()
             startBusNodeTableView.beginUpdates()
             response.forEach {
@@ -324,9 +312,9 @@ final class SelectStartNodeViewController:
                     StartNodeModel(
                         nodeName: $0.nodenm,
                         nodeID: $0.nodeid,
+                        nodeNo: $0.nodeno,
                         nodeCityCode: cityCode ?? -1,
-                        nodeCityName: cityCodeDictionary[cityCode ?? -1] ?? "Nil_"
-                        ,
+                        nodeCityName: cityCodeDictionary[cityCode ?? -1] ?? "Nil_",
                         nodeCLLocationCoordinate2D: CLLocationCoordinate2D(
                             latitude: Double($0.gpslati.stringValue) ?? -1,
                             longitude: Double($0.gpslong.stringValue) ?? -1
