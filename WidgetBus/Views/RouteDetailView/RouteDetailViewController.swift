@@ -8,29 +8,6 @@
 import UIKit
 import CoreLocation
 
-enum BoardingStatus {
-    case onBoard
-    case getOff
-}
-struct RouteModel {
-    let startNodeId: String
-    let endNodeId: String
-}
-struct CurrentBusLocationInfo {
-    // 버스 위치
-    var nodeord: Int
-    // 버스 개수
-    var cnt: Int
-}
-struct ClientBoardingStatus {
-    var boardingState: BoardingStatus
-    var vehicleno: String?
-}
-struct ClientLocation {
-    var latitude: CLLocationDegrees?
-    var longtitude: CLLocationDegrees?
-}
-
 class RouteDetailViewController: UIViewController {
 
     @IBOutlet weak var busNumberLabel: UILabel!
@@ -135,7 +112,22 @@ class RouteDetailViewController: UIViewController {
                     alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 } else if(clientLocation.latitude == nil || clientLocation.longtitude == nil) {
                     // 사용자 위치 설정
-                    alertManager("설정에서 위치허용을 해주세요.")
+                    let authAlertController : UIAlertController
+
+                    authAlertController = UIAlertController(
+                        title: "위치 사용 권한이 필요합니다.",
+                        message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.",
+                        preferredStyle: .alert)
+
+                    let getAuthAction : UIAlertAction
+
+                    getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (_) in
+                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(appSettings,options: [:],completionHandler: nil)
+                        }
+                    })
+                    authAlertController.addAction(getAuthAction)
+                    self.present(authAlertController, animated: true, completion: nil)
                 } else {
                     alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 }
