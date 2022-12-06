@@ -185,6 +185,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		091BF424293F7610004B8275 /* CustomAnimation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomAnimation;
+			sourceTree = "<group>";
+		};
 		096B55C8292213D100B328A0 /* SelectArrivalView */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +253,7 @@
 				E1707844291EC26A001D324C /* Views */,
 				E1707845291EC271001D324C /* Models */,
 				D784808C291E18DC009F8FDB /* Extensions */,
+				091BF424293F7610004B8275 /* CustomAnimation */,
 				C169206C2907B75D0021D17F /* Assets.xcassets */,
 				C169206E2907B75D0021D17F /* LaunchScreen.storyboard */,
 				C16920692907B75C0021D17F /* WidgetBus.xcdatamodeld */,
