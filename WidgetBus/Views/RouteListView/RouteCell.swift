@@ -29,7 +29,7 @@ final class RouteCell: UITableViewCell {
     }
 
     // 다음 남은 시간
-    var nextArrTime: String = "정보없음"
+//    var nextArrTime: String = "정보없음"
 
     // 버스번호
     var busNumberLabel: UILabel = {
@@ -64,14 +64,14 @@ final class RouteCell: UITableViewCell {
     }()
 
     // 다음버스남은시간
-    private lazy var nextBusRemainingTimeLabel: UILabel = {
-        let label = UILabel()
-        label.text = nextArrTime
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .duduGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+//    private lazy var nextBusRemainingTimeLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = nextArrTime
+//        label.font = UIFont.systemFont(ofSize: 14)
+//        label.textColor = .duduGray
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
 
     // 탑승버튼
     private lazy var rideButton: UIButton = {
@@ -102,7 +102,7 @@ final class RouteCell: UITableViewCell {
         self.contentView.addSubview(busNumberBackgroundView)
         self.contentView.addSubview(busNumberLabel)
         self.contentView.addSubview(busRemainingTimeLabel)
-        self.contentView.addSubview(nextBusRemainingTimeLabel)
+//        self.contentView.addSubview(nextBusRemainingTimeLabel)
         self.contentView.addSubview(rideButton)
 
         NSLayoutConstraint.activate([
@@ -125,11 +125,11 @@ final class RouteCell: UITableViewCell {
                 equalTo: self.contentView.centerXAnchor, constant: -20),
 
             // 다음버스남은시간
-            nextBusRemainingTimeLabel.bottomAnchor.constraint(
-                equalTo: self.busRemainingTimeLabel.bottomAnchor),
-            nextBusRemainingTimeLabel.leadingAnchor.constraint(
-                equalTo: self.busRemainingTimeLabel.trailingAnchor,
-                constant: 14),
+//            nextBusRemainingTimeLabel.bottomAnchor.constraint(
+//                equalTo: self.busRemainingTimeLabel.bottomAnchor),
+//            nextBusRemainingTimeLabel.leadingAnchor.constraint(
+//                equalTo: self.busRemainingTimeLabel.trailingAnchor,
+//                constant: 14),
 
             // 탑승버튼
             rideButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
