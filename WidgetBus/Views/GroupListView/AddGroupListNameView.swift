@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddGroupListNameViewController: UIViewController {
+final class AddGroupListNameViewController: BackgroundViewController {
 
     // CoreData Controller
     var dataController: DataController!
@@ -16,7 +16,7 @@ final class AddGroupListNameViewController: UIViewController {
     private let backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        view.backgroundColor = .duduDeepBlue
 
         return view
     }()
@@ -67,6 +67,7 @@ final class AddGroupListNameViewController: UIViewController {
         groupListTextfield.layer.shadowRadius = 2
         groupListTextfield.borderStyle = .roundedRect
         groupListTextfield.clearButtonMode = .whileEditing
+        groupListTextfield.autocorrectionType = .no
 
         return groupListTextfield
     }()
@@ -86,12 +87,12 @@ final class AddGroupListNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.groupListTextfield.delegate = self
-        setupLayout()
 
         let backButton = UIBarButtonItem()
         backButton.tintColor = .white
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-
+        setupNavigationController()
+        setupLayout()
         let rightButton = UIBarButtonItem(
             title: "다음",
             style: .plain,
@@ -134,51 +135,26 @@ final class AddGroupListNameViewController: UIViewController {
 
 private extension AddGroupListNameViewController {
     func setupLayout() {
-        self.view.addSubview(backgroundView)
-        backgroundView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        backgroundView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        backgroundView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        setTitleAndIndicator(titleText: "어떨때 이용하는 \n대중교통인가요?", indicatorStep: .stepOne)
 
-        backgroundView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 70).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
-
-        backgroundView.addSubview(indicatorImage)
-        indicatorImage.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 80).isActive = true
-        indicatorImage.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor).isActive = true
-        indicatorImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        indicatorImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-
-        backgroundView.addSubview(bottomView)
-        bottomView.topAnchor.constraint(equalTo: indicatorImage.topAnchor, constant: 50).isActive = true
-        bottomView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        bottomView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        bottomView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-
-        bottomView.addSubview(groupListTextfield)
-        groupListTextfield.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 20)
+        contentView.addSubview(groupListTextfield)
+        groupListTextfield.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20)
             .isActive = true
-        groupListTextfield.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15).isActive = true
-        groupListTextfield.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15)
+        groupListTextfield.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15)
+            .isActive = true
+        groupListTextfield.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
             .isActive = true
         groupListTextfield.heightAnchor.constraint(equalToConstant: 80).isActive = true
 
-        bottomView.addSubview(bottomLabel)
+        groupListTextfield.addSubview(bottomLabel)
         bottomLabel.topAnchor.constraint(equalTo: groupListTextfield.topAnchor, constant: 100)
             .isActive = true
-        bottomLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor).isActive = true
-        bottomLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor).isActive = true
+        bottomLabel.leadingAnchor.constraint(equalTo: groupListTextfield.leadingAnchor).isActive = true
+        bottomLabel.trailingAnchor.constraint(equalTo: groupListTextfield.trailingAnchor).isActive = true
 
     }
 }
 extension AddGroupListNameViewController: UITextFieldDelegate {
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        navigationItem.rightBarButtonItem?.isEnabled = true
-    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.groupListTextfield.resignFirstResponder()
@@ -190,7 +166,46 @@ extension AddGroupListNameViewController: UITextFieldDelegate {
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String
     ) -> Bool {
+        let text = (groupListTextfield.text! as NSString).replacingCharacters(in: range, with: string)
         guard groupListTextfield.text!.count < 17 else { return false }
+
+        if !text.isEmpty == true {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+
         return true
+    }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+                return true
+            }
+}
+
+private extension AddGroupListNameViewController {
+    func setupNavigationController() {
+        let button = UIButton(type: .system)
+        let barButtonItem = UIBarButtonItem(customView: button)
+        barButtonItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 40).isActive = true
+
+        self.navigationItem.rightBarButtonItem = barButtonItem
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.view.backgroundColor = .duduDeepBlue
+
+        let rightButton = UIBarButtonItem(
+            title: "다음",
+            style: .plain,
+            target: self,
+            action: #selector(pressButton(_:))
+        )
+
+        navigationItem.rightBarButtonItem = rightButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.rightBarButtonItem?.tintColor = .white
     }
 }

@@ -12,27 +12,20 @@ class AddGroupTableViewCell: UITableViewCell {
 
     private lazy var groupListAddLabel: UILabel = {
         let label = UILabel()
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(systemName: "plus")
-        let attachmentString = NSAttributedString(attachment: attachment)
-        let contentString = NSMutableAttributedString(string: "")
-        contentString.append(attachmentString)
-        label.attributedText = contentString
-
+        label.text = "+"
+        label.font = .systemFont(ofSize: 70, weight: .bold)
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .white
-        label.textAlignment = .center
-        label.backgroundColor = UIColor(red: 44/255.0, green: 53/255.0, blue: 122/255.0, alpha: 1.0)
+        label.backgroundColor = .duduDeepBlue
         label.layer.masksToBounds = true
         label.layer.opacity = 0.3
-        label.layer.borderWidth = 1
         label.layer.cornerRadius = 15
         label.layer.shadowColor = UIColor.black.cgColor
         label.layer.shadowOpacity = 0.8
         label.layer.shadowOffset = CGSize(width: 2, height: 20)
         label.layer.shadowRadius = 2.0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.sizeToFit()
 
         return label
     }()

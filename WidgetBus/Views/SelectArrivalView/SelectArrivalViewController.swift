@@ -88,7 +88,7 @@ final class SelectArrivalViewController: BackgroundViewController {
         configureTableView()
         configureNavigationBar()
         configureUI()
-
+        self.extendedLayoutIncludesOpaqueBars = true
     }
 
     // 네비게이션 스택에 AddGroupListNameViewController가 있는지 확인

@@ -103,6 +103,8 @@ final class SelectStartNodeViewController:
 
         settingDefaultTableView()
         addDefaultKeyboardObserver()
+
+        self.extendedLayoutIncludesOpaqueBars = true
     }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
