@@ -101,7 +101,7 @@ final class GroupListViewContoller: UIViewController {
 
 private extension GroupListViewContoller {
     func setupNavigationController() {
-        let logo = UIImage(named: "MainLogo")
+        let logo = UIImage(named: "AppIcon")
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         logoView.contentMode = .scaleAspectFill
         logoView.image = logo
