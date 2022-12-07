@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArrivalTableViewCell: UITableViewCell {
+final class ArrivalTableViewCell: UITableViewCell {
     // MARK: - Properties
     private let highlightView: UIView = {
         let view = UIView()

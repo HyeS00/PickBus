@@ -96,4 +96,7 @@ enum IndicatorStep: String {
     case stepTwo = "progressIndicator2"
     case stepThree = "progressIndicator3"
     case stepFour = "progressIndicator4"
+    case stepOneOfThree = "progressIndicator1of3"
+    case stepTwoOfThree = "progressIndicator2of3"
+    case stepThreeOfThree = "progressIndicator3of3"
 }

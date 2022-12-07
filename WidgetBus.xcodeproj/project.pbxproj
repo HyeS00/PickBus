@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091BF3CA292E0F12004B8275 /* BusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF3C9292E0F12004B8275 /* BusBadgeView.swift */; };
 		091BF3D0292F707E004B8275 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF3CF292F707E004B8275 /* BackgroundViewController.swift */; };
 		091BF42A293FAA86004B8275 /* TransitInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF429293FAA86004B8275 /* TransitInfoProtocol.swift */; };
 		091BF42C293FAF6D004B8275 /* ExtendFromCellTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091BF42B293FAF6D004B8275 /* ExtendFromCellTransition.swift */; };
@@ -89,6 +90,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		091BF3C9292E0F12004B8275 /* BusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBadgeView.swift; sourceTree = "<group>"; };
 		091BF3CF292F707E004B8275 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 		091BF429293FAA86004B8275 /* TransitInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitInfoProtocol.swift; sourceTree = "<group>"; };
 		091BF42B293FAF6D004B8275 /* ExtendFromCellTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendFromCellTransition.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				099287E52924B23800CB7DBE /* ArrivalTableViewCell.swift */,
 				099287E62924B23800CB7DBE /* SelectArrivalViewController.swift */,
+				091BF3C9292E0F12004B8275 /* BusBadgeView.swift */,
 			);
 			path = SelectArrivalView;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				091BF42C293FAF6D004B8275 /* ExtendFromCellTransition.swift in Sources */,
 				099287E72924B23800CB7DBE /* ArrivalTableViewCell.swift in Sources */,
 				099287E42924B22A00CB7DBE /* ArrivalNodeModel.swift in Sources */,
+				091BF3CA292E0F12004B8275 /* BusBadgeView.swift in Sources */,
 				C175CD25292CA0EF00140CDC /* RouteListViewController.swift in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
 				C175CD0E292B719900140CDC /* GroupListViewContoller.swift in Sources */,

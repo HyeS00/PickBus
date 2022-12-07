@@ -22,7 +22,7 @@ class RouteDetailViewController: UIViewController {
     @IBOutlet weak var boardingStateButton: UIButton!
 
     var boardingStatus: BoardingStatus = .onBoard
-    let route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
+    var route: RouteModel = RouteModel(startNodeId: "DJB8001793", endNodeId: "DJB8007236")
     var startNodeIdIndex = 0
     var endNodeIdIndex = 0
     var clientBoardingStatus = ClientBoardingStatus(boardingState: .getOff, vehicleno : nil)
@@ -37,6 +37,8 @@ class RouteDetailViewController: UIViewController {
     var nodeId: String = "DJB8001793"
     // 도시 코드
     var cityCode: Int = 25
+    // 버스 번호
+    var routeNo: String = "1000"
     // 버스 정류장들
     private var nodeList = [RouteNodesInfo]()
     // 버스 위치
@@ -162,7 +164,7 @@ class RouteDetailViewController: UIViewController {
         self.view.backgroundColor = .duduDeepBlue
         self.routeDetailTableView.dataSource = self
         self.routeDetailTableView.delegate = self
-        busNumberLabel.text = "1000"
+        busNumberLabel.text = routeNo
 
         refreshButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         refreshButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
