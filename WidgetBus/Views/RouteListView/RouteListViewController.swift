@@ -222,7 +222,8 @@ final class RouteListViewController: UIViewController {
     @objc private func pressedDeleteTitleButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
         let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
-            self.navigationController?.popViewController(animated: true)
+            // 루트뷰로 가게 수정해야함
+            self.navigationController?.popToRootViewController(animated: true)
             self.deleteGroup()
         }
         let cancle = UIAlertAction(title: "취소", style: .cancel)
