@@ -86,11 +86,11 @@ final class GroupListViewContoller: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.view.backgroundColor = .white
+
         getGroupsFromCoreData()
         print(coreDataGroups.count)
         if coreDataGroups.isEmpty {
             setupMainView()
-            groupListView.reloadData()
         } else {
             setupTableView()
             getGroupsFromCoreData()
@@ -102,8 +102,8 @@ final class GroupListViewContoller: UIViewController {
 private extension GroupListViewContoller {
     func setupNavigationController() {
         let logo = UIImage(named: "MainLogo")
-        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        logoView.contentMode = .scaleAspectFit
+        let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        logoView.contentMode = .scaleAspectFill
         logoView.image = logo
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: logoView)
 
@@ -201,11 +201,11 @@ extension GroupListViewContoller: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let coreDataGroup = coreDataGroups[indexPath.row]
 
         print(coreDataGroups)
         if indexPath.section == coreDataGroups.count {
             // 마지막 섹션
+            print(coreDataGroups.count)
             let cell = groupListView.dequeueReusableCell(
                 withIdentifier: AddGroupTableViewCell.identifier,
                 for: indexPath) as! AddGroupTableViewCell
@@ -213,6 +213,7 @@ extension GroupListViewContoller: UITableViewDataSource {
             return cell
         } else {
             // 기본 섹션
+            let coreDataGroup = coreDataGroups[indexPath.section]
             let cell = groupListView.dequeueReusableCell(
                 withIdentifier: GroupTableViewCell.identifier,
                 for: indexPath) as! GroupTableViewCell
