@@ -107,7 +107,7 @@ final class SelectStartNodeViewController:
 
         settingDefaultTableView()
         addDefaultKeyboardObserver()
-        
+
         self.extendedLayoutIncludesOpaqueBars = true
     }
 
