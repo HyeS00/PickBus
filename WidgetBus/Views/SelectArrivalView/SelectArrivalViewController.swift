@@ -77,9 +77,14 @@ final class SelectArrivalViewController: BackgroundViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        super.setTitleAndIndicator(
+//            titleText: "도착 정류장을\n선택해 주세요",
+//            indicatorStep: checkAddGroupViewInStack() ? .stepFour : .stepThreeOfThree
+//        )
+
         super.setTitleAndIndicator(
             titleText: "도착 정류장을\n선택해 주세요",
-            indicatorStep: checkAddGroupViewInStack() ? .stepFour : .stepThreeOfThree
+            indicatorStep: .stepFour
         )
 
         setInformations()

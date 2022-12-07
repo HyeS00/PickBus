@@ -78,6 +78,8 @@ final class RouteListViewController: UIViewController {
         routeTableView.reloadData()
         routeTableView.delegate = self
         routeTableView.dataSource = self
+
+        self.extendedLayoutIncludesOpaqueBars = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
