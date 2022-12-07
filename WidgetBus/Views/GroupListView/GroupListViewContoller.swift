@@ -11,13 +11,18 @@ import UIKit
 struct GroupListArray: Decodable {
     let groupName: String
 }
-final class GroupListViewContoller: UIViewController {
+
+final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
 
     // CoreData 컨트롤러
     var dataController: DataController!
 
     // Group Array
     var coreDataGroups = [Group]()
+
+    // TransitInfo Protocol
+    private var cellOriginFrame: CGRect?
+    private var cellInfo: UITableViewCell?
 
     // 그룹 리스트 테이블
     private lazy var groupListView: UITableView = {
@@ -29,7 +34,7 @@ final class GroupListViewContoller: UIViewController {
         groupList.register(GroupTableViewCell.self, forCellReuseIdentifier: GroupTableViewCell.identifier)
         groupList.register(
             AddGroupTableViewCell.self,
-                           forCellReuseIdentifier: AddGroupTableViewCell.identifier)
+            forCellReuseIdentifier: AddGroupTableViewCell.identifier)
         return groupList
     }()
 
@@ -73,11 +78,21 @@ final class GroupListViewContoller: UIViewController {
 
     }
 
+    func getCellFrame() -> CGRect? {
+        return cellOriginFrame
+    }
+
+    func getCell() -> UITableViewCell? {
+        return cellInfo
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         groupListView.delegate = self
         groupListView.dataSource = self
+
+        navigationController?.delegate = self
 
         setupNavigationController()
 
@@ -170,6 +185,13 @@ private extension GroupListViewContoller {
 extension GroupListViewContoller: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = groupListView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        cellOriginFrame = cell.convert(cell.subviews[0].frame, to: nil)
+        cellInfo = cell
+
         // 데이터 있을 때, 여기 추가.
         if indexPath.section == coreDataGroups.count {
             let addGroupListNameView = AddGroupListNameViewController()
@@ -223,4 +245,29 @@ extension GroupListViewContoller: UITableViewDataSource {
             return cell
         }
     }
+}
+
+extension GroupListViewContoller: UINavigationControllerDelegate {
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+
+            let transition: UIViewControllerAnimatedTransitioning?
+
+            switch (fromVC, toVC) {
+            case (fromVC as GroupListViewContoller,
+                  toVC as RouteListViewController):
+                transition = ExtendFromCellTransition()
+            case (fromVC as RouteListViewController,
+                  toVC as GroupListViewContoller):
+                transition = ShrinkToCellTransition()
+            default:
+                transition = nil
+            }
+
+            return transition
+
+        }
 }
