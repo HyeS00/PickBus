@@ -61,6 +61,7 @@ class ExtendFromCellTransition: NSObject, UIViewControllerAnimatedTransitioning 
 
         let animation3 = UIViewPropertyAnimator(duration: duration * 0.25, curve: .linear)
         animation3.addAnimations({
+            toView.layer.cornerRadius = 0
             toView.transform = CGAffineTransform(scaleX: 1.01, y: 1.01)
         })
 
