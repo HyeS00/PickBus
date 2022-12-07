@@ -113,7 +113,7 @@ class SelectArrivalViewController: UIViewController {
         configureTableView()
         configureNavigationBar()
         configureUI()
-
+        self.extendedLayoutIncludesOpaqueBars = true
     }
 
     func setInformations() {
