@@ -44,9 +44,9 @@ struct BusLocationsInfo: Decodable {
     /// 정류장 순서
     let nodeord: Int
     /// 노선 번호
-    let routenm: Int
+    let routenm: StringMultiType
     /// 노선 유형(간선 버스 등)
     let routetp: String
     /// 차량 번호(대전99가9999 등)
-    let vehicleno: String
+    let vehicleno: StringMultiType
 }
