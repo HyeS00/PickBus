@@ -165,7 +165,11 @@ final class RouteListViewController: UIViewController {
             // 수정할 부분 값이 nil인 경우 처리
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {fatalError()}
+                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {
+                    // 정보 없음 시, 뒤돌아가면 에러 발생해서 주석 처리.
+//                    fatalError()
+                    return
+                }
                 if let fetchBusInfo = response.filter({
                     $0.routeno.stringValue == String(myRouteNo)
                 }).first {
