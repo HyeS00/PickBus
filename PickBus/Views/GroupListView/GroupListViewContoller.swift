@@ -86,6 +86,11 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
         return cellInfo
     }
 
+    func setCellInit() {
+        cellOriginFrame = nil
+        cellInfo = nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -262,6 +267,10 @@ extension GroupListViewContoller: UINavigationControllerDelegate {
                 transition = ExtendFromCellTransition()
             case (fromVC as RouteListViewController,
                   toVC as GroupListViewContoller):
+                if cellOriginFrame == nil {
+                    return nil
+                }
+
                 transition = ShrinkToCellTransition()
             default:
                 transition = nil
