@@ -8,23 +8,25 @@
 import Foundation
 
 class BusClient {
-
+    
+    static private let debug = true
+    
     static var apiKey: String {
-
+        
         guard let url = Bundle.main.url(forResource: "Service Key", withExtension: "plist") else {
             return ""
         }
         guard let dictionary = NSDictionary(contentsOf: url) else {
             return ""
         }
-
+        
         return dictionary["BusStop"] as? String ?? ""
     }
-
+    
     enum Endpoints {
         static let base = "http://apis.data.go.kr"
         static let apiKeyParam = "?serviceKey=\(BusClient.apiKey)"
-
+        
         case getArriveList(city: String, busStopId: String)
         case getCityCodeList
         case getNodesList(city: String, routeId: String, pageNumber: String = "1")
@@ -33,7 +35,7 @@ class BusClient {
         case getBusLocationsOnRoute(city: String, routeId: String)
         case getSpecificArrive(city: String, routeId: String, nodeId: String)
         case getAllRoutesFromNode(city: String, nodeId: String)
-
+        
         var stringValue: String {
             switch self {
             case .getArriveList(let city, let busStopId):
@@ -41,18 +43,18 @@ class BusClient {
                 "/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList" +
                 Endpoints.apiKeyParam +
                 "&_type=json&cityCode=\(city)&nodeId=\(busStopId)&numOfRows=99"
-
+                
             case .getAllRoutesFromNode(let city, let nodeId):
                 return Endpoints.base +
                 "/1613000/BusSttnInfoInqireService/getSttnThrghRouteList" +
                 Endpoints.apiKeyParam +
                 "&_type=json&cityCode=\(city)&nodeid=\(nodeId)&numOfRows=99"
-
+                
             case .getCityCodeList:
                 return Endpoints.base +
                 "/1613000/BusSttnInfoInqireService/getCtyCodeList" +
                 Endpoints.apiKeyParam + "&_type=json"
-
+                
             case .getNodesList(let city, let routeId, let pageNumber):
                 return Endpoints.base +
                 "/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList" +
@@ -60,15 +62,15 @@ class BusClient {
                 "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=99"
                 +
                 "&pageNo=\(pageNumber)"
-
+                
             case .searchNode(let city, let nodeName, let nodeNumber):
                 var url = ""
-
+                
                 var isNodeName = false
                 var isNodeNumber = false
                 nodeName == nil ? (isNodeName = false) : (isNodeName = true)
                 nodeNumber == nil ? (isNodeNumber = false) : (isNodeNumber = true)
-
+                
                 if isNodeName {
                     let escapedNodeNm =
                     nodeName!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
@@ -87,19 +89,19 @@ class BusClient {
                     return url
                 }
                 return url
-
+                
             case .getRouteInformation(let city, let routeId):
                 return Endpoints.base +
                 "/1613000/BusRouteInfoInqireService/getRouteInfoIem" +
                 Endpoints.apiKeyParam +
                 "&_type=json&cityCode=\(city)&routeId=\(routeId)"
-
+                
             case .getBusLocationsOnRoute(let city, let routeId):
                 return Endpoints.base +
                 "/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList" +
                 Endpoints.apiKeyParam +
                 "&_type=json&cityCode=\(city)&routeId=\(routeId)&numOfRows=99"
-
+                
             case .getSpecificArrive(let city, let routeId, let nodeId):
                 return Endpoints.base +
                 "/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList" +
@@ -107,12 +109,12 @@ class BusClient {
                 "&_type=json&cityCode=\(city)&nodeId=\(nodeId)&routeId=\(routeId)&numOfRows=99"
             }
         }
-
+        
         var url: URL {
             return URL(string: stringValue)!
         }
     }
-
+    
     class func taskForGETRequest<ResponseType: Decodable>(
         url: URL,
         responseType: ResponseType.Type,
@@ -138,10 +140,10 @@ class BusClient {
             }
         }
         task.resume()
-
+        
         return task
     }
-
+    
     class func taskForGetRequestWithCityCode<ResponseType: Decodable>(
         url: URL,
         cityCode: Int,
@@ -150,7 +152,7 @@ class BusClient {
     ) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-
+                
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
@@ -169,10 +171,10 @@ class BusClient {
             }
         }
         task.resume()
-
+        
         return task
     }
-
+    
     class func searchNodeList(
         city: String = "25",
         nodeName: String? = "전통시장",
@@ -192,10 +194,16 @@ class BusClient {
                     completion(nil, [], error)
                 }
             }
-
+        if debug {
+            print(Endpoints.searchNode(
+                city: city,
+                nodeName: nodeName,
+                nodeNumber: nodeNumber).url)
+        }
+        
         return myTask
     }
-
+    
     class func getArriveList(
         city: String = "25",
         nodeId: String = "DJB8001793",
@@ -209,8 +217,11 @@ class BusClient {
                         completion([], error)
                     }
                 }
+            if debug {
+                print(Endpoints.getArriveList(city: city, busStopId: nodeId).url)
+            }
         }
-
+    
     class func getAllRoutesFromNode(
         city: String = "25",
         nodeId: String = "DJB8001793",
@@ -224,8 +235,11 @@ class BusClient {
                         completion([], error)
                     }
                 }
+            if debug {
+                print(Endpoints.getAllRoutesFromNode(city: city, nodeId: nodeId).url)
+            }
         }
-
+    
     class func getNodesListBody(
         city: String = "25",
         routeId: String = "DJB30300004",
@@ -239,8 +253,11 @@ class BusClient {
                         completion(nil, error)
                     }
                 }
+            if debug {
+                print(Endpoints.getNodesList(city: city, routeId: routeId).url)
+            }
         }
-
+    
     class func getNodeList (
         city: String = "25",
         routeId: String = "DJB30300004",
@@ -255,8 +272,11 @@ class BusClient {
                         completion([], error)
                     }
                 }
+            if debug {
+                print(Endpoints.getNodesList(city: city, routeId: routeId, pageNumber: pageNo).url)
+            }
         }
-
+    
     class func getCityCodeList (
         completion: @escaping ([CityCodeInfo], Error?) -> Void) {
             _ = taskForGETRequest(
@@ -268,6 +288,9 @@ class BusClient {
                         completion([], error)
                     }
                 }
+            if debug {
+                print(Endpoints.getCityCodeList.url)
+            }
         }
     class func getRouteInformation (
         city: String = "25",
@@ -282,8 +305,11 @@ class BusClient {
                         completion(nil, error)
                     }
                 })
+            if debug {
+                print(Endpoints.getRouteInformation(city: city, routeId: routeId).url)
+            }
         }
-
+    
     class func getLocationsOnRoute(
         city: String = "25",
         routeId: String = "DJB30300004",
@@ -297,8 +323,11 @@ class BusClient {
                         completion([], error)
                     }
                 })
+            if debug {
+                print(Endpoints.getBusLocationsOnRoute(city: city, routeId: routeId).url)
+            }
         }
-
+    
     class func getSpecificArrive(
         city: String = "25",
         routeId: String = "DJB30300004",
@@ -315,5 +344,5 @@ class BusClient {
                     }
                 })
         }
-
+    
 }
