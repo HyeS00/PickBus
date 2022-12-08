@@ -29,6 +29,8 @@ class RouteDetailViewController: UIViewController {
     var clientLocation = ClientLocation()
     let locationManager = CLLocationManager()
 
+    private var pageCount: Int = -1
+
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
     // 노선 ID
@@ -244,6 +246,7 @@ class RouteDetailViewController: UIViewController {
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
+            pageCount = iterater
             for index in 1...iterater {
                 BusClient.getNodeList(
                     city: String(cityCode),
@@ -267,15 +270,16 @@ class RouteDetailViewController: UIViewController {
 
         nodeList += response
 
-        nodeList.sort { $0.nodeord < $1.nodeord }
+        pageCount -= 1
+        if pageCount == 0 {
+            nodeList.sort { $0.nodeord < $1.nodeord }
+            startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
+            endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
 
-        startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
-        endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
-
-        print("Node List: \(nodeList.count)")
-        routeDetailTableView.reloadData()
-        scrollToRow()
-
+            print("Node List: \(nodeList.count)")
+            routeDetailTableView.reloadData()
+            scrollToRow()
+        }
     }
 
     // 노선 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.

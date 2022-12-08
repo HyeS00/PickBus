@@ -120,6 +120,9 @@ class BusClient {
         responseType: ResponseType.Type,
         completion: @escaping (ResponseType?, Error?) -> Void
     ) -> URLSessionDataTask {
+        if debug {
+            print(url)
+        }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
                 DispatchQueue.main.async {
@@ -150,6 +153,9 @@ class BusClient {
         responseType: ResponseType.Type,
         completion: @escaping (Int?, ResponseType?, Error?) -> Void
     ) -> URLSessionDataTask {
+        if debug {
+            print(url)
+        }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
 
@@ -194,12 +200,6 @@ class BusClient {
                     completion(nil, [], error)
                 }
             }
-        if debug {
-            print(Endpoints.searchNode(
-                city: city,
-                nodeName: nodeName,
-                nodeNumber: nodeNumber).url)
-        }
 
         return myTask
     }
@@ -217,9 +217,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
-            if debug {
-                print(Endpoints.getArriveList(city: city, busStopId: nodeId).url)
-            }
+
         }
 
     class func getAllRoutesFromNode(
@@ -235,9 +233,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
-            if debug {
-                print(Endpoints.getAllRoutesFromNode(city: city, nodeId: nodeId).url)
-            }
+
         }
 
     class func getNodesListBody(
@@ -253,9 +249,7 @@ class BusClient {
                         completion(nil, error)
                     }
                 }
-            if debug {
-                print(Endpoints.getNodesList(city: city, routeId: routeId).url)
-            }
+
         }
 
     class func getNodeList (
@@ -272,9 +266,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
-            if debug {
-                print(Endpoints.getNodesList(city: city, routeId: routeId, pageNumber: pageNo).url)
-            }
+
         }
 
     class func getCityCodeList (
@@ -288,9 +280,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
-            if debug {
-                print(Endpoints.getCityCodeList.url)
-            }
+
         }
     class func getRouteInformation (
         city: String = "25",
@@ -305,9 +295,7 @@ class BusClient {
                         completion(nil, error)
                     }
                 })
-            if debug {
-                print(Endpoints.getRouteInformation(city: city, routeId: routeId).url)
-            }
+
         }
 
     class func getLocationsOnRoute(
@@ -323,9 +311,7 @@ class BusClient {
                         completion([], error)
                     }
                 })
-            if debug {
-                print(Endpoints.getBusLocationsOnRoute(city: city, routeId: routeId).url)
-            }
+
         }
 
     class func getSpecificArrive(
