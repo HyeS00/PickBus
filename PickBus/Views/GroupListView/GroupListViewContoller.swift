@@ -105,7 +105,6 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.view.backgroundColor = .white
 
         getGroupsFromCoreData()
         print(coreDataGroups.count)
@@ -113,9 +112,9 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
             setupMainView()
         } else {
             setupTableView()
-            getGroupsFromCoreData()
-            groupListView.reloadData()
+//            getGroupsFromCoreData()
         }
+        groupListView.reloadData()
     }
 }
 
@@ -151,6 +150,7 @@ private extension GroupListViewContoller {
 
 private extension GroupListViewContoller {
     func setupMainView() {
+        groupListView.removeFromSuperview()
         self.view.addSubview(mainLabel)
 
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -177,6 +177,8 @@ private extension GroupListViewContoller {
 }
 private extension GroupListViewContoller {
     func setupTableView() {
+        mainLabel.removeFromSuperview()
+        addButton.removeFromSuperview()
 
         self.view.addSubview(groupListView)
         groupListView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -210,7 +212,7 @@ extension GroupListViewContoller: UITableViewDelegate {
                 print("코어데이터에 저장된 데이터가 있습니다. 뷰를 이동합니다.")
                 let routeListView = RouteListViewController()
                 routeListView.dataController = dataController
-                routeListView.myGroup = coreDataGroups.first
+                routeListView.myGroup = coreDataGroups[indexPath.section]
                 self.navigationController?.pushViewController(routeListView, animated: true)
             }
         }
