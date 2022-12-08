@@ -34,7 +34,7 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         newBus.startNodeName = newNode.nodeNm
 
         //        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
-        self.navigationItem.title = "\(newNode.nodeNm!)"
+        self.navigationItem.title = ""
         BusClient.getAllRoutesFromNode(
             city: newNode.cityCode!,
             nodeId: newNode.nodeId!,
@@ -58,7 +58,7 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
     }
 
     func setBackground() {
-        setTitleAndIndicator(titleText: "버스 번호 선택", indicatorStep: .stepThree)
+        setTitleAndIndicator(titleText: "버스 번호를\n선택해 주세요", indicatorStep: .stepThree)
 
         contentView.addSubview(routeNumberTableView)
         //        routeNumberTableView.translatesAutoresizingMaskIntoConstraints = false
