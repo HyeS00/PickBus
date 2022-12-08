@@ -1,20 +1,20 @@
-# Uncomment the next line to define a global platform for your project
+# Uncomment the next line to define a global platform for your projectPickBus
   platform :ios, '16.0'
 
-target 'WidgetBus' do
+target 'PickBus' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for WidgetBus
+  # Pods for PickBus
     pod 'SwiftLint'
 
 
-  target 'WidgetBusTests' do
+  target 'PickBusTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'WidgetBusUITests' do
+  target 'PickBusUITests' do
     # Pods for testing
   end
 
