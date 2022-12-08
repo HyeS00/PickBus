@@ -311,7 +311,10 @@ extension RouteListViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(selectStartNodeViewController, animated: true)
         } else {
             // 버스 셀 선택 - 디테일뷰
-            toRouteDetilView(indexPath: indexPath, bordingStatus: .getOff)
+            if indexPath.row != 0 {
+                toRouteDetilView(indexPath: indexPath, bordingStatus: .getOff)
+            }
+
         }
     }
 }
@@ -367,6 +370,7 @@ extension RouteListViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddRouteCell.identifier,
                 for: indexPath) as! AddRouteCell
+            cell.selectionStyle = .none
             return cell
         } else {
             // 기본 섹션
