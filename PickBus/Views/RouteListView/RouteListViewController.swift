@@ -276,7 +276,11 @@ extension RouteListViewController: UITableViewDelegate {
 
     // 정류장 셀은 삭제 불가 기능
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        indexPath.row == 0 ? false : true
+        if tableView.isEditing {
+            return indexPath.row == 0 ? false : true
+        } else {
+            return false
+        }
     }
 
     // 스크롤 위치변화에 따른 네비게이션 타이틀 표시
