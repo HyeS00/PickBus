@@ -9,7 +9,7 @@ import Foundation
 
 class BusClient {
 
-    static private let debug = true
+    static private let debug = false
 
     static var apiKey: String {
 
@@ -310,7 +310,7 @@ class BusClient {
                 url: Endpoints.getBusLocationsOnRoute(city: city, routeId: routeId).url,
                 responseType: BusLocationsOnRoute.self, completion: { response, error in
                     if let response = response {
-                        completion(response.response.body.items.item, nil)
+                        completion(response.response.body.items.item.listValue, nil)
                     } else {
                         completion([], error)
                     }

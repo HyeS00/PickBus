@@ -29,7 +29,7 @@ struct BusLocationsResponseBody: Decodable {
 }
 
 struct BusLocationsResponseItems: Decodable {
-    let item: [BusLocationsInfo]
+    let item: BusLocationInfoMultiType
 }
 
 struct BusLocationsInfo: Decodable {
