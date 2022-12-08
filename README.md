@@ -1,4 +1,4 @@
-# 위젯 버스
+# Pick Bus
 
 <p align="center">
   <img src="https://img.shields.io/github/license/DeveloperAcademy-POSTECH/WidgetBus?style=flat-square" />
@@ -14,12 +14,12 @@
 </p>
 
 <p align="center" text-align="center" width="100%">
-<img width="251" alt="LogoImage" src="">
-  
-<p align="center" text-align="center" display="inline-block">Apple Developer Academy MacC Dudu</p>
+<img width="251" alt="LogoImage" src="https://user-images.githubusercontent.com/94058164/206380168-d567c8e5-d2d2-493f-ae26-bb6e834a57cb.jpg">
+
+<p align="center" text-align="center" display="inline-block">Apple Developer Academy MacC Dudu Pick Bus</p>
 
 
-# :iphone: 위젯 버스
+# :iphone: Pick Bus
 
 앱 설명 들어가는 곳
 
