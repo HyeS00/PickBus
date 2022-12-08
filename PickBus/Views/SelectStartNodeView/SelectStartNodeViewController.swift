@@ -267,7 +267,7 @@ final class SelectStartNodeViewController:
                 self.loadTasks.append(task)
 
                 if self.repeatCount % 25 == 0 && self.repeatCount > 0 {
-                    sleep(1)
+                    sleep(2)
                 }
             }
         }
