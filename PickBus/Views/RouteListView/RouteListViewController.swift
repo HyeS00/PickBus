@@ -86,6 +86,11 @@ final class RouteListViewController: UIViewController {
         super.viewWillDisappear(animated)
         apiTimer?.invalidate()
         apiTimer = nil
+        navigationController?.navigationBar.barTintColor = .clear
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .duduDeepBlue
     }
 
     private func setupNavigationBar() {

@@ -107,7 +107,7 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.view.backgroundColor = .white
-
+        navigationController?.navigationBar.barTintColor = .white
         getGroupsFromCoreData()
         print(coreDataGroups.count)
         if coreDataGroups.isEmpty {

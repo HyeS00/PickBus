@@ -156,6 +156,7 @@ class RouteDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.extendedLayoutIncludesOpaqueBars = true
         // 네트워크 전송.
         callNetworkFunction()
 
@@ -182,6 +183,13 @@ class RouteDetailViewController: UIViewController {
         locationManager.requestLocation()
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .duduDeepBlue
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .clear
+    }
     // 네트워크 연결 부르는 함수
     func callNetworkFunction() {
         BusClient.getNodesListBody(
@@ -193,21 +201,15 @@ class RouteDetailViewController: UIViewController {
             city: String(cityCode),
             routeId: routeId,
             completion: handleRequestRouteInformation(response:error:))
-
-        BusClient.getLocationsOnRoute(
-            city: String(cityCode),
-            routeId: routeId,
-            completion: handleRequestLocationsOnRouteResponse(response:error:))
-
-        BusClient.getSpecificArrive(
-            city: String(cityCode),
-            routeId: routeId,
-            nodeId: nodeId,
-            completion: handleRequestSpecificArriveInfoResponse(response:error:))
+        getData()
     }
 
     // 새로고침용 네트워크 연결 함수
     func callNetworkRefreshFunction() {
+        getData()
+    }
+
+    func getData() {
         BusClient.getLocationsOnRoute(
             city: String(cityCode),
             routeId: routeId,
@@ -281,8 +283,6 @@ class RouteDetailViewController: UIViewController {
     func handleRequestRouteInformation(response: RouteInformationInfo?, error: Error?) {
         // 여기 버스 노선 정보 첫차, 막차 등.
         guard let response = response else {
-            //        print("error")
-            //        print(error?.localizedDescription ?? "")
             return
         }
 
@@ -329,8 +329,6 @@ class RouteDetailViewController: UIViewController {
     func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
         // 여기 특정 노선에 대한 도착 정보 표현 됨.
         guard let response = response else {
-//                    print(error)
-//                    print(error?.localizedDescription)
             return
         }
         print("Response: \(response)")
