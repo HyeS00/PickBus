@@ -120,9 +120,6 @@ class BusClient {
         responseType: ResponseType.Type,
         completion: @escaping (ResponseType?, Error?) -> Void
     ) -> URLSessionDataTask {
-        if debug {
-            print(url)
-        }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
                 DispatchQueue.main.async {
@@ -141,6 +138,10 @@ class BusClient {
                     completion(nil, error)
                 }
             }
+            if debug {
+                print(url)
+                print(error?.localizedDescription ?? "")
+            }
         }
         task.resume()
 
@@ -158,7 +159,6 @@ class BusClient {
         }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
@@ -174,6 +174,10 @@ class BusClient {
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
+            }
+            if debug {
+                print(url)
+                print(error?.localizedDescription ?? "")
             }
         }
         task.resume()

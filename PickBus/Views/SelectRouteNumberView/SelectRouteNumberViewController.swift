@@ -26,6 +26,8 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
     @IBOutlet weak var routeNumberTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.extendedLayoutIncludesOpaqueBars = true
+
         setNavigation()
         setBackground()
 
@@ -34,7 +36,7 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         newBus.startNodeName = newNode.nodeNm
 
         //        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
-        self.navigationItem.title = ""
+        self.navigationItem.title = .none
         BusClient.getAllRoutesFromNode(
             city: newNode.cityCode!,
             nodeId: newNode.nodeId!,
