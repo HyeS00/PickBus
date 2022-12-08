@@ -67,6 +67,7 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
     }()
 
     func getGroupsFromCoreData() {
+        dataController.viewContext.reset()
         let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: false)
 
