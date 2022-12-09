@@ -234,17 +234,8 @@ final class RouteListViewController: UIViewController {
         let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
         let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
 
-            // 여기 타입 확인 필요 !!!!
+
             let navigationStack = self.navigationController?.viewControllers
-
-            /*
-            let groupListVC = navigationStack?.filter {
-                $0 is GroupListViewContoller
-            }[0] as GroupListViewContoller
-
-            groupListVC.setCellInit()
-             */
-
             navigationStack?.forEach {
                 if $0 is GroupListViewContoller {
                     let groupListVC = $0 as! GroupListViewContoller
