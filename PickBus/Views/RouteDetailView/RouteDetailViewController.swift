@@ -74,72 +74,75 @@ class RouteDetailViewController: UIViewController {
         switch self.boardingStatus {
 
         case .onBoard:
-            if !busLocationList.isEmpty, clientLocation.latitude != nil, clientLocation.longtitude != nil {
-
-                var nearestBus = CLLocationDistance(10000000)
-                var nearestBusIndex = -1
-
-                let clientLocation = CLLocationCoordinate2D(
-                    latitude: clientLocation.latitude!,
-                    longitude: clientLocation.longtitude!
-                )
-
-                for index in 0..<busLocationList.count {
-                    let busLocation = CLLocationCoordinate2D(
-                        latitude: Double(busLocationList[index].gpslati.stringValue) ?? -1,
-                        longitude: Double(busLocationList[index].gpslong.stringValue) ?? -1
-                    )
-                    let distance = CLLocation.distance(
-                        clientLocation: clientLocation,
-                        busLocation: busLocation
-                    )
-                    if(nearestBus > distance) {
-                        nearestBus = distance
-                        nearestBusIndex = index
-                    }
-                }
-                if(nearestBus < 20) { // 특정 거리 설정을 어떻게 할까?
-                    self.boardingStatus = .getOff
-                    self.boardingStateButton.isSelected = true
-
-                    clientBoardingStatus.boardingState = .onBoard
-                    clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno.stringValue
-                    routeDetailTableView.reloadData()
-                } else {
-                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
-                }
-            } else {
-                if(busLocationList.isEmpty) {
-                    // 새로고침을 해주세요
-                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
-                } else if(clientLocation.latitude == nil || clientLocation.longtitude == nil) {
-                    // 사용자 위치 설정
-                    let authAlertController : UIAlertController
-
-                    authAlertController = UIAlertController(
-                        title: "위치 사용 권한이 필요합니다.",
-                        message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.",
-                        preferredStyle: .alert)
-
-                    let getAuthAction : UIAlertAction
-
-                    getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (_) in
-                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(appSettings,options: [:],completionHandler: nil)
-                        }
-                    })
-                    authAlertController.addAction(getAuthAction)
-                    self.present(authAlertController, animated: true, completion: nil)
-                } else {
-                    alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
-                }
-            }
-
+            checkBoardingStatus()
         case .getOff:
             self.boardingStatus = .onBoard
             self.clientBoardingStatus.boardingState = .getOff
             self.clientBoardingStatus.vehicleno = nil
             self.boardingStateButton.isSelected = false
+        }
+    }
+
+    func checkBoardingStatus() {
+        print("check")
+        if !busLocationList.isEmpty, clientLocation.latitude != nil, clientLocation.longtitude != nil {
+            var nearestBus = CLLocationDistance(10000000)
+            var nearestBusIndex = -1
+
+            let clientLocation = CLLocationCoordinate2D(
+                latitude: clientLocation.latitude!,
+                longitude: clientLocation.longtitude!
+            )
+
+            for index in 0..<busLocationList.count {
+                let busLocation = CLLocationCoordinate2D(
+                    latitude: Double(busLocationList[index].gpslati.stringValue) ?? -1,
+                    longitude: Double(busLocationList[index].gpslong.stringValue) ?? -1
+                )
+                let distance = CLLocation.distance(
+                    clientLocation: clientLocation,
+                    busLocation: busLocation
+                )
+                if(nearestBus > distance) {
+                    nearestBus = distance
+                    nearestBusIndex = index
+                }
+            }
+            if(nearestBus < 20) { // 특정 거리 설정을 어떻게 할까? 여기가 탑승으로 판별
+                self.boardingStatus = .getOff
+                self.boardingStateButton.isSelected = true
+
+                clientBoardingStatus.boardingState = .onBoard
+                clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno.stringValue
+                routeDetailTableView.reloadData()
+            } else {
+                alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
+            }
+        } else {
+            if(busLocationList.isEmpty) {
+                // 새로고침을 해주세요
+                alertManager("잠시 후 다시 시도해주세요.")
+            } else if(clientLocation.latitude == nil || clientLocation.longtitude == nil) {
+                // 사용자 위치 설정
+                let authAlertController : UIAlertController
+
+                authAlertController = UIAlertController(
+                    title: "위치 사용 권한이 필요합니다.",
+                    message: "위치 권한을 허용해야만 앱을 사용하실 수 있습니다.",
+                    preferredStyle: .alert)
+
+                let getAuthAction : UIAlertAction
+
+                getAuthAction = UIAlertAction(title: "설정", style: .default, handler: { (_) in
+                    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(appSettings,options: [:],completionHandler: nil)
+                    }
+                })
+                authAlertController.addAction(getAuthAction)
+                self.present(authAlertController, animated: true, completion: nil)
+            } else {
+                alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
+            }
         }
     }
 
@@ -163,7 +166,6 @@ class RouteDetailViewController: UIViewController {
         self.view.backgroundColor = .duduDeepBlue
         self.routeDetailTableView.dataSource = self
         self.routeDetailTableView.delegate = self
-//        busNumberLabel.text = routeNo
 
         refreshButton.layer.cornerRadius = 0.5 * refreshButton.bounds.width
         refreshButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
@@ -173,11 +175,13 @@ class RouteDetailViewController: UIViewController {
 
         self.cofigureRefreshControl()
 
-        // 여기 화면을 로드할떄 리퀘스트
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
 
+        if(clientBoardingStatus.boardingState == .onBoard) {
+            checkBoardingStatus()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.barTintColor = .duduDeepBlue
