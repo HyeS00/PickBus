@@ -321,12 +321,14 @@ class RouteDetailViewController: UIViewController {
     }
 
     // 정류장에 오는 특정 노선에 대한 도착 정보만 받는 네트워크 결과 받으면 실행되는 콜백.
-    func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
+    func handleRequestSpecificArriveInfoResponse(response: [SpecificArriveInfo], error: Error?) {
         // 여기 특정 노선에 대한 도착 정보 표현 됨.
-        guard let response = response else {
+        guard !response.isEmpty else {
+            specificArriveInfo = nil
             return
         }
-        specificArriveInfo = response
+        // 여기서
+        specificArriveInfo = response.first
         routeDetailTableView.reloadData()
     }
 
