@@ -55,12 +55,10 @@ final class SettingViewController: UIViewController, UNUserNotificationCenterDel
         let isPushOn = UIApplication.shared.isRegisteredForRemoteNotifications
 
         if isPushOn {
-            print("push on")
             // disable
             UIApplication.shared.unregisterForRemoteNotifications()
             notiText.text = "알림 설정 On"
         } else {
-            print("push off")
             // enable
             UIApplication.shared.registerForRemoteNotifications()
             notiText.text = "알림 설정 Off"

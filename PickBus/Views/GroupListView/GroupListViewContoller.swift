@@ -69,7 +69,7 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
     func getGroupsFromCoreData() {
         dataController.viewContext.reset()
         let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: true)
 
         fetchRequest.sortDescriptors = [sortDescriptor]
 
@@ -109,12 +109,10 @@ final class GroupListViewContoller: UIViewController, TransitInfoProtocol {
         self.navigationController?.view.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
         getGroupsFromCoreData()
-        print(coreDataGroups.count)
         if coreDataGroups.isEmpty {
             setupMainView()
         } else {
             setupTableView()
-//            getGroupsFromCoreData()
         }
         groupListView.reloadData()
     }
@@ -211,7 +209,6 @@ extension GroupListViewContoller: UITableViewDelegate {
             if coreDataGroups.isEmpty {
                 print("코어데이터에 저장된 데이터가 없습니다.")
             } else {
-                print("코어데이터에 저장된 데이터가 있습니다. 뷰를 이동합니다.")
                 let routeListView = RouteListViewController()
                 routeListView.dataController = dataController
                 routeListView.myGroup = coreDataGroups[indexPath.section]
@@ -233,10 +230,8 @@ extension GroupListViewContoller: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        print(coreDataGroups)
         if indexPath.section == coreDataGroups.count {
             // 마지막 섹션
-            print(coreDataGroups.count)
             let cell = groupListView.dequeueReusableCell(
                 withIdentifier: AddGroupTableViewCell.identifier,
                 for: indexPath) as! AddGroupTableViewCell

@@ -11,8 +11,6 @@ import CoreLocation
 extension RouteDetailViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
-            print(coordinate.latitude)
-            print(coordinate.longitude)
             clientLocation.latitude = coordinate.latitude
             clientLocation.longtitude = coordinate.longitude
             // start 가져오고싶을때 stop / startUpdatingLocation - stopUpdatingLocation / requireLocation

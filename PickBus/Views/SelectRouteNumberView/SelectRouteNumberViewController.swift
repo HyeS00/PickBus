@@ -35,7 +35,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         newBus.startNodeId = newNode.nodeId
         newBus.startNodeName = newNode.nodeNm
 
-        //        print("hello: \(newNode.cityCode!), \(newNode.nodeId!)")
         self.navigationItem.title = .none
         BusClient.getAllRoutesFromNode(
             city: newNode.cityCode!,
@@ -110,7 +109,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         selectedIndex = indexPath
 
         navigationItem.rightBarButtonItem?.isEnabled = isReady
@@ -119,7 +117,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("run \(routeNumberCellInfos)")
         if routeNumberCellInfos.isEmpty {
             return 3
         } else {
@@ -139,9 +136,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
             $0.routeNumber < $1.routeNumber
         }
         routeNumberTableView.reloadData()
-        //        for test in response {
-        //            print(test)
-        //        }
 
         guard error == nil else {
             print("error")
@@ -150,6 +144,5 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
             return
         }
         isReady = true
-        print("response")
     }
 }
