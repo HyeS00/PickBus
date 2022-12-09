@@ -95,6 +95,11 @@ final class SelectStartNodeViewController:
         self.extendedLayoutIncludesOpaqueBars = true
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        stop = true
+        clearNetworkSessionTask()
+    }
+
     @objc func pressButton(_ sender: UIBarButtonItem) {
 
         let storyboard = UIStoryboard(name: "RouteNumberViewStoryboard", bundle: nil)
@@ -266,8 +271,8 @@ final class SelectStartNodeViewController:
 
                 self.loadTasks.append(task)
 
-                if self.repeatCount % 25 == 0 && self.repeatCount > 0 {
-                    sleep(1)
+                if self.repeatCount % 28 == 0 && self.repeatCount > 0 {
+                    sleep(3)
                 }
             }
         }

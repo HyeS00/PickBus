@@ -48,6 +48,7 @@
 		CF3D0A362929B4C500639E5C /* CityCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D0A352929B4C500639E5C /* CityCode.swift */; };
 		CF3D0A382929CC1B00639E5C /* SearchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D0A372929CC1B00639E5C /* SearchNode.swift */; };
 		CF3D0A3A292A2B9700639E5C /* MySearchNodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3D0A39292A2B9700639E5C /* MySearchNodeInfo.swift */; };
+		CF56AE7B2942193000BA033B /* BusLocationInfoMultiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF56AE7A2942193000BA033B /* BusLocationInfoMultiType.swift */; };
 		CFA1F6382935E18400D1C513 /* AllRoutesFromNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA1F6372935E18400D1C513 /* AllRoutesFromNode.swift */; };
 		CFA1F63C2935EA5D00D1C513 /* MyAllRoutesFromNodeMultiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA1F63B2935EA5D00D1C513 /* MyAllRoutesFromNodeMultiType.swift */; };
 		CFD79B04291E45050091202C /* Service Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFD79B03291E45050091202C /* Service Key.plist */; };
@@ -138,6 +139,7 @@
 		CF3D0A352929B4C500639E5C /* CityCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCode.swift; sourceTree = "<group>"; };
 		CF3D0A372929CC1B00639E5C /* SearchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNode.swift; sourceTree = "<group>"; };
 		CF3D0A39292A2B9700639E5C /* MySearchNodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySearchNodeInfo.swift; sourceTree = "<group>"; };
+		CF56AE7A2942193000BA033B /* BusLocationInfoMultiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusLocationInfoMultiType.swift; sourceTree = "<group>"; };
 		CFA1F6372935E18400D1C513 /* AllRoutesFromNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRoutesFromNode.swift; sourceTree = "<group>"; };
 		CFA1F63B2935EA5D00D1C513 /* MyAllRoutesFromNodeMultiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAllRoutesFromNodeMultiType.swift; sourceTree = "<group>"; };
 		CFD79B03291E45050091202C /* Service Key.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Service Key.plist"; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				CF2F03702931B9AC00414507 /* ArriveInfoMultiTypes.swift */,
 				CFFDB0A329260591007AE8C3 /* RouteInformation.swift */,
 				CFFDB0A529262701007AE8C3 /* BusLocationsOnRoute.swift */,
+				CF56AE7A2942193000BA033B /* BusLocationInfoMultiType.swift */,
 				CF3C88E8292669B20069E8CE /* SpecificArrive.swift */,
 				CFA1F6372935E18400D1C513 /* AllRoutesFromNode.swift */,
 				CF2F036E2931ACAC00414507 /* StringMultiType.swift */,
@@ -665,6 +668,7 @@
 				091BF3CA292E0F12004B8275 /* BusBadgeView.swift in Sources */,
 				C175CD25292CA0EF00140CDC /* RouteListViewController.swift in Sources */,
 				CF251EB929227BE300785682 /* BusLocationFromBusStop.swift in Sources */,
+				CF56AE7B2942193000BA033B /* BusLocationInfoMultiType.swift in Sources */,
 				C175CD0E292B719900140CDC /* GroupListViewContoller.swift in Sources */,
 				C175CD24292CA0EF00140CDC /* BusStopCell.swift in Sources */,
 				C146115429237E11003E03E3 /* SelectStartNodeTableViewCell.swift in Sources */,

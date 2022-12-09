@@ -29,6 +29,8 @@ class RouteDetailViewController: UIViewController {
     var clientLocation = ClientLocation()
     let locationManager = CLLocationManager()
 
+    private var pageCount: Int = -1
+
     // Jedi
     // 코어데이터에서 가져오는 정보들 (예정)
     // 노선 ID
@@ -101,7 +103,7 @@ class RouteDetailViewController: UIViewController {
                     self.boardingStateButton.isSelected = true
 
                     clientBoardingStatus.boardingState = .onBoard
-                    clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno
+                    clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno.stringValue
                     routeDetailTableView.reloadData()
 //                    print("====================버스 위치 \(clientBoardingStatus.vehicleno)")
 //                    print("====================버스 거리 \(nearestBus)")
@@ -154,6 +156,7 @@ class RouteDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.extendedLayoutIncludesOpaqueBars = true
         // 네트워크 전송.
         callNetworkFunction()
 
@@ -164,7 +167,7 @@ class RouteDetailViewController: UIViewController {
         self.view.backgroundColor = .duduDeepBlue
         self.routeDetailTableView.dataSource = self
         self.routeDetailTableView.delegate = self
-        busNumberLabel.text = routeNo
+//        busNumberLabel.text = routeNo
 
         refreshButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
         refreshButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
@@ -180,6 +183,13 @@ class RouteDetailViewController: UIViewController {
         locationManager.requestLocation()
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .duduDeepBlue
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .clear
+    }
     // 네트워크 연결 부르는 함수
     func callNetworkFunction() {
         BusClient.getNodesListBody(
@@ -191,21 +201,15 @@ class RouteDetailViewController: UIViewController {
             city: String(cityCode),
             routeId: routeId,
             completion: handleRequestRouteInformation(response:error:))
-
-        BusClient.getLocationsOnRoute(
-            city: String(cityCode),
-            routeId: routeId,
-            completion: handleRequestLocationsOnRouteResponse(response:error:))
-
-        BusClient.getSpecificArrive(
-            city: String(cityCode),
-            routeId: routeId,
-            nodeId: nodeId,
-            completion: handleRequestSpecificArriveInfoResponse(response:error:))
+        getData()
     }
 
     // 새로고침용 네트워크 연결 함수
     func callNetworkRefreshFunction() {
+        getData()
+    }
+
+    func getData() {
         BusClient.getLocationsOnRoute(
             city: String(cityCode),
             routeId: routeId,
@@ -244,6 +248,7 @@ class RouteDetailViewController: UIViewController {
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
+            pageCount = iterater
             for index in 1...iterater {
                 BusClient.getNodeList(
                     city: String(cityCode),
@@ -252,38 +257,32 @@ class RouteDetailViewController: UIViewController {
                     completion: handleRequestNodesListResponse(response:error:))
             }
         }
-
-        //        print("error")
-        //        print(error?.localizedDescription ?? "")
     }
 
     // 버스 정류장 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesListResponse(response: [RouteNodesInfo], error: Error?) {
         guard !response.isEmpty else {
-            //        print("error")
-            //        print(error?.localizedDescription ?? "")
             return
         }
 
         nodeList += response
 
-        nodeList.sort { $0.nodeord < $1.nodeord }
+        pageCount -= 1
+        if pageCount == 0 {
+            nodeList.sort { $0.nodeord < $1.nodeord }
+            startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
+            endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
 
-        startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
-        endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
-
-        print("Node List: \(nodeList.count)")
-        routeDetailTableView.reloadData()
-        scrollToRow()
-
+            print("Node List: \(nodeList.count)")
+            routeDetailTableView.reloadData()
+            scrollToRow()
+        }
     }
 
     // 노선 정보 받아오는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestRouteInformation(response: RouteInformationInfo?, error: Error?) {
         // 여기 버스 노선 정보 첫차, 막차 등.
         guard let response = response else {
-            //        print("error")
-            //        print(error?.localizedDescription ?? "")
             return
         }
 
@@ -295,15 +294,18 @@ class RouteDetailViewController: UIViewController {
 
         switch weekday {
         case 1:// 일요일
-            intervalTime = response.intervalsuntime
+            // 일요일 시간 없는 것도 존재.
+            intervalTime = response.intervalsuntime ?? response.intervaltime
         case 7:// 토요일
-            intervalTime = response.intervalsattime
+            // 토요일 시간 없는 것도 존재.
+            intervalTime = response.intervalsattime ?? response.intervaltime
         default:// 평일
             intervalTime = response.intervaltime
         }
 
         startTime.insert(":", at: startTime.index(startTime.startIndex, offsetBy: 2))
         endTime.insert(":", at: endTime.index(endTime.startIndex, offsetBy: 2))
+        busNumberLabel.text = response.routeno.stringValue
 
         busTimeInfoLabel.text = "\(startTime) ~ \(endTime) 배차간격 \(intervalTime)분"
         //        print("RouteInformation: \(response)")
@@ -313,8 +315,8 @@ class RouteDetailViewController: UIViewController {
     func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
         // 여기 버스 위치들 나타남
         guard !response.isEmpty else {
-            //        print("error")
-            //        print(error?.localizedDescription ?? "")
+                    print("error")
+                    print(error?.localizedDescription ?? "")
             return
         }
         busLocationList += response
@@ -327,8 +329,6 @@ class RouteDetailViewController: UIViewController {
     func handleRequestSpecificArriveInfoResponse(response: SpecificArriveInfo?, error: Error?) {
         // 여기 특정 노선에 대한 도착 정보 표현 됨.
         guard let response = response else {
-//                    print(error)
-//                    print(error?.localizedDescription)
             return
         }
         print("Response: \(response)")
@@ -345,7 +345,9 @@ class RouteDetailViewController: UIViewController {
             moveIndex = IndexPath(row: startNodeIdIndex, section: 0)
             self.routeDetailTableView.scrollToRow(at: moveIndex, at: .bottom, animated: true)
         case .onBoard:
-            if let bus = busLocationList.first(where: {$0.vehicleno == clientBoardingStatus.vehicleno}) {
+            if let bus = busLocationList.first(where: {
+                $0.vehicleno.stringValue == clientBoardingStatus.vehicleno
+            }) {
                 moveIndex = IndexPath(row: bus.nodeord, section: 0)
                 self.routeDetailTableView.scrollToRow(at: moveIndex, at: .bottom, animated: true)
             }

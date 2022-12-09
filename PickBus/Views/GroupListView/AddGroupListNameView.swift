@@ -87,6 +87,7 @@ final class AddGroupListNameViewController: BackgroundViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.groupListTextfield.delegate = self
+        self.extendedLayoutIncludesOpaqueBars = true
 
         let backButton = UIBarButtonItem()
         backButton.tintColor = .white

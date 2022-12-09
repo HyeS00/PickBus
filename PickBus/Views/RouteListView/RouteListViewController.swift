@@ -86,6 +86,11 @@ final class RouteListViewController: UIViewController {
         super.viewWillDisappear(animated)
         apiTimer?.invalidate()
         apiTimer = nil
+        navigationController?.navigationBar.barTintColor = .clear
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .duduDeepBlue
     }
 
     private func setupNavigationBar() {
@@ -165,7 +170,11 @@ final class RouteListViewController: UIViewController {
             // 수정할 부분 값이 nil인 경우 처리
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {fatalError()}
+                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {
+                    // 정보 없음 시, 뒤돌아가면 에러 발생해서 주석 처리.
+//                    fatalError()
+                    return
+                }
                 if let fetchBusInfo = response.filter({
                     $0.routeno.stringValue == String(myRouteNo)
                 }).first {
@@ -225,9 +234,14 @@ final class RouteListViewController: UIViewController {
         let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
         let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
 
+
             let navigationStack = self.navigationController?.viewControllers
-            let groupListVC = navigationStack![navigationStack!.count-2] as! GroupListViewContoller
-            groupListVC.setCellInit()
+            navigationStack?.forEach {
+                if $0 is GroupListViewContoller {
+                    let groupListVC = $0 as! GroupListViewContoller
+                    groupListVC.setCellInit()
+                }
+            }
 
             // 루트뷰로 가게 수정해야함
             self.navigationController?.popToRootViewController(animated: true)
