@@ -58,6 +58,13 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.isMovingFromParent {
+            dataController.viewContext.delete(newBus)
+            dataController.viewContext.delete(newNode)
+        }
+    }
+
     func setBackground() {
         setTitleAndIndicator(titleText: "버스 번호를\n선택해 주세요", indicatorStep: .stepThree)
 
@@ -125,6 +132,13 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
     }
 
     func handleRequestAllRoutesInfoResponse(response: [AllRoutesFromNodeInfo], error: Error?) {
+        guard error == nil else {
+            print("error")
+            print(error?.localizedDescription ?? "")
+            isReady = false
+            return
+        }
+
         routeNumberCellInfos = response.map { res in
             RouteNumberCellStruct(
                 routeNumber: res.routeno.stringValue,
@@ -137,12 +151,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         }
         routeNumberTableView.reloadData()
 
-        guard error == nil else {
-            print("error")
-            print(error?.localizedDescription ?? "")
-            isReady = false
-            return
-        }
         isReady = true
     }
 }

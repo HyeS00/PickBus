@@ -98,6 +98,10 @@ final class SelectStartNodeViewController:
     override func viewWillDisappear(_ animated: Bool) {
         stop = true
         clearNetworkSessionTask()
+
+        if self.isMovingFromParent {
+            dataController.viewContext.delete(newGroup)
+        }
     }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
@@ -271,7 +275,7 @@ final class SelectStartNodeViewController:
 
                 self.loadTasks.append(task)
 
-                if self.repeatCount % 28 == 0 && self.repeatCount > 0 {
+                if self.repeatCount % 27 == 0 && self.repeatCount > 0 {
                     sleep(3)
                 }
             }
@@ -303,7 +307,6 @@ final class SelectStartNodeViewController:
             startSearch()
         }
     }
-
     // 검색 후, 실행되는 콜백
     func handleRequestSearchNodeResponse(cityCode: Int?, response: [SearchNodeInfo], error: Error?) {
         guard error == nil else {
