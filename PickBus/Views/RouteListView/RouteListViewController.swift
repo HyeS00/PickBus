@@ -236,8 +236,21 @@ final class RouteListViewController: UIViewController {
 
             // 여기 타입 확인 필요 !!!!
             let navigationStack = self.navigationController?.viewControllers
-            let groupListVC = navigationStack![navigationStack!.count-2] as! GroupListViewContoller
+
+            /*
+            let groupListVC = navigationStack?.filter {
+                $0 is GroupListViewContoller
+            }[0] as GroupListViewContoller
+
             groupListVC.setCellInit()
+             */
+
+            navigationStack?.forEach {
+                if $0 is GroupListViewContoller {
+                    let groupListVC = $0 as! GroupListViewContoller
+                    groupListVC.setCellInit()
+                }
+            }
 
             // 루트뷰로 가게 수정해야함
             self.navigationController?.popToRootViewController(animated: true)
