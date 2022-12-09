@@ -266,9 +266,14 @@ class RouteDetailViewController: UIViewController {
         pageCount -= 1
         if pageCount == 0 {
             nodeList.sort { $0.nodeord < $1.nodeord }
-            startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
-            endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
-
+            if let startNode = nodeList.first(where: {$0.nodeid == route.startNodeId}) {
+                startStationLabel.text = startNode.nodenm
+                startNodeIdIndex = startNode.nodeord
+            }
+            if let endNode = nodeList.first(where: {$0.nodeid == route.endNodeId}) {
+                endStationLabel.text = endNode.nodenm
+                endNodeIdIndex = endNode.nodeord
+            }
             routeDetailTableView.reloadData()
             scrollToRow()
         }
