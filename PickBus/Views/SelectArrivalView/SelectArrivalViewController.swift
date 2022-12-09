@@ -186,7 +186,6 @@ final class SelectArrivalViewController: BackgroundViewController {
         if let response = response {
             let iterater: Int = (response.totalCount / response.numOfRows) + 1
             pageCount = iterater
-            print(pageCount)
             for index in 1...iterater {
                 BusClient.getNodeList(
                     city: cityCode,

@@ -105,8 +105,6 @@ class RouteDetailViewController: UIViewController {
                     clientBoardingStatus.boardingState = .onBoard
                     clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno.stringValue
                     routeDetailTableView.reloadData()
-//                    print("====================버스 위치 \(clientBoardingStatus.vehicleno)")
-//                    print("====================버스 거리 \(nearestBus)")
                 } else {
                     alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
                 }
@@ -273,7 +271,6 @@ class RouteDetailViewController: UIViewController {
             startNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.startNodeId }!
             endNodeIdIndex = nodeList.firstIndex { $0.nodeid == route.endNodeId }!
 
-            print("Node List: \(nodeList.count)")
             routeDetailTableView.reloadData()
             scrollToRow()
         }
@@ -308,7 +305,6 @@ class RouteDetailViewController: UIViewController {
         busNumberLabel.text = response.routeno.stringValue
 
         busTimeInfoLabel.text = "\(startTime) ~ \(endTime) 배차간격 \(intervalTime)분"
-        //        print("RouteInformation: \(response)")
     }
 
     // 버스 위치 받아오는 네트워크 결과 받으면 실행되는 콜백.
@@ -321,7 +317,6 @@ class RouteDetailViewController: UIViewController {
         }
         busLocationList += response
         busLocationList.sort { $0.nodeord < $1.nodeord }
-        print("Locations: \(response)")
         routeDetailTableView.reloadData()
     }
 
@@ -331,7 +326,6 @@ class RouteDetailViewController: UIViewController {
         guard let response = response else {
             return
         }
-        print("Response: \(response)")
         specificArriveInfo = response
         routeDetailTableView.reloadData()
     }

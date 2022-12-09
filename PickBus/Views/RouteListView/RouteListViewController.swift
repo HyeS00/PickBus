@@ -233,8 +233,6 @@ final class RouteListViewController: UIViewController {
     @objc private func pressedDeleteTitleButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
         let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
-
-
             let navigationStack = self.navigationController?.viewControllers
             navigationStack?.forEach {
                 if $0 is GroupListViewContoller {
