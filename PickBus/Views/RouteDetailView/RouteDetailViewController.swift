@@ -150,8 +150,6 @@ class RouteDetailViewController: UIViewController {
         present(alret, animated: true, completion: nil)
     }
 
-    let retryButton = UIButton(frame: CGRect(x: 318, y: 707, width: 55, height: 55))
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.extendedLayoutIncludesOpaqueBars = true
@@ -167,7 +165,7 @@ class RouteDetailViewController: UIViewController {
         self.routeDetailTableView.delegate = self
 //        busNumberLabel.text = routeNo
 
-        refreshButton.layer.cornerRadius = 0.5 * retryButton.bounds.width
+        refreshButton.layer.cornerRadius = 0.5 * refreshButton.bounds.width
         refreshButton.setImage(#imageLiteral(resourceName: "retry"), for: .normal)
         refreshButton.backgroundColor = .duduDeepBlue
         refreshButton.addTarget(self, action: #selector(handleRefreshControl), for: .touchUpInside)
