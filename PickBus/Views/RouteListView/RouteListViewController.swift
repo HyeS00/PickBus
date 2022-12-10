@@ -163,14 +163,13 @@ final class RouteListViewController: UIViewController {
         if error == nil {
             // 성공
             // 수정할 부분 값이 nil인 경우 처리
-            print("response: ", response)
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
                 guard let myRoteId = busArray[nodeIndex][busIndex].routeId else { fatalError() }
                 if let fetchBusInfo = response.filter({$0.routeid == myRoteId}).first {
                     // 버스정보 있음
                     arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
-//                    arriveBusStopArray[nodeIndex][busIndex] = fetchBusInfo.arrprevstationcnt
+                    arriveBusStopArray[nodeIndex][busIndex] = fetchBusInfo.arrprevstationcnt
                 } else {
                     // 버스정보 없음
                 }
@@ -394,8 +393,10 @@ extension RouteListViewController: UITableViewDataSource {
                     self.toRouteDetilView(indexPath: indexPath, bordingStatus: .onBoard)
                 }
                 cell.busNumberLabel.text = busArray[indexPath.section][indexPath.row - 1].routeNo
-                cell.arrTime = secToMin(
+                cell.busRemainingTimeLabel.text = secToMin(
                     sec: arriveArray[indexPath.section][indexPath.row - 1])
+                cell.arrprevstationcnt.text =
+                String(arriveBusStopArray[indexPath.section][indexPath.row - 1]) + "번째전"
                 return cell
             }
         }
@@ -442,6 +443,7 @@ extension RouteListViewController: NSFetchedResultsControllerDelegate {
             loadBuses(myNode: nodeArray[num])
             nodeIdDic[nodeArray[num].nodeId!] = num
             arriveArray.append(Array(repeating: nil, count: busArray[num].count))
+            arriveBusStopArray.append(Array(repeating: -1, count: busArray[num].count))
         }
     }
 
