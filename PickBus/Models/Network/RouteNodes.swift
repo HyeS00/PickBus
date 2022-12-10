@@ -48,5 +48,5 @@ struct RouteNodesInfo: Decodable {
     /// 노선 ID
     let routeid: String
     /// 상하행 구분 코드
-    let updowncd: Int
+    let updowncd: Int?
 }

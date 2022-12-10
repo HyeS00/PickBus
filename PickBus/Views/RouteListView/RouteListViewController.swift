@@ -86,6 +86,11 @@ final class RouteListViewController: UIViewController {
         super.viewWillDisappear(animated)
         apiTimer?.invalidate()
         apiTimer = nil
+        navigationController?.navigationBar.barTintColor = .clear
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = .duduDeepBlue
     }
 
     private func setupNavigationBar() {
@@ -222,6 +227,14 @@ final class RouteListViewController: UIViewController {
     @objc private func pressedDeleteTitleButton(_ sender: UIButton) {
         let alert = UIAlertController(title: "정말로 그룹을 삭제 하시겠습니까?", message: nil, preferredStyle: .alert)
         let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            let navigationStack = self.navigationController?.viewControllers
+            navigationStack?.forEach {
+                if $0 is GroupListViewContoller {
+                    let groupListVC = $0 as! GroupListViewContoller
+                    groupListVC.setCellInit()
+                }
+            }
+
             // 루트뷰로 가게 수정해야함
             self.navigationController?.popToRootViewController(animated: true)
             self.deleteGroup()

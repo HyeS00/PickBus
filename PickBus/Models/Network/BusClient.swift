@@ -9,6 +9,8 @@ import Foundation
 
 class BusClient {
 
+    static private let debug = false
+
     static var apiKey: String {
 
         guard let url = Bundle.main.url(forResource: "Service Key", withExtension: "plist") else {
@@ -136,6 +138,10 @@ class BusClient {
                     completion(nil, error)
                 }
             }
+            if debug {
+                print(url)
+                print(error?.localizedDescription ?? "")
+            }
         }
         task.resume()
 
@@ -148,9 +154,11 @@ class BusClient {
         responseType: ResponseType.Type,
         completion: @escaping (Int?, ResponseType?, Error?) -> Void
     ) -> URLSessionDataTask {
+        if debug {
+            print(url)
+        }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
-
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
@@ -166,6 +174,10 @@ class BusClient {
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
+            }
+            if debug {
+                print(url)
+                print(error?.localizedDescription ?? "")
             }
         }
         task.resume()
@@ -209,6 +221,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
+
         }
 
     class func getAllRoutesFromNode(
@@ -224,6 +237,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
+
         }
 
     class func getNodesListBody(
@@ -239,6 +253,7 @@ class BusClient {
                         completion(nil, error)
                     }
                 }
+
         }
 
     class func getNodeList (
@@ -255,6 +270,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
+
         }
 
     class func getCityCodeList (
@@ -268,6 +284,7 @@ class BusClient {
                         completion([], error)
                     }
                 }
+
         }
     class func getRouteInformation (
         city: String = "25",
@@ -282,6 +299,7 @@ class BusClient {
                         completion(nil, error)
                     }
                 })
+
         }
 
     class func getLocationsOnRoute(
@@ -292,11 +310,12 @@ class BusClient {
                 url: Endpoints.getBusLocationsOnRoute(city: city, routeId: routeId).url,
                 responseType: BusLocationsOnRoute.self, completion: { response, error in
                     if let response = response {
-                        completion(response.response.body.items.item, nil)
+                        completion(response.response.body.items.item.listValue, nil)
                     } else {
                         completion([], error)
                     }
                 })
+
         }
 
     class func getSpecificArrive(
