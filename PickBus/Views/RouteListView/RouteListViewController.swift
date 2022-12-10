@@ -22,7 +22,7 @@ final class RouteListViewController: UIViewController {
 
     // 셋 데이터
     private var nodeIdDic = [String: Int]()
-    private var arriveBusStopArray = [[Int]]()
+    private var arriveBusStopArray = [[Int?]]()
     private var arriveArray = [[Int?]]()
     private var nodeArray = [Node]()
     private var busArray = [[Bus]]()
@@ -395,8 +395,11 @@ extension RouteListViewController: UITableViewDataSource {
                 cell.busNumberLabel.text = busArray[indexPath.section][indexPath.row - 1].routeNo
                 cell.busRemainingTimeLabel.text = secToMin(
                     sec: arriveArray[indexPath.section][indexPath.row - 1])
-                cell.arrprevstationcnt.text =
-                String(arriveBusStopArray[indexPath.section][indexPath.row - 1]) + "번째전"
+                if let arrprevstationcnt = arriveBusStopArray[indexPath.section][indexPath.row - 1] {
+                    cell.arrprevstationcnt.text = String(arrprevstationcnt) + "번째전"
+                } else {
+                    cell.arrprevstationcnt.text = ""
+                }
                 return cell
             }
         }
@@ -443,7 +446,7 @@ extension RouteListViewController: NSFetchedResultsControllerDelegate {
             loadBuses(myNode: nodeArray[num])
             nodeIdDic[nodeArray[num].nodeId!] = num
             arriveArray.append(Array(repeating: nil, count: busArray[num].count))
-            arriveBusStopArray.append(Array(repeating: -1, count: busArray[num].count))
+            arriveBusStopArray.append(Array(repeating: nil, count: busArray[num].count))
         }
     }
 
