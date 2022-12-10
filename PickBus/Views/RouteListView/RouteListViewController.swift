@@ -22,7 +22,7 @@ final class RouteListViewController: UIViewController {
 
     // 셋 데이터
     private var nodeIdDic = [String: Int]()
-    private var arriveBusStop = [[Int]]()
+    private var arriveBusStopArray = [[Int]]()
     private var arriveArray = [[Int?]]()
     private var nodeArray = [Node]()
     private var busArray = [[Bus]]()
@@ -163,19 +163,17 @@ final class RouteListViewController: UIViewController {
         if error == nil {
             // 성공
             // 수정할 부분 값이 nil인 경우 처리
+            print("response: ", response)
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {fatalError()}
-                if let fetchBusInfo = response.filter({
-                    $0.routeno.stringValue == String(myRouteNo)
-                }).first {
-                    // 버스 정보가 있음
+                guard let myRoteId = busArray[nodeIndex][busIndex].routeId else { fatalError() }
+                if let fetchBusInfo = response.filter({$0.routeid == myRoteId}).first {
+                    // 버스정보 있음
                     arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
+//                    arriveBusStopArray[nodeIndex][busIndex] = fetchBusInfo.arrprevstationcnt
                 } else {
-                    // 버스 정보가 없음
-                    print("도착정보가 없습니다.")
+                    // 버스정보 없음
                 }
-
             }
             nodeCount += 1
         } else {
