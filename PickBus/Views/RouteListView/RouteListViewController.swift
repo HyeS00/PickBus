@@ -186,10 +186,11 @@ final class RouteListViewController: UIViewController {
     }
 
     private func secToMin(sec: Int?) -> String {
-        if sec == nil {
-            return "정보없음"
+        guard let sec = sec else { return "정보없음" }
+        if sec > 60 {
+            return String(sec / 60) + "분"
         } else {
-            return String(sec! / 60) + "분"
+            return "곧도착"
         }
     }
 
