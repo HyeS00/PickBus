@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 final class SelectStartNodeViewController:
     BackgroundViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
@@ -111,7 +112,35 @@ final class SelectStartNodeViewController:
         storyboard.instantiateViewController(
             withIdentifier: "SelectRouteNumberViewController") as! SelectRouteNumberViewController
 
-        let newNode = Node(context: dataController.viewContext)
+//        let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
+//        let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: true)
+//
+//        fetchRequest.sortDescriptors = [sortDescriptor]
+//
+//        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+//            coreDataGroups = result
+//        }
+
+        let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
+        let predicate = NSPredicate(format: "group == %@ AND nodeId == %@",
+                                    newGroup, nodeList[selectedTableViewCellIndexPath!.row].nodeID )
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "nodeId", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        let newNode: Node
+
+        do {
+            let newNodeList = try dataController.viewContext.fetch(fetchRequest)
+            print(newNodeList)
+            if !newNodeList.isEmpty {
+                newNode = newNodeList.first!
+            } else {
+                newNode = Node(context: dataController.viewContext)
+            }
+        } catch {
+            print("no Node")
+            newNode = Node(context: dataController.viewContext)
+        }
 
         if let selectedTableViewCellIndexPath = selectedTableViewCellIndexPath {
             newNode.cityCode = String(nodeList[selectedTableViewCellIndexPath.row].nodeCityCode)
