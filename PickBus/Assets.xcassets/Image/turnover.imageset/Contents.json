@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "turnover.png",
+      "filename" : "turnOver.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "turnover 1.png",
+      "filename" : "turnOver@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "turnover 2.png",
+      "filename" : "turnOver@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
