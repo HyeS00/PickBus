@@ -359,11 +359,9 @@ class RouteDetailViewController: UIViewController {
     }
 }
 extension RouteDetailViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nodeList.count
     }
-
     // swiftlint:disable:next cyclomatic_complexity
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
@@ -406,7 +404,6 @@ extension RouteDetailViewController: UITableViewDataSource {
             } else {
                 cell.highlightView.isHidden = true
             }
-
             // 버스 위치
             if(busLocationList.isEmpty) {
                 print("busLocationList 불러오는 중")
@@ -472,7 +469,6 @@ extension RouteDetailViewController: UITableViewDataSource {
 //                    cell.busTimeLabel2.isHidden = true
 //                }
             }
-
             // 회차지 표시
             if(indexPath.row + 1 < nodeList.count
                && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
