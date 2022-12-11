@@ -11,26 +11,6 @@ final class RouteCell: UITableViewCell {
 
     var closure: (() -> Void)?
 
-    // 남은 정류장
-    var arrprevstationcnt: Int = 1000
-
-    // 남은 시간
-    var arrTime: String = "" {
-        didSet {
-            switch arrprevstationcnt {
-            case 1:
-                busRemainingTimeLabel.text = "곧도착"
-            case 2:
-                busRemainingTimeLabel.text = "전전"
-            default:
-                busRemainingTimeLabel.text = arrTime
-            }
-        }
-    }
-
-    // 다음 남은 시간
-//    var nextArrTime: String = "정보없음"
-
     // 버스번호
     var busNumberLabel: UILabel = {
         let label = UILabel()
@@ -54,24 +34,22 @@ final class RouteCell: UITableViewCell {
     }()
 
     // 버스남은시간
-    private lazy var busRemainingTimeLabel: UILabel = {
+    lazy var busRemainingTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = arrTime
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    // 다음버스남은시간
-//    private lazy var nextBusRemainingTimeLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = nextArrTime
-//        label.font = UIFont.systemFont(ofSize: 14)
-//        label.textColor = .duduGray
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
+    // 남은정류장
+    lazy var arrprevstationcnt: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .duduGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     // 탑승버튼
     private lazy var rideButton: UIButton = {
@@ -102,7 +80,7 @@ final class RouteCell: UITableViewCell {
         self.contentView.addSubview(busNumberBackgroundView)
         self.contentView.addSubview(busNumberLabel)
         self.contentView.addSubview(busRemainingTimeLabel)
-//        self.contentView.addSubview(nextBusRemainingTimeLabel)
+        self.contentView.addSubview(arrprevstationcnt)
         self.contentView.addSubview(rideButton)
 
         NSLayoutConstraint.activate([
@@ -124,12 +102,12 @@ final class RouteCell: UITableViewCell {
             busRemainingTimeLabel.leadingAnchor.constraint(
                 equalTo: self.contentView.centerXAnchor, constant: -20),
 
-            // 다음버스남은시간
-//            nextBusRemainingTimeLabel.bottomAnchor.constraint(
-//                equalTo: self.busRemainingTimeLabel.bottomAnchor),
-//            nextBusRemainingTimeLabel.leadingAnchor.constraint(
-//                equalTo: self.busRemainingTimeLabel.trailingAnchor,
-//                constant: 14),
+            // 남은정류장
+            arrprevstationcnt.bottomAnchor.constraint(
+                equalTo: self.busRemainingTimeLabel.bottomAnchor),
+            arrprevstationcnt.leadingAnchor.constraint(
+                equalTo: self.busRemainingTimeLabel.trailingAnchor,
+                constant: 14),
 
             // 탑승버튼
             rideButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),

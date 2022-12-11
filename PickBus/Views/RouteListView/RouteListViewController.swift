@@ -22,7 +22,7 @@ final class RouteListViewController: UIViewController {
 
     // 셋 데이터
     private var nodeIdDic = [String: Int]()
-    private var arriveBusStop = [[Int]]()
+    private var arriveBusStopArray = [[Int?]]()
     private var arriveArray = [[Int?]]()
     private var nodeArray = [Node]()
     private var busArray = [[Bus]]()
@@ -170,21 +170,14 @@ final class RouteListViewController: UIViewController {
             // 수정할 부분 값이 nil인 경우 처리
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-                guard let myRouteNo = busArray[nodeIndex][busIndex].routeNo else {
-                    // 정보 없음 시, 뒤돌아가면 에러 발생해서 주석 처리.
-//                    fatalError()
-                    return
-                }
-                if let fetchBusInfo = response.filter({
-                    $0.routeno.stringValue == String(myRouteNo)
-                }).first {
-                    // 버스 정보가 있음
+                guard let myRoteId = busArray[nodeIndex][busIndex].routeId else { return }
+                if let fetchBusInfo = response.filter({$0.routeid == myRoteId}).first {
+                    // 버스정보 있음
                     arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
+                    arriveBusStopArray[nodeIndex][busIndex] = fetchBusInfo.arrprevstationcnt
                 } else {
-                    // 버스 정보가 없음
-                    print("도착정보가 없습니다.")
+                    // 버스정보 없음
                 }
-
             }
             nodeCount += 1
         } else {
@@ -198,10 +191,11 @@ final class RouteListViewController: UIViewController {
     }
 
     private func secToMin(sec: Int?) -> String {
-        if sec == nil {
-            return "정보없음"
+        guard let sec = sec else { return "정보없음" }
+        if sec > 60 {
+            return String(sec / 60) + "분"
         } else {
-            return String(sec! / 60) + "분"
+            return "곧도착"
         }
     }
 
@@ -293,7 +287,11 @@ extension RouteListViewController: UITableViewDelegate {
 
     // 정류장 셀은 삭제 불가 기능
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        indexPath.row == 0 ? false : true
+        if tableView.isEditing {
+            return indexPath.row == 0 ? false : true
+        } else {
+            return false
+        }
     }
 
     // 스크롤 위치변화에 따른 네비게이션 타이틀 표시
@@ -328,7 +326,10 @@ extension RouteListViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(selectStartNodeViewController, animated: true)
         } else {
             // 버스 셀 선택 - 디테일뷰
-            toRouteDetilView(indexPath: indexPath, bordingStatus: .getOff)
+            if indexPath.row != 0 {
+                toRouteDetilView(indexPath: indexPath, bordingStatus: .getOff)
+            }
+
         }
     }
 }
@@ -384,6 +385,7 @@ extension RouteListViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: AddRouteCell.identifier,
                 for: indexPath) as! AddRouteCell
+            cell.selectionStyle = .none
             return cell
         } else {
             // 기본 섹션
@@ -405,8 +407,13 @@ extension RouteListViewController: UITableViewDataSource {
                     self.toRouteDetilView(indexPath: indexPath, bordingStatus: .onBoard)
                 }
                 cell.busNumberLabel.text = busArray[indexPath.section][indexPath.row - 1].routeNo
-                cell.arrTime = secToMin(
+                cell.busRemainingTimeLabel.text = secToMin(
                     sec: arriveArray[indexPath.section][indexPath.row - 1])
+                if let arrprevstationcnt = arriveBusStopArray[indexPath.section][indexPath.row - 1] {
+                    cell.arrprevstationcnt.text = String(arrprevstationcnt) + "번째전"
+                } else {
+                    cell.arrprevstationcnt.text = ""
+                }
                 return cell
             }
         }
@@ -453,6 +460,7 @@ extension RouteListViewController: NSFetchedResultsControllerDelegate {
             loadBuses(myNode: nodeArray[num])
             nodeIdDic[nodeArray[num].nodeId!] = num
             arriveArray.append(Array(repeating: nil, count: busArray[num].count))
+            arriveBusStopArray.append(Array(repeating: nil, count: busArray[num].count))
         }
     }
 
