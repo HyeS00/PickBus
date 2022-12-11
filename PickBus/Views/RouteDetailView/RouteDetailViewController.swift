@@ -32,7 +32,6 @@ class RouteDetailViewController: UIViewController {
     private var pageCount: Int = -1
 
     // Jedi
-    // 코어데이터에서 가져오는 정보들 (예정)
     // 노선 ID
     var routeId: String = "DJB30300004"
     // 정류장 ID
@@ -72,7 +71,6 @@ class RouteDetailViewController: UIViewController {
 
     @IBAction func tapBoardingStateButton(_ sender: UIButton) {
         switch self.boardingStatus {
-
         case .onBoard:
             checkBoardingStatus()
         case .getOff:
@@ -84,7 +82,6 @@ class RouteDetailViewController: UIViewController {
     }
 
     func checkBoardingStatus() {
-        print("check")
         if !busLocationList.isEmpty, clientLocation.latitude != nil, clientLocation.longtitude != nil {
             var nearestBus = CLLocationDistance(10000000)
             var nearestBusIndex = -1
@@ -93,7 +90,6 @@ class RouteDetailViewController: UIViewController {
                 latitude: clientLocation.latitude!,
                 longitude: clientLocation.longtitude!
             )
-
             for index in 0..<busLocationList.count {
                 let busLocation = CLLocationCoordinate2D(
                     latitude: Double(busLocationList[index].gpslati.stringValue) ?? -1,
@@ -108,7 +104,7 @@ class RouteDetailViewController: UIViewController {
                     nearestBusIndex = index
                 }
             }
-            if(nearestBus < 20) { // 특정 거리 설정을 어떻게 할까? 여기가 탑승으로 판별
+            if(nearestBus < 10) { // 특정 거리 설정을 어떻게 할까? 여기가 탑승으로 판별
                 self.boardingStatus = .getOff
                 self.boardingStateButton.isSelected = true
 
@@ -116,9 +112,11 @@ class RouteDetailViewController: UIViewController {
                 clientBoardingStatus.vehicleno = busLocationList[nearestBusIndex].vehicleno.stringValue
                 routeDetailTableView.reloadData()
             } else {
+                clientBoardingStatus.boardingState = .getOff
                 alertManager("현재위치에 버스가 없습니다. 다시한번확인해주세요.")
             }
         } else {
+            clientBoardingStatus.boardingState = .getOff
             if(busLocationList.isEmpty) {
                 // 새로고침을 해주세요
                 alertManager("잠시 후 다시 시도해주세요.")
@@ -289,7 +287,6 @@ class RouteDetailViewController: UIViewController {
         guard let response = response else {
             return
         }
-
         var startTime: String = response.startvehicletime
         var endTime: String = String(response.endvehicletime)
         var intervalTime: Int
@@ -306,7 +303,6 @@ class RouteDetailViewController: UIViewController {
         default:// 평일
             intervalTime = response.intervaltime
         }
-
         startTime.insert(":", at: startTime.index(startTime.startIndex, offsetBy: 2))
         endTime.insert(":", at: endTime.index(endTime.startIndex, offsetBy: 2))
         busNumberLabel.text = response.routeno.stringValue
@@ -326,7 +322,6 @@ class RouteDetailViewController: UIViewController {
         busLocationList.sort { $0.nodeord < $1.nodeord }
         routeDetailTableView.reloadData()
     }
-
     // 정류장에 오는 특정 노선에 대한 도착 정보만 받는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestSpecificArriveInfoResponse(response: [SpecificArriveInfo], error: Error?) {
         // 여기 특정 노선에 대한 도착 정보 표현 됨.
@@ -338,7 +333,6 @@ class RouteDetailViewController: UIViewController {
         specificArriveInfo = response.first
         routeDetailTableView.reloadData()
     }
-
     // 뷰가 로드된 후 상황에 맞게 scroll이동
     func scrollToRow() {
         var moveIndex: IndexPath
@@ -357,7 +351,6 @@ class RouteDetailViewController: UIViewController {
         }
     }
 }
-
 extension RouteDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -390,9 +383,7 @@ extension RouteDetailViewController: UITableViewDataSource {
         if nodeList.isEmpty {
             cell.busStationLabel.text = "불러오는 중입니다."
         } else {
-
             cell.busStationLabel.text = "\(cellData.nodenm)"
-
             cell.highlightView.layer.cornerRadius = 15
 
             // 출발지 도착지 표시
@@ -444,19 +435,37 @@ extension RouteDetailViewController: UITableViewDataSource {
                 }
 
                 // 특정 버스 시간
-                if let specificBusInfo = specificArriveInfo {
-                    let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
-                    if(specificBusLocation > 0) {
-                        if(indexPath.row == specificBusLocation) {
-                            cell.busTimeLabel2.isHidden = false
-                            cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
-                        } else {
-                            cell.busTimeLabel2.isHidden = true
+                if(clientBoardingStatus.boardingState == .getOff) {
+                    if let specificBusInfo = specificArriveInfo {
+                        let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
+                        if(specificBusLocation > 0) {
+                            if(indexPath.row == specificBusLocation) {
+                                cell.busTimeLabel2.isHidden = false
+                                if(specificBusInfo.arrtime / 60 == 0) {
+                                    cell.busTimeLabel2.text = "곧도착"
+                                } else {
+                                    cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
+                                }
+                            } else {
+                                cell.busTimeLabel2.isHidden = true
+                            }
                         }
+                    } else {
+                        cell.busTimeLabel2.isHidden = true
+                        print("현재 다가오는 버스가 없어요.")
                     }
                 } else {
-                    cell.busTimeLabel2.isHidden = true
-                    print("현재 다가오는 버스가 없어요.")
+                    // 탑승 중일때 탑승 버스 여기라고 표시하기
+                    if let bus = busLocationList.first(where: {
+                        $0.vehicleno.stringValue == clientBoardingStatus.vehicleno}) {
+                        if(bus.nodeord == indexPath.row) {
+                            cell.busTimeLabel2.isHidden = false
+                            cell.busTimeLabel2.text = "여기"
+                            print("check \(bus.nodenm)")
+                        }
+                    } else {
+                        cell.busTimeLabel2.isHidden = true
+                    }
                 }
             }
 
@@ -482,13 +491,6 @@ extension RouteDetailViewController: UITableViewDataSource {
             cell.routeLineView.isHidden = false
         }
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        UIView()
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
     }
 }
 extension RouteDetailViewController: UITableViewDelegate {
