@@ -436,7 +436,7 @@ extension RouteDetailViewController: UITableViewDataSource {
 
                 // 특정 버스 시간
                 if let specificBusInfo = specificArriveInfo {
-                    let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
+                    let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt - 1
                     if(specificBusLocation > 0) {
                         if(indexPath.row == specificBusLocation) {
                             cell.busTimeLabel2.isHidden = false
