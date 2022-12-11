@@ -435,38 +435,35 @@ extension RouteDetailViewController: UITableViewDataSource {
                 }
 
                 // 특정 버스 시간
-                if(clientBoardingStatus.boardingState == .getOff) {
-                    if let specificBusInfo = specificArriveInfo {
-                        let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
-                        if(specificBusLocation > 0) {
-                            if(indexPath.row == specificBusLocation) {
-                                cell.busTimeLabel2.isHidden = false
-                                if(specificBusInfo.arrtime / 60 == 0) {
-                                    cell.busTimeLabel2.text = "곧도착"
-                                } else {
-                                    cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
-                                }
+                if let specificBusInfo = specificArriveInfo {
+                    let specificBusLocation = startNodeIdIndex - specificBusInfo.arrprevstationcnt
+                    if(specificBusLocation > 0) {
+                        if(indexPath.row == specificBusLocation) {
+                            cell.busTimeLabel2.isHidden = false
+                            if(specificBusInfo.arrtime / 60 == 0) {
+                                cell.busTimeLabel2.text = "곧도착"
                             } else {
-                                cell.busTimeLabel2.isHidden = true
+                                cell.busTimeLabel2.text = "\(specificBusInfo.arrtime / 60)분"
                             }
+                        } else {
+                            cell.busTimeLabel2.isHidden = true
                         }
-                    } else {
-                        cell.busTimeLabel2.isHidden = true
-                        print("현재 다가오는 버스가 없어요.")
                     }
                 } else {
-                    // 탑승 중일때 탑승 버스 여기라고 표시하기
-                    if let bus = busLocationList.first(where: {
-                        $0.vehicleno.stringValue == clientBoardingStatus.vehicleno}) {
-                        if(bus.nodeord == indexPath.row) {
-                            cell.busTimeLabel2.isHidden = false
-                            cell.busTimeLabel2.text = "여기"
-                            print("check \(bus.nodenm)")
-                        }
-                    } else {
-                        cell.busTimeLabel2.isHidden = true
-                    }
+                    cell.busTimeLabel2.isHidden = true
+                    print("현재 다가오는 버스가 없어요.")
                 }
+                // 탑승 중일때 탑승 버스 여기라고 표시하기
+//                if let bus = busLocationList.first(where: {
+//                    $0.vehicleno.stringValue == clientBoardingStatus.vehicleno}) {
+//                    if(bus.nodeord == indexPath.row) {
+//                        cell.busTimeLabel2.isHidden = false
+//                        cell.busTimeLabel2.text = "여기"
+//                        print("check \(bus.nodenm)")
+//                    }
+//                } else {
+//                    cell.busTimeLabel2.isHidden = true
+//                }
             }
 
             // 회차지 표시
