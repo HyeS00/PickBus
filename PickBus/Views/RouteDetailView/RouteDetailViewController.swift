@@ -157,6 +157,7 @@ class RouteDetailViewController: UIViewController {
         // 네트워크 전송.
         callNetworkFunction()
 
+        busNumberLabel.text = routeNo
         routeView.clipsToBounds = true
         routeView.layer.cornerRadius = 30
         routeView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
