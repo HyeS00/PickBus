@@ -170,7 +170,7 @@ final class RouteListViewController: UIViewController {
             // 수정할 부분 값이 nil인 경우 처리
             guard let nodeIndex = nodeIdDic[response[0].nodeid] else { fatalError() }
             for busIndex in busArray[nodeIndex].indices {
-                guard let myRoteId = busArray[nodeIndex][busIndex].routeId else { fatalError() }
+                guard let myRoteId = busArray[nodeIndex][busIndex].routeId else { return }
                 if let fetchBusInfo = response.filter({$0.routeid == myRoteId}).first {
                     // 버스정보 있음
                     arriveArray[nodeIndex][busIndex] = fetchBusInfo.arrtime
