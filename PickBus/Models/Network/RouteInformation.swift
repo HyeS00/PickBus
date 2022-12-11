@@ -33,7 +33,7 @@ struct RouteInformationInfo: Decodable {
     /// 종점
     let endnodenm: String
     /// 막차 시간
-    let endvehicletime: Int
+    let endvehicletime: StringMultiType
     /// 배차 간격(토요일)
     let intervalsattime: Int?
     /// 배차 간격(일요일)
@@ -49,5 +49,5 @@ struct RouteInformationInfo: Decodable {
     /// 기점
     let startnodenm: String
     /// 첫차 시간
-    let startvehicletime: String
+    let startvehicletime: StringMultiType
 }

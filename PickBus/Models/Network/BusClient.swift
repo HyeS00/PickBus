@@ -143,6 +143,9 @@ class BusClient {
                     completion(nil, MyError.noData)
                 }
             } catch {
+                if debug {
+                    print(error.localizedDescription)
+                }
                 DispatchQueue.main.async {
                     completion(nil, error)
                 }
@@ -180,6 +183,9 @@ class BusClient {
                     completion(cityCode, responseObject, nil)
                 }
             } catch {
+                if debug {
+                    print(error.localizedDescription)
+                }
                 DispatchQueue.main.async {
                     completion(nil, nil, error)
                 }
@@ -279,7 +285,6 @@ class BusClient {
                         completion([], error)
                     }
                 }
-
         }
 
     class func getCityCodeList (
@@ -331,15 +336,15 @@ class BusClient {
         city: String = "25",
         routeId: String = "DJB30300004",
         nodeId: String = "DJB8001793",
-        completion: @escaping (SpecificArriveInfo?, Error?) -> Void) {
+        completion: @escaping ([SpecificArriveInfo], Error?) -> Void) {
             _ = taskForGETRequest(
                 url: Endpoints.getSpecificArrive(
                     city: city, routeId: routeId, nodeId: nodeId).url, responseType: SpecificArrive.self,
                 completion: { response, error in
                     if let response = response {
-                        completion(response.response.body.items.item, nil)
+                        completion(response.response.body.items.item.listValue, nil)
                     } else {
-                        completion(nil, error)
+                        completion([], error)
                     }
                 })
         }

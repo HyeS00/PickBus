@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Bus2.png",
+      "filename" : "turnOver.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Bus2@2x.png",
+      "filename" : "turnOver@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Bus2@3x.png",
+      "filename" : "turnOver@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

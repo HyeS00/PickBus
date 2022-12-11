@@ -29,7 +29,7 @@ struct SpecificArriveResponseBody: Decodable {
 }
 
 struct SpeicificArriveResponseItems: Decodable {
-    let item: SpecificArriveInfo
+    let item: MySpecificArriveInfoMultiType
 }
 
 struct SpecificArriveInfo: Decodable {
@@ -44,7 +44,9 @@ struct SpecificArriveInfo: Decodable {
     /// 노선 ID
     let routeid: String
     /// 노선 번호
-    let routeno: Int
+    let routeno: StringMultiType
     /// 노선 유형(마을 버스 등)
     let routetp: String
+    /// 저상버스 여부
+    let vehicletp: String?
 }
