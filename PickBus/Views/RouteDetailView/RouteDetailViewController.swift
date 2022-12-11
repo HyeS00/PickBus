@@ -469,7 +469,7 @@ extension RouteDetailViewController: UITableViewDataSource {
             // 회차지 표시
             if(indexPath.row + 1 < nodeList.count
                && cellData.updowncd != nodeList[indexPath.row + 1].updowncd) {
-                cell.routePointImageView.image = UIImage(systemName: "eraser")
+                cell.routePointImageView.image = UIImage(named: "turnover")
             } else {
                 cell.routePointImageView.image = UIImage(systemName: "chevron.down.circle")
             }
