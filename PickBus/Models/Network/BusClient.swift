@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum MyError: Error {
+    case noData
+}
+
 class BusClient {
 
     static private let debug = false
@@ -132,6 +136,11 @@ class BusClient {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
+                }
+            } catch DecodingError.typeMismatch(let type, let context) {
+                print("type mismatch for type \(type) in JSON: \(context.debugDescription)")
+                DispatchQueue.main.async {
+                    completion(nil, MyError.noData)
                 }
             } catch {
                 if debug {

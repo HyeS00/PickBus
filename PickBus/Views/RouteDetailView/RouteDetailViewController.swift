@@ -246,7 +246,13 @@ class RouteDetailViewController: UIViewController {
     // 전체 갯수 확인하는 네트워크 결과 받으면 실행되는 콜백.
     func handleRequestNodesTotalNumberResponse(response: RouteNodesResponseBody?, error: Error?) {
         if let response = response {
-            let iterater: Int = (response.totalCount / response.numOfRows) + 1
+            let iterater: Int
+            print(response.totalCount)
+            if Int(response.totalCount % response.numOfRows) == 0 {
+                iterater = Int(response.totalCount / response.numOfRows)
+            } else {
+                iterater = Int(response.totalCount / response.numOfRows) + 1
+            }
             pageCount = iterater
             for index in 1...iterater {
                 BusClient.getNodeList(
@@ -315,8 +321,8 @@ class RouteDetailViewController: UIViewController {
     func handleRequestLocationsOnRouteResponse(response: [BusLocationsInfo], error: Error?) {
         // 여기 버스 위치들 나타남
         guard !response.isEmpty else {
-                    print("error")
-                    print(error?.localizedDescription ?? "")
+            print("error")
+            print(error?.localizedDescription ?? "")
             return
         }
         busLocationList += response

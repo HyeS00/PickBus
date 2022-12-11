@@ -58,7 +58,7 @@ final class AddGroupListNameViewController: BackgroundViewController {
     lazy var groupListTextfield: UITextField = {
         var groupListTextfield = UITextField()
         groupListTextfield.font = UIFont(name: "SFUI-Regular", size: 30)
-        groupListTextfield.placeholder = "출발지를 입력해주세요"
+        groupListTextfield.placeholder = "그룹 이름을 입력해주세요"
         groupListTextfield.tintColor = .black
         groupListTextfield.layer.shadowColor = UIColor.black.cgColor
         groupListTextfield.layer.shadowOpacity = 0.3
