@@ -289,6 +289,8 @@ class RouteDetailViewController: UIViewController {
         }
         var startTime: String = response.startvehicletime
         var endTime: String = String(response.endvehicletime)
+        var startTime: String = response.startvehicletime.stringValue
+        var endTime: String = response.endvehicletime.stringValue
         var intervalTime: Int
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
