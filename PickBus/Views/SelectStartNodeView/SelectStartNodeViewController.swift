@@ -39,6 +39,7 @@ final class SelectStartNodeViewController:
     }
 
     private var selectedTableViewCellIndexPath: IndexPath?
+    private var frameHeight: CGFloat?
 
     // load task
     private var loadTasks = [URLSessionDataTask]()
@@ -76,6 +77,7 @@ final class SelectStartNodeViewController:
         busNodeSearchTextField.layer.borderWidth = 2
         busNodeSearchTextField.layer.borderColor = UIColor.duduDeepBlue?.cgColor
         busNodeSearchTextField.addLeftPadding()
+        frameHeight = self.view.frame.size.height
 
         let rightButton = UIBarButtonItem(
             title: "다음",
@@ -83,6 +85,8 @@ final class SelectStartNodeViewController:
             target: self,
             action: #selector(pressButton(_:))
         )
+
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationItem.rightBarButtonItem = rightButton
         navigationItem.rightBarButtonItem?.isEnabled = false
         navigationItem.rightBarButtonItem?.tintColor = .white
@@ -160,6 +164,12 @@ final class SelectStartNodeViewController:
 
     override func viewDidDisappear(_ animated: Bool) {
         removeDefaultKeyboardObserver()
+    }
+
+    // swiftlint:disable:next line_length
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        frameHeight = size.height
+        self.view.endEditing(true)
     }
 
     func getCityCode(isInit: Bool = true) {
@@ -254,12 +264,12 @@ final class SelectStartNodeViewController:
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         UIView.animate(withDuration: 1) {
-            self.view.frame.origin.y -= keyboardHeight
+            self.view.frame.size.height = (self.frameHeight ?? self.view.frame.size.height) - keyboardHeight
         }
     }
 
     @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y = 0
+        self.view.frame.size.height = self.frameHeight ?? self.view.frame.size.height
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
