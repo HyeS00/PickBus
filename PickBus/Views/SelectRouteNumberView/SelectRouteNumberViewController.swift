@@ -58,6 +58,13 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.isMovingFromParent {
+            dataController.viewContext.delete(newBus)
+            dataController.viewContext.delete(newNode)
+        }
+    }
+
     func setBackground() {
         setTitleAndIndicator(titleText: "버스 번호를\n선택해 주세요", indicatorStep: .stepThree)
 
@@ -91,15 +98,20 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
 
         } else {
             let cellData = routeNumberCellInfos[indexPath.row]
-            cellContent.text = "\(cellData.routeNumber) 번"
-            cellContent.secondaryText = cellData.routeType
-
-            if selectedIndex == indexPath {
-                newBus.routeId = cellData.routeId
-                newBus.routeNo = cellData.routeNumber
-                cell.backgroundColor = UIColor(named: "duduBlue")
+            if cellData.routeId == "Error" {
+                cellContent.text = "\(cellData.routeNumber)"
             } else {
-                cell.backgroundColor = UIColor.clear
+                cellContent.text = "\(cellData.routeNumber) 번"
+
+                cellContent.secondaryText = cellData.routeType
+
+                if selectedIndex == indexPath {
+                    newBus.routeId = cellData.routeId
+                    newBus.routeNo = cellData.routeNumber
+                    cell.backgroundColor = UIColor(named: "duduBlue")
+                } else {
+                    cell.backgroundColor = UIColor.clear
+                }
             }
         }
 
@@ -125,6 +137,21 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
     }
 
     func handleRequestAllRoutesInfoResponse(response: [AllRoutesFromNodeInfo], error: Error?) {
+        guard error == nil else {
+            if error! is MyError {
+                routeNumberCellInfos =
+                [RouteNumberCellStruct(routeNumber: "등록된 정보가 없습니다.", routeType: "", routeId: "Error")]
+            } else {
+                routeNumberCellInfos =
+                [RouteNumberCellStruct(routeNumber: "정보를 가져올 수 없습니다.", routeType: "", routeId: "Error")]
+            }
+//            print("error: \(error!)")
+//            print(error?.localizedDescription ?? "")
+            isReady = false
+            routeNumberTableView.reloadData()
+            return
+        }
+
         routeNumberCellInfos = response.map { res in
             RouteNumberCellStruct(
                 routeNumber: res.routeno.stringValue,
@@ -137,12 +164,6 @@ class SelectRouteNumberViewController: BackgroundViewController, UITableViewData
         }
         routeNumberTableView.reloadData()
 
-        guard error == nil else {
-            print("error")
-            print(error?.localizedDescription ?? "")
-            isReady = false
-            return
-        }
         isReady = true
     }
 }
