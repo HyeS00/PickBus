@@ -10,7 +10,8 @@ import CoreLocation
 import CoreData
 
 final class SelectStartNodeViewController:
-    BackgroundViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    BackgroundViewController, UITableViewDelegate, UITableViewDataSource,
+    UITextFieldDelegate, CLLocationManagerDelegate {
 
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var startBusNodeTableView: UITableView!
@@ -52,6 +53,8 @@ final class SelectStartNodeViewController:
     private var cityCodeDictionary = [Int: String]()
 
     private var nodeList = [StartNodeModel]()
+    private var locationManager = CLLocationManager()
+    private var currentLocation = CLLocationCoordinate2D()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +101,10 @@ final class SelectStartNodeViewController:
         addDefaultKeyboardObserver()
 
         self.extendedLayoutIncludesOpaqueBars = true
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,14 +123,14 @@ final class SelectStartNodeViewController:
         storyboard.instantiateViewController(
             withIdentifier: "SelectRouteNumberViewController") as! SelectRouteNumberViewController
 
-//        let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
-//        let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: true)
-//
-//        fetchRequest.sortDescriptors = [sortDescriptor]
-//
-//        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-//            coreDataGroups = result
-//        }
+        //        let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
+        //        let sortDescriptor = NSSortDescriptor(key: "createDate", ascending: true)
+        //
+        //        fetchRequest.sortDescriptors = [sortDescriptor]
+        //
+        //        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+        //            coreDataGroups = result
+        //        }
 
         let fetchRequest: NSFetchRequest<Node> = Node.fetchRequest()
         let predicate = NSPredicate(format: "group == %@ AND nodeId == %@",
@@ -202,7 +209,14 @@ final class SelectStartNodeViewController:
 
         cell.nodeName.text = nodeList[indexPath.row].nodeName
         cell.nodeRegion.text = nodeList[indexPath.row].nodeCityName
-        cell.nodeDistance.text = "거리 추가 예정"
+        cell.nodeDistance.text = String(
+            Int(
+                CLLocation.distance(
+                    clientLocation: currentLocation,
+                    busLocation: nodeList[indexPath.row].nodeCLLocationCoordinate2D
+                )
+            )
+        ) + "m"
         cell.nodeCoordinate = nodeList[indexPath.row].nodeCLLocationCoordinate2D
         cell.settingData(isClicked: selectedTableViewCellIndexPath == indexPath)
 
@@ -278,6 +292,19 @@ final class SelectStartNodeViewController:
         startBusNodeTableView.reloadData()
         activityIndicator.startAnimating()
         return true
+    }
+
+    // MARK: 위치 정보
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            currentLocation.latitude = location.coordinate.latitude
+            currentLocation.longitude = location.coordinate.longitude
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 
     // MARK: 검색
