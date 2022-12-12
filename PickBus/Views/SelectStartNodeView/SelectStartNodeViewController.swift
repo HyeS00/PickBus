@@ -105,6 +105,7 @@ final class SelectStartNodeViewController:
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -114,6 +115,7 @@ final class SelectStartNodeViewController:
         if self.isMovingFromParent {
             dataController.viewContext.delete(newGroup)
         }
+        locationManager.stopUpdatingHeading()
     }
 
     @objc func pressButton(_ sender: UIBarButtonItem) {
@@ -209,14 +211,28 @@ final class SelectStartNodeViewController:
 
         cell.nodeName.text = nodeList[indexPath.row].nodeName
         cell.nodeRegion.text = nodeList[indexPath.row].nodeCityName
-        cell.nodeDistance.text = String(
-            Int(
-                CLLocation.distance(
-                    clientLocation: currentLocation,
-                    busLocation: nodeList[indexPath.row].nodeCLLocationCoordinate2D
+        if CLLocation.distance(
+            clientLocation: currentLocation,
+            busLocation: nodeList[indexPath.row].nodeCLLocationCoordinate2D
+        ) >= 1000 {
+            cell.nodeDistance.text = String(
+                Int(
+                    CLLocation.distance(
+                        clientLocation: currentLocation,
+                        busLocation: nodeList[indexPath.row].nodeCLLocationCoordinate2D
+                    )
+                ) / 1000
+            ) + "km"
+        } else {
+            cell.nodeDistance.text = String(
+                Int(
+                    CLLocation.distance(
+                        clientLocation: currentLocation,
+                        busLocation: nodeList[indexPath.row].nodeCLLocationCoordinate2D
+                    )
                 )
-            )
-        ) + "m"
+            ) + "m"
+        }
         cell.nodeCoordinate = nodeList[indexPath.row].nodeCLLocationCoordinate2D
         cell.settingData(isClicked: selectedTableViewCellIndexPath == indexPath)
 
