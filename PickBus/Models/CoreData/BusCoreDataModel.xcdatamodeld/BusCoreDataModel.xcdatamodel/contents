@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bus" representedClassName="Bus" syncable="YES" codeGenerationType="class">
+        <attribute name="endNodeId" optional="YES" attributeType="String"/>
+        <attribute name="endNodeName" optional="YES" attributeType="String"/>
+        <attribute name="routeId" optional="YES" attributeType="String"/>
+        <attribute name="routeNo" optional="YES" attributeType="String"/>
+        <attribute name="startNodeId" optional="YES" attributeType="String"/>
+        <attribute name="startNodeName" optional="YES" attributeType="String"/>
+        <relationship name="node" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Node" inverseName="buses" inverseEntity="Node"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES" codeGenerationType="class">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="nodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Node" inverseName="group" inverseEntity="Node"/>
+    </entity>
+    <entity name="Node" representedClassName="Node" syncable="YES" codeGenerationType="class">
+        <attribute name="cityCode" optional="YES" attributeType="String"/>
+        <attribute name="nodeId" optional="YES" attributeType="String"/>
+        <attribute name="nodeNm" optional="YES" attributeType="String"/>
+        <attribute name="nodeNo" optional="YES" attributeType="String"/>
+        <relationship name="buses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Bus" inverseName="node" inverseEntity="Bus"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="nodes" inverseEntity="Group"/>
+    </entity>
+</model>
